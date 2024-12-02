@@ -34,4 +34,4 @@ app.get("/", (req,res) => {
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
-app.listen(port, () =>console.log(`Server is listening on port ${port}`))
+app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
