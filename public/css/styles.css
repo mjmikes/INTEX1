@@ -1,31 +1,91 @@
-/* Problem Section */
-.problem {
-    padding: 2rem;
-    background: #f7f3eb;
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background: #f9f7fc;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(120deg, #e4cfff, #d1c2e9);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin: 0.5rem 0;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin: 0.5rem 0 2rem;
+}
+
+.cta-button {
+    background: #a78ce6;
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.cta-button:hover {
+    background: #8f7ac4;
+}
+
+/* Section Styles */
+section {
+    padding: 2rem 1rem;
     text-align: center;
 }
 
-.problem h2 {
-    font-size: 2rem;
+.overview {
+    background: #fff;
+}
+
+.problem-solution {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    background: #f3eafc;
+}
+
+.problem, .solution {
+    flex: 1;
+    max-width: 500px;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.problem h2, .solution h2 {
+    font-size: 1.75rem;
     margin-bottom: 1rem;
 }
 
-.problem p {
-    font-size: 1.2rem;
+.features {
+    background: #fff;
 }
 
-/* Features Grid */
 .features-grid {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
-    flex-wrap: wrap;
-    padding: 2rem 0;
 }
 
 .feature-card {
-    background: #f7f3eb;
-    padding: 1rem;
+    background: #f9f7fc;
+    padding: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 300px;
@@ -37,67 +97,36 @@
     margin-bottom: 0.5rem;
 }
 
-/* Team Section */
-.team {
-    padding: 2rem;
+.call-to-action {
+    background: #d1c2e9;
+    color: white;
     text-align: center;
-    background: #fff;
+    padding: 2rem 1rem;
 }
 
-.team h2 {
+.call-to-action h2 {
     font-size: 2rem;
-    margin-bottom: 2rem;
-}
-
-.team-grid {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.team-member {
-    text-align: center;
-}
-
-.team-member img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
     margin-bottom: 1rem;
 }
 
-.team-member h3 {
-    font-size: 1.2rem;
-}
-
-.team-member p {
+.call-to-action a {
+    background: #a78ce6;
+    color: white;
     font-size: 1rem;
-}
-
-/* CTA Section */
-.cta {
-    background: #d47c37;
-    color: white;
-    text-align: center;
-    padding: 2rem;
-}
-
-.cta h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.cta a {
-    color: white;
-    font-size: 1.2rem;
-    background: #b3642b;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 5px;
     text-decoration: none;
     transition: background 0.3s;
 }
 
-.cta a:hover {
-    background: #8b4e22;
+.call-to-action a:hover {
+    background: #8f7ac4;
+}
+
+/* Footer */
+footer {
+    background: #d1c2e9;
+    color: white;
+    text-align: center;
+    padding: 1rem;
 }
