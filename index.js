@@ -1,4 +1,5 @@
 const express = require("express");
+const { default: test } = require("node:test");
 
 let app = express();
 
@@ -34,5 +35,3 @@ app.get("/", (req,res) => {
 app.use(express.static('public'));
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}`))
-
-//hello
