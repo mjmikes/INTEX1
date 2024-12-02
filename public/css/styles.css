@@ -1,84 +1,29 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* Hero Section */
-.hero {
-    background: url('/images/cookies-bg.jpg') no-repeat center center/cover;
-    height: 100vh;
-    color: white;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.cta-button {
-    background: #d47c37;
-    color: white;
-    padding: 1rem 2rem;
-    text-decoration: none;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-.cta-button:hover {
-    background: #b3642b;
-}
-
-/* About Section */
-.about {
+/* Problem Section */
+.problem {
     padding: 2rem;
-    text-align: center;
     background: #f7f3eb;
+    text-align: center;
 }
 
-.about h2 {
+.problem h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
-/* Flavors Section */
-.flavors {
-    padding: 2rem;
-    text-align: center;
-    background: #fff;
+.problem p {
+    font-size: 1.2rem;
 }
 
-.flavors h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-}
-
-.flavor-grid {
+/* Features Grid */
+.features-grid {
     display: flex;
     gap: 2rem;
     justify-content: center;
     flex-wrap: wrap;
+    padding: 2rem 0;
 }
 
-.flavor-card {
+.feature-card {
     background: #f7f3eb;
     padding: 1rem;
     border-radius: 10px;
@@ -87,44 +32,72 @@ body {
     text-align: center;
 }
 
-.flavor-card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-.flavor-card h3 {
+.feature-card h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
 }
 
-/* Order Section */
-.order {
+/* Team Section */
+.team {
     padding: 2rem;
     text-align: center;
-    background: #d47c37;
-    color: white;
+    background: #fff;
 }
 
-.order h2 {
+.team h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.team-grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.team-member {
+    text-align: center;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.team-member h3 {
+    font-size: 1.2rem;
+}
+
+.team-member p {
+    font-size: 1rem;
+}
+
+/* CTA Section */
+.cta {
+    background: #d47c37;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.cta h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
-.order a {
-    color: #fdd59e;
-    text-decoration: underline;
-}
-
-.order a:hover {
-    color: #fbe4c7;
-}
-
-/* Footer */
-footer {
-    background: #333;
+.cta a {
     color: white;
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
+    background: #b3642b;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.cta a:hover {
+    background: #8b4e22;
 }
