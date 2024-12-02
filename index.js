@@ -4,7 +4,7 @@ let app = express();
 
 let path = require("path");
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 
@@ -25,4 +25,4 @@ app.get("/", (req,res) => {
     res.render("index.ejs")
 });
 
-app.listen(port, () =>console.log("Server is listening on port 3000"))
+app.listen(port, () =>console.log(`Server is listening on port ${port}`))
