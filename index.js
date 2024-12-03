@@ -40,8 +40,8 @@ app.get('/login', (req, res) => {
 });
 
 // get route for the jen's page
-app.get('/jen', (req, res) => {
-    res.render('login');
+app.get('/jens_story', (req, res) => {
+    res.render('jens_story');
 });
 
 
