@@ -333,6 +333,13 @@ footer p {
         align-items: center;}}
 
 /* Form Section */
+/* Center the header */
+h1.form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
 form {
     background: #fff;
     padding: 20px;
@@ -381,15 +388,21 @@ form textarea {
     min-height: 100px;
 }
 
-form .checkbox-group {
+/* Style the Jen Story radio buttons */
+.checkbox-group {
     display: flex;
+    gap: 15px;
     align-items: center;
-    gap: 10px;
-}
-
-form .checkbox-group input {
+  }
+  
+  .checkbox-group input[type="radio"] {
     margin-right: 5px;
-}
+  }
+  
+  .checkbox-group .checkbox-label {
+    font-weight: normal;
+  }
+  
 
 form button {
     background-color: #34B3A8;
