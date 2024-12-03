@@ -10,18 +10,13 @@
     <header>
         <nav class="navbar">
             <div class="navbar-brand">
-                <img src="/themes/custom/equalopp/logo.svg" alt="Home">
+                <img src="images/turtleshelter_logo.png" alt="Home">
             </div>
-            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="navbar-collapse">
                 <ul class="main-menu">
-                    <li><a href="/our_issue">The Issue</a></li>
-                    <li><a href="/about_us">About Us</a></li>
-                    <li><a href="/about_us">About Us</a></li>
+                    <li><a href="/our_issue">Request An Event</a></li>
                     <li><a href="/our_impact">Jen's Story</a></li>
-                    <li><a href="/get_involved">Get Involved</a></li>
+                    <li><a href="/get_involved">Volunteer</a></li>
                     <li><a href="/donate">Donate</a></li>
                 </ul>
             </div>
@@ -30,7 +25,7 @@
 
     <main>
         <section class="hero">
-            <img src="/sites/default/files/base-page/bg-mage/hero.jpg" alt="Creating a World">
+            <img src="images/foam_logo.jpeg" alt="Creating a World">
             <div class="hero-text">
                 <h2>Creating a World</h2>
                 <p>Where every child has the opportunity to succeed</p>
@@ -45,7 +40,7 @@
             <div class="welcome">
                 <h2>Welcome to Equal Opportunity</h2>
                 <p>The Equal Opportunity Community Initiative (EOCI) is committed to improving the quality of life of vulnerable children both locally and internationally.</p>
-                <img src="/sites/default/files/inline-images/home.png" alt="Map">
+                <img src="images/minky_logo.jpeg" alt="Map">
             </div>
             <div class="cards">
                 <div class="card">
@@ -67,37 +62,6 @@
         </section>
         <!-- Carousel Section -->
     <section class="carousel">
-        <script>
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.carousel-slide');
-            const totalSlides = slides.length;
-        
-            // Show the current slide
-            function updateCarousel() {
-                const offset = -currentSlide * 100;
-                document.querySelector('.carousel-container').style.transform = `translateX(${offset}%)`;
-            }
-        
-            // Next slide
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                updateCarousel();
-            }
-        
-            // Previous slide
-            function prevSlide() {
-                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                updateCarousel();
-            }
-        
-            // Event listeners for next/prev buttons
-            document.querySelector('.carousel-next').addEventListener('click', nextSlide);
-            document.querySelector('.carousel-prev').addEventListener('click', prevSlide);
-        
-            // Optionally, auto-advance the carousel every 3 seconds
-            setInterval(nextSlide, 5000);
-        </script>
-        
         <div class="carousel-container">
             <div class="carousel-slide">
                 <img src="images/chance_logo.jpg" alt="Image 1">
@@ -132,5 +96,6 @@
         </div>
         <p>&copy; 2019 Equal Opportunity Community Initiative. All Rights Reserved.</p>
     </footer>
+    <script src="js/app.js"></script>
 </body>
 </html>
