@@ -128,3 +128,24 @@ document.addEventListener("DOMContentLoaded", function() {
         rightArrow.addEventListener('click', scrollRight);
     }
 });
+
+// app.js
+
+// app.js
+document.addEventListener('DOMContentLoaded', function () {
+    // Get the hamburger icon and sidebar
+    const sidebarToggler = document.querySelector('.navbar-toggler');
+    const sidebar = document.getElementById('sidebar');
+
+    // Toggle sidebar when the hamburger icon is clicked
+    sidebarToggler.addEventListener('click', function() {
+        sidebar.classList.toggle('active'); // Toggle the visibility of the sidebar
+    });
+
+    // Close the sidebar when the close button (×) is clicked
+    const closeBtn = document.querySelector('.close-btn');
+    closeBtn.addEventListener('click', function() {
+        sidebar.classList.remove('active'); // Close the sidebar
+    });
+});
+

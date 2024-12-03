@@ -52,6 +52,7 @@ header {
     background-color: transparent;
     border: none;
     cursor: pointer;
+    margin-top: 12px;
 }
 
 .navbar-toggler-icon {
