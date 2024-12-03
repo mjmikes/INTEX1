@@ -515,3 +515,19 @@ footer p {
     .donate-section p {
         font-size: 1.1rem;
     }}
+
+/* Donate small text class for legal disclaimer */
+.donate-small-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Heading for 'How to Donate' */
+.donate-section h3 {
+    font-size: 1.8rem;
+    font-weight: normal;
+    color: #34B3A8;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
