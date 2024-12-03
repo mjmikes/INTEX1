@@ -31,9 +31,24 @@
         </nav>
     </header>
 
-
+    <!-- Main content with background and overlay -->
     <main>
+
+        <section class="hero">
+            <div class="hero-overlay"></div> 
+            <img src="images/donate.avif" alt="Creating a World">
+            <div class="hero-text">
+                <h2>START SAVING LIVES <br> DONATE TODAY </h2>
+                <div class="button-group">
+                    <button class="btn-primary-hero" onclick="window.location.href='https://turtleshelterproject.org/checkout/donate?donatePageId=5b6a44c588251b72932df5a0';">
+                        <i class="fas fa-heart"></i> Donate Now
+                    </button>
+                    
+                </div>
+            </div>
+        </section>
         <section class="donate-section">
+            <div class="donate-overlay"></div> <!-- Overlay -->
             <div class="donate-container">
                 <h2>Donate to the Turtle Shelter Project</h2>
                 <p>
@@ -42,16 +57,11 @@
                     You can tell us where you would like the vest or vests sent to, 
                     or we will send them to where there is the greatest need.
                 </p>
-
-                <!-- Added "How to Donate" heading -->
                 <h3>How to Donate:</h3>
                 <div class="button-group">
                     <p>Donate securely online:</p>
-                    <a href="https://turtleshelterproject.org/checkout/donate?donatePageId=5b6a44c588251b72932df5a0" class="btn-primary">Donate</a>
+                    <a href="https://turtleshelterproject.org/checkout/donate?donatePageId=5b6a44c588251b72932df5a0" class="btn-primary">Donate Now</a>
                 </div>
-                <p>
-                    
-                </p>
                 <div class="donate-address">
                     <p>Or you can mail a check to:</p>
                     <address>
@@ -60,10 +70,6 @@
                         Kaysville, Utah 84037
                     </address>
                 </div>
-                <!-- Moved the original text here and made it smaller -->
-                 <p>
-
-                 </p>
                 <p class="donate-small-text">
                     The Turtle Shelter Project is a 501 (c)(3) non-profit, EIN 82-1035303.
                 </p>

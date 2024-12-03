@@ -164,7 +164,7 @@ header {
 .hero-text {
     position: absolute;
     top: 40%;
-    left: 5%;  /* Align the text more to the left side */
+    right: 5%;  /* Align the text more to the left side */
     transform: translateY(-50%);  /* Center the text vertically */
     color: white;
     text-align: left;  /* Align the text to the left */
