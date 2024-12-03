@@ -444,3 +444,55 @@ footer p {
         align-items: center;
     }
 }
+
+/* Donate Page Specific Styles */
+.donate-section {
+    padding: 40px 20px;
+    background-color: #f4f4f4; /* Matches body background */
+}
+
+.donate-section h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center; /* Centers the heading */
+}
+
+.donate-section p {
+    font-size: 1rem;
+    color: #333;
+    padding-left: 40px;
+    padding-right: 40px;
+    color: #555;
+    line-height: 1.6;
+    text-align: center; /* Centers the paragraphs */
+    margin-bottom: 20px; /* Adds space between paragraphs */
+}
+
+.donate-address {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center; /* Centers the address block */
+}
+
+.donate-section .button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Space above the button */
+}
+
+.donate-section .button-group .btn-primary {
+    padding: 12px 30px;
+    font-size: 1rem;
+    border-radius: 30px; /* Gives a rounded button look */
+    background-color: #34B3A8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.donate-section .button-group .btn-primary:hover {
+    background-color: #2a8e85; /* Slightly darker green on hover */
+}
