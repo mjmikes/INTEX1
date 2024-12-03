@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate | Turtle Shelter Project</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Link to the correct CSS file for the donate page -->
+    <link rel="stylesheet" href="/css/donate.styles.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <a href="/" class="logo-link">
-                <span class="logo-text">Turtle Shelter Project</span>
-            </a>
-            <ul class="main-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/donate" class="active">Donate</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
+            <div class="navbar-brand">
+                <a href="/" class="logo-link"><span class="logo-text">Turtle Shelter Project</span></a>
+            </div>
+            
+            <div class="navbar-collapse">
+                <ul class="main-menu">
+                    <li><a href="/request_event">Request Event</a></li>
+                    <li><a href="/jens_story">Jen's Story</a></li>
+                    <li><a href="/our_sponsors">Our Sponsors</a></li>
+                    <li><a href="/login">Admin Login</a></li>
+                    <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
+                    <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+                </ul>
+            </div>
         </nav>
     </header>
+
 
     <main>
         <section class="donate-section">
@@ -31,32 +38,35 @@
                     You can tell us where you would like the vest or vests sent to, 
                     or we will send them to where there is the greatest need.
                 </p>
-                <p>
-                    The Turtle Shelter Project is a 501 (c)(3) non-profit, EIN 82-1035303.
-                </p>
+
                 <!-- Added "How to Donate" heading -->
                 <h3>How to Donate:</h3>
                 <div class="button-group">
+                    <p>Donate securely online:</p>
                     <a href="https://turtleshelterproject.org/checkout/donate?donatePageId=5b6a44c588251b72932df5a0" class="btn-primary">Donate</a>
                 </div>
-                <!-- Moved the original text here and made it smaller -->
-                <p class="donate-small-text">
-                    The Turtle Shelter Project is a 501 (c)(3) non-profit, EIN 82-1035303.
-                </p>
                 <div class="donate-address">
-                    <p>You can mail a check to:</p>
+                    <p></p>
+                    <p></p>
+                    <p>Or you can mail a check to:</p>
                     <address>
                         Turtle Shelter Project<br>
                         PO Box 382<br>
                         Kaysville, Utah 84037
                     </address>
                 </div>
+                <!-- Moved the original text here and made it smaller -->
+                <p class="donate-small-text">
+                    The Turtle Shelter Project is a 501 (c)(3) non-profit, EIN 82-1035303.
+                </p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Turtle Shelter Project. All rights reserved.</p>
+        <div class="footer">
+            <p>&copy; 2024 Turtle Shelter Project. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>

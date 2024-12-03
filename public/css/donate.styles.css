@@ -1,0 +1,400 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar-brand img {
+    width: 150px;
+    height: auto;
+}
+
+.navbar-brand {
+    font-size: 24px;  /* Adjust the font size */
+    font-weight: bold;  /* Make the text bold */
+    color: #000000;  /* Color similar to the other buttons, adjust as needed */
+    text-transform: uppercase;  /* Optionally uppercase the text */
+    letter-spacing: 2px;  /* Add spacing between letters */
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.navbar-toggler {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.navbar-toggler-icon {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    display: block;
+    position: relative;
+}
+
+.navbar-toggler-icon:before,
+.navbar-toggler-icon:after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    left: 0;
+}
+
+.navbar-toggler-icon:before {
+    top: -8px;
+}
+
+.navbar-toggler-icon:after {
+    top: 8px;
+}
+
+.navbar-collapse {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the logo text link */
+.logo-link {
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.logo-text {
+    font-size: 24px;  /* Adjust the font size */
+    font-weight: bold;  /* Make the text bold */
+    color: #000000;  /* Color of the text */
+    text-transform: uppercase;  /* Optional: uppercase text */
+    letter-spacing: 2px;  /* Add some letter spacing */
+    transition: all 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+/* Hover effect for glowing text */
+.logo-link:hover .logo-text {
+    color: #34B3A8;  /* Change text color when hovered */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);  /* Glow effect */
+}
+
+/* Optional: Active state (when clicked) to revert to original color */
+.logo-link:active .logo-text {
+    color: #FBB711;  /* Revert to original color */
+}
+
+.main-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.main-menu li {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.main-menu li a {
+    font-weight: bold; /* Make the text bold */
+    color: #000; /* Adjust the color if needed (default is black) */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 18px; /* Adjust font size */
+    padding: 10px 15px; /* Optional: add some padding around the link */
+}
+
+.main-menu a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s;
+}
+
+.main-menu a:hover {
+    color: #34B3A8;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;  /* Allows absolute positioning of text */
+    width: 100%;  /* Ensure it spans the entire width of the screen */
+    height: 100vh;  /* Make the hero section take up the full viewport height */
+    overflow: hidden;  /* Prevent overflow */
+}
+
+/* Hero Image */
+.hero img {
+    position: absolute;  /* Position the image relative to the hero section */
+    top: 0;
+    left: 0;
+    width: 100%;  /* Make the image take the full width */
+    height: 100%;  /* Make the image take the full height */
+    object-fit: cover;  /* Ensure the image covers the entire area without distortion */
+    z-index: -1;  /* Push the image behind the text */
+}
+
+/* Hero Text */
+.hero-text {
+    position: absolute;
+    top: 40%;
+    left: 5%;  /* Align the text more to the left side */
+    transform: translateY(-50%);  /* Center the text vertically */
+    color: white;
+    text-align: left;  /* Align the text to the left */
+    padding: 20px;
+}
+
+.hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Darken the image with a semi-transparent black */
+    z-index: 0; /* Ensure it's on top of the image but behind the text */
+}
+
+.hero-text h2 {
+    font-size: 3rem;  /* Increase the size of the heading */
+    font-weight: bold;  /* Make the heading bold */
+    margin: 0;
+    padding: 0;
+    z-index: 1;  /* Ensure the text appears above the image */
+}
+
+.hero-text p {
+    font-size: 2rem;  /* Adjust the size of the paragraph text */
+    margin: 10px 0;
+}
+
+/* Button Group */
+.button-group {
+    margin-top: 20px;  /* Space the buttons below the text */
+}
+
+/* Buttons Styling */
+.btn-primary,
+.btn-secondary {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 25px;  /* Add this line to make the buttons round */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary {
+    background-color: #34B3A8;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #FBB711;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2a8e80;
+}
+
+.btn-secondary:hover {
+    background-color: #ff9d00;
+}
+
+/* Hero Button Styling (Larger Buttons) */
+
+.btn-primary-hero i,
+.btn-secondary-hero i {
+    margin-right: 10px; /* Space between the icon and the text */
+    font-size: 1.5rem;  /* Adjust icon size */
+}
+
+.btn-primary-hero,
+.btn-secondary-hero {
+    padding: 10px 40px;  /* Increase the padding for bigger buttons */
+    font-size: 1.5rem;  /* Increase font size */
+    border-radius: 25px;  /* Optional: slightly larger border-radius */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary-hero {
+    background-color: #34B3A8;
+    color: white;
+}
+
+.btn-secondary-hero {
+    background-color: #FBB711;
+    color: white;
+}
+
+.btn-primary-hero:hover {
+    background-color: #2a8e80;
+}
+
+.btn-secondary-hero:hover {
+    background-color: #ff9d00;
+}
+
+/* Content Section */
+.content {
+    padding: 50px 40px;
+    position: relative;
+    background-color: #fff;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 20px;
+}
+
+.contact h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.contact p {
+    font-size: 1rem;
+}
+
+.links ul {
+    list-style: none;
+}
+
+.links li {
+    margin: 10px 0;
+}
+
+.links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.links a:hover {
+    color: #34B3A8;
+}
+
+footer p {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar-collapse {
+        display: none;
+        width: 100%;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+    .main-menu {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;}}
+
+/* Donation Section */
+.donate-section {
+    background-color: #fff;
+    padding: 40px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.donate-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.donate-section p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.donate-section h3 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 30px;
+}
+
+.donate-section .btn-primary {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #34B3A8;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.donate-section .btn-primary:hover {
+    background-color: #2a8e80;
+}
+
+.donate-section .donate-address {
+    font-size: 1.1rem;
+    margin-top: 20px;
+    color: #555;
+}
+
+.donate-section .donate-address address {
+    font-style: normal;
+    margin: 5px 0;
+}
+
+.donate-section .donate-small-text {
+    font-size: 1rem;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* Additional styles for button group container */
+.donate-section .button-group {
+    margin-top: 20px;
+}
