@@ -81,54 +81,52 @@ header {
     justify-content: flex-start;
 }
 
-/* Hero Section */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+/* Main Content */
+.donate-section {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+    margin-top: 20px;
 }
 
-.hero img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
-.hero-text {
-    position: absolute;
-    top: 40%;
-    left: 5%;
-    transform: translateY(-50%);
-    color: white;
-    text-align: left;
+.donate-container {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.hero .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 0;
-}
-
-.hero-text h2 {
-    font-size: 3rem;
+/* Heading Styles */
+.donate-section h2 {
+    font-size: 2.5rem;
     font-weight: bold;
-    margin: 0;
-    padding: 0;
+    color: #34B3A8;
+    margin-bottom: 20px;
 }
 
-.hero-text p {
-    font-size: 2rem;
-    margin: 10px 0;
+.donate-section h3 {
+    font-size: 1.8rem;
+    font-weight: normal;
+    color: #34B3A8;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* Paragraphs */
+.donate-section p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Address Styling */
+.donate-address {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #555;
 }
 
 /* Button Group */
@@ -167,79 +165,11 @@ header {
     background-color: #ff9d00;
 }
 
-/* Donate Section */
-.donate-section {
-    padding: 50px 20px;
-    background-color: #fff;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.donate-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Heading Styles */
-.donate-section h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #34B3A8;
-    margin-bottom: 20px;
-}
-
-/* Paragraphs */
-.donate-section p {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-/* Address Styling */
-.donate-address {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    color: #555;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .donate-section {
-        padding: 30px 15px;
-    }
-
-    .donate-container {
-        padding: 20px;
-    }
-
-    .donate-section h2 {
-        font-size: 2rem;
-    }
-
-    .donate-section p {
-        font-size: 1.1rem;
-    }
-}
-
 /* Donate small text class for legal disclaimer */
 .donate-small-text {
     font-size: 0.9rem;
     color: #555;
     margin-top: 10px;
-}
-
-/* Heading for 'How to Donate' */
-.donate-section h3 {
-    font-size: 1.8rem;
-    font-weight: normal;
-    color: #34B3A8;
-    margin-top: 20px;
-    margin-bottom: 15px;
 }
 
 /* Footer */
@@ -258,59 +188,27 @@ footer {
     margin-bottom: 20px;
 }
 
-.contact h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-.contact p {
-    font-size: 1rem;
-}
-
-.links ul {
-    list-style: none;
-}
-
-.links li {
-    margin: 10px 0;
-}
-
-.links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
-
-.links a:hover {
-    color: #34B3A8;
-}
-
 footer p {
     font-size: 0.9rem;
     color: #ccc;
 }
 
-/* Mobile Responsive */
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-    .navbar-collapse {
-        display: none;
-        width: 100%;
+    .donate-section {
+        padding: 30px 15px;
     }
 
-    .navbar-toggler {
-        display: block;
+    .donate-container {
+        padding: 20px;
     }
 
-    .main-menu {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        margin-top: 20px;
-    }
-
-    .hero-text h2 {
+    .donate-section h2 {
         font-size: 2rem;
+    }
+
+    .donate-section p {
+        font-size: 1.1rem;
     }
 
     .footer {
