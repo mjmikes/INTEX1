@@ -457,54 +457,98 @@ footer p {
     }
 }
 
-/* Donate Page Specific Styles */
+/* Donate Section */
 .donate-section {
-    padding: 40px 20px;
-    background-color: #f4f4f4; /* Matches body background */
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #fff;
 }
 
+.donate-container {
+    max-width: 800px;  /* Limit the width of the donate section */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Image for Donate Section */
+.donate-image {
+    margin-bottom: 30px;
+}
+
+.donate-image img {
+    width: 100%;  /* Make the image responsive */
+    max-width: 800px;  /* Limit the max-width */
+    height: auto;
+    border-radius: 8px;  /* Optional: Add border radius for a smoother look */
+}
+
+/* Heading */
 .donate-section h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 15px;
-    text-align: center; /* Centers the heading */
-}
-
-.donate-section p {
-    font-size: 1rem;
-    color: #333;
-    padding-left: 40px;
-    padding-right: 40px;
-    color: #555;
-    line-height: 1.6;
-    text-align: center; /* Centers the paragraphs */
-    margin-bottom: 20px; /* Adds space between paragraphs */
-}
-
-.donate-address {
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    font-size: 1rem;
-    line-height: 1.5;
-    text-align: center; /* Centers the address block */
+    color: #34B3A8;
+    font-weight: bold;
 }
 
-.donate-section .button-group {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; /* Space above the button */
+/* Paragraphs */
+.donate-section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #333;
+    line-height: 1.6;
 }
 
-.donate-section .button-group .btn-primary {
-    padding: 12px 30px;
-    font-size: 1rem;
-    border-radius: 30px; /* Gives a rounded button look */
+/* Address */
+.donate-address {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.donate-address address {
+    font-style: normal;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+/* Donate Button */
+.donate-online {
+    margin-top: 30px;
+}
+
+.donate-online .btn-primary {
+    padding: 15px 40px;
     background-color: #34B3A8;
     color: white;
     border: none;
+    border-radius: 30px;
+    font-size: 18px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
-.donate-section .button-group .btn-primary:hover {
-    background-color: #2a8e85; /* Slightly darker green on hover */
+.donate-online .btn-primary:hover {
+    background-color: #2a8e85;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .donate-section {
+        padding: 30px 10px;
+    }
+
+    .donate-container {
+        padding: 20px;
+    }
+
+    .donate-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .donate-online .btn-primary {
+        width: 100%;
+        padding: 12px 20px;
+    }
 }
