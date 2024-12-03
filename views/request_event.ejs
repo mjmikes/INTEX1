@@ -32,28 +32,28 @@
   <main>
     <h1 class="form-header">Event Request Form</h1>
     <form action="/submit-event-request" method="POST" class="event-form">
-      <div class="form-group">
-        <!-- First Name -->
-        <label for="firstName" class="form-label">First Name:</label>
-        <input type="text" id="firstName" name="firstName" class="form-input" required>
+      <!-- Form Row 1 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName" class="form-label">First Name:</label>
+          <input type="text" id="firstName" name="firstName" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName" class="form-label">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" class="form-input" required>
+        </div>
       </div>
 
-      <div class="form-group">
-        <!-- Last Name -->
-        <label for="lastName" class="form-label">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" class="form-input" required>
-      </div>
-
-      <div class="form-group">
-        <!-- Phone -->
-        <label for="phone" class="form-label">Phone:</label>
-        <input type="tel" id="phone" name="phone" class="form-input" required>
-      </div>
-
-      <div class="form-group">
-        <!-- Email -->
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" id="email" name="email" class="form-input" required>
+      <!-- Form Row 2 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone:</label>
+          <input type="tel" id="phone" name="phone" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" id="email" name="email" class="form-input" required>
+        </div>
       </div>
 
       <!-- Event Name -->
@@ -73,35 +73,38 @@
       </div>
 
       <!-- Address, City, State, Zip -->
-      <div class="form-group">
-        <label for="address" class="form-label">Address:</label>
-        <input type="text" id="address" name="address" class="form-input" required>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="address" class="form-label">Address:</label>
+          <input type="text" id="address" name="address" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="city" class="form-label">City:</label>
+          <input type="text" id="city" name="city" class="form-input" required>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="city" class="form-label">City:</label>
-        <input type="text" id="city" name="city" class="form-input" required>
-      </div>
-
-      <div class="form-group">
-        <label for="state" class="form-label">State:</label>
-        <input type="text" id="state" name="state" class="form-input" required>
-      </div>
-
-      <div class="form-group">
-        <label for="zip" class="form-label">Zip Code:</label>
-        <input type="text" id="zip" name="zip" class="form-input" required>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="state" class="form-label">State:</label>
+          <input type="text" id="state" name="state" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="zip" class="form-label">Zip Code:</label>
+          <input type="text" id="zip" name="zip" class="form-input" required>
+        </div>
       </div>
 
       <!-- Possible Dates -->
-      <div class="form-group">
-        <label for="possibleDate1" class="form-label">Possible Date 1:</label>
-        <input type="date" id="possibleDate1" name="possibleDate1" class="form-input" required>
-      </div>
-
-      <div class="form-group">
-        <label for="possibleDate2" class="form-label">Possible Date 2:</label>
-        <input type="date" id="possibleDate2" name="possibleDate2" class="form-input">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="possibleDate1" class="form-label">Possible Date 1:</label>
+          <input type="date" id="possibleDate1" name="possibleDate1" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="possibleDate2" class="form-label">Possible Date 2:</label>
+          <input type="date" id="possibleDate2" name="possibleDate2" class="form-input">
+        </div>
       </div>
 
       <!-- Event Start Time -->
@@ -156,14 +159,15 @@
       </div>
 
       <!-- Available Tables -->
-      <div class="form-group">
-        <label for="roundTables" class="form-label">Available Round Tables:</label>
-        <input type="number" id="roundTables" name="roundTables" class="form-input" min="0">
-      </div>
-
-      <div class="form-group">
-        <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
-        <input type="number" id="rectangleTables" name="rectangleTables" class="form-input" min="0">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="roundTables" class="form-label">Available Round Tables:</label>
+          <input type="number" id="roundTables" name="roundTables" class="form-input" min="0">
+        </div>
+        <div class="form-group">
+          <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
+          <input type="number" id="rectangleTables" name="rectangleTables" class="form-input" min="0">
+        </div>
       </div>
 
       <!-- # of Kids under 10 -->
