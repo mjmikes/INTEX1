@@ -26,6 +26,9 @@
                     <li><a href="/login">Admin Login</a></li>
                     <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+                    <div class="navbar-collapse">
+                        <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
+                    </div>
                 </ul>
             </div>
         </nav>
@@ -82,8 +85,11 @@
                     <img src="images/working.jpg" alt="Image illustrating the issue" class="card-image">
                     <h3>Our Work</h3>
                     <p>We craft and distribute high-tech foam vests that provide warmth in freezing temperatures, saving lives and restoring hope.</p>
-                    <a href="/jens_story" style="display: flex; justify-content: center; align-items: center; text-decoration: none; width: 100%;">
-                        <button class="donate-button">Request An Event</button>
+                    <a href="/request_event" style="display: flex; justify-content: center; align-items: center; text-decoration: none; width: 100%;">
+                        <button class="donate-button" onclick="window.location.href='/request_event';">
+                            Request An Event
+                        </button>
+                        
                     </a>
                 </div>
             
@@ -104,7 +110,7 @@
             <div class="hero-text">
                 <h2>EVERY LIFE HAS VALUE<br>EVERY PERSON CAN SERVE</h2>
                 <div class="button-group">
-                    <button class="btn-primary-hero">
+                    <button class="btn-primary-hero" onclick="location.href='/donate'">
                         <i class="fas fa-heart"></i> Donate
                     </button>
                     <button class="btn-secondary-hero">
