@@ -531,9 +531,11 @@ footer p {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: url('images/loginimg.jpg') no-repeat center center/cover;
+    background: white no-repeat center center/cover;
     position: relative;
     overflow: hidden;
+    padding: 0 20px;
+
 }
 
 
