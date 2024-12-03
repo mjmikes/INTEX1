@@ -63,36 +63,32 @@
           <input type="text" id="eventName" name="eventName" class="form-input" required>
         </div>
         <div class="form-group">
-          <label for="eventType" class="form-label">Event Type:</label>
-          <select id="eventType" name="eventType" class="form-select" required>
-            <option value="Sewing">Sewing</option>
-            <option value="Non-Sewing">Non-Sewing</option>
-            <option value="Both">Both</option>
-          </select>
+          <label for="address" class="form-label">Address:</label>
+          <input type="text" id="address" name="address" class="form-input" required>
         </div>
       </div>
 
       <!-- Form Row 4 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="address" class="form-label">Address:</label>
-          <input type="text" id="address" name="address" class="form-input" required>
-        </div>
-        <div class="form-group">
           <label for="city" class="form-label">City:</label>
           <input type="text" id="city" name="city" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="state" class="form-label">State:</label>
+          <input type="text" id="state" name="state" class="form-input" required>
         </div>
       </div>
 
       <!-- Form Row 5 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="state" class="form-label">State:</label>
-          <input type="text" id="state" name="state" class="form-input" required>
-        </div>
-        <div class="form-group">
           <label for="zip" class="form-label">Zip Code:</label>
           <input type="text" id="zip" name="zip" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="spaceSize" class="form-label">Event Space Description:</label>
+          <input type="text" id="spaceSize" name="spaceSize" class="form-input" required>
         </div>
       </div>
 
@@ -139,15 +135,15 @@
           <input type="number" id="participants" name="participants" class="form-input" min="1" required>
         </div>
         <div class="form-group">
-          <label for="description" class="form-label">Event Description:</label>
-          <textarea id="description" name="description" class="form-textarea" rows="4" required></textarea>
+          <label for="kidsUnder10" class="form-label"># of Kids Under Age 10:</label>
+          <input type="number" id="kidsUnder10" name="kidsUnder10" class="form-input" min="0">
         </div>
       </div>
 
       <!-- Form Row 10 -->
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Jen Story:</label>
+          <label class="form-label">Would you like Jen to tell her story at the start:</label>
           <div class="checkbox-group">
             <label for="jenStoryYes" class="checkbox-label">
               <input type="radio" id="jenStoryYes" name="jenStory" value="Yes">
@@ -160,28 +156,32 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="roundTables" class="form-label">Available Round Tables:</label>
-          <input type="number" id="roundTables" name="roundTables" class="form-input" min="0">
+          <label for="eventType" class="form-label">Event Type:</label>
+          <select id="eventType" name="eventType" class="form-select" required>
+            <option value="Sewing">Sewing</option>
+            <option value="Non-Sewing">Non-Sewing</option>
+            <option value="Both">Both</option>
+          </select>
         </div>
       </div>
 
       <!-- Form Row 11 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
-          <input type="number" id="rectangleTables" name="rectangleTables" class="form-input" min="0">
+          <label for="roundTables" class="form-label">Available Round Tables:</label>
+          <input type="number" id="roundTables" name="roundTables" class="form-input" min="0">
         </div>
         <div class="form-group">
-          <label for="kidsUnder10" class="form-label"># of Kids Under Age 10:</label>
-          <input type="number" id="kidsUnder10" name="kidsUnder10" class="form-input" min="0">
+          <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
+          <input type="number" id="rectangleTables" name="rectangleTables" class="form-input" min="0">
         </div>
       </div>
 
       <!-- Form Row 12 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="spaceSize" class="form-label">Event Space Size:</label>
-          <input type="text" id="spaceSize" name="spaceSize" class="form-input" required>
+          <label for="description" class="form-label">Event Description:</label>
+          <textarea id="description" name="description" class="form-textarea" rows="4" required></textarea>
         </div>
       </div>
 
