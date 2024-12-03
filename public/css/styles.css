@@ -457,98 +457,61 @@ footer p {
     }
 }
 
-/* Donate Section */
+/* Donate Section Styling */
 .donate-section {
     padding: 50px 20px;
-    text-align: center;
     background-color: #fff;
+    text-align: center;
+    margin-top: 20px;
 }
 
+/* Container for the Content */
 .donate-container {
-    max-width: 800px;  /* Limit the width of the donate section */
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Image for Donate Section */
-.donate-image {
-    margin-bottom: 30px;
-}
-
-.donate-image img {
-    width: 100%;  /* Make the image responsive */
-    max-width: 800px;  /* Limit the max-width */
-    height: auto;
-    border-radius: 8px;  /* Optional: Add border radius for a smoother look */
-}
-
-/* Heading */
+/* Heading Styles */
 .donate-section h2 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #34B3A8;
     font-weight: bold;
+    color: #34B3A8;
+    margin-bottom: 20px;
 }
 
 /* Paragraphs */
 .donate-section p {
     font-size: 1.2rem;
+    color: #555;
     margin-bottom: 20px;
-    color: #333;
     line-height: 1.6;
 }
 
-/* Address */
+/* Address Styling */
 .donate-address {
     font-size: 1.1rem;
     margin-bottom: 30px;
+    color: #555;
 }
 
-.donate-address address {
-    font-style: normal;
-    line-height: 1.6;
-    font-size: 1.1rem;
-}
-
-/* Donate Button */
-.donate-online {
-    margin-top: 30px;
-}
-
-.donate-online .btn-primary {
-    padding: 15px 40px;
-    background-color: #34B3A8;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.donate-online .btn-primary:hover {
-    background-color: #2a8e85;
-}
-
-/* Mobile Responsiveness */
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .donate-section {
-        padding: 30px 10px;
+        padding: 30px 15px;
     }
 
     .donate-container {
         padding: 20px;
     }
 
-    .donate-image img {
-        max-width: 100%;
-        height: auto;
+    .donate-section h2 {
+        font-size: 2rem;
     }
 
-    .donate-online .btn-primary {
-        width: 100%;
-        padding: 12px 20px;
-    }
-}
+    .donate-section p {
+        font-size: 1.1rem;
+    }}
