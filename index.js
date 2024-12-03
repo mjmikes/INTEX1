@@ -27,9 +27,37 @@ let knex = require("knex")({
     }
 });
 
+
+// get route for the landing page (index.ejs)
 app.get("/", (req,res) => {
     res.render("index.ejs")
 });
+
+// get route for the login page
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+// get route for the admin page
+app.get('/admin', (req, res) => {
+    res.render('admin');
+});
+
+// get route for the request event page
+app.get('/requestevent', (req, res) => {
+    res.render('requestevent');
+});
+
+// get route for the volunteer page
+app.get('/volunteer', (req, res) => {
+    res.render('volunteer');
+});
+
+// get route for the donate page
+app.get('/donate', (req, res) => {
+    res.render('donate');
+});
+
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
