@@ -39,6 +39,12 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
+// get route for the jen's page
+app.get('/jen', (req, res) => {
+    res.render('login');
+});
+
+
 // get route for the admin page
 app.get('/admin', (req, res) => {
     res.render('admin');

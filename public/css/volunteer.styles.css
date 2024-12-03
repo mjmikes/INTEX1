@@ -13,16 +13,11 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Keep the header fixed at the top */
+/* Header */
 header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    /* Makes sure the navbar stays on top of the content */
-    background-color: rgba(255, 255, 255, 0.9); /* Optional: add some transparency */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: small shadow for a clean look */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
 }
 
 .navbar {
@@ -52,7 +47,6 @@ header {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    margin-top: 12px;
 }
 
 .navbar-toggler-icon {
@@ -83,14 +77,12 @@ header {
 
 .navbar-collapse {
     display: flex;
-    align-items: center; /* Vertically center the nav items */
-    justify-content: flex-start; /* Align items to the left (default) */
+    align-items: center;
 }
 
 /* Styling for the logo text link */
 .logo-link {
     text-decoration: none; /* Remove underline from the link */
-    color: #000000;
 }
 
 .logo-text {
@@ -108,16 +100,10 @@ header {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);  /* Glow effect */
 }
 
-/* Hover Effect: Change color for both icon and text when hovering over the whole logo */
-.logo-link:hover {
-    color: #34B3A8;  /* Change both icon and text to this color */
-}
-
 /* Optional: Active state (when clicked) to revert to original color */
 .logo-link:active .logo-text {
     color: #FBB711;  /* Revert to original color */
 }
-
 
 .main-menu {
     list-style: none;
@@ -130,6 +116,7 @@ header {
     display: flex;
     align-items: center;
 }
+
 .main-menu li a {
     font-weight: bold; /* Make the text bold */
     color: #000; /* Adjust the color if needed (default is black) */
@@ -149,7 +136,6 @@ header {
     color: #34B3A8;
 }
 
-/* Hero Section */
 /* Hero Section */
 .hero {
     position: relative;  /* Allows absolute positioning of text */
@@ -274,134 +260,12 @@ header {
     background-color: #ff9d00;
 }
 
-
-
 /* Content Section */
 .content {
     padding: 50px 40px;
     position: relative;
     background-color: #fff;
 }
-
-/* Welcome Section Styling */
-.welcome {
-    background-color: #fff; /* Set background color to white */
-    padding: 40px 30px; /* Add padding to create space inside the card */
-    border-radius: 15px; /* Round the corners of the card */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Apply a subtle shadow to the card */
-    margin-top: -250px; /* Create overlap effect with the section above */
-    position: relative;
-    z-index: 1; /* Ensure this card stays on top */
-    text-align: center;
-    width: 80%; /* Set the width of the card (adjust as needed) */
-    margin-left: auto; /* Center horizontally */
-    margin-right: auto; /* Center horizontally */
-}
-
-
-/* Welcome Section Heading Styling */
-.welcome h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-/* Welcome Section Paragraph Styling */
-.welcome p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-
-/* Welcome Section Logo Styling */
-.welcome img {
-    width: 100px; /* Adjust logo size */
-    height: auto;
-    margin-top: 20px;
-}
-.welcome-button {
-    background-color: #FBB711; /* Use a similar color to your other buttons */
-    color: white; /* White text */
-    font-size: 1.2rem; /* Slightly larger font size */
-    padding: 15px 30px; /* Add padding for a more button-like feel */
-    border: none; /* Remove the default border */
-    border-radius: 30px; /* Round the corners */
-    cursor: pointer; /* Show pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
-    font-weight: bold; /* Make the text bold */
-    text-align: center; /* Center the text */
-    display: inline-block; /* Allow the button to act like a block but sit inline */
-    margin: 20px 0; /* Add spacing around the button */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.welcome-button:hover {
-    background-color: #FBB711; /* Darker background color on hover */
-    transform: scale(1.05); /* Slightly increase the size on hover */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-}
-
-/* Button hover effect */
-.donate-button:hover {
-    background-color: #2a8e80; /* Darker background color on hover */
-    transform: scale(1.05); /* Slightly increase the size on hover */
-}
-
-
-/* Card Container (cards that are beneath the welcome card) */
-.cards {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* Space between cards */
-    margin-top: 30px; /* Add space between welcome card and the smaller cards */
-    position: relative;
-    z-index: 1; /* Ensure it stays above other elements */
-}
-
-/* Individual Card Styling */
-.card {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 30px;
-    width: 30%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow for card */
-    position: relative;
-    z-index: 1;
-    transition: box-shadow 0.3s ease;
-}
-
-/* Card Header Styling */
-.card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-/* Card Paragraph Styling */
-.card p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-/* Card Button Styling */
-.card button {
-    background-color: #34B3A8;
-    color: white;
-    padding: 12px 25px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-/* Button Hover Effect */
-.card button:hover {
-    background-color: #2a8e80;
-}
-
-/* Card Hover Effect (increase shadow on hover) */
-.card:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-}
-
 
 /* Footer */
 footer {
@@ -466,151 +330,127 @@ footer p {
     .main-menu {
         flex-direction: column;
         gap: 10px;
-        align-items: center;
-        margin-top: 20px;
-    }
+        align-items: center;}}
 
-    .hero-text h2 {
-        font-size: 2rem;
-    }
-
-    .cards {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .card {
-        width: 100%;
-    }
-
-    .footer {
-        flex-direction: column;
-        align-items: center;
-    }
+/* Form Section */
+/* Center the header */
+/* Form Section */
+/* Center the header */
+h1.form-header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .donate-section {
-        padding: 30px 15px;
-    }
-
-    .donate-container {
-        padding: 20px;
-    }
-
-    .donate-section h2 {
-        font-size: 2rem;
-    }
-
-    .donate-section p {
-        font-size: 1.1rem;
-    }}
-
-/* Donate small text class for legal disclaimer */
-.donate-small-text {
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 10px;
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
 }
 
-/* Heading for 'How to Donate' */
-.donate-section h3 {
+form h2 {
+    margin-bottom: 20px;
     font-size: 1.8rem;
-    font-weight: normal;
-    color: #34B3A8;
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
-
-/* Login Page Styling */
-.login-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background: white no-repeat center center/cover;
-    position: relative;
-    overflow: hidden;
-    padding: 0 20px;
-
-}
-
-
-.login-container {
-    display: flex;
-    width: 80%;
-    max-width: 900px;
-    min-height: 500px;
-    background-color: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-
-.login-image {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f4f4f4; /* Backup color in case the image doesn't load */
-}
-
-.login-image img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.login-form {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    color: #333;
     text-align: center;
 }
 
-.login-form h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
+form label {
     display: block;
-    font-size: 1rem;
+    font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
 }
 
-.form-group input {
+form .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+form .form-group {
+    flex: 1;
+    min-width: 200px; /* Ensure minimum width for each column */
+}
+
+form input,
+form select,
+form textarea {
     width: 100%;
     padding: 10px;
-    font-size: 1rem;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.btn-primary {
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Style the Jen Story radio buttons */
+.checkbox-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.checkbox-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.checkbox-group .checkbox-label {
+    font-weight: normal;
+}
+
+form button {
     background-color: #34B3A8;
     color: white;
-    padding: 12px 20px;
     font-size: 1rem;
+    padding: 10px 20px;
     border: none;
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.btn-primary:hover {
+form button:hover {
     background-color: #2a8e80;
+}
+
+/* Media Query for Mobile */
+@media (max-width: 768px) {
+    form .form-row {
+        flex-direction: column; /* Stacks the fields vertically on mobile */
+    }
+
+    form .form-group {
+        min-width: 100%; /* Makes each form field full width on mobile */
+    }
+}
+
+
+/* Table Section */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
