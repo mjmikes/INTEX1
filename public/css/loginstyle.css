@@ -13,11 +13,16 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Header */
+/* Keep the header fixed at the top */
 header {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10; 
+    /* Makes sure the navbar stays on top of the content */
+    background-color: rgba(255, 255, 255, 0.9); /* Optional: add some transparency */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: small shadow for a clean look */
 }
 
 .navbar {
@@ -287,14 +292,6 @@ header {
 }
 
 
-/* Increase the size of the image */
-.welcome img.large-image {
-    width: 70%; /* Set to full container width */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 1200px; /* Optional: Limit max size of the image */
-    margin-top: 20px; /* Add space between text and image */
-}
-
 /* Welcome Section Heading Styling */
 .welcome h2 {
     font-size: 2.5rem;
@@ -485,46 +482,7 @@ footer p {
     }
 }
 
-/* Donate Section Styling */
-.donate-section {
-    padding: 50px 20px;
-    background-color: #fff;
-    text-align: center;
-    margin-top: 20px;
-}
 
-/* Container for the Content */
-.donate-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Heading Styles */
-.donate-section h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #34B3A8;
-    margin-bottom: 20px;
-}
-
-/* Paragraphs */
-.donate-section p {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-/* Address Styling */
-.donate-address {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    color: #555;
-}
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
@@ -567,7 +525,7 @@ footer p {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background: url('/path/to/your/background-image.jpg') no-repeat center center/cover;
+    background: url('images/loginimg.jpg') no-repeat center center/cover;
     position: relative;
     overflow: hidden;
 }
