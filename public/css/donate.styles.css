@@ -83,6 +83,7 @@ header {
 /* Styling for the logo text link */
 .logo-link {
     text-decoration: none; /* Remove underline from the link */
+    color:#000000
 }
 
 .logo-text {
@@ -98,6 +99,10 @@ header {
 .logo-link:hover .logo-text {
     color: #34B3A8;  /* Change text color when hovered */
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);  /* Glow effect */
+}
+/* Hover Effect: Change color for both icon and text when hovering over the whole logo */
+.logo-link:hover {
+    color: #34B3A8;  /* Change both icon and text to this color */
 }
 
 /* Optional: Active state (when clicked) to revert to original color */
@@ -159,7 +164,7 @@ header {
 .hero-text {
     position: absolute;
     top: 40%;
-    left: 5%;  /* Align the text more to the left side */
+    right: 5%;  /* Align the text more to the left side */
     transform: translateY(-50%);  /* Center the text vertically */
     color: white;
     text-align: left;  /* Align the text to the left */
@@ -397,4 +402,89 @@ footer p {
 /* Additional styles for button group container */
 .donate-section .button-group {
     margin-top: 20px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #2c3e50; /* Dark, professional background */
+    color: #ecf0f1;  /* Light text color for contrast */
+    padding: 40px 0;  /* Adequate padding for spacing */
+    font-size: 16px;  /* Slightly larger font for readability */
+    text-align: center;
+}
+
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px; /* Adds spacing between sections */
+    margin-bottom: 30px;
+}
+
+.contact, .links {
+    width: 45%; /* Each section takes up 45% of the width */
+    min-width: 250px; /* Ensure sections don't shrink too much */
+    box-sizing: border-box;  /* Make sure padding is included in width */
+}
+
+/* Header in footer */
+footer h2 {
+    font-size: 20px;
+    font-weight: 700;  /* Bold headers */
+    margin-bottom: 15px;
+    text-transform: uppercase; /* Uppercase for a clean, bold look */
+}
+
+/* Contact section */
+.contact p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.contact p:first-of-type {
+    font-weight: bold;
+}
+
+/* Links section */
+.links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.links li {
+    margin-bottom: 12px;
+}
+
+.links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.links a:hover {
+    color: #3498db;  /* Blue color on hover for a professional effect */
+    text-decoration: underline;
+}
+
+/* Footer copyright */
+footer p {
+    font-size: 14px;
+    margin-top: 20px;
+    color: #bdc3c7;  /* Slightly lighter text color */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact, .links {
+        width: 100%;  /* Full width on smaller screens */
+        text-align: center;  /* Center-align text on small screens */
+    }
 }
