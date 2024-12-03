@@ -119,29 +119,37 @@
       <!-- Form Row 8 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="advancedSewers" class="form-label">Expected Advanced Sewers:</label>
-          <input type="number" id="advancedSewers" name="advancedSewers" class="form-input" min="0" required>
+          <label for="eventType" class="form-label">Event Type:</label>
+          <select id="eventType" name="eventType" class="form-select" required>
+            <option value="Sewing">Sewing</option>
+            <option value="Non-Sewing">Non-Sewing</option>
+            <option value="Both">Both</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="sewingMachines" class="form-label">Sewing Machines Available:</label>
-          <input type="number" id="sewingMachines" name="sewingMachines" class="form-input" min="0" required>
+          <label for="advancedSewers" class="form-label">Expected Advanced Sewers:</label>
+          <input type="number" id="advancedSewers" name="advancedSewers" class="form-input" min="0" required>
         </div>
       </div>
 
       <!-- Form Row 9 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="participants" class="form-label"># of Expected Participants:</label>
-          <input type="number" id="participants" name="participants" class="form-input" min="1" required>
+          <label for="sewingMachines" class="form-label">Sewing Machines Available:</label>
+          <input type="number" id="sewingMachines" name="sewingMachines" class="form-input" min="0" required>
         </div>
         <div class="form-group">
-          <label for="kidsUnder10" class="form-label"># of Kids Under Age 10:</label>
-          <input type="number" id="kidsUnder10" name="kidsUnder10" class="form-input" min="0">
+          <label for="participants" class="form-label"># of Expected Participants:</label>
+          <input type="number" id="participants" name="participants" class="form-input" min="1" required>
         </div>
       </div>
 
       <!-- Form Row 10 -->
       <div class="form-row">
+        <div class="form-group">
+          <label for="kidsUnder10" class="form-label"># of Kids Under Age 10:</label>
+          <input type="number" id="kidsUnder10" name="kidsUnder10" class="form-input" min="0">
+        </div>
         <div class="form-group">
           <label class="form-label">Would you like Jen to tell her story at the start:</label>
           <div class="checkbox-group">
@@ -154,14 +162,6 @@
               No
             </label>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="eventType" class="form-label">Event Type:</label>
-          <select id="eventType" name="eventType" class="form-select" required>
-            <option value="Sewing">Sewing</option>
-            <option value="Non-Sewing">Non-Sewing</option>
-            <option value="Both">Both</option>
-          </select>
         </div>
       </div>
 
