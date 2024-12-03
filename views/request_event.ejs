@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Event Request</title>
-  <link rel="stylesheet" href="/css/requestevent.styles.css"> <!-- Update the path as needed -->
+  <link rel="stylesheet" href="/css/requestevent.styles.css">
 </head>
 
 <body>
@@ -32,85 +31,121 @@
   <main>
     <h1 class="form-header">Event Request Form</h1>
     <form action="/submit-event-request" method="POST" class="event-form">
-      <!-- Event Name -->
-      <label for="eventName" class="form-label">Event Name:</label>
-      <input type="text" id="eventName" name="eventName" class="form-input" required>
-      <br><br>
+      <div class="form-row">
+        <div class="form-group">
+          <!-- Event Name -->
+          <label for="eventName" class="form-label">Event Name:</label>
+          <input type="text" id="eventName" name="eventName" class="form-input" required>
+        </div>
 
-      <!-- Event Type -->
-      <label for="eventType" class="form-label">Event Type:</label>
-      <select id="eventType" name="eventType" class="form-select" required>
-        <option value="Sewing">Sewing</option>
-        <option value="Non-Sewing">Non-Sewing</option>
-        <option value="Both">Both</option>
-      </select>
-      <br><br>
+        <div class="form-group">
+          <!-- Event Type -->
+          <label for="eventType" class="form-label">Event Type:</label>
+          <select id="eventType" name="eventType" class="form-select" required>
+            <option value="Sewing">Sewing</option>
+            <option value="Non-Sewing">Non-Sewing</option>
+            <option value="Both">Both</option>
+          </select>
+        </div>
+      </div>
 
-      <!-- Event Location -->
-      <label for="eventLocation" class="form-label">Event Location:</label>
-      <input type="text" id="eventLocation" name="eventLocation" class="form-input" required>
-      <br><br>
+      <div class="form-row">
+        <div class="form-group">
+          <!-- Event Location -->
+          <label for="eventLocation" class="form-label">Event Location:</label>
+          <input type="text" id="eventLocation" name="eventLocation" class="form-input" required>
+        </div>
 
-      <!-- Possible Dates -->
-      <label for="possibleDate1" class="form-label">Possible Date 1:</label>
-      <input type="date" id="possibleDate1" name="possibleDate1" class="form-input" required>
-      <br><br>
-      <label for="possibleDate2" class="form-label">Possible Date 2:</label>
-      <input type="date" id="possibleDate2" name="possibleDate2" class="form-input">
-      <br><br>
+        <div class="form-group">
+          <!-- Possible Date 1 -->
+          <label for="possibleDate1" class="form-label">Possible Date 1:</label>
+          <input type="date" id="possibleDate1" name="possibleDate1" class="form-input" required>
+        </div>
+      </div>
 
-      <!-- Event Start Time -->
-      <label for="startTime" class="form-label">Event Start Time:</label>
-      <input type="time" id="startTime" name="startTime" class="form-input" required>
-      <br><br>
+      <div class="form-row">
+        <div class="form-group">
+          <!-- Possible Date 2 -->
+          <label for="possibleDate2" class="form-label">Possible Date 2:</label>
+          <input type="date" id="possibleDate2" name="possibleDate2" class="form-input">
+        </div>
 
-      <!-- Event Duration -->
-      <label for="duration" class="form-label">Event Duration (hrs):</label>
-      <input type="number" id="duration" name="duration" class="form-input" min="1" required>
-      <br><br>
+        <div class="form-group">
+          <!-- Event Start Time -->
+          <label for="startTime" class="form-label">Event Start Time:</label>
+          <input type="time" id="startTime" name="startTime" class="form-input" required>
+        </div>
+      </div>
 
-      <!-- Expected Advanced Sewers -->
-      <label for="advancedSewers" class="form-label">Expected Advanced Sewers:</label>
-      <input type="number" id="advancedSewers" name="advancedSewers" class="form-input" min="0" required>
-      <br><br>
+      <div class="form-row">
+        <div class="form-group">
+          <!-- Event Duration -->
+          <label for="duration" class="form-label">Event Duration (hrs):</label>
+          <input type="number" id="duration" name="duration" class="form-input" min="1" required>
+        </div>
 
-      <!-- Sewing Machines Available -->
-      <label for="sewingMachines" class="form-label">Sewing Machines Available:</label>
-      <input type="number" id="sewingMachines" name="sewingMachines" class="form-input" min="0" required>
-      <br><br>
+        <div class="form-group">
+          <!-- Expected Advanced Sewers -->
+          <label for="advancedSewers" class="form-label">Expected Advanced Sewers:</label>
+          <input type="number" id="advancedSewers" name="advancedSewers" class="form-input" min="0" required>
+        </div>
+      </div>
 
-      <!-- Expected Participants -->
-      <label for="participants" class="form-label"># of Expected Participants:</label>
-      <input type="number" id="participants" name="participants" class="form-input" min="1" required>
-      <br><br>
+      <div class="form-row">
+        <div class="form-group">
+          <!-- Sewing Machines Available -->
+          <label for="sewingMachines" class="form-label">Sewing Machines Available:</label>
+          <input type="number" id="sewingMachines" name="sewingMachines" class="form-input" min="0" required>
+        </div>
 
-      <!-- Event Description -->
-      <label for="description" class="form-label">Event Description:</label>
-      <textarea id="description" name="description" class="form-textarea" rows="4" cols="50" required></textarea>
-      <br><br>
+        <div class="form-group">
+          <!-- # of Expected Participants -->
+          <label for="participants" class="form-label"># of Expected Participants:</label>
+          <input type="number" id="participants" name="participants" class="form-input" min="1" required>
+        </div>
+      </div>
 
-      <!-- Jen Story -->
-      <label for="jenStory" class="form-label">Jen Story:</label>
-      <input type="checkbox" id="jenStory" name="jenStory" class="form-checkbox" value="Yes">
-      <br><br>
+      <div class="form-row">
+        <div class="form-group">
+          <!-- Event Description -->
+          <label for="description" class="form-label">Event Description:</label>
+          <textarea id="description" name="description" class="form-textarea" rows="4" cols="50" required></textarea>
+        </div>
 
-      <!-- Available Tables -->
-      <label for="roundTables" class="form-label">Available Round Tables:</label>
-      <input type="number" id="roundTables" name="roundTables" class="form-input" min="0">
-      <br><br>
-      <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
-      <input type="number" id="rectangleTables" name="rectangleTables" class="form-input" min="0">
-      <br><br>
+        <div class="form-group">
+          <!-- Jen Story -->
+          <label for="jenStory" class="form-label">Jen Story:</label>
+          <input type="checkbox" id="jenStory" name="jenStory" class="form-checkbox" value="Yes">
+        </div>
+      </div>
 
-      <!-- # of Kids under 10 -->
-      <label for="kidsUnder10" class="form-label"># of Kids Under Age 10:</label>
-      <input type="number" id="kidsUnder10" name="kidsUnder10" class="form-input" min="0">
-      <br><br>
+      <div class="form-row">
+        <div class="form-group">
+          <!-- Available Round Tables -->
+          <label for="roundTables" class="form-label">Available Round Tables:</label>
+          <input type="number" id="roundTables" name="roundTables" class="form-input" min="0">
+        </div>
 
-      <!-- Event Space Size -->
-      <label for="spaceSize" class="form-label">Event Space Size:</label>
-      <input type="text" id="spaceSize" name="spaceSize" class="form-input" required>
-      <br><br>
+        <div class="form-group">
+          <!-- Available Rectangle Tables -->
+          <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
+          <input type="number" id="rectangleTables" name="rectangleTables" class="form-input" min="0">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <!-- # of Kids under 10 -->
+          <label for="kidsUnder10" class="form-label"># of Kids Under Age 10:</label>
+          <input type="number" id="kidsUnder10" name="kidsUnder10" class="form-input" min="0">
+        </div>
+
+        <div class="form-group">
+          <!-- Event Space Size -->
+          <label for="spaceSize" class="form-label">Event Space Size:</label>
+          <input type="text" id="spaceSize" name="spaceSize" class="form-input" required>
+        </div>
+      </div>
 
       <!-- Submit Button -->
       <button type="submit" class="submit-btn">Submit</button>
@@ -124,5 +159,4 @@
     </div>
   </footer>
 </body>
-
 </html>
