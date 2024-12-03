@@ -19,7 +19,7 @@ header {
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 10; 
+    z-index: 10;
     /* Makes sure the navbar stays on top of the content */
     background-color: rgba(255, 255, 255, 0.9); /* Optional: add some transparency */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: small shadow for a clean look */
@@ -552,6 +552,7 @@ footer p {
     border-radius: 15px;
     overflow: hidden;
 }
+
 
 .login-image {
     flex: 1;
