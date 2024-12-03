@@ -330,4 +330,52 @@ footer p {
     .main-menu {
         flex-direction: column;
         gap: 10px;
-        align-items: center;
+        align-items: center;}}
+
+/* Donation Section */
+.donation-section {
+    background-color: #fff;
+    padding: 40px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.donation-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.donation-section p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.donation-section a.btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #34B3A8;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.donation-section a.btn:hover {
+    background-color: #2a8e80;
+}
+
+.donation-section .address {
+    font-size: 1.1rem;
+    margin-top: 20px;
+    color: #555;
+}
+
+.donation-section .address p {
+    margin: 5px 0;
+}
