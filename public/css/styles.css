@@ -32,6 +32,17 @@ header {
     height: auto;
 }
 
+.navbar-brand {
+    font-size: 24px;  /* Adjust the font size */
+    font-weight: bold;  /* Make the text bold */
+    color: #000000;  /* Color similar to the other buttons, adjust as needed */
+    text-transform: uppercase;  /* Optionally uppercase the text */
+    letter-spacing: 2px;  /* Add spacing between letters */
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
 .navbar-toggler {
     background-color: transparent;
     border: none;
@@ -66,7 +77,35 @@ header {
 
 .navbar-collapse {
     display: flex;
+    align-items: center; /* Vertically center the nav items */
+    justify-content: flex-start; /* Align items to the left (default) */
 }
+
+/* Styling for the logo text link */
+.logo-link {
+    text-decoration: none; /* Remove underline from the link */
+}
+
+.logo-text {
+    font-size: 24px;  /* Adjust the font size */
+    font-weight: bold;  /* Make the text bold */
+    color: #000000;  /* Color of the text */
+    text-transform: uppercase;  /* Optional: uppercase text */
+    letter-spacing: 2px;  /* Add some letter spacing */
+    transition: all 0.3s ease;  /* Smooth transition for hover effect */
+}
+
+/* Hover effect for glowing text */
+.logo-link:hover .logo-text {
+    color: #34B3A8;  /* Change text color when hovered */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);  /* Glow effect */
+}
+
+/* Optional: Active state (when clicked) to revert to original color */
+.logo-link:active .logo-text {
+    color: #FBB711;  /* Revert to original color */
+}
+
 
 .main-menu {
     list-style: none;
@@ -76,6 +115,15 @@ header {
 
 .main-menu li {
     font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+.main-menu li a {
+    font-weight: bold; /* Make the text bold */
+    color: #000; /* Adjust the color if needed (default is black) */
+    text-decoration: none; /* Remove underline from links */
+    font-size: 18px; /* Adjust font size */
+    padding: 10px 15px; /* Optional: add some padding around the link */
 }
 
 .main-menu a {
@@ -295,61 +343,3 @@ footer p {
         align-items: center;
     }
 }
-/* Carousel Section */
-.carousel {
-    position: relative;
-    width: 100%;
-    height: 400px; /* Adjust this height as needed */
-    overflow: hidden;
-    margin-top: 50px; /* Add some space above the carousel */
-}
-
-.carousel-container {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-slide {
-    min-width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.carousel-prev,
-.carousel-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.carousel-prev {
-    left: 10px;
-}
-
-.carousel-next {
-    right: 10px;
-}
-
-.carousel-prev:hover,
-.carousel-next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-/* Optional: Adding some fade effect when the carousel changes images */
-.carousel-container {
-    transition: transform 0.5s ease-in-out;
-}
-
