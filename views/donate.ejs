@@ -9,15 +9,20 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="/" class="logo-link">
-                <span class="logo-text">Turtle Shelter Project</span>
-            </a>
-            <ul class="main-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/donate" class="active">Donate</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
+            <div class="navbar-brand">
+                <a href="/" class="logo-link"><span class="logo-text">Turtle Shelter Project</span></a>
+            </div>
+            
+            <div class="navbar-collapse">
+                <ul class="main-menu">
+                    <li><a href="/request_event">Request Event</a></li>
+                    <li><a href="/jens_story">Jen's Story</a></li>
+                    <li><a href="/our_sponsors">Our Sponsors</a></li>
+                    <li><a href="/login">Admin Login</a></li>
+                    <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
+                    <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
