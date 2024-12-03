@@ -281,6 +281,18 @@ header {
     position: relative;
     z-index: 1; /* Ensure this card stays on top */
     text-align: center;
+    width: 80%; /* Set the width of the card (adjust as needed) */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+}
+
+
+/* Increase the size of the image */
+.welcome img.large-image {
+    width: 70%; /* Set to full container width */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 1200px; /* Optional: Limit max size of the image */
+    margin-top: 20px; /* Add space between text and image */
 }
 
 /* Welcome Section Heading Styling */
