@@ -13,11 +13,16 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Header */
+/* Keep the header fixed at the top */
 header {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10; 
+    /* Makes sure the navbar stays on top of the content */
+    background-color: rgba(255, 255, 255, 0.9); /* Optional: add some transparency */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: small shadow for a clean look */
 }
 
 .navbar {
@@ -287,21 +292,6 @@ header {
 }
 
 
-/* Increase the size of the image */
-.welcome img.large-image {
-    width: 70%; /* Set to full container width */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 1200px; /* Optional: Limit max size of the image */
-    margin-top: 20px; /* Add space between text and image */
-    transition: opacity 1s ease-in-out; /* Smooth fade-in and fade-out effect */
-}
-/* Ensure the image container is positioned correctly and has a smooth fade */
-#welcome-image-container {
-    position: relative;
-    width: 100%;  /* Or set a specific width */
-    height: auto; /* Adjust as needed */
-}
-
 /* Welcome Section Heading Styling */
 .welcome h2 {
     font-size: 2.5rem;
@@ -346,17 +336,15 @@ header {
 .donate-button:hover {
     background-color: #2a8e80; /* Darker background color on hover */
     transform: scale(1.05); /* Slightly increase the size on hover */
-    align-items: center; /* Centers the button horizontally */
 }
 
 
 /* Card Container (cards that are beneath the welcome card) */
-/* Card Container */
 .cards {
     display: flex;
     justify-content: space-between;
     gap: 20px; /* Space between cards */
-    margin-top: 30px; /* Space between welcome card and the smaller cards */
+    margin-top: 30px; /* Add space between welcome card and the smaller cards */
     position: relative;
     z-index: 1; /* Ensure it stays above other elements */
 }
@@ -364,42 +352,25 @@ header {
 /* Individual Card Styling */
 .card {
     background-color: #fff;
-    border-radius: 10px;  /* You can set this to a value that suits your design */
-    padding:0px; /* Adjust padding to reduce space inside the card */
-    width: 30%;  /* Set width to control the size of the card */
+    border-radius: 10px;
+    padding: 30px;
+    width: 30%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow for card */
     position: relative;
     z-index: 1;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: space-between; /* Distribute space evenly inside */
-    height: 650px; /* Set a fixed height for the card */
-}
-
-/* Card Image Styling */
-.card .card-image {
-    width: 100%; /* Image takes up full width */
-    height: 65%; /* Adjust image height */
-    border-radius: 10px; /* Round the corners of the image */
-    margin-bottom: 10px; /* Add some space below the image */
-    object-fit: cover; /* Ensure the image fits well */
+    transition: box-shadow 0.3s ease;
 }
 
 /* Card Header Styling */
 .card h3 {
     font-size: 1.8rem;
-    margin-bottom: 0px; /* Reduce space below the heading */
-    text-align: center; /* Center align heading */
-    margin-top: -80px;
+    margin-bottom: 15px;
 }
 
 /* Card Paragraph Styling */
 .card p {
-    font-size: .9rem;
-    margin-bottom: 10px; /* Reduce space below the paragraph */
-    text-align: center; /* Center align paragraph */
-    margin-top: -70px;
-    padding: 20px;
+    font-size: 1rem;
+    margin-bottom: 20px;
 }
 
 /* Card Button Styling */
@@ -412,8 +383,6 @@ header {
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    align-self: center; /* Center the button horizontally */
-    margin-top: -65px; /* Add this line to push the button upwards */
 }
 
 /* Button Hover Effect */
@@ -426,318 +395,94 @@ header {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
-/* Take Action Section */
-/* Take Action Section */
-.take-action {
-    position: relative;  /* Allows absolute positioning of text */
-    width: 100%;  /* Ensure it spans the entire width of the screen */
-    height: 100vh;  /* Make the take-action section take up the full viewport height */
-    overflow: hidden;  /* Prevent overflow */
-    top: -75px;
-    z-index: 0;
-    
-}
 
-/* Take Action Image */
-.take-action img {
-    position: absolute;  /* Position the image relative to the take-action section */
-    top: 0;
-    left: 0;
-    width: 100%;  /* Make the image take the full width */
-    height: 100%;  /* Make the image take the full height */
-    object-fit: cover;  /* Ensure the image covers the entire area without distortion */
-    z-index: -2;  /* Push the image behind the overlay and text */
-    
-}
-
-/* Take Action Overlay (Underlay) */
-.take-action .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);  /* Darken the image with a semi-transparent black */
-    z-index: 0;  /* Ensure it's on top of the image but behind the text */
-    
-}
-
-/* Take Action Text */
-.take-action .hero-text {
-    position: absolute;
-    top: 40%;  /* Adjust as needed to center the text vertically */
-    right: 5%;  /* Align the text more to the right side */
-    transform: translateY(-50%);  /* Center the text vertically */
-    color: white;
-    text-align: right;  /* Right-align the text */
-    padding: 20px;
-}
-
-/* Take Action Text - Heading */
-.take-action .hero-text h2 {
-    font-size: 3rem;  /* Adjust the size of the heading */
-    font-weight: bold;  /* Make the heading bold */
-    margin: 0;
-    padding: 0;
-    z-index: 1;  /* Ensure the text appears above the image */
-}
-
-/* Take Action Text - Paragraph */
-.take-action .hero-text p {
-    font-size: 2rem;  /* Adjust the size of the paragraph text */
-    margin: 10px 0;
-}
-
-/* Button Group in Take Action Section */
-.take-action .button-group {
-    margin-top: 20px;  /* Space the buttons below the text */
-    text-align: right;  /* Right-align the buttons */
-}
-
-/* Buttons Styling for Take Action */
-.take-action .btn-primary-hero,
-.take-action .btn-secondary-hero {
-    padding: 10px 40px;  /* Larger padding for bigger buttons */
-    font-size: 1.5rem;  /* Larger font size for better visibility */
-    border-radius: 25px;  /* Add border-radius to make buttons round */
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.take-action .btn-primary-hero {
-    background-color: #34B3A8;
-    color: white;
-}
-
-.take-action .btn-secondary-hero {
-    background-color: #FBB711;
-    color: white;
-}
-
-.take-action .btn-primary-hero:hover {
-    background-color: #2a8e80;
-}
-
-.take-action .btn-secondary-hero:hover {
-    background-color: #ff9d00;
-}
-
-/* Icon Styling inside Buttons */
-.take-action .btn-primary-hero i,
-.take-action .btn-secondary-hero i {
-    margin-right: 10px;  /* Space between the icon and text */
-    font-size: 1.5rem;  /* Adjust icon size */
-}
-
-
-/* Adjust the cards section to be in front of the Take Action section */
-.cards {
-    position: relative; /* Ensures cards are above the Take Action section */
-    z-index: 1; /* Higher z-index to keep cards on top */
-}
-
-/* Welcome Section and Card Container */
-.welcome {
-    position: relative;
-    z-index: 1;  /* Ensure the welcome section stays above the Take Action section */
-}
-
-/* Sponsors Section */
-.sponsors {
-    position: relative;
-    overflow: hidden;  /* Hides the overflowing logos when they slide */
-    width: 100%; /* Ensure it takes full width of the container */
-    align-self: center;
-    margin-bottom: 50px;
-    margin-top: -50px;
-}
-
-.sponsors h2 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 40px; /* Increase the font size */
-    margin: 0; /* Reset any default margins */
-    padding-bottom: 30px; /* Add space below the header */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.sponsors-container {
-    display: flex;  /* Align logos horizontally */
-    transition: transform 0.5s ease;  /* Smooth scrolling effect */
-    gap: 20px;
-}
-
-.sponsor-logo {
-    margin-right: 20px;  /* Space between logos */
-}
-
-.sponsor-nav {
-    position: absolute;
-    top: 50%;  /* Center the arrows vertically */
-    transform: translateY(-50%);  /* Adjust alignment */
-    font-size: 30px;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-}
-.left-arrow {
-    left: 10px;  /* Position on the left side */
-}
-
-.right-arrow {
-    right: 10px;  /* Position on the right side */
-}
-
-/* Optional: Add hover effect to arrows */
-.sponsor-nav:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.sponsor-logo img {
-    width: 250px;
-    height: 250px;
-    object-fit: contain;
-    transition: transform 0.3s ease-in-out;  /* Add transition for smooth scaling */
-}
-
-.sponsor-logo img:hover {
-    transform: scale(1.1);  /* Slightly enlarge logos on hover */
-}
-
-
-@keyframes scroll-carousel {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%);  /* Scroll all the way to the left */
-    }
-}
-
-/* Footer Styles */
+/* Footer */
 footer {
-    background-color: #2c3e50; /* Dark, professional background */
-    color: #ecf0f1;  /* Light text color for contrast */
-    padding: 40px 0;  /* Adequate padding for spacing */
-    font-size: 16px;  /* Slightly larger font for readability */
+    background-color: #333;
+    color: white;
+    padding: 40px 20px;
     text-align: center;
 }
 
 .footer {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 30px; /* Adds spacing between sections */
-    margin-bottom: 30px;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 20px;
 }
 
-.contact, .links {
-    width: 45%; /* Each section takes up 45% of the width */
-    min-width: 250px; /* Ensure sections don't shrink too much */
-    box-sizing: border-box;  /* Make sure padding is included in width */
+.contact h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
 }
 
-/* Header in footer */
-footer h2 {
-    font-size: 20px;
-    font-weight: 700;  /* Bold headers */
-    margin-bottom: 15px;
-    text-transform: uppercase; /* Uppercase for a clean, bold look */
-}
-
-/* Contact section */
 .contact p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin: 5px 0;
+    font-size: 1rem;
 }
 
-.contact p:first-of-type {
-    font-weight: bold;
-}
-
-/* Links section */
 .links ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    list-style: none;
 }
 
 .links li {
-    margin-bottom: 12px;
+    margin: 10px 0;
 }
 
 .links a {
-    color: #ecf0f1;
+    color: #fff;
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s ease; /* Smooth color transition */
+    font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
 .links a:hover {
-    color: #3498db;  /* Blue color on hover for a professional effect */
-    text-decoration: underline;
+    color: #34B3A8;
 }
 
-/* Footer copyright */
 footer p {
-    font-size: 14px;
-    margin-top: 20px;
-    color: #bdc3c7;  /* Slightly lighter text color */
+    font-size: 0.9rem;
+    color: #ccc;
 }
 
-/* Mobile responsiveness */
+/* Mobile Responsive */
 @media (max-width: 768px) {
+    .navbar-collapse {
+        display: none;
+        width: 100%;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+    .main-menu {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .hero-text h2 {
+        font-size: 2rem;
+    }
+
+    .cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .card {
+        width: 100%;
+    }
+
     .footer {
         flex-direction: column;
         align-items: center;
     }
 }
 
-/* Donate Section Styling */
-.donate-section {
-    padding: 50px 20px;
-    background-color: #fff;
-    text-align: center;
-    margin-top: 20px;
-}
 
-/* Container for the Content */
-.donate-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Heading Styles */
-.donate-section h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #34B3A8;
-    margin-bottom: 20px;
-}
-
-/* Paragraphs */
-.donate-section p {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-/* Address Styling */
-.donate-address {
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    color: #555;
-}
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
@@ -771,4 +516,102 @@ footer p {
     color: #34B3A8;
     margin-top: 20px;
     margin-bottom: 15px;
+}
+
+/* Login Page Styling */
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: url('images/loginimg.jpg') no-repeat center center/cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    filter: blur(10px);
+    z-index: -1;
+}
+
+.login-container {
+    display: flex;
+    width: 80%;
+    max-width: 900px;
+    min-height: 500px;
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.login-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f4f4; /* Backup color in case the image doesn't load */
+}
+
+.login-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.login-form {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.login-form h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #34B3A8;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #2a8e80;
 }

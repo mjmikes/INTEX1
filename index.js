@@ -44,8 +44,8 @@ app.get('/admin', (req, res) => {
 });
 
 // get route for the request event page
-app.get('/requestevent', (req, res) => {
-    res.render('requestevent');
+app.get('/request_event', (req, res) => {
+    res.render('request_event');
 });
 
 // get route for the volunteer page
