@@ -547,11 +547,24 @@ header {
     position: relative;
     overflow: hidden;  /* Hides the overflowing logos when they slide */
     width: 100%; /* Ensure it takes full width of the container */
+    align-self: center;
+    margin-bottom: 50px;
+    margin-top: -50px;
+}
+
+.sponsors h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px; /* Increase the font size */
+    margin: 0; /* Reset any default margins */
+    padding-bottom: 30px; /* Add space below the header */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .sponsors-container {
     display: flex;  /* Align logos horizontally */
     transition: transform 0.5s ease;  /* Smooth scrolling effect */
+    gap: 20px;
 }
 
 .sponsor-logo {
@@ -584,8 +597,9 @@ header {
 }
 
 .sponsor-logo img {
-    width: 100%;
-    height: auto;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
     transition: transform 0.3s ease-in-out;  /* Add transition for smooth scaling */
 }
 
@@ -603,90 +617,90 @@ header {
     }
 }
 
-
-
-/* Footer */
+/* Footer Styles */
 footer {
-    background-color: #333;
-    color: white;
-    padding: 40px 20px;
+    background-color: #2c3e50; /* Dark, professional background */
+    color: #ecf0f1;  /* Light text color for contrast */
+    padding: 40px 0;  /* Adequate padding for spacing */
+    font-size: 16px;  /* Slightly larger font for readability */
     text-align: center;
 }
 
 .footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    margin-bottom: 20px;
+    gap: 30px; /* Adds spacing between sections */
+    margin-bottom: 30px;
 }
 
-.contact h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
+.contact, .links {
+    width: 45%; /* Each section takes up 45% of the width */
+    min-width: 250px; /* Ensure sections don't shrink too much */
+    box-sizing: border-box;  /* Make sure padding is included in width */
 }
 
+/* Header in footer */
+footer h2 {
+    font-size: 20px;
+    font-weight: 700;  /* Bold headers */
+    margin-bottom: 15px;
+    text-transform: uppercase; /* Uppercase for a clean, bold look */
+}
+
+/* Contact section */
 .contact p {
-    font-size: 1rem;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 5px 0;
 }
 
+.contact p:first-of-type {
+    font-weight: bold;
+}
+
+/* Links section */
 .links ul {
-    list-style: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .links li {
-    margin: 10px 0;
+    margin-bottom: 12px;
 }
 
 .links a {
-    color: #fff;
+    color: #ecf0f1;
     text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease; /* Smooth color transition */
 }
 
 .links a:hover {
-    color: #34B3A8;
+    color: #3498db;  /* Blue color on hover for a professional effect */
+    text-decoration: underline;
 }
 
+/* Footer copyright */
 footer p {
-    font-size: 0.9rem;
-    color: #ccc;
+    font-size: 14px;
+    margin-top: 20px;
+    color: #bdc3c7;  /* Slightly lighter text color */
 }
 
-/* Mobile Responsive */
+/* Mobile responsiveness */
 @media (max-width: 768px) {
-    .navbar-collapse {
-        display: none;
-        width: 100%;
-    }
-
-    .navbar-toggler {
-        display: block;
-    }
-
-    .main-menu {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-        margin-top: 20px;
-    }
-
-    .hero-text h2 {
-        font-size: 2rem;
-    }
-
-    .cards {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .card {
-        width: 100%;
-    }
-
     .footer {
         flex-direction: column;
         align-items: center;
     }
+    .contact, .links {
+        width: 100%;  /* Full width on smaller screens */
+        text-align: center;  /* Center-align text on small screens */
+    }
 }
+
+
+
