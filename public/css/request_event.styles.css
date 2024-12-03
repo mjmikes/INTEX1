@@ -334,11 +334,12 @@ footer p {
 
 /* Form Section */
 /* Center the header */
+/* Form Section */
+/* Center the header */
 h1.form-header {
     text-align: center;
     margin-bottom: 20px;
 }
-
 
 form {
     background: #fff;
@@ -371,6 +372,7 @@ form .form-row {
 
 form .form-group {
     flex: 1;
+    min-width: 200px; /* Ensure minimum width for each column */
 }
 
 form input,
@@ -393,16 +395,15 @@ form textarea {
     display: flex;
     gap: 15px;
     align-items: center;
-  }
-  
-  .checkbox-group input[type="radio"] {
+}
+
+.checkbox-group input[type="radio"] {
     margin-right: 5px;
-  }
-  
-  .checkbox-group .checkbox-label {
+}
+
+.checkbox-group .checkbox-label {
     font-weight: normal;
-  }
-  
+}
 
 form button {
     background-color: #34B3A8;
@@ -419,9 +420,14 @@ form button:hover {
     background-color: #2a8e80;
 }
 
+/* Media Query for Mobile */
 @media (max-width: 768px) {
     form .form-row {
-        flex-direction: column;
+        flex-direction: column; /* Stacks the fields vertically on mobile */
+    }
+
+    form .form-group {
+        min-width: 100%; /* Makes each form field full width on mobile */
     }
 }
 
