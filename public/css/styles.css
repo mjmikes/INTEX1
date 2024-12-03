@@ -313,6 +313,34 @@ header {
     height: auto;
     margin-top: 20px;
 }
+.welcome-button {
+    background-color: #FBB711; /* Use a similar color to your other buttons */
+    color: white; /* White text */
+    font-size: 1.2rem; /* Slightly larger font size */
+    padding: 15px 30px; /* Add padding for a more button-like feel */
+    border: none; /* Remove the default border */
+    border-radius: 30px; /* Round the corners */
+    cursor: pointer; /* Show pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center the text */
+    display: inline-block; /* Allow the button to act like a block but sit inline */
+    margin: 20px 0; /* Add spacing around the button */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.welcome-button:hover {
+    background-color: #FBB711; /* Darker background color on hover */
+    transform: scale(1.05); /* Slightly increase the size on hover */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* Button hover effect */
+.donate-button:hover {
+    background-color: #2a8e80; /* Darker background color on hover */
+    transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
 
 /* Card Container (cards that are beneath the welcome card) */
 .cards {

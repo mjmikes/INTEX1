@@ -27,6 +27,8 @@ let knex = require("knex")({
     }
 });
 
+
+// get route for the landing page (index.ejs1)
 app.get("/", (req,res) => {
     res.render("index.ejs")
 });
