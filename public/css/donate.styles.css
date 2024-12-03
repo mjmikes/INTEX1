@@ -83,6 +83,7 @@ header {
 /* Styling for the logo text link */
 .logo-link {
     text-decoration: none; /* Remove underline from the link */
+    color:#000000
 }
 
 .logo-text {
@@ -98,6 +99,10 @@ header {
 .logo-link:hover .logo-text {
     color: #34B3A8;  /* Change text color when hovered */
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);  /* Glow effect */
+}
+/* Hover Effect: Change color for both icon and text when hovering over the whole logo */
+.logo-link:hover {
+    color: #34B3A8;  /* Change both icon and text to this color */
 }
 
 /* Optional: Active state (when clicked) to revert to original color */
