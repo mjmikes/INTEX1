@@ -485,54 +485,77 @@ footer p {
     }
 }
 
-/* Donate Page Specific Styles */
+/* Donate Section Styling */
 .donate-section {
-    padding: 40px 20px;
-    background-color: #f4f4f4; /* Matches body background */
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+    margin-top: 20px;
 }
 
+/* Container for the Content */
+.donate-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styles */
 .donate-section h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 15px;
-    text-align: center; /* Centers the heading */
-}
-
-.donate-section p {
-    font-size: 1rem;
-    color: #333;
-    padding-left: 40px;
-    padding-right: 40px;
-    color: #555;
-    line-height: 1.6;
-    text-align: center; /* Centers the paragraphs */
-    margin-bottom: 20px; /* Adds space between paragraphs */
-}
-
-.donate-address {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #34B3A8;
     margin-bottom: 20px;
-    font-size: 1rem;
-    line-height: 1.5;
-    text-align: center; /* Centers the address block */
 }
 
-.donate-section .button-group {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; /* Space above the button */
+/* Paragraphs */
+.donate-section p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
 }
 
-.donate-section .button-group .btn-primary {
-    padding: 12px 30px;
-    font-size: 1rem;
-    border-radius: 30px; /* Gives a rounded button look */
-    background-color: #34B3A8;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Address Styling */
+.donate-address {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: #555;
 }
 
-.donate-section .button-group .btn-primary:hover {
-    background-color: #2a8e85; /* Slightly darker green on hover */
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .donate-section {
+        padding: 30px 15px;
+    }
+
+    .donate-container {
+        padding: 20px;
+    }
+
+    .donate-section h2 {
+        font-size: 2rem;
+    }
+
+    .donate-section p {
+        font-size: 1.1rem;
+    }}
+
+/* Donate small text class for legal disclaimer */
+.donate-small-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Heading for 'How to Donate' */
+.donate-section h3 {
+    font-size: 1.8rem;
+    font-weight: normal;
+    color: #34B3A8;
+    margin-top: 20px;
+    margin-bottom: 15px;
 }
