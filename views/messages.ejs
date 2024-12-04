@@ -82,17 +82,17 @@
             </thead>
             <tbody>
                 <% if (messages && messages.length > 0) { %>
-                    <% messages.forEach(messages => { %>
+                    <% messages.forEach(message => { %>
                         <tr>
-                            <td><%= messages.submission_id %></td>
-                            <td><%= messages.first_name %></td>
-                            <td><%= messages.last_name %></td>
-                            <td><%= messages.phone %></td>
-                            <td><%= messages.email %></td>
-                            <td><%= messages.city %></td>
-                            <td><%= messages.state %></td>
-                            <td class="message-column"><%= messages.message %></td>
-                            <td><%= messages.created_at %></td>
+                            <td><%= message.submission_id %></td>
+                            <td><%= message.first_name %></td>
+                            <td><%= message.last_name %></td>
+                            <td><%= message.phone %></td>
+                            <td><%= message.email %></td>
+                            <td><%= message.city %></td>
+                            <td><%= message.state %></td>
+                            <td class="message-column"><%= message.message %></td>
+                            <td><%= message.created_at %></td>
                         </tr>
                     <% }) %>
                 <% } else { %>
