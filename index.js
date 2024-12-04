@@ -71,6 +71,11 @@ app.get('/jens_story', (req, res) => {
     res.render('jens_story');
 });
 
+// get route to add_admin page
+app.get('/add_admin', (req, res) => {
+    res.render('add_admin');
+});
+
 
 // get route for the admin page
 app.get('/admin', (req, res) => {
@@ -275,16 +280,6 @@ app.post("/submit-volunteer", async (req, res) => {
     }
 });
 
-// Admin login form submission route (POST request to authenticate)
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  if (username === adminTable.username && password === adminTable.password) {
-    req.session.isAdmin = true;  // Store admin login state in session
-    res.redirect('/');  // Redirect to home page after successful login
-  } else {
-    res.redirect('/login');  // Invalid login, stay on login page
-  }
-});
 
 //Home Page
 app.get('/', (req, res) => {
