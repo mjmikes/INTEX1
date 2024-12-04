@@ -158,9 +158,19 @@ app.get("/volunteer_success_page", (req, res) => {
 });
 
 // Display Messages page 
-app.get("/messages", (req, res) => {
-    res.render("messages");
+app.get('/messages', async (req, res) => {
+    try {
+        // Assuming you're using a database query to fetch data
+        const submissions = await db.query('SELECT * FROM contact_us ORDER BY timestamp DESC');
+        
+        // Pass the submissions array to the EJS view
+        res.render('messages', { submissions });
+    } catch (error) {
+        console.error('Error fetching submissions:', error);
+        res.status(500).send('Server Error');
+    }
 });
+
 
 
 // Post route to send event request form data to database

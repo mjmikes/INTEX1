@@ -521,9 +521,9 @@ header {
 /* Card Header Styling */
 .card h3 {
     font-size: 1.8rem;
-    margin-bottom: 0px; /* Reduce space below the heading */
+    margin-bottom: -15px; /* Reduce space below the heading */
     text-align: center; /* Center align heading */
-    margin-top: -80px;
+    margin-top: -60px;
 }
 
 /* Card Paragraph Styling */
@@ -546,7 +546,7 @@ header {
     cursor: pointer;
     transition: background-color 0.3s ease;
     align-self: center; /* Center the button horizontally */
-    margin-top: -65px; /* Add this line to push the button upwards */
+    margin-top: -100px; /* Add this line to push the button upwards */
 }
 
 /* Button Hover Effect */
