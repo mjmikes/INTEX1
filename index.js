@@ -220,7 +220,7 @@ app.post('/requestEvent', (req, res) => {
   let contactId;
   let locationId;
 
-  // Insert into event_contact and retrieve its ID
+  // Insert into event_contact and retrieve its auto-generated ID
   knex('event_contact')
     .insert({
       event_contact_first_name,
@@ -228,19 +228,21 @@ app.post('/requestEvent', (req, res) => {
       event_contact_phone,
       event_contact_email,
     })
-    .returning('event_contact_id') // For PostgreSQL, returns the inserted ID
-    .then((ids) => {
-      contactId = ids[0]; // Store the generated Event Contact ID
-      // Insert into event_location and retrieve its ID
-      return knex('event_location').insert({
-        event_address: event_location_address,
-        event_city: event_location_city,
-        event_state: event_location_state,
-        event_zip: event_location_zip,
-      }).returning('event_location_id');
+    .returning('id') // Retrieve the auto-generated ID (matches your schema)
+    .then(([id]) => {
+      contactId = id; // Store the generated Event Contact ID
+      // Insert into event_location and retrieve its auto-generated ID
+      return knex('event_location')
+        .insert({
+          event_address: event_location_address,
+          event_city: event_location_city,
+          event_state: event_location_state,
+          event_zip: event_location_zip,
+        })
+        .returning('id');
     })
-    .then((idss) => {
-      locationId = idss[0]; // Store the generated Event Location ID
+    .then(([id]) => {
+      locationId = id; // Store the generated Event Location ID
       // Insert into event_request with the retrieved foreign keys
       return knex('event_request').insert({
         event_name,
@@ -266,7 +268,7 @@ app.post('/requestEvent', (req, res) => {
       res.redirect('/'); // Redirect after all inserts are complete
     })
     .catch((error) => {
-      console.error('Error adding event request:', error);
+      console.error('Error adding event request:', error.message);
       res.status(500).send('Internal Server Error');
     });
 });
