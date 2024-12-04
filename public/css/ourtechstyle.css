@@ -707,6 +707,15 @@ footer p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.ourtech img {
+    width: 60%; /* Set the width of the image */
+    display: block; /* Ensures the image behaves like a block element */
+    margin: 20px auto; /* Centers the image horizontally and adds spacing above and below */
+    border-radius: 10px; /* Optional: Adds rounded corners to the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better appearance */
+}
+
+
 /* Story Content */
 .container {
     padding: 30px;
