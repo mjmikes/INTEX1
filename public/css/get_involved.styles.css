@@ -390,7 +390,6 @@ form textarea {
     min-height: 100px;
 }
 
-/* Style the Jen Story radio buttons */
 .checkbox-group {
     display: flex;
     gap: 15px;
@@ -404,6 +403,7 @@ form textarea {
 .checkbox-group .checkbox-label {
     font-weight: normal;
 }
+
 
 form button {
     background-color: #34B3A8;
