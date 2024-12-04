@@ -88,6 +88,57 @@ header {
     width: 250px; /* Width of the sidebar */
 }
 
+.circle-icon {
+    width: 50px;           /* Set the width and height to make it circular */
+    height: 50px;
+    border-radius: 50%;    /* Makes it a perfect circle */
+    background-color: #34B3A8;  /* Set the background color (you can change this) */
+    color: white;          /* Text color */
+    display: flex;         /* Flexbox for centering the text */
+    justify-content: center;  /* Horizontally center the text */
+    align-items: center;   /* Vertically center the text */
+    font-size: 24px;       /* Adjust the size of the letter */
+    font-weight: bold;     /* Bold letter */
+    text-transform: uppercase; /* Uppercase the letter */
+    cursor: pointer;
+}
+.logout-option {
+    display: none;  /* Initially hidden */
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    
+}
+
+
+.logout-option.show {
+    display: block;  /* Make it visible */
+    opacity: 10;  /* Fade in */
+    z-index: 1000;
+}
+
+.logout-option button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FBB711;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+.logout-option button:hover {
+    background-color: #FF9D00;
+}
+
 .navbar-toggler {
     background-color: transparent;
     border: none;

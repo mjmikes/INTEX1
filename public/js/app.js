@@ -149,3 +149,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// Function to toggle the visibility of the logout option with fade-in effect
+function toggleLogout() {
+    const logoutOption = document.getElementById('logout-option');
+    logoutOption.classList.toggle('show');
+}
+
+// Function to handle the logout and redirect to index.ejs
+function logout() {
+    window.location.href = '/';  // Assuming '/' corresponds to your index.ejs page
+}
+
