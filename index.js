@@ -103,7 +103,7 @@ app.post("/addEventRequest", (req, res) => {
             event_zip: event_location_zip
           }).then(eventLocationIds => {
             const eventLocationId = eventLocationIds[0];  // Get the ID of the newly inserted event location
-
+            console.log(req.body);  // Log all data
             // Now insert into event_request table
             return knex('event_request').insert({
                 event_name: event_name,
@@ -133,9 +133,9 @@ app.post("/addEventRequest", (req, res) => {
         });
       }) // Error message in case it doesnt work
       .catch(error => {
-        console.error('Error inserting event_contact or event_location:', error);
-        res.status(500).send('Internal Server Error');
-      });
+        console.error('Error inserting event_request:', error);
+        res.status(500).send("An error occurred while processing your request.");
+    });
 });
 
 
