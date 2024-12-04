@@ -252,7 +252,7 @@ app.post("/submit-volunteer", async (req, res) => {
         willing_to_travel_state,
         willing_to_teach,
         willing_to_lead,
-        soure,
+        source,
         details
     } = req.body;
     try {
@@ -277,6 +277,34 @@ app.post("/submit-volunteer", async (req, res) => {
         });
         // Redirect to a success page
         res.redirect('/volunteer_success_page');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Post route to send admin form data to database
+app.post("/add-admin", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        username,
+        password
+    } = req.body;
+    try {
+        // Insert into admin table
+        await knex('admin').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            username,
+            password
+        });
+        // Redirect to a success page
+        res.redirect('/volunteers');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
         res.status(500).send('Internal Server Error');
