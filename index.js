@@ -83,8 +83,10 @@ app.post("/addEventRequest", (req, res) => {
         event_location_city, event_location_state, event_location_zip, event_start_time,
         event_duration, event_description, expected_advanced_sewers, sewing_machines_available,
         expected_participants, children_under_10, jen_story, event_space_description,
-        round_tables, rectangle_tables, possible_date_1, possible_date_2
+        round_tables, rectangle_tables, possible_date_1
     } = req.body;
+
+    const possibleDate2 = possible_date_2 === "" ? null : possible_date_2;
 
     console.log(req.body);  // Log all data
 
