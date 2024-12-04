@@ -219,7 +219,7 @@ app.post("/RequestEvent", async (req, res) => {
 
     try {
         // Insert into event_contact table
-        const [eventContactId] = await knex('event_contact')
+        const [eventContact] = await knex('event_contact')
             .returning('event_contact_id')
             .insert({
                 first_name,
@@ -229,7 +229,7 @@ app.post("/RequestEvent", async (req, res) => {
             });
 
         // Insert into event_location table
-        const [eventLocationId] = await knex('event_location')
+        const [eventLocation] = await knex('event_location')
             .returning('event_location_id')
             .insert({
                 event_address: event_location_address,
@@ -241,9 +241,9 @@ app.post("/RequestEvent", async (req, res) => {
         // Insert into event_request table
         await knex('event_request').insert({
             event_name,
-            event_contact_id: eventContactId, // Foreign Key
+            event_contact_id: eventContact.event_contact_id, // Extract the actual ID
             event_type,
-            event_location_id: eventLocationId, // Foreign Key
+            event_location_id: eventLocation.event_location_id, // Extract the actual ID
             event_start_time,
             event_duration,
             event_description,
