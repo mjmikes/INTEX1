@@ -717,17 +717,16 @@ td[colspan="23"] {
     border-collapse: collapse; /* Optional: Remove spacing between table cells */
 }
 
-/* Container to position the buttons */
+/* Container for the buttons */
 .button-container {
-    display: flex;
-    flex-direction: column; /* Stack buttons vertically */
-    justify-content: space-between; /* Space out buttons evenly */
-    height: 100%; /* Ensure it takes up the full height of the container */
+    display: grid; /* Use grid layout for better control */
+    grid-template-rows: auto auto; /* Two rows for two buttons */
+    gap: 10px; /* Space between buttons */
 }
 
 /* Style for submit buttons */
 form button[type="submit"] {
-    padding: 6px 12px; /* Smaller padding for a compact button */
+    padding: 6px 12px; /* Smaller padding for compact button */
     font-size: 12px; /* Smaller font size */
     border: 1px solid #ccc; /* Light border */
     background-color: transparent; /* Transparent background */
@@ -736,7 +735,6 @@ form button[type="submit"] {
     width: auto; /* Button width will adjust based on content */
     border-radius: 3px; /* Slightly rounded corners */
     transition: all 0.3s ease; /* Smooth transition for hover effect */
-    margin: 5px 0; /* Vertical space between the buttons */
 }
 
 /* Hover effect */
