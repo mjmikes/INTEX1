@@ -29,6 +29,16 @@ const knex = require("knex")({
     }
 });
 
+knex.raw('SELECT 1')
+  .then(() => {
+    console.log('Connected to the database successfully!');
+    process.exit(0); // Exit the script if successful
+  })
+  .catch((error) => {
+    console.error('Error connecting to the database:', error);
+    process.exit(1); // Exit with failure
+  });
+
 // GET ROUTES TO ACCESS PAGES
 
 // get route for the landing page (index.ejs1)
