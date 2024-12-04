@@ -42,6 +42,50 @@ header {
     padding: 0;
     display: inline-block;
 }
+/* Sidebar Styles */
+.sidebar {
+    height: 100%;
+    width: 0; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #333;
+    z-index: 1000; /* Make sure it's above other elements */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px; /* Add some padding to avoid the top being cut off */
+}
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #34B3A8; /* Highlight links on hover */
+}
+
+/* Close Button */
+.sidebar .close-btn {
+    font-size: 36px;
+    color: #fff;
+    background: none;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 25px;
+    padding: 16px;
+    cursor: pointer;
+}
+
+/* When Sidebar is Active */
+.sidebar.active {
+    width: 250px; /* Width of the sidebar */
+}
 
 .navbar-toggler {
     background-color: transparent;

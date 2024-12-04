@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <script src="js/app.js"></script>
   <!-- Header -->
   <header>
     <nav class="navbar">
@@ -27,11 +28,24 @@
           <li><a href="/login">Admin Login</a></li>
           <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
           <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
-          <div class="navbar-collapse">
+          <div class="navbar-toggler">
             <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
         </div>
+    </ul>
+</div>
+    <div class="sidebar" id="sidebar">
+        <!-- Close button -->
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <!-- Sidebar Links -->
+        <ul class="sidebar-links">
+            <li><a href="/request_event">Request Event</a></li>
+            <li><a href="/jens_story">Jen's Story</a></li>
+            <li><a href="/our_sponsors">Our Sponsors</a></li>
+            <li><a href="/login">Admin Login</a></li>
+            <li><a href="/get_involved">Get Involved</a></li>
+            <li><a href="/donate">Donate</a></li>
         </ul>
-      </div>
+    </div>
     </nav>
   </header>
 
@@ -196,3 +210,4 @@
       <button type="submit" class="submit-btn">Submit</button>
     </form>
   </main
+  
