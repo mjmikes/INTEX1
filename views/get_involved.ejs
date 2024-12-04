@@ -75,11 +75,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="firstName" class="form-label">First Name:</label>
-          <input type="text" id="firstName" name="firstName" class="form-input" required>
+          <input type="text" id="firstName" name="first_name" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="lastName" class="form-label">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" class="form-input" required>
+          <input type="text" id="lastName" name="last_name" class="form-input" required>
         </div>
       </div>
 
@@ -98,40 +98,40 @@
       <!-- Form Row 3 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="eventName" class="form-label">Address:</label>
-          <input type="text" id="eventName" name="eventName" class="form-input" required>
+          <label for="address" class="form-label">Address:</label>
+          <input type="text" id="address" name="address" class="form-input" required>
         </div>
         <div class="form-group">
-          <label for="address" class="form-label">City:</label>
-          <input type="text" id="address" name="address" class="form-input" required>
+          <label for="city" class="form-label">City:</label>
+          <input type="text" id="city" name="city" class="form-input" required>
         </div>
       </div>
 
       <!-- Form Row 4 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="city" class="form-label">State:</label>
-          <input type="text" id="city" name="city" class="form-input" required>
+          <label for="state" class="form-label">State:</label>
+          <input type="text" id="state" name="state" class="form-input" required>
         </div>
         <div class="form-group">
-          <label for="state" class="form-label">Zip Code:</label>
-          <input type="text" id="state" name="state" class="form-input" required>
+          <label for="zip" class="form-label">Zip Code:</label>
+          <input type="text" id="zip" name="zip" class="form-input" required>
         </div>
       </div>
 
       <!-- Form Row 5 -->
       <div class="form-row">
         <div class="form-group">
-            <label for="eventType" class="form-label">Sewing Level:</label>
-            <select id="eventType" name="eventType" class="form-select" required>
+            <label for="sewing_level" class="form-label">Sewing Level:</label>
+            <select id="sewing_level" name="sewing_level" class="form-select" required>
               <option value="Sewing">Beginner</option>
               <option value="Non-Sewing">Intermediate</option>
               <option value="Both">Advanced</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="duration" class="form-label">Hours available each Month:</label>
-            <input type="number" id="duration" name="duration" class="form-input" min="1" required>
+            <label for="monthly_hour_availability" class="form-label">Hours available each Month (estimate):</label>
+            <input type="number" id="monthly_hour_availability" name="monthly_hour_availability" class="form-input" min="1" required>
           </div>
       </div>
 
@@ -141,11 +141,11 @@
           <label class="form-label">Willing to travel out of County:</label>
           <div class="checkbox-group">
             <label for="outOfCountyYes" class="checkbox-label">
-              <input type="radio" id="outOfCountyYes" name="outOfCounty" value="Yes">
+              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes">
               Yes
             </label>
             <label for="outOfCountyNo" class="checkbox-label">
-              <input type="radio" id="outOfCountyNo" name="outOfCounty" value="No">
+              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No">
               No
             </label>
           </div>
@@ -154,11 +154,11 @@
           <label class="form-label">Willing to travel out of State:</label>
           <div class="checkbox-group">
             <label for="outOfStateYes" class="checkbox-label">
-              <input type="radio" id="outOfStateYes" name="outOfState" value="Yes">
+              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes">
               Yes
             </label>
             <label for="outOfStateNo" class="checkbox-label">
-              <input type="radio" id="outOfStateNo" name="outOfState" value="No">
+              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No">
               No
             </label>
           </div>
@@ -171,11 +171,11 @@
           <label class="form-label">Willing to teach:</label>
           <div class="checkbox-group">
             <label for="teachYes" class="checkbox-label">
-              <input type="radio" id="teachYes" name="teach" value="Yes">
+              <input type="radio" id="teachYes" name="willing_to_teach" value="Yes">
               Yes
             </label>
             <label for="teachNo" class="checkbox-label">
-              <input type="radio" id="teachNo" name="teach" value="No">
+              <input type="radio" id="teachNo" name="willing_to_teach" value="No">
               No
             </label>
           </div>
@@ -184,11 +184,11 @@
           <label class="form-label">Willing to Lead:</label>
           <div class="checkbox-group">
             <label for="leadYes" class="checkbox-label">
-              <input type="radio" id="leadYes" name="lead" value="Yes">
+              <input type="radio" id="leadYes" name="willing_to_lead" value="Yes">
               Yes
             </label>
             <label for="leadNo" class="checkbox-label">
-              <input type="radio" id="leadNo" name="lead" value="No">
+              <input type="radio" id="leadNo" name="willing_to_lead" value="No">
               No
             </label>
           </div>
@@ -198,8 +198,8 @@
       <!-- Form Row 8 (How did you hear about us?) -->
       <div class="form-row">
         <div class="form-group">
-          <label for="howDidYouHear" class="form-label">How did you hear about us?</label>
-          <select id="howDidYouHear" name="howDidYouHear" class="form-select" required>
+          <label for="soure" class="form-label">How did you hear about us?</label>
+          <select id="soure" name="soure" class="form-select" required>
             <option value="Friend/Family">Friend/Family</option>
             <option value="Social Media">Social Media</option>
             <option value="Online">Online</option>
@@ -215,7 +215,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="additionalInfo" class="form-label">What should we know about you:</label>
-          <textarea id="additionalInfo" name="additionalInfo" class="form-textarea" rows="4" required></textarea>
+          <textarea id="additionalInfo" name="details" class="form-textarea" rows="4" required></textarea>
         </div>
       </div>
 
