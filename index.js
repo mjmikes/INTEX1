@@ -235,6 +235,50 @@ app.post("/RequestEvent", async (req, res) => {
     }
 });
 
+// Get Route to display records from the event_request table to the requested_events.ejs page for the admin
+app.get('requested_events', async (req, res) => {
+    try {
+        const event_id = req.params.event_id;
+        
+        // Fetch event details from multiple tables
+        const eventData = await knex('event_request')
+            .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
+            .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
+            .where('event_request.event_id', event_id)
+            .select(
+                'event_request.event_id',
+                'event_request.event_name',
+                'event_request.event_type',
+                'event_request.event_description',
+                'event_request.expected_advanced_sewers',
+                'event_request.sewing_machines_available',
+                'event_request.expected_participants',
+                'event_request.children_under_10',
+                'event_request.jen_story',
+                'event_request.event_space_description',
+                'event_request.round_tables_count',
+                'event_request.rectangle_tables_count',
+                'event_request.possible_date_1',
+                'event_request.possible_date_2',
+                'event_contact.first_name',
+                'event_contact.last_name',
+                'event_contact.phone',
+                'event_contact.event_contact_email',
+                'event_location.event_address',
+                'event_location.event_city',
+                'event_location.event_state',
+                'event_location.event_zip'
+            );
+        
+        // Pass data to the view
+        res.render('requested_events', { requested_events: eventData[0] });
+    } catch (error) {
+        console.error('Error fetching event data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 // Post route to send volunteer form data to database
 app.post("/submit-volunteer", async (req, res) => {
     const {
