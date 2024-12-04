@@ -876,3 +876,69 @@ footer p {
     margin-top: 20px;
     margin-bottom: 15px;
 }
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: black;
+    margin-bottom: 20px;
+}
+
+/* FAQ container styling */
+.faq {
+    margin-bottom: 15px;
+}
+
+/* FAQ question styling */
+.faq-question {
+    background-color: #34B3A8;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* FAQ answer styling */
+.faq-answer {
+    padding: 0px;
+    background-color: #f9f9f9;
+    border-left: 5px solid #FBB711;
+    border-radius: 0 0 5px 5px;
+    max-height: 0; /* Hidden by default */
+    opacity: 0; /* Hidden by default */
+    overflow: hidden; /* Prevent overflow when collapsed */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out; /* Smooth transition */
+}
+
+/* When answer is open, set max-height to a value large enough to display the content */
+.faq-answer.open {
+    max-height: 1000px; /* Adjust max-height if necessary */
+    opacity: 1; /* Make it fully visible */
+    padding: 5px;
+    align-self: center;
+}
+
+/* Arrow rotation */
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+/* Rotate arrow when the answer is open */
+.arrow.open {
+    transform: rotate(180deg); /* Rotate 180 degrees */
+}

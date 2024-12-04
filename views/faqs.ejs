@@ -1,1 +1,165 @@
-faqs
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turtle Shelter Project</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a href="/" class="logo-link">
+                    <i class="fas fa-home"></i> <!-- Home icon -->
+                    <span class="logo-text">Turtle Shelter Project</span>
+                </a>
+            </div>
+            
+            <div class="navbar-collapse">
+                <ul class="main-menu">
+                    <li><a href="/request_event">Request Event</a></li>
+                    <li><a href="/jens_story">Jen's Story</a></li>
+                    <li><a href="/our_tech">Our Tech</a></li>
+                    <li><a href="/login">Admin Login</a></li>
+                    <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
+                    <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+                    <div class="navbar-toggler">
+                        <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
+                    </div>
+                </ul>
+            </div>
+                <div class="sidebar" id="sidebar">
+                    <!-- Close button -->
+                    <button class="close-btn" onclick="toggleSidebar()">×</button>
+                    <!-- Sidebar Links -->
+                    <ul class="sidebar-links">
+                        <li><a href="/contact_us">Contact Us</a></li>
+                        <li><a href="/faqs">FAQs</a></li>
+                        <li><a href="/sponsor_us">Sponsor Us</a></li>
+                        <li><a href="/upcoming_events">Upcominig Events</a></li>
+                    </ul>
+                </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Frequently Asked Questions</h1>
+
+        <!-- FAQ Item 1 -->
+        <div class="faq">
+            <div class="faq-question">
+                <span>How long have you been doing this?</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Jen got the idea for the Turtle Shelter Project in 2015 to help keep people experiencing homelessness from freezing to death. We officially incorporated 3 April 2017, on Jen's sobriety anniversary. Our 501c3 status was granted in 2018.</p>
+                <p>Between September 2017 and January 2018, with a combined 450 volunteer hours, we completed 50 prototype vests to be tested.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq">
+            <div class="faq-question">
+                <span>If you want to help homeless people be warm, why not just do a coat drive?</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>The foam insulation layer combined with moisture-wicking fabrics creates a more effective insulation layer than other winter clothing. Clothing made from foam will provide warmth even if it is wet – it allows the wearer to maintain their core body temperature. You can read more about it in <a href="/our_tech">“Our Tech”</a>.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq">
+            <div class="faq-question">
+                <span>What does the turtle in your logo have to do with your project?</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>A turtle carries its shelter wherever it goes. Our insulated vests are intended to be a portable “shelter.” Instead of having to find shelter, a person can carry their shelter on their back, like a turtle.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq">
+            <div class="faq-question">
+                <span>How/where are the vests distributed?</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>During the winter of 2017-18, the distribution and testing were done mainly in the Ogden area with the help and support of The Episcopal Church of the Good Shepherd and the staff at Youth Futures.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq">
+            <div class="faq-question">
+                <span>Why don’t you just have a professional sewing shop make the vests?</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>We talked about this idea early in our planning stages, but ultimately decided that our mission had 2 parts - help the homeless or others in need of warm clothing, and provide an opportunity for any willing person to serve. That was how we came up with our motto: Every Life Has Value; Every Person Can Serve.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="faq">
+            <div class="faq-question">
+                <span>I want to help, but I don’t sew.</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Turtle Shelter Project vests are designed to be made by volunteers who have no special sewing skills. We can put any willing volunteer to work who can use a marker or a pair of scissors. Although we do need people with basic and advanced sewing skills, there are lots of the steps that can be done by those with no sewing skills. The final construction is done by our expert staff. The completed vests are then returned to the community where volunteers made them - or to another area with need.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 7 -->
+        <div class="faq">
+            <div class="faq-question">
+                <span>We don’t live close to your Northern Utah operation. Can we still help?</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>YES YES YES! We can send parts of the vests to be cut, marked, and/or completed by your group and sent back to us, or we can provide materials and training so you can complete entire vests and distribute them in your area.</p>
+                <p>We live by the motto that every person can serve, and we will accommodate anyone who wants to help - we are only limited by our funding. Send us a note in CONTACT US or SCHEDULE YOUR OWN EVENT and we will coordinate the best project for you and/or your group.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Item 8 -->
+        <div class="faq">
+            <div class="faq-question">
+                <span>How much of my donation goes to overhead?</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Our overhead costs are very limited because our staff is 100% volunteer. We have no paid employees. Our yearly operating costs include business registration, website hosting and support, post office box rental, and liability insurance. Other expenses have been to purchase things like scissors and sewing machines. During 2018 these costs were about 25% of our total budget.</p>
+                <p>Also, if you would like to make a donation specifically for materials or a certain part of our project, we will honor your request.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer">
+            <div class="contact">
+                <h2>Contact</h2>
+                <p>Phone: 801-872-3190</p>
+                <p>Email: turtleshelterproject@gmail.com</p>
+                <p>Address: PO Box 382, Kaysville, UT 84037</p>
+            </div>
+            <div class="links">
+                <ul>
+                    <li><a href="/about_us">About Us</a></li>
+                    <li><a href="/get_involved">Get Involved</a></li>
+                    <li><a href="/privacy_policy">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
+    </footer>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
