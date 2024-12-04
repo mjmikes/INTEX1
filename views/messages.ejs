@@ -92,6 +92,9 @@
                             <td><%= message.state %></td>
                             <td class="message-column"><%= message.message %></td>
                             <td><%= message.created_at %></td>
+                            <td style="text-align: center;">
+                                <form action="/deleteMessage/<%= message.submission_id %>" method="POST">
+                                    <button type="submit">Delete</button>
                         </tr>
                     <% }) %>
                 <% } else { %>
