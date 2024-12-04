@@ -74,7 +74,7 @@ app.get('/jens_story', (req, res) => {
 });
 
 app.get('/user_maintenance', (req, res) => {
-    res.render('user_maintenance');
+    res.render('user_maintenace');
 });
 
 // get route to add_admin page
@@ -458,7 +458,6 @@ app.post('/login', (req, res) => {
     res.redirect('/');
 });
 
-
 // volunteer section
 app.get('/volunteers', (req, res) => {
     try {
@@ -485,7 +484,7 @@ app.get('/volunteers', (req, res) => {
         .then(volunteer_info => {
                 // Render the index.ejs template and pass the data
                 // We use res.render to work with ejs files we use res.redirct to work with routes
-                res.render('volunteers', { volunteer_info, security });
+                res.render('volunteer_info', { volunteer_info, security });
         })
             .catch(error => {
                 console.error('Error querying database:', error);
