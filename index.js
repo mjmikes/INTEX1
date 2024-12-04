@@ -52,6 +52,13 @@ app.get('/admin', (req, res) => {
 
 // get route for the request event page
 app.get('/request_event', (req, res) => {
+    try {
+        await knex.raw('SELECT 1');
+        res.send('Database connection is working');
+    } catch (error) {
+        console.error("Database connection error:", error);
+        res.status(500).send("Database is not connected");
+    }
     res.render('request_event');
 });
 
