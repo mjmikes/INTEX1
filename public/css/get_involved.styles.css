@@ -428,6 +428,7 @@ header {
 h1.form-header {
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 form {
