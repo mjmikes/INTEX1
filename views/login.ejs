@@ -21,7 +21,7 @@
                     <li><a href="/request_event">Request Event</a></li>
                     <li><a href="/jens_story">Jen's Story</a></li>
                     <li><a href="/our_tech">Our Tech</a></li>
-                    <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
+                    <li><button class="btn-secondary" onclick="location.href='/how_to_get_involved'">Get Involved</button></li>
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
                      <!-- Conditionally show icon based on isAdmin -->
                      <% if (isAdmin) { %>
@@ -64,6 +64,14 @@
         </div>
         <div class="login-form">
             <h2>Welcome Back</h2>
+            
+            <!-- Display error message if there's any -->
+            <div class="error-message">
+                <% if (errorMessage) { %>
+                    <p style="color: red; font-weight: bold;"><%= errorMessage %></p>
+                <% } %>
+            </div>
+
             <form action="/login" method="POST">
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -73,12 +81,24 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn-primary" onclick="window.location.href='/';">
+                <button type="submit" class="btn-primary">
                     Log In
                 </button>
-                
             </form>
         </div>
     </div>
-    <script src="js/app.js"></script>
+
+    <!-- Simple client-side validation -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                event.preventDefault();
+                alert("Username and password are required.");
+            }
+        });
+    </script>
+</body>
 </html>

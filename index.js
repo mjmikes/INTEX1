@@ -30,12 +30,17 @@ app.use((req, res, next) => {
     next();  // Proceed to the next middleware/route handler
 });
 
+app.use((req, res, next) => {
+    res.locals.errorMessage = req.session.errorMessage || false;  // Make isAdmin available in all views
+    next();  // Proceed to the next middleware/route handler
+});
+
 
 // Mock admin table for the sake of this example
-const adminTable = {
-    username: 'admin',
-    password: 'admin'
-  };
+const adminTable = [
+    { username: 'admin', password: 'admin' } // Example credentials
+];
+
 
 const knex = require("knex")({
     client: "pg",
@@ -66,6 +71,14 @@ app.get('/jens_story', (req, res) => {
     res.render('jens_story');
 });
 
+// get route to add_admin page
+app.get('/add_admin', (req, res) => {
+    res.render('add_admin');
+});
+
+app.get('/how_to_get_involved.ejs', (req, res) => {
+    res.render('how_to_get_involved.ejs');
+});
 
 // get route for the admin page
 app.get('/admin', (req, res) => {
@@ -138,7 +151,13 @@ app.get("/event_success_page", (req, res) => {
     res.render("event_success_page");
 });
 
+// Volunteer Success page 
+app.get("/volunteer_success_page", (req, res) => {
+    res.render("volunteer_success_page");
+});
 
+
+// Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
     const {
         event_name,
@@ -260,18 +279,82 @@ app.get('requested_events', async (req, res) => {
 });
 
 
-
-
-// Admin login form submission route (POST request to authenticate)
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  if (username === adminTable.username && password === adminTable.password) {
-    req.session.isAdmin = true;  // Store admin login state in session
-    res.redirect('/');  // Redirect to home page after successful login
-  } else {
-    res.redirect('/login');  // Invalid login, stay on login page
-  }
+// Post route to send volunteer form data to database
+app.post("/submit-volunteer", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        address,
+        city,
+        state,
+        zip,
+        sewing_level,
+        monthly_hour_availability,
+        willing_to_travel_county,
+        willing_to_travel_state,
+        willing_to_teach,
+        willing_to_lead,
+        source,
+        details
+    } = req.body;
+    try {
+        // Insert into volunteer_info table
+        await knex('volunteer_info').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            address,
+            city,
+            state,
+            zip,
+            sewing_level,
+            monthly_hour_availability,
+            willing_to_travel_county,
+            willing_to_travel_state,
+            willing_to_teach,
+            willing_to_lead,
+            source,
+            details
+        });
+        // Redirect to a success page
+        res.redirect('/volunteer_success_page');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
+// Post route to send admin form data to database
+app.post("/add-admin", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        username,
+        password
+    } = req.body;
+    try {
+        // Insert into admin table
+        await knex('admin').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            username,
+            password
+        });
+        // Redirect to a success page
+        res.redirect('/volunteers');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 //Home Page
 app.get('/', (req, res) => {
@@ -293,6 +376,29 @@ app.get('/logout', (req, res) => {
         res.redirect('/');
     });
 });
+
+// POST route to handle login
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Check if both fields are filled out
+    if (!username || !password) {
+        return res.render('login', { errorMessage: 'Username and password are required.' });
+    }
+
+    // Find the user in the adminTable array
+    const user = adminTable.find(user => user.username === username && user.password === password);
+
+    // If no matching user or incorrect credentials
+    if (!user) {
+        return res.render('login', { errorMessage: 'Invalid username or password.' });
+    }
+
+    // Successful login, store admin session and redirect
+    req.session.isAdmin = true;
+    res.redirect('/');
+});
+
 
 
 
