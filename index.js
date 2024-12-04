@@ -137,11 +137,6 @@ app.get("/completed_events", (req, res) => {
     res.render("completed_events");
 });
 
-// Volunteers page (protected by authentication)
-app.get("/volunteers", (req, res) => {
-    res.render("volunteers");
-});
-
 // Event Dashboard page (protected by authentication)
 app.get("/event_dashboard", (req, res) => {
     res.render("event_dashboard");
