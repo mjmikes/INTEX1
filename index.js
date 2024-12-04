@@ -72,6 +72,7 @@ app.use(express.static('public'));
 // POST ROUTES TO UPDATE DATA
 
 app.post("/addEventRequest", (req, res) => {
+    console.log(req.body);  // Log all data
     const {
         event_name, event_contact_first_name, event_contact_last_name,
         event_contact_phone, event_contact_email, event_type, event_location_address,
@@ -103,7 +104,6 @@ app.post("/addEventRequest", (req, res) => {
             event_zip: event_location_zip
           }).then(eventLocationIds => {
             const eventLocationId = eventLocationIds[0];  // Get the ID of the newly inserted event location
-            console.log(req.body);  // Log all data
             // Now insert into event_request table
             return knex('event_request').insert({
                 event_name: event_name,
