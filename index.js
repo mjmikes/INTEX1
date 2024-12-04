@@ -17,7 +17,7 @@ const knex = require("knex")({
         host : process.env.RDS_HOSTNAME || "awseb-e-3dmmzs5fan-stack-awsebrdsdatabase-rm7jlczpxzug.cr82swsq26ts.us-east-1.rds.amazonaws.com",
         user : process.env.RDS_USERNAME || "ebroot",
         password : process.env.RDS_PASSWORD || "admin123",
-        database : process.env.RDS_DB_NAME || "ebdb",
+        database : process.env.RDS_DB_NAME || "intex1",
         port : process.env.RDS_PORT || 5433,
         ssl : process.env.DB_SSL ? { rejectUnauthorized: false } : false
     },
@@ -52,14 +52,6 @@ app.get('/admin', (req, res) => {
 
 // get route for the request event page
 app.get('/request_event', async (req, res) => {
-    try {
-        await knex.raw('SELECT 1');
-        console.log('Database connection is working');
-    } catch (error) {
-        console.error("Database connection error:", error);
-        res.status(500).send("Database is not connected");
-        return;  // Prevents the code from continuing if there is an error
-    }
     res.render('request_event');
 });
 
@@ -131,7 +123,7 @@ app.use(express.static('public'));
 
 // POST ROUTES TO UPDATE DATA
 
-app.post("/addEventRequest1", (req, res) => {
+app.post("/addEventRequest", (req, res) => {
     const {
         event_name, event_contact_first_name, event_contact_last_name,
         event_contact_phone, event_contact_email, event_type, event_location_address,
@@ -198,61 +190,18 @@ app.post("/addEventRequest1", (req, res) => {
       });
 });
 
-app.post('/request_event', (req, res) => {
-  const {
-    event_name,
-    event_contact_first_name,
-    event_contact_last_name,
-    event_contact_phone,
-    event_contact_email,
-    event_type,
-    event_location_address,
-    event_location_city,
-    event_location_state,
-    event_location_zip,
-    event_start_time,
-    event_duration,
-    event_description,
-    expected_advanced_sewers,
-    sewing_machines_available,
-    expected_participants,
-    children_under_10,
-    jen_story,
-    event_space_description,
-    round_tables,
-    rectangle_tables,
-    possible_date_1,
-    possible_date_2,
-  } = req.body;
-
-  let contactId;
-  let locationId;
-
-  // Insert into event_contact and retrieve its ID
-  knex('event_contact')
-    .insert({
-      event_contact_first_name,
-      event_contact_last_name,
-      event_contact_phone,
-      event_contact_email,
-    })
-    .returning('id') // For PostgreSQL, returns the inserted ID
-    .then((ids) => {
-      contactId = ids[0]; // Store the generated Event Contact ID
-      // Insert into event_location and retrieve its ID
-      return knex('event_location').insert({
-        event_address: event_location_address,
-        event_city: event_location_city,
-        event_state: event_location_state,
-        event_zip: event_location_zip,
-      }).returning('id');
-    })
-    .then((ids) => {
-      locationId = ids[0]; // Store the generated Event Location ID
-      // Insert into event_request with the retrieved foreign keys
-      return knex('event_request').insert({
+app.post("/RequestEvent", async (req, res) => {
+    const {
         event_name,
+        first_name,
+        last_name,
+        phone,
+        event_contact_email,
         event_type,
+        event_location_address,
+        event_location_city,
+        event_location_state,
+        event_location_zip,
         event_start_time,
         event_duration,
         event_description,
@@ -262,22 +211,62 @@ app.post('/request_event', (req, res) => {
         children_under_10,
         jen_story,
         event_space_description,
-        round_tables,
-        rectangle_tables,
+        round_tables_count,
+        rectangle_tables_count,
         possible_date_1,
-        possible_date_2,
-        event_contact_id: contactId, // Use the generated Event Contact ID
-        event_location_id: locationId, // Use the generated Event Location ID
-      });
-    })
-    .then(() => {
-      res.redirect('/'); // Redirect after all inserts are complete
-    })
-    .catch((error) => {
-      console.error('Error adding event request:', error);
-      res.status(500).send('Internal Server Error');
-    });
+        possible_date_2
+    } = req.body;
+
+    try {
+        // Insert into event_contact table
+        const [eventContact] = await knex('event_contact')
+            .returning('event_contact_id')
+            .insert({
+                first_name,
+                last_name,
+                phone,
+                event_contact_email
+            });
+
+        // Insert into event_location table
+        const [eventLocation] = await knex('event_location')
+            .returning('event_location_id')
+            .insert({
+                event_address: event_location_address,
+                event_city: event_location_city,
+                event_state: event_location_state,
+                event_zip: event_location_zip
+            });
+
+        // Insert into event_request table
+        await knex('event_request').insert({
+            event_name,
+            event_contact_id: eventContact.event_contact_id, // Extract the actual ID
+            event_type,
+            event_location_id: eventLocation.event_location_id, // Extract the actual ID
+            event_start_time,
+            event_duration,
+            event_description,
+            expected_advanced_sewers,
+            sewing_machines_available,
+            expected_participants,
+            children_under_10,
+            jen_story,
+            event_space_description,
+            round_tables_count,
+            rectangle_tables_count,
+            possible_date_1,
+            possible_date_2
+        });
+
+        // Redirect to a success page
+        res.redirect('/event_success_page');
+    } catch (error) {
+        console.error('Error inserting event data:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
