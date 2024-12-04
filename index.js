@@ -197,9 +197,9 @@ app.post('/requestEvent', (req, res) => {
 
   const {
     event_name,
-    event_contact_first_name,
-    event_contact_last_name,
-    event_contact_phone,
+    first_name,
+    last_name,
+    phone,
     event_contact_email,
     event_type,
     event_location_address,
@@ -223,9 +223,9 @@ app.post('/requestEvent', (req, res) => {
 
     console.log("Parsed request data:", {
         event_name,
-        event_contact_first_name,
-        event_contact_last_name,
-        event_contact_phone,
+        first_name,
+        last_name,
+        phone,
         event_contact_email,
     });
 
@@ -235,9 +235,9 @@ app.post('/requestEvent', (req, res) => {
   // Insert into event_contact and retrieve its auto-generated ID
   knex('event_contact')
     .insert({
-      event_contact_first_name,
-      event_contact_last_name,
-      event_contact_phone,
+      first_name,
+      last_name,
+      phone,
       event_contact_email,
     })
     .returning('id') // Retrieve the auto-generated ID (matches your schema)
