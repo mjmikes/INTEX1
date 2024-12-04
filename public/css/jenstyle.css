@@ -193,64 +193,8 @@ header {
     color: #34B3A8;
 }
 
-/* Hero Section */
-/* Hero Section */
-.hero {
-    position: relative;  /* Allows absolute positioning of text */
-    width: 100%;  /* Ensure it spans the entire width of the screen */
-    padding: 70px;  /* Add some padding for spacing */
-    background-color: #f0f0f0;  /* Subtle background color */
-    display: flex;  /* Flexbox for layout */
-    align-items: center;  /* Center vertically */
-    justify-content: space-between;  /* Spread content evenly */
-    overflow: hidden;  /* Prevent overflow */
-}
 
 
-/* Hero Image */
-.hero img {
-    position: absolute;  /* Position the image relative to the hero section */
-    top: 0;
-    left: 0;
-    width: 100%;  /* Make the image take the full width */
-    height: 100%;  /* Make the image take the full height */
-    object-fit: cover;  /* Ensure the image covers the entire area without distortion */
-    z-index: -1;  /* Push the image behind the text */
-}
-
-/* Hero Text */
-.hero-text {
-    position: absolute;
-    top: 40%;
-    left: 5%;  /* Align the text more to the left side */
-    transform: translateY(-50%);  /* Center the text vertically */
-    color: white;
-    text-align: left;  /* Align the text to the left */
-    padding: 20px;
-}
-
-.hero .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Darken the image with a semi-transparent black */
-    z-index: 0; /* Ensure it's on top of the image but behind the text */
-}
-
-.hero-text h2 {
-    font-size: 3rem;  /* Increase the size of the heading */
-    font-weight: bold;  /* Make the heading bold */
-    margin: 0;
-    padding: 0;
-    z-index: 1;  /* Ensure the text appears above the image */
-}
-
-.hero-text p {
-    font-size: 2rem;  /* Adjust the size of the paragraph text */
-    margin: 10px 0;
-}
 
 /* Button Group */
 .button-group {
@@ -709,4 +653,92 @@ footer {
     padding: 20px;
     background-color: #333;
     color: white;
+}
+
+.gen-story {
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #f9f9f9; /* Neutral background */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    font-family: 'Merriweather', serif; /* Clean serif font */
+    color: #333;
+    line-height: 1.8;
+}
+
+
+
+.gen-story .story-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Space between paragraphs */
+}
+
+.gen-story p {
+    font-size: 16px;
+    text-align: justify;
+    margin: 0;
+}
+
+.gen-story p.highlighted {
+    font-size: 17px;
+    font-weight: bold; /* Slightly bolder text for emphasis */
+    color: #444; /* Darker gray for contrast */
+    padding: 10px 0;
+}
+
+
+.gen-story {
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 1000px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Merriweather', serif;
+    color: #333;
+    line-height: 1.8;
+}
+
+.gen-story h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.story-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.image-container {
+    flex: 1 1 37%; /* Adjust width as needed */
+    display: flex;
+    justify-content: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.text-container {
+    flex: 1 1 60%; /* Adjust width as needed */
+}
+
+.text-container p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.text-container1 p {
+    margin-bottom: 20px;
+    text-align: justify;
 }
