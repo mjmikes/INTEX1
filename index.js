@@ -1,18 +1,7 @@
 const express = require("express");
-const { default: test } = require("node:test");
-
-let app = express();
-
-let path = require("path");
-
-const port = process.env.PORT || 5500;
-
-app.set("view engine", "ejs");
-
-app.use(express.json()); // For parsing application/json
-
-app.use(express.urlencoded({extended: true}));
-
+const passport = require("passport");
+const session = require("express-session");
+const flash = require("connect-flash");
 const knex = require("knex")({
     client: "pg",
     connection: {
@@ -29,56 +18,119 @@ const knex = require("knex")({
     }
 });
 
+let app = express();
+let path = require("path");
+const port = process.env.PORT || 5500;
+
+app.set("view engine", "ejs");
+
+app.use(express.json()); // For parsing application/json
+app.use(express.urlencoded({ extended: true }));
+
+// Setup express session
+app.use(session({
+    secret: 'yourSecretKey',  // Change this to a more secure secret key
+    resave: false,
+    saveUninitialized: true
+}));
+
+// Initialize Passport and session handling
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Setup connect-flash for flash messages (for login errors, etc.)
+app.use(flash());
+
+// Define the isAuthenticated middleware
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();  // Proceed to the requested route
+    }
+    res.redirect('/login');  // Redirect to login if the user is not authenticated
+}
+
+// Passport local strategy setup (assuming you have a User model or database)
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        // Authenticate user here, e.g. check against database
+        knex('admins')
+            .where({ username: username })
+            .first()
+            .then(user => {
+                if (!user) {
+                    return done(null, false, { message: 'Incorrect username.' });
+                }
+                // Replace this with proper password verification, e.g., bcrypt
+                if (user.password !== password) {
+                    return done(null, false, { message: 'Incorrect password.' });
+                }
+                return done(null, user);
+            })
+            .catch(err => done(err));
+    }
+));
+
+// Serialize user into session (store user ID in session)
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+// Deserialize user from session (retrieve user by ID)
+passport.deserializeUser(function(id, done) {
+    knex('admins')
+        .where({ id: id })
+        .first()
+        .then(user => done(null, user))
+        .catch(err => done(err));
+});
+
+knex.raw('SELECT 1')
+  .then(() => {
+    console.log('Connected to the database successfully!');
+    process.exit(0); // Exit the script if successful
+  })
+  .catch((error) => {
+    console.error('Error connecting to the database:', error);
+    process.exit(1); // Exit with failure
+  });
+
 // GET ROUTES TO ACCESS PAGES
-
-// get route for the landing page (index.ejs1)
-app.get("/", (req,res) => {
-    res.render("index.ejs")
+app.get("/", (req, res) => {
+    res.render("index");
 });
 
-// get route for the login page
 app.get('/login', (req, res) => {
-    res.render('login');
+    // Flash messages for errors
+    const errorMsg = req.flash('error');
+    res.render('login', { errorMsg: errorMsg });
 });
 
-// get route for the jen's page
 app.get('/jens_story', (req, res) => {
     res.render('jens_story');
 });
 
-
-// get route for the admin page
-app.get('/admin', (req, res) => {
-    res.render('admin');
+app.get('/admin', isAuthenticated, (req, res) => {
+    res.render('admin-dashboard');
 });
 
-// get route for the request event page
 app.get('/request_event', (req, res) => {
     res.render('request_event');
 });
 
-// get route for the get involved page
 app.get('/get_involved', (req, res) => {
     res.render('get_involved');
 });
 
-// get route for the donate page
 app.get('/donate', (req, res) => {
     res.render('donate');
 });
 
-// Serve static files from the "public" directory
 app.use(express.static('public'));
-
-
-
 
 // POST ROUTES TO UPDATE DATA
 
 app.post("/addEventRequest", (req, res) => {
-    console.log("POST /addEventRequest hit");
-    console.log("Request body:", req.body);
-
+    
     const {
         event_name, event_contact_first_name, event_contact_last_name,
         event_contact_phone, event_contact_email, event_type, event_location_address,
@@ -108,11 +160,9 @@ app.post("/addEventRequest", (req, res) => {
         event_contact_email: event_contact_email
       })
       .then(eventContactIds => {
-        console.log("Inserted into event_contact table. Returned IDs:", eventContactIds);
         const eventContactId = eventContactIds[0];  // Get the ID of the newly inserted event contact
 
         // Insert into event_location table
-        console.log("Now inserting into event_location table...");
         return knex('event_location')
           .returning('event_location_id')
           .insert({
@@ -121,11 +171,8 @@ app.post("/addEventRequest", (req, res) => {
             event_state: event_location_state,
             event_zip: event_location_zip
           }).then(eventLocationIds => {
-            console.log("Inserted into event_location table. Returned IDs:", eventLocationIds);
             const eventLocationId = eventLocationIds[0];  // Get the ID of the newly inserted event location
-
             // Now insert into event_request table
-            console.log("Now inserting into event_request table...");
             return knex('event_request').insert({
                 event_name: event_name,
                 event_contact_id: eventContactId, // Foreign Key
@@ -145,20 +192,51 @@ app.post("/addEventRequest", (req, res) => {
                 possible_date_1: possible_date_1,
                 possible_date_2: possible_date_2
             }).then(() => {
-                console.log("Inserted into event_request table successfully.");
                 // After inserting data, send redirect to send a success message
                 res.redirect('/event_success_page');  
             }).catch(error => {
-                console.error('Error inserting into event_request table:', error);
+                console.error('Error inserting event_request:', error);
                 res.status(500).send('Internal Server Error');
             });
         });
       }) // Error message in case it doesnt work
       .catch(error => {
-        console.error('Error inserting into event_contact or event_location table:', error);
+        console.error('Error inserting event_request:', error);
         res.status(500).send("An error occurred while processing your request.");
     });
 });
 
+// POST route for login (Passport authentication)
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/admin',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
 
-app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
+// Protected routes (only accessible when logged in)
+app.get('/requested_events', isAuthenticated, (req, res) => {
+    res.render('requested-events');  // Your requested events page
+});
+
+app.get('/completed_events', isAuthenticated, (req, res) => {
+    res.render('completed-events');  // Your completed events page
+});
+
+// Other admin pages protected by isAuthenticated middleware
+app.get('/volunteers', isAuthenticated, (req, res) => {
+    res.render('volunteers');  // Volunteers page
+});
+
+app.get('/event_dashboard', isAuthenticated, (req, res) => {
+    res.render('event-dashboard');  // Event dashboard page
+});
+
+// Logout route
+app.get('/logout', (req, res) => {
+    req.logout((err) => {
+        if (err) return next(err);
+        res.redirect('/');  // Redirect to home page after logout
+    });
+});
+
+app.listen(port, () => console.log(`Server is listening on port ${port}!`));
