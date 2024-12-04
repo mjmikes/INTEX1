@@ -322,6 +322,20 @@ app.get('/requested_events', async (req, res) => {
     }
 });
 
+app.post('/deleteEvent/:id', (req, res) => {
+    const id = req.params.id;
+    knex('event_request')
+      .where('id', id)
+      .del() // Deletes the record with the specified ID
+      .then(() => {
+        res.redirect('/requested_events'); // Redirect to the Pokémon list after deletion
+      })
+      .catch(error => {
+        console.error('Error deleting Event:', error);
+        res.status(500).send('Internal Server Error');
+      });
+});
+
 
 // Post route to send volunteer form data to database
 app.post("/submit-volunteer", async (req, res) => {
