@@ -171,8 +171,6 @@ app.get('/messages', async (req, res) => {
     }
 });
 
-
-
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
     const {
@@ -379,24 +377,26 @@ app.post("/add-admin", async (req, res) => {
 });
 
 // Post route to send admin form data to database
-app.post("/contact_us", async (req, res) => {
+app.post("/submit-contact", async (req, res) => {
     const {
         first_name,
         last_name,
         phone,
         email,
-        username,
-        password
+        city,
+        state,
+        message 
     } = req.body;
     try {
         // Insert into admin table
-        await knex('admin').insert({
+        await knex('contact-us').insert({
             first_name,
             last_name,
             phone,
             email,
-            username,
-            password
+            city,
+            state,
+            message 
         });
         // Redirect to a success page
         res.redirect('/volunteers');
