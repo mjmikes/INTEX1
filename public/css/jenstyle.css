@@ -452,54 +452,53 @@ header {
 }
 
 
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
+/* Footer container */
+.footer {
+    text-align: center;  /* Centers all content inside the footer */
+    padding: 30px 20px;
+    background-color: lightgray; /* Light background color for footer */
+    color: #333;  /* Dark text color */
 }
 
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
+/* Contact Section */
+.contact {
     margin-bottom: 20px;
 }
 
 .contact h2 {
     font-size: 1.8rem;
     margin-bottom: 10px;
+    color: #34B3A8;  /* Set color for header */
 }
 
 .contact p {
     font-size: 1rem;
+    margin: 5px 0;
 }
 
-.links ul {
-    list-style: none;
+/* Social Media Icons */
+.social-icons {
+    margin: 20px 0;
 }
 
-.links li {
-    margin: 10px 0;
-}
-
-.links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
+.social-icon {
+    font-size: 2rem;  /* Size of the icons */
+    margin: 0 15px;  /* Space between icons */
+    color: #333;  /* Default color for icons */
     transition: color 0.3s ease;
 }
 
-.links a:hover {
-    color: #34B3A8;
+.social-icon:hover {
+    color: #34B3A8;  /* Change color on hover */
 }
 
+/* Copyright Text */
 footer p {
-    font-size: 0.9rem;
-    color: #ccc;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #666;  /* Lighter text color */
 }
+
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
