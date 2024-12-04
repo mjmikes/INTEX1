@@ -75,7 +75,7 @@ app.get('/jens_story', (req, res) => {
 });
 
 app.get('/user_maintenance', (req, res) => {
-    res.render('user_maintenace');
+    res.render('user_maintenance');
 });
 
 // get route to add_admin page
