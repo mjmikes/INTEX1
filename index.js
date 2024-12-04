@@ -76,8 +76,8 @@ app.get('/add_admin', (req, res) => {
     res.render('add_admin');
 });
 
-app.get('/how_to_get_involved.ejs', (req, res) => {
-    res.render('how_to_get_involved.ejs');
+app.get('/how_to_get_involved', (req, res) => {
+    res.render('how_to_get_involved');
 });
 
 // get route for the admin page

@@ -392,53 +392,17 @@ header {
     background-color: #fff;
 }
 
-/* Footer */
-footer {
-    background-color: #333;
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
-}
 
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    margin-bottom: 20px;
-}
-
-.contact h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-.contact p {
-    font-size: 1rem;
-}
-
-.links ul {
-    list-style: none;
-}
-
-.links li {
-    margin: 10px 0;
-}
-
-.links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
-
-.links a:hover {
-    color: #34B3A8;
-}
-
-footer p {
-    font-size: 0.9rem;
-    color: #ccc;
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact, .links {
+        width: 100%;  /* Full width on smaller screens */
+        text-align: center;  /* Center-align text on small screens */
+    }
 }
 
 /* Mobile Responsive */
