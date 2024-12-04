@@ -138,6 +138,11 @@ app.get("/event_success_page", (req, res) => {
     res.render("event_success_page");
 });
 
+// Volunteer Success page 
+app.get("/volunteer_success_page", (req, res) => {
+    res.render("volunteer_success_page");
+});
+
 
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
