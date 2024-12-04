@@ -102,6 +102,12 @@ header {
     text-transform: uppercase; /* Uppercase the letter */
     cursor: pointer;
 }
+
+.circle-icon:hover{
+    background-color: #2a8e80;
+    transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
 .logout-option {
     display: none;  /* Initially hidden */
     position: absolute;
@@ -325,10 +331,12 @@ header {
 
 .btn-primary:hover {
     background-color: #2a8e80;
+    transform: scale(1.05); /* Slightly increase the size on hover */
 }
 
 .btn-secondary:hover {
     background-color: #ff9d00;
+    transform: scale(1.05); /* Slightly increase the size on hover */
 }
 
 /* Hero Button Styling (Larger Buttons) */
@@ -346,6 +354,7 @@ header {
     border-radius: 25px;  /* Optional: slightly larger border-radius */
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 .btn-primary-hero {
@@ -360,10 +369,12 @@ header {
 
 .btn-primary-hero:hover {
     background-color: #2a8e80;
+    transform: scale(1.05); /* Slightly increase the size on hover */
 }
 
 .btn-secondary-hero:hover {
     background-color: #ff9d00;
+    transform: scale(1.05); /* Slightly increase the size on hover */
 }
 
 
@@ -721,86 +732,54 @@ header {
     }
 }
 
-/* Footer Styles */
-footer {
-    background-color: #2c3e50; /* Dark, professional background */
-    color: #ecf0f1;  /* Light text color for contrast */
-    padding: 40px 0;  /* Adequate padding for spacing */
-    font-size: 16px;  /* Slightly larger font for readability */
-    text-align: center;
-}
 
+/* Footer container */
 .footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 30px; /* Adds spacing between sections */
-    margin-bottom: 30px;
+    text-align: center;  /* Centers all content inside the footer */
+    padding: 30px 20px;
+    background-color: lightgray; /* Light background color for footer */
+    color: #333;  /* Dark text color */
 }
 
-.contact, .links {
-    width: 45%; /* Each section takes up 45% of the width */
-    min-width: 250px; /* Ensure sections don't shrink too much */
-    box-sizing: border-box;  /* Make sure padding is included in width */
+/* Contact Section */
+.contact {
+    margin-bottom: 20px;
 }
 
-/* Header in footer */
-footer h2 {
-    font-size: 20px;
-    font-weight: 700;  /* Bold headers */
-    margin-bottom: 15px;
-    text-transform: uppercase; /* Uppercase for a clean, bold look */
+.contact h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #34B3A8;  /* Set color for header */
 }
 
-/* Contact section */
 .contact p {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 1rem;
     margin: 5px 0;
 }
 
-.contact p:first-of-type {
-    font-weight: bold;
+/* Social Media Icons */
+.social-icons {
+    margin: 20px 0;
 }
 
-/* Links section */
-.links ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.social-icon {
+    font-size: 2rem;  /* Size of the icons */
+    margin: 0 15px;  /* Space between icons */
+    color: #333;  /* Default color for icons */
+    transition: color 0.3s ease;
 }
 
-.links li {
-    margin-bottom: 12px;
+.social-icon:hover {
+    color: #34B3A8;  /* Change color on hover */
 }
 
-.links a {
-    color: #ecf0f1;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s ease; /* Smooth color transition */
-}
-
-.links a:hover {
-    color: #3498db;  /* Blue color on hover for a professional effect */
-    text-decoration: underline;
-}
-
-/* Footer copyright */
+/* Copyright Text */
 footer p {
-    font-size: 14px;
     margin-top: 20px;
-    color: #bdc3c7;  /* Slightly lighter text color */
+    font-size: 1rem;
+    color: #666;  /* Lighter text color */
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .footer {
-        flex-direction: column;
-        align-items: center;
-    }
-}
 
 /* Donate Section Styling */
 .donate-section {
