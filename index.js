@@ -233,30 +233,30 @@ app.post('/requestEvent', (req, res) => {
   let locationId;
 
   // Insert into event_contact and retrieve its auto-generated ID
-  knex('event_contact')
+    knex('event_contact')
     .insert({
-      first_name,
-      last_name,
-      phone,
-      event_contact_email,
+        first_name,
+        last_name,
+        phone,
+        event_contact_email,
     })
-    .returning('event_contact_id') // Retrieve the auto-generated ID (matches your schema)
-    .then(([id]) => {
-      contactId = id; // Store the generated Event Contact ID
-      // Insert into event_location and retrieve its auto-generated ID
-      return knex('event_location')
+    .returning('event_contact_id') // Retrieve the auto-generated ID
+    .then(([result]) => {
+        contactId = result.event_contact_id; // Extract the actual ID value
+        // Insert into event_location and retrieve its auto-generated ID
+        return knex('event_location')
         .insert({
-          event_address: event_location_address,
-          event_city: event_location_city,
-          event_state: event_location_state,
-          event_zip: event_location_zip,
+            event_address: event_location_address,
+            event_city: event_location_city,
+            event_state: event_location_state,
+            event_zip: event_location_zip,
         })
         .returning('event_location_id');
     })
-    .then(([id]) => {
-      locationId = id; // Store the generated Event Location ID
-      // Insert into event_request with the retrieved foreign keys
-      return knex('event_request').insert({
+    .then(([result]) => {
+        locationId = result.event_location_id; // Extract the actual ID value
+        // Insert into event_request with the retrieved foreign keys
+        return knex('event_request').insert({
         event_name,
         event_type,
         event_start_time,
@@ -274,16 +274,16 @@ app.post('/requestEvent', (req, res) => {
         possible_date_2,
         event_contact_id: contactId, // Use the generated Event Contact ID
         event_location_id: locationId, // Use the generated Event Location ID
-      });
+        });
     })
     .then(() => {
-      res.redirect('/'); // Redirect after all inserts are complete
+        res.redirect('/'); // Redirect after all inserts are complete
     })
     .catch((error) => {
-      console.error('Error adding event request:', error.message);
-      res.status(500).send('Internal Server Error');
+        console.error('Error adding event request:', error.message);
+        res.status(500).send('Internal Server Error');
     });
-});
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
