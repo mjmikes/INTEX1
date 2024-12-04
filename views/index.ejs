@@ -23,7 +23,7 @@
                     <li><a href="/request_event">Request Event</a></li>
                     <li><a href="/jens_story">Jen's Story</a></li>
                     <li><a href="/our_tech">Our Tech</a></li>
-                    <li><button class="btn-secondary" onclick="location.href='/how_to_get_involved'">Get Involved</button></li>
+                    <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
                      <!-- Conditionally show icon based on isAdmin -->
                      <% if (isAdmin) { %>
@@ -56,6 +56,7 @@
                         <li><a href="/sponsor_us">Sponsor Us</a></li>
                         <li><a href="/upcoming_events">Upcoming Events</a></li>
                         <% if (isAdmin) { %>
+                            <li><a href="/requested_events"><b>Requested Events</b></a></li>
                             <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
                             <li><a href="/completed_events"><b>Completed Events</b></a></li>
                             <li><a href="/volunteers"><b>Volunteers</b></a></li>
@@ -77,7 +78,7 @@
                         <i class="fas fa-heart"></i> Donate
                     </button>
                     
-                    <button class="btn-secondary-hero" onclick="location.href='/how_to_get_involved'">
+                    <button class="btn-secondary-hero" onclick="location.href='/get_involved'">
                         <i class="fas fa-hands-helping"></i> Volunteer
                     </button>
                 </div>
@@ -96,7 +97,7 @@
                     <img id="dynamic-image" class="large-image" src="images/service_group.jpg" alt="Map">
                 </div>
             
-                <button class="welcome-button" onclick="location.href='/get_involved'">
+                <button class="welcome-button" onclick="location.href='/request_event'">
                     <b>Every person can serve! Host an event and start saving lives today!</b>
                 </button>
             </div>
@@ -107,7 +108,7 @@
                     <h3>The Issue</h3>
                     <p>700 people experiencing or at risk of homelessness are killed from hypothermia annually in the United States. Our vests help protect against temperatures as low as -10°F and save lives.</p>
                     <a href="/jens_story" style="display: flex; justify-content: center; align-items: center; text-decoration: none; width: 100%;">
-                        <button class="donate-button">Learn More</button>
+                        <button class="donate-button">Our Story</button>
                     </a>
                     
                 </div>
@@ -116,9 +117,9 @@
                     <img src="images/working.jpg" alt="Image illustrating the issue" class="card-image">
                     <h3>Our Work</h3>
                     <p>We craft and distribute high-tech foam vests that provide warmth in freezing temperatures, saving lives and restoring hope.</p>
-                    <a href="/request_event" style="display: flex; justify-content: center; align-items: center; text-decoration: none; width: 100%;">
-                        <button class="donate-button" onclick="window.location.href='/request_event';">
-                            Request An Event
+                    <a href="/our_tech" style="display: flex; justify-content: center; align-items: center; text-decoration: none; width: 100%;">
+                        <button class="donate-button" onclick="window.location.href='/our_tech';">
+                            Learn More
                         </button>
                         
                     </a>

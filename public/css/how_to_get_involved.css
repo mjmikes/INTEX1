@@ -483,81 +483,7 @@ header {
 }
 
 
-/* Card Container (cards that are beneath the welcome card) */
-/* Card Container */
-.cards {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* Space between cards */
-    margin-top: 30px; /* Space between welcome card and the smaller cards */
-    position: relative;
-    z-index: 1; /* Ensure it stays above other elements */
-}
 
-/* Individual Card Styling */
-.card {
-    background-color: #fff;
-    border-radius: 10px;  /* You can set this to a value that suits your design */
-    padding:0px; /* Adjust padding to reduce space inside the card */
-    width: 30%;  /* Set width to control the size of the card */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow for card */
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: space-between; /* Distribute space evenly inside */
-    height: 650px; /* Set a fixed height for the card */
-}
-
-/* Card Image Styling */
-.card .card-image {
-    width: 100%; /* Image takes up full width */
-    height: 65%; /* Adjust image height */
-    border-radius: 10px; /* Round the corners of the image */
-    margin-bottom: 10px; /* Add some space below the image */
-    object-fit: cover; /* Ensure the image fits well */
-}
-
-/* Card Header Styling */
-.card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 0px; /* Reduce space below the heading */
-    text-align: center; /* Center align heading */
-    margin-top: -80px;
-}
-
-/* Card Paragraph Styling */
-.card p {
-    font-size: .9rem;
-    margin-bottom: 10px; /* Reduce space below the paragraph */
-    text-align: center; /* Center align paragraph */
-    margin-top: -70px;
-    padding: 20px;
-}
-
-/* Card Button Styling */
-.card button {
-    background-color: #34B3A8;
-    color: white;
-    padding: 12px 25px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    align-self: center; /* Center the button horizontally */
-    margin-top: -65px; /* Add this line to push the button upwards */
-}
-
-/* Button Hover Effect */
-.card button:hover {
-    background-color: #2a8e80;
-}
-
-/* Card Hover Effect (increase shadow on hover) */
-.card:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-}
 
 /* Take Action Section */
 /* Take Action Section */
@@ -663,13 +589,6 @@ header {
 }
 
 
-/* Adjust the cards section to be in front of the Take Action section */
-.cards {
-    position: relative; /* Ensures cards are above the Take Action section */
-    z-index: 1; /* Higher z-index to keep cards on top */
-}
-
-/* Welcome Section and Card Container */
 .welcome {
     position: relative;
     z-index: 1;  /* Ensure the welcome section stays above the Take Action section */
@@ -1040,50 +959,117 @@ form button:hover {
     }
 }
 
-/* Table Styling */
-table {
+/* Cards Section */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Table Head Styling */
-thead {
-    background-color: #34B3A8;  /* Header background color to match the brand */
-    color: white;  /* Text color for header */
-}
-
-th {
-    padding: 12px 15px;
-    text-align: left;
-    font-weight: bold;
-    text-transform: uppercase;  /* Makes header text uppercase */
-    letter-spacing: 1px;
-}
-
-/* Table Row Styling */
-tbody tr {
-    border-bottom: 1px solid #ddd;  /* Light border for row separation */
-}
-
-tbody tr:hover {
-    background-color: #f1f1f1;  /* Hover effect for rows */
-}
-
-/* Table Data Styling */
-td {
-    padding: 12px 15px;
-    text-align: left;
-    font-size: 14px;
-    color: #333;
-}
-
-/* Empty Table Row */
-td[colspan="23"] {
-    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    font-size: 16px;
-    color: #888;
 }
+
+/* Individual Card Styling */
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    margin: 15px 0;
+    color: #34B3A8;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Card Button */
+.card button {
+    background-color: #34B3A8;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.card button:hover {
+    background-color: #2a8e80;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .cards-container {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+
+    .card img {
+        height: 150px; /* Adjust image height for smaller screens */
+    }
+}
+
+.hero-image {
+    position: relative;
+    width: 100%;
+    height: 80vh; /* Takes up most of the viewport */
+    overflow: hidden;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    background-color: #34B3A8;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.hero-text p {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
