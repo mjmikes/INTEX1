@@ -55,9 +55,9 @@ app.get('/request_event', (req, res) => {
     res.render('request_event');
 });
 
-// get route for the volunteer page
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer');
+// get route for the get involved page
+app.get('/get_involved', (req, res) => {
+    res.render('get_involved');
 });
 
 // get route for the donate page
@@ -131,7 +131,7 @@ app.post("/addEventRequest", (req, res) => {
                 res.status(500).send('Internal Server Error');
             });
         });
-      })
+      }) // Error message in case it doesnt work
       .catch(error => {
         console.error('Error inserting event_contact or event_location:', error);
         res.status(500).send('Internal Server Error');
