@@ -14,12 +14,12 @@ app.use(express.urlencoded({extended: true}));
 const knex = require("knex")({
     client: "pg",
     connection: {
-        host: "awseb-e-3dmmzs5fan-stack-awsebrdsdatabase-rm7jlczpxzug.cr82swsq26ts.us-east-1.rds.amazonaws.com",
-        user: "ebroot",
-        password: "admin123",
-        database: "ebdb",
-        port: 5433,
-        ssl: { rejectUnauthorized: false }
+        host : process.env.RDS_HOSTNAME || "awseb-e-3dmmzs5fan-stack-awsebrdsdatabase-rm7jlczpxzug.cr82swsq26ts.us-east-1.rds.amazonaws.com",
+        user : process.env.RDS_USERNAME || "ebroot",
+        password : process.env.RDS_PASSWORD || "admin123",
+        database : process.env.RDS_DB_NAME || "ebdb",
+        port : process.env.RDS_PORT || 5433,
+        ssl : process.env.DB_SSL ? { rejectUnauthorized: false } : false
     },
     pool: {
         min: 2,
