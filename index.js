@@ -128,11 +128,6 @@ app.get("/upcoming_events", (req, res) => {
     res.render("upcoming_events");
 });
 
-// Requested Events page 
-app.get("/requested_events", (req, res) => {
-    res.render("requested_events");
-});
-
 // Completed Events page (protected by authentication)
 app.get("/completed_events", (req, res) => {
     res.render("completed_events");
