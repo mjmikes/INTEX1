@@ -191,6 +191,10 @@ app.post("/addEventRequest", (req, res) => {
 });
 
 app.post('/requestEvent', (req, res) => {
+
+    console.log("Request received at /requestEvent");
+    console.log("Request body:", req.body);
+
   const {
     event_name,
     event_contact_first_name,
@@ -216,6 +220,14 @@ app.post('/requestEvent', (req, res) => {
     possible_date_1,
     possible_date_2,
   } = req.body;
+
+    console.log("Parsed request data:", {
+        event_name,
+        event_contact_first_name,
+        event_contact_last_name,
+        event_contact_phone,
+        event_contact_email,
+    });
 
   let contactId;
   let locationId;
