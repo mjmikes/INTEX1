@@ -76,7 +76,9 @@ app.use(express.static('public'));
 // POST ROUTES TO UPDATE DATA
 
 app.post("/addEventRequest", (req, res) => {
-    
+    console.log("POST /addEventRequest hit");
+    console.log("Request body:", req.body);
+
     const {
         event_name, event_contact_first_name, event_contact_last_name,
         event_contact_phone, event_contact_email, event_type, event_location_address,
@@ -86,7 +88,15 @@ app.post("/addEventRequest", (req, res) => {
         round_tables, rectangle_tables, possible_date_1, possible_date_2
     } = req.body;
 
-    console.log(req.body);  // Log all data
+    console.log("Extracted variables from req.body:");
+    console.log({
+        event_name, event_contact_first_name, event_contact_last_name,
+        event_contact_phone, event_contact_email, event_type, event_location_address,
+        event_location_city, event_location_state, event_location_zip, event_start_time,
+        event_duration, event_description, expected_advanced_sewers, sewing_machines_available,
+        expected_participants, children_under_10, jen_story, event_space_description,
+        round_tables, rectangle_tables, possible_date_1, possible_date_2
+    });
 
     // Insert into event_contact table
     knex('event_contact')
@@ -98,9 +108,11 @@ app.post("/addEventRequest", (req, res) => {
         event_contact_email: event_contact_email
       })
       .then(eventContactIds => {
+        console.log("Inserted into event_contact table. Returned IDs:", eventContactIds);
         const eventContactId = eventContactIds[0];  // Get the ID of the newly inserted event contact
 
         // Insert into event_location table
+        console.log("Now inserting into event_location table...");
         return knex('event_location')
           .returning('event_location_id')
           .insert({
@@ -109,8 +121,11 @@ app.post("/addEventRequest", (req, res) => {
             event_state: event_location_state,
             event_zip: event_location_zip
           }).then(eventLocationIds => {
+            console.log("Inserted into event_location table. Returned IDs:", eventLocationIds);
             const eventLocationId = eventLocationIds[0];  // Get the ID of the newly inserted event location
+
             // Now insert into event_request table
+            console.log("Now inserting into event_request table...");
             return knex('event_request').insert({
                 event_name: event_name,
                 event_contact_id: eventContactId, // Foreign Key
@@ -130,16 +145,17 @@ app.post("/addEventRequest", (req, res) => {
                 possible_date_1: possible_date_1,
                 possible_date_2: possible_date_2
             }).then(() => {
+                console.log("Inserted into event_request table successfully.");
                 // After inserting data, send redirect to send a success message
                 res.redirect('/event_success_page');  
             }).catch(error => {
-                console.error('Error inserting event_request:', error);
+                console.error('Error inserting into event_request table:', error);
                 res.status(500).send('Internal Server Error');
             });
         });
       }) // Error message in case it doesnt work
       .catch(error => {
-        console.error('Error inserting event_request:', error);
+        console.error('Error inserting into event_contact or event_location table:', error);
         res.status(500).send("An error occurred while processing your request.");
     });
 });
