@@ -51,16 +51,18 @@ app.get('/admin', (req, res) => {
 });
 
 // get route for the request event page
-app.get('/request_event', (req, res) => {
+app.get('/request_event', async (req, res) => {
     try {
         await knex.raw('SELECT 1');
         console.log('Database connection is working');
     } catch (error) {
         console.error("Database connection error:", error);
         res.status(500).send("Database is not connected");
+        return;  // Prevents the code from continuing if there is an error
     }
     res.render('request_event');
 });
+
 
 // get route for the get involved page
 app.get('/get_involved', (req, res) => {
@@ -94,7 +96,7 @@ app.get("/our_tech", (req, res) => {
 
 // Sponsor Us page
 app.get("/sponsor_us", (req, res) => {
-    res.render("our_sponsors.ejs");
+    res.render("sponsor_us.ejs");
 });
 
 // Upcoming Events page
