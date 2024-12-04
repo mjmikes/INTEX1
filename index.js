@@ -389,7 +389,7 @@ app.post("/submit-contact", async (req, res) => {
     } = req.body;
     try {
         // Insert into admin table
-        await knex('contact-us').insert({
+        await knex('contact_us').insert({
             first_name,
             last_name,
             phone,
