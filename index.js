@@ -95,23 +95,23 @@ app.get("/upcoming_events", (req, res) => {
     res.render("upcoming_events.ejs");
 });
 
-// Requested Events page (protected by authentication)
-app.get("/requested_events", isAuthenticated, (req, res) => {
+// Requested Events page 
+app.get("/requested_events", (req, res) => {
     res.render("requested_events.ejs");
 });
 
 // Completed Events page (protected by authentication)
-app.get("/completed_events", isAuthenticated, (req, res) => {
+app.get("/completed_events", (req, res) => {
     res.render("completed_events.ejs");
 });
 
 // Volunteers page (protected by authentication)
-app.get("/volunteers", isAuthenticated, (req, res) => {
+app.get("/volunteers", (req, res) => {
     res.render("volunteers.ejs");
 });
 
 // Event Dashboard page (protected by authentication)
-app.get("/event_dashboard", isAuthenticated, (req, res) => {
+app.get("/event_dashboard", (req, res) => {
     res.render("event_dashboard.ejs");
 });
 
