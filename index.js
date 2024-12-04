@@ -70,7 +70,10 @@ app.get('/donate', (req, res) => {
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
-
+// Test if server is running
+app.get('/test', (req, res) => {
+    res.send('Server is running!');
+  });
 
 
 // POST ROUTES TO UPDATE DATA
