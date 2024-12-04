@@ -452,30 +452,42 @@ app.post('/login', (req, res) => {
 
 // volunteer section
 
-app.get('/', (res, req) => {
-    knex('Tables')
-    .select('Tables.admin',
-        'Tables.admin',
-        'Tables.completed_event',
-        'Tables.contact_us',
-        'Tables.event_contact',
-        'Tables.event_location',
-        'Tables.event_production',
-        'Tables.event_request',
-        'Tables.volunteer_events',
-        'Tables.volunteer_info'
-    )
-    .then(Tables => {
-        // Render the index.ejs template and pass the data
-        // usamos res.render para q funcione con routes, aqui pokemon tambien se refiere a la variable no al table
-        res.render('index', { Tables });
-      })
-      //PARA EL TEST TENGO QUE RECORDAR ESTO ASI COMO ES, Simplemente es decide que si es q hay un error entonces lo avise
-      .catch(error => {
-        console.error('Error querying database:', error);
-        res.status(500).send('Internal Server Error Volunteer');
-      });
-  });
+app.get('/volunteers', (res, req) => {
+    try {
+        knex('volunteer_info')
+        .select(
+            'volunteer_info.volunteer_id',
+            'volunteer_info.first_name',
+            'volunteer_info.last_name',
+            'volunteer_info.address',
+            'volunteer_info.city',
+            'volunteer_info.state',
+            'volunteer_info.zip',
+            'volunteer_info.phone',
+            'volunteer_info.email',
+            'volunteer_info.source',
+            'volunteer_info.sewing_level',
+            'volunteer_info.monthly_hour_availability',
+            'volunteer_info.willing_to_teach',
+            'volunteer_info.willing_to_lead',
+            'volunteer_info.willing_to_travel_county',
+            'volunteer_info.willing_to_travel_state',
+            'volunteer_info.details',
+        )
+        .then(volunteer_info => {
+                // Render the index.ejs template and pass the data
+                // We use res.render to work with ejs files we use res.redirct to work with routes
+                res.render('volunteer_info', { volunteer_info, security });
+        })
+            .catch(error => {
+                console.error('Error querying database:', error);
+                res.status(500).send('Internal Server Error');
+        });
+    } catch (error) {
+        console.error('Error fetching event data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 
