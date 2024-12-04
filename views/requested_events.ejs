@@ -90,49 +90,50 @@
             <th>Available Round Tables</th>
             <th>Available Rectangle Tables</th>
             <th>Event Description</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <% if (requested_events) { %>
-            <tr>
-              <input type="hidden" value="<%= eventData.event_id %>">
-              <td><%= eventData.first_name %> <%= eventData.last_name %></td>
-              <td><%= eventData.phone %></td>
-              <td><%= eventData.event_contact_email %></td>
-              <td><%= eventData.event_address %></td>
-              <td><%= eventData.event_city %></td>
-              <td><%= eventData.event_state %></td>
-              <td><%= eventData.event_zip %></td>
-              <td><%= eventData.event_space_description %></td>
-              <td><%= eventData.possible_date_1 %></td>
-              <td><%= eventData.possible_date_2 %></td>
-              <td><%= eventData.event_start_time %></td>
-              <td><%= eventData.event_duration %></td>
-              <td><%= eventData.event_type %></td>
-              <td><%= eventData.expected_advanced_sewers %></td>
-              <td><%= eventData.sewing_machines_available %></td>
-              <td><%= eventData.expected_participants %></td>
-              <td><%= eventData.children_under_10 %></td>
-              <td><%= eventData.jen_story ? 'Yes' : 'No' %></td>
-              <td><%= eventData.round_tables_count %></td>
-              <td><%= eventData.rectangle_tables_count %></td>
-              <td><%= eventData.event_space_description %></td>
-              <td>
-                <form action="/editEvent/<%= eventData.event_id %>" method="GET" style="display:inline;">
-                  <button type="submit">Edit</button>
-                </form>
-                <form action="/deleteEvent/<%= eventData.event_id %>" method="POST" style="display:inline;">
-                  <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
-                </form>
-              </td>
-            </tr>
-          <% } else { %>
-            <tr>
-              <td colspan="14">No event data available</td>
-            </tr>
-          <% } %>
+            <% if (requested_events) { %> <!-- Check if requested_events is available -->
+              <tr>
+                <input type="hidden" value="<%= requested_events.event_id %>">
+                <td><%= requested_events.first_name %> <%= requested_events.last_name %></td>
+                <td><%= requested_events.phone %></td>
+                <td><%= requested_events.event_contact_email %></td>
+                <td><%= requested_events.event_address %></td>
+                <td><%= requested_events.event_city %></td>
+                <td><%= requested_events.event_state %></td>
+                <td><%= requested_events.event_zip %></td>
+                <td><%= requested_events.event_space_description %></td>
+                <td><%= requested_events.possible_date_1 %></td>
+                <td><%= requested_events.possible_date_2 %></td>
+                <td><%= requested_events.event_start_time %></td>
+                <td><%= requested_events.event_duration %></td>
+                <td><%= requested_events.event_type %></td>
+                <td><%= requested_events.expected_advanced_sewers %></td>
+                <td><%= requested_events.sewing_machines_available %></td>
+                <td><%= requested_events.expected_participants %></td>
+                <td><%= requested_events.children_under_10 %></td>
+                <td><%= requested_events.jen_story ? 'Yes' : 'No' %></td>
+                <td><%= requested_events.round_tables_count %></td>
+                <td><%= requested_events.rectangle_tables_count %></td>
+                <td><%= requested_events.event_description %></td>
+                <td>
+                  <form action="/editEvent/<%= requested_events.event_id %>" method="GET" style="display:inline;">
+                    <button type="submit">Edit</button>
+                  </form>
+                  <form action="/deleteEvent/<%= requested_events.event_id %>" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% } else { %>
+              <tr>
+                <td colspan="23">No event data available</td>
+              </tr>
+            <% } %>
+          </tbody>
           
-        </tbody>
     </table>
 
     <footer>

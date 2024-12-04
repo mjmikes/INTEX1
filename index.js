@@ -236,10 +236,10 @@ app.post("/RequestEvent", async (req, res) => {
 });
 
 // Get Route to display records from the event_request table to the requested_events.ejs page for the admin
-app.get('requested_events', async (req, res) => {
+app.get('/requested_events/:event_id', async (req, res) => {  // Ensure the correct route parameter
     try {
         const event_id = req.params.event_id;
-        
+
         // Fetch event details from multiple tables
         const eventData = await knex('event_request')
             .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
@@ -272,8 +272,9 @@ app.get('requested_events', async (req, res) => {
                 'event_location.event_state',
                 'event_location.event_zip'
             );
-        // Pass data to the view
-        res.render('requested_events', { requested_events: eventData[0] });
+
+        // Since eventData is an array, we can access the first element directly
+        res.render('requested_events', { requested_events: eventData[0] });  // Send only the first event if found
     } catch (error) {
         console.error('Error fetching event data:', error);
         res.status(500).send('Internal Server Error');
