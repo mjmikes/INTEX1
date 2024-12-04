@@ -182,9 +182,6 @@ app.get('/messages', async (req, res) => {
     }
 });
 
-
-
-
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
     const {
