@@ -249,6 +249,8 @@ app.get('requested_events', async (req, res) => {
                 'event_request.event_id',
                 'event_request.event_name',
                 'event_request.event_type',
+                'event_request.event_start_time',
+                'event_request.event_duration',
                 'event_request.event_description',
                 'event_request.expected_advanced_sewers',
                 'event_request.sewing_machines_available',
@@ -260,6 +262,7 @@ app.get('requested_events', async (req, res) => {
                 'event_request.rectangle_tables_count',
                 'event_request.possible_date_1',
                 'event_request.possible_date_2',
+                'event_request.actual_date',
                 'event_contact.first_name',
                 'event_contact.last_name',
                 'event_contact.phone',
@@ -269,7 +272,6 @@ app.get('requested_events', async (req, res) => {
                 'event_location.event_state',
                 'event_location.event_zip'
             );
-        
         // Pass data to the view
         res.render('requested_events', { requested_events: eventData[0] });
     } catch (error) {
