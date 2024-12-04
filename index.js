@@ -161,8 +161,7 @@ app.get("/volunteer_success_page", (req, res) => {
 app.get('/messages', async (req, res) => {
     try {
         // Assuming you're using a database query to fetch data
-        const submissions = await db.query('SELECT * FROM contact_us ORDER BY timestamp DESC');
-        
+        const submissions = await db.query('SELECT * FROM contact_us ORDER BY created_at DESC');
         // Pass the submissions array to the EJS view
         res.render('messages', { submissions });
     } catch (error) {
