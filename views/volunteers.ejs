@@ -68,7 +68,6 @@
     </header>
 
 <div class = "table-container">
-  <h1 style="text-align: center;">Volunteers</h1>
   <table>
     <thead>
       <tr>
@@ -88,7 +87,7 @@
     </thead>
     <tbody>
       <% if (volunteer_info.length > 0) { %>
-        <% volunteer_info.forEach(function(volunteer) => { %>
+        <% volunteer_info.forEach(function(volunteer) { %>
           <tr>
             <input type="hidden" value="<%= volunteer.volunteer_id%>">
             <td><%= volunteer.first_name volunteer.last_name %></td>
