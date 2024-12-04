@@ -131,7 +131,7 @@ app.post("/addEventRequest", (req, res) => {
                 res.status(500).send('Internal Server Error');
             });
         });
-      })
+      }) // Error message in case it doesnt work
       .catch(error => {
         console.error('Error inserting event_contact or event_location:', error);
         res.status(500).send('Internal Server Error');
