@@ -94,8 +94,8 @@
             </tr>
         </thead>
         <tbody>
-            <% if (requested_events.length > 0) { %> <!-- Check if there are events -->
-                <% requested_events.forEach(function(event) { %> <!-- Loop through events -->
+            <% if (event_request.length > 0) { %> <!-- Check if there are events -->
+                <% event_request.forEach(function(event) { %> <!-- Loop through events -->
                     <tr>
                         <input type="hidden" value="<%= event.event_id %>">
                         <td><%= event.first_name %> <%= event.last_name %></td>

@@ -7,6 +7,8 @@ const session = require('express-session');
 
 let path = require("path");
 
+let security = false;
+
 const port = process.env.PORT || 5500;
 
 app.set("view engine", "ejs");
@@ -240,7 +242,7 @@ app.post("/RequestEvent", async (req, res) => {
 app.get('/requested_events', async (req, res) => {
     try {
         // Fetch all event data using Knex or another query builder
-        const eventData = await knex('event_request')
+        knex('event_request')
             .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
             .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
             .select(
@@ -269,14 +271,16 @@ app.get('/requested_events', async (req, res) => {
                 'event_location.event_city',
                 'event_location.event_state',
                 'event_location.event_zip'
-            );
-
-        if (eventData.length > 0) {
-            // Pass all event data to the EJS template
-            res.render('requested_events', { requested_events: eventData });
-        } else {
-            res.status(404).send('No events found');
-        }
+            )
+            .then(event_request => {
+                // Render the index.ejs template and pass the data
+                // We use res.render to work with ejs files we use res.redirct to work with routes
+                res.render('index', { event_request, security });
+            })
+            .catch(error => {
+                console.error('Error querying database:', error);
+                res.status(500).send('Internal Server Error');
+            });
     } catch (error) {
         console.error('Error fetching event data:', error);
         res.status(500).send('Internal Server Error');
