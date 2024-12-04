@@ -67,66 +67,58 @@
         </nav>
     </header>
 
-
-
-<main>
-  <h1 style="text-align: center;">Volunteers</h1>
+<div class = "table-container">
   <table>
     <thead>
       <tr>
-        <th>Admin</th>
-        <th>Completed Event</th>
-        <th>Date Created</th>
-        <th>Contact Us</th>
-        <th>Event Contact</th>
-        <th>Event Location</th>
-        <th>Event Production</th>
-        <th>Event Request</th>
-        <th>Volunteer Event</th>
-        <th>Volunteer Info</th>
+        <th>Volunteer Name</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Source</th>
+        <th>Sewing Level</th>
+        <th>Monthly Availability (Hrs)</th>
+        <th>Willing to Teach</th>
+        <th>Willing to Lead</th>
+        <th>Travel Out of County</th>
+        <th>Travel Out of State</th>
+        <th>Volunteer Details</th>
       </tr>
     </thead>
-<tbody>
-    <% if (volunteer_info.length > 0) { %>
-      <% volunteer_info.forEach(function(volunteer) => { %>
+    <tbody>
+      <% if (volunteer_info.length > 0) { %>
+        <% volunteer_info.forEach(function(volunteer) { %>
+          <tr>
+            <input type="hidden" value="<%= volunteer.volunteer_id%>">
+            <td><%= volunteer.first_name %> <%= volunteer.last_name %></td>
+            <td><%= volunteer.address %> <%= volunteer.city %>, <%= volunteer.state %> <%= volunteer.zip %></td>
+            <td><%= volunteer.phone %></td>
+            <td><%= volunteer.email %></td>
+            <td><%= volunteer.source %></td>
+            <td><%= volunteer.sewing_level %></td>
+            <td><%= volunteer.monthly_hour_availability %></td>
+            <td><%= volunteer.willing_to_teach ? 'Yes' : 'No' %></td>
+            <td><%= volunteer.willing_to_lead ? 'Yes' : 'No' %></td>
+            <td><%= volunteer.travel_county ? 'Yes' : 'No' %></td>
+            <td><%= volunteer.willing_to_travel_state ? 'Yes' : 'No' %></td>
+            <td><%= volunteer.details %></td>
+            <td>
+              <form action="/editTables/<%= volunteer.volunteer_id %>" method="GET" style="display:inline;">
+                <button type="submit">Edit</button>
+              </form>
+              <form action="/deleteTables/<%= volunteer.volunteer_id %>" method="POST" style="display:inline;">
+                <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      <% } else { %>
         <tr>
-          <input type="hidden" value="volunteer.event_id">
-          <td><%= volunteer.first_name volunteer.last_name %></td>
-          <td><%= volunteer.address %></td>
-          <td><%= volunteer.city %></td>
-          <td><%= volunteer.state %></td>
-          <td><%= volunteer.zip %></td>
-          <td><%= volunteer.phone %></td>
-          <td><%= volunteer.email %></td>
-          <td><%= volunteer.source %></td>
-          <td><%= volunteer.sewing_level %></td>
-          <td><%= volunteer.monthly_hour_availability %></td>
-          <td><%= volunteer.willing_to_teach ? 'T' : 'F' %></td>
-          <td><%= volunteer.willing_to_lead ? 'T' : 'F' %></td>
-          <td><%= volunteer.travel_county %></td>
-          <td><%= volunteer.willing_to_travel_state %></td>
-          <td><%= volunteer.details %></td>
-          <td>
-            <form action="/editTables/<%= volunteer.volunteer_id %>" method="GET" style="display:inline;">
-              <button type="submit">Edit</button>
-            </form>
-            <form action="/deleteTables/<%= volunteer.volunteer_id %>" method="POST" style="display:inline;">
-              <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
-            </form>
-          </td>
+          <td colspan="17">No data available</td>
         </tr>
-      <% }) %>
-    <% } else { %>
-      <tr>
-        <td colspan="7">No data available</td>
-      </tr>
-    <% } %>
+      <% } %>
   </tbody>
 </table>
-</main>
-
-
-
 
  <!-- Footer -->
     <footer>

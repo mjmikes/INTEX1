@@ -137,11 +137,6 @@ app.get("/completed_events", (req, res) => {
     res.render("completed_events");
 });
 
-// Volunteers page (protected by authentication)
-app.get("/volunteers", (req, res) => {
-    res.render("volunteers");
-});
-
 // Event Dashboard page (protected by authentication)
 app.get("/event_dashboard", (req, res) => {
     res.render("event_dashboard");
@@ -157,6 +152,35 @@ app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
 });
 
+app.get('/messages', async (req, res) => {
+    try {
+        // Fetching contact submissions with Knex query
+        knex('contact_us')
+            .select(
+                'contact_us.submission_id',
+                'contact_us.first_name',
+                'contact_us.last_name',
+                'contact_us.phone',
+                'contact_us.email',
+                'contact_us.city',
+                'contact_us.state',
+                'contact_us.message',
+                'contact_us.created_at'
+            )
+            .orderBy('contact_us.created_at', 'desc') // Orders messages by creation time
+            .then(messages => {
+                console.log(messages); // Log to inspect the data structure
+                res.render('messages', { messages }); // Pass the messages data to EJS template
+            })
+            .catch(error => {
+                console.error('Error querying database:', error);
+                res.status(500).send('Internal Server Error');
+            });
+    } catch (error) {
+        console.error('Error fetching messages:', error);
+        res.status(500).send('Server Error');
+    }
+});
 
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
@@ -462,81 +486,5 @@ app.get('/', (res, req) => {
   });
 
 
-  app.get('/editTables/:id', (req, res) => {
-    let id = req.params.id;
-    // Query the Pokémon by ID first
-    knex('Tables')
-      .where('id', id)
-      .first()
-      .then(pokemon => {
-        if (!pokemon) {
-          return res.status(404).send('Not found');
-        }
-        // Query all Pokémon types after fetching the Pokémon
-        knex('poke_type')
-          .select('id', 'description')
-          .then(poke_types => {
-            // Render the edit form and pass both pokemon and poke_types
-            res.render('editPoke', { pokemon, poke_types });
-          })
-          .catch(error => {
-            console.error('Error fetching Pokémon types:', error);
-            res.status(500).send('Internal Server Error');
-          });
-      })
-      .catch(error => {
-        console.error('Error fetching Pokémon for editing:', error);
-        res.status(500).send('Internal Server Error');
-      });
-  });
-
-
-  app.post('/editPoke/:id', (req, res) => {
-    const id = req.params.id;
-    // Access each value directly from req.body
-    const description = req.body.description;
-    const base_total = parseInt(req.body.base_total); // Convert to integer
-    const date_created = req.body.date_created;
-    // Since active_poke is a checkbox, its value is only sent when the checkbox is checked.
-    // If it is unchecked, no value is sent to the server.
-    // This behavior requires special handling on the server-side to set a default
-    // value for active_poke when it is not present in req.body.
-    const active_poke = req.body.active_poke === 'true'; // Convert checkbox value to boolean
-    const gender = req.body.gender;
-    const poke_type_id = parseInt(req.body.poke_type_id); // Convert to integer
-    // Update the Pokémon in the database
-    knex('pokemon')
-      .where('id', id)
-      .update({
-        description: description,
-        base_total: base_total,
-        date_created: date_created,
-        active_poke: active_poke,
-        gender: gender,
-        poke_type_id: poke_type_id,
-      })
-      .then(() => {
-        // res.redirect lleva al route, no lleva al ejs file.  quien lleva al ejs file es res.render
-        res.redirect('/'); // Redirect to the list of Pokémon after saving
-      })
-      .catch(error => {
-        console.error('Error updating Pokémon:', error);
-        res.status(500).send('Internal Server Error');
-      });
-  });
-
-  app.post('/deletePoke/:id', (req, res) => {
-  const id = req.params.id;
-  knex('pokemon')
-    .where('id', id)
-    .del() // Deletes the record with the specified ID
-    .then(() => {
-      res.redirect('/'); // Redirect to the Pokémon list after deletion
-    })
-    .catch(error => {
-      console.error('Error deleting Pokémon:', error);
-      res.status(500).send('Internal Server Error');
-    });
-});
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
