@@ -161,8 +161,7 @@ app.get("/volunteer_success_page", (req, res) => {
 app.get('/messages', async (req, res) => {
     try {
         // Assuming you're using a database query to fetch data
-        const submissions = await db.query('SELECT * FROM contact_us ORDER BY timestamp DESC');
-        
+        const submissions = await db.query('SELECT * FROM contact_us ORDER BY created_at DESC');
         // Pass the submissions array to the EJS view
         res.render('messages', { submissions });
     } catch (error) {
@@ -170,8 +169,6 @@ app.get('/messages', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
-
-
 
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
@@ -379,27 +376,29 @@ app.post("/add-admin", async (req, res) => {
 });
 
 // Post route to send admin form data to database
-app.post("/contact_us", async (req, res) => {
+app.post("/submit-contact", async (req, res) => {
     const {
         first_name,
         last_name,
         phone,
         email,
-        username,
-        password
+        city,
+        state,
+        message 
     } = req.body;
     try {
         // Insert into admin table
-        await knex('admin').insert({
+        await knex('contact_us').insert({
             first_name,
             last_name,
             phone,
             email,
-            username,
-            password
+            city,
+            state,
+            message 
         });
         // Redirect to a success page
-        res.redirect('/volunteers');
+        res.redirect('/#contact-us-form');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
         res.status(500).send('Internal Server Error');
