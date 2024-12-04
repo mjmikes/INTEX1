@@ -94,7 +94,7 @@
           </tr>
         </thead>
         <tbody>
-            <% if (requested_events) { %> <!-- Check if requested_events is available -->
+            <% if (requested_events.length > 0) { %> <!-- Check if requested_events is available -->
               <tr>
                 <input type="hidden" value="<%= requested_events.event_id %>">
                 <td><%= requested_events.first_name %> <%= requested_events.last_name %></td>
