@@ -246,6 +246,15 @@
 
         <!-- Submit Button -->
         <button type="submit" class="submit-btn">Submit</button>
+        <!-- Success or Error Message -->
+        <div id="message-container">
+            <% if (successMessage) { %>
+                <p class="success-message"><%= successMessage %></p>
+            <% } %>
+            <% if (errorMessage) { %>
+                <p class="error-message"><%= errorMessage %></p>
+            <% } %>
+        </div>
     </form>
     </main>
 
