@@ -81,18 +81,18 @@
                 </tr>
             </thead>
             <tbody>
-                <% if (submissions && submissions.length > 0) { %>
-                    <% submissions.forEach(submission => { %>
+                <% if (messages && messages.length > 0) { %>
+                    <% messages.forEach(messages => { %>
                         <tr>
-                            <td><%= submission.submission_id %></td>
-                            <td><%= submission.first_name %></td>
-                            <td><%= submission.last_name %></td>
-                            <td><%= submission.phone %></td>
-                            <td><%= submission.email %></td>
-                            <td><%= submission.city %></td>
-                            <td><%= submission.state %></td>
-                            <td class="message-column"><%= submission.message %></td>
-                            <td><%= submission.created_at %></td>
+                            <td><%= messages.submission_id %></td>
+                            <td><%= messages.first_name %></td>
+                            <td><%= messages.last_name %></td>
+                            <td><%= messages.phone %></td>
+                            <td><%= messages.email %></td>
+                            <td><%= messages.city %></td>
+                            <td><%= messages.state %></td>
+                            <td class="message-column"><%= messages.message %></td>
+                            <td><%= messages.created_at %></td>
                         </tr>
                     <% }) %>
                 <% } else { %>
