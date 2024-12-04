@@ -153,8 +153,6 @@ app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
 });
 
-const moment = require('moment-timezone'); // Ensure this is at the top of your file
-
 app.get('/messages', async (req, res) => {
     try {
         knex('contact_us')
