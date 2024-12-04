@@ -18,7 +18,7 @@ const knex = require("knex")({
     connection: {
         host: "awseb-e-3dmmzs5fan-stack-awsebrdsdatabase-rm7jlczpxzug.cr82swsq26ts.us-east-1.rds.amazonaws.com",
         user: "ebroot",
-        password: "your_password",
+        password: "admin123",
         database: "ebdb",
         port: 5433,
         ssl: { rejectUnauthorized: false }
