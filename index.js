@@ -65,6 +65,57 @@ app.get('/donate', (req, res) => {
     res.render('donate');
 });
 
+// Home page
+app.get("/", (req, res) => {
+    res.render("index.ejs");
+});
+
+// Contact Us page
+app.get("/contact_us", (req, res) => {
+    res.render("contact_us.ejs");
+});
+
+// FAQs page
+app.get("/faqs", (req, res) => {
+    res.render("faqs.ejs");
+});
+
+// Our Tech page
+app.get("/our_tech", (req, res) => {
+    res.render("our_tech.ejs");
+});
+
+// Sponsor Us page
+app.get("/sponsor_us", (req, res) => {
+    res.render("our_sponsors.ejs");
+});
+
+// Upcoming Events page
+app.get("/upcoming_events", (req, res) => {
+    res.render("upcoming_events.ejs");
+});
+
+// Requested Events page (protected by authentication)
+app.get("/requested_events", isAuthenticated, (req, res) => {
+    res.render("requested_events.ejs");
+});
+
+// Completed Events page (protected by authentication)
+app.get("/completed_events", isAuthenticated, (req, res) => {
+    res.render("completed_events.ejs");
+});
+
+// Volunteers page (protected by authentication)
+app.get("/volunteers", isAuthenticated, (req, res) => {
+    res.render("volunteers.ejs");
+});
+
+// Event Dashboard page (protected by authentication)
+app.get("/event_dashboard", isAuthenticated, (req, res) => {
+    res.render("event_dashboard.ejs");
+});
+
+
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
