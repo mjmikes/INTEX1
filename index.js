@@ -133,76 +133,11 @@ app.get("/event_dashboard", (req, res) => {
     res.render("event_dashboard");
 });
 
-
-
-// POST ROUTES TO UPDATE DATA
-
-app.post("/addEventRequest", (req, res) => {
-    const {
-        event_name, event_contact_first_name, event_contact_last_name,
-        event_contact_phone, event_contact_email, event_type, event_location_address,
-        event_location_city, event_location_state, event_location_zip, event_start_time,
-        event_duration, event_description, expected_advanced_sewers, sewing_machines_available,
-        expected_participants, children_under_10, jen_story, event_space_description,
-        round_tables, rectangle_tables, possible_date_1, possible_date_2
-    } = req.body;
-
-    // Insert into event_contact table
-    knex('event_contact')
-      .returning('event_contact_id')
-      .insert({
-        event_contact_first_name: event_contact_first_name,
-        event_contact_last_name: event_contact_last_name,
-        event_contact_phone: event_contact_phone,
-        event_contact_email: event_contact_email
-      })
-      .then(eventContactIds => {
-        const eventContactId = eventContactIds[0];  // Get the ID of the newly inserted event contact
-
-        // Insert into event_location table
-        return knex('event_location')
-          .returning('event_location_id')
-          .insert({
-            event_address: event_location_address,
-            event_city: event_location_city,
-            event_state: event_location_state,
-            event_zip: event_location_zip
-          }).then(eventLocationIds => {
-            const eventLocationId = eventLocationIds[0];  // Get the ID of the newly inserted event location
-
-            // Now insert into event_request table
-            return knex('event_request').insert({
-                event_name: event_name,
-                event_contact_id: eventContactId, // Foreign Key
-                event_type: event_type,
-                event_location_id: eventLocationId, // Foreign Key
-                event_start_time: event_start_time,
-                event_duration: event_duration,
-                event_description: event_description,
-                expected_advanced_sewers: expected_advanced_sewers,
-                sewing_machines_available: sewing_machines_available,
-                expected_participants: expected_participants,
-                children_under_10: children_under_10,
-                jen_story: jen_story,
-                event_space_description: event_space_description,
-                round_tables: round_tables,
-                rectangle_tables: rectangle_tables,
-                possible_date_1: possible_date_1,
-                possible_date_2: possible_date_2
-            }).then(() => {
-                // After inserting data, send redirect to send a success message
-                res.redirect('/event_success_page');  
-            }).catch(error => {
-                console.error('Error inserting event_request:', error);
-                res.status(500).send('Internal Server Error');
-            });
-        });
-      }) // Error message in case it doesnt work
-      .catch(error => {
-        console.error('Error inserting event_contact or event_location:', error);
-        res.status(500).send('Internal Server Error');
-      });
+// Event Success page 
+app.get("/event_success_page", (req, res) => {
+    res.render("event_success_page");
 });
+
 
 app.post("/RequestEvent", async (req, res) => {
     const {
