@@ -161,7 +161,8 @@ app.get("/volunteer_success_page", (req, res) => {
 app.get('/messages', async (req, res) => {
     try {
         // Assuming you're using a database query to fetch data
-        const submissions = await db.query('SELECT * FROM contact_us ORDER BY created_at DESC');
+        const submissions = await db.query('SELECT * FROM contact_us ORDER BY timestamp DESC');
+        
         // Pass the submissions array to the EJS view
         res.render('messages', { submissions });
     } catch (error) {
@@ -169,6 +170,8 @@ app.get('/messages', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+
 
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
@@ -248,37 +251,55 @@ app.post("/RequestEvent", async (req, res) => {
     }
 });
 
-// Get Route to display records from the contact_us table
-app.get('/messages', async (req, res) => {
+// Get Route to display records from the event_request table to the requested_events.ejs page for the admin
+// Assuming you're using Express
+app.get('/requested_events', async (req, res) => {
     try {
-        // Assuming you're using Knex or a query builder like it
-        knex('contact_us')
+        // Fetch all event data using Knex or another query builder
+        knex('event_request')
+            .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
+            .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
             .select(
-                'contact_us.submission_id',
-                'contact_us.first_name',
-                'contact_us.last_name',
-                'contact_us.phone',
-                'contact_us.email',
-                'contact_us.city',
-                'contact_us.state',
-                'contact_us.message',
-                'contact_us.created_at',
+                'event_request.event_id',
+                'event_request.event_name',
+                'event_request.event_type',
+                'event_request.event_start_time',
+                'event_request.event_duration',
+                'event_request.event_description',
+                'event_request.expected_advanced_sewers',
+                'event_request.sewing_machines_available',
+                'event_request.expected_participants',
+                'event_request.children_under_10',
+                'event_request.jen_story',
+                'event_request.event_space_description',
+                'event_request.round_tables_count',
+                'event_request.rectangle_tables_count',
+                'event_request.possible_date_1',
+                'event_request.possible_date_2',
+                'event_request.actual_date',
+                'event_contact.first_name',
+                'event_contact.last_name',
+                'event_contact.phone',
+                'event_contact.event_contact_email',
+                'event_location.event_address',
+                'event_location.event_city',
+                'event_location.event_state',
+                'event_location.event_zip'
             )
-            .orderBy('contact_us.created_at', 'desc') // Orders messages by creation time
-            .then(messages => {
-                // Render the 'messages' template and pass the data
-                res.render('messages', { messages });
+            .then(event_request => {
+                // Render the index.ejs template and pass the data
+                // We use res.render to work with ejs files we use res.redirct to work with routes
+                res.render('requested_events', { event_request, security });
             })
             .catch(error => {
                 console.error('Error querying database:', error);
                 res.status(500).send('Internal Server Error');
             });
     } catch (error) {
-        console.error('Error fetching messages:', error);
-        res.status(500).send('Server Error');
+        console.error('Error fetching event data:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
-
 
 
 // Post route to send volunteer form data to database
@@ -358,29 +379,27 @@ app.post("/add-admin", async (req, res) => {
 });
 
 // Post route to send admin form data to database
-app.post("/submit-contact", async (req, res) => {
+app.post("/contact_us", async (req, res) => {
     const {
         first_name,
         last_name,
         phone,
         email,
-        city,
-        state,
-        message 
+        username,
+        password
     } = req.body;
     try {
         // Insert into admin table
-        await knex('contact_us').insert({
+        await knex('admin').insert({
             first_name,
             last_name,
             phone,
             email,
-            city,
-            state,
-            message 
+            username,
+            password
         });
         // Redirect to a success page
-        res.redirect('/#contact-us-form');
+        res.redirect('/volunteers');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
         res.status(500).send('Internal Server Error');
@@ -432,7 +451,6 @@ app.post('/login', (req, res) => {
 
 
 // volunteer section
-
 app.get('/volunteers', (res, req) => {
     try {
         knex('volunteer_info')
@@ -471,5 +489,52 @@ app.get('/volunteers', (res, req) => {
 });
 
 
+app.get('/requested_events', async (req, res) => {
+    try {
+        // Fetch all event data using Knex or another query builder
+        knex('event_request')
+            .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
+            .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
+            .select(
+                'event_request.event_id',
+                'event_request.event_name',
+                'event_request.event_type',
+                'event_request.event_start_time',
+                'event_request.event_duration',
+                'event_request.event_description',
+                'event_request.expected_advanced_sewers',
+                'event_request.sewing_machines_available',
+                'event_request.expected_participants',
+                'event_request.children_under_10',
+                'event_request.jen_story',
+                'event_request.event_space_description',
+                'event_request.round_tables_count',
+                'event_request.rectangle_tables_count',
+                'event_request.possible_date_1',
+                'event_request.possible_date_2',
+                'event_request.actual_date',
+                'event_contact.first_name',
+                'event_contact.last_name',
+                'event_contact.phone',
+                'event_contact.event_contact_email',
+                'event_location.event_address',
+                'event_location.event_city',
+                'event_location.event_state',
+                'event_location.event_zip'
+            )
+            .then(event_request => {
+                // Render the index.ejs template and pass the data
+                // We use res.render to work with ejs files we use res.redirct to work with routes
+                res.render('requested_events', { event_request, security });
+            })
+            .catch(error => {
+                console.error('Error querying database:', error);
+                res.status(500).send('Internal Server Error');
+            });
+    } catch (error) {
+        console.error('Error fetching event data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
