@@ -390,23 +390,20 @@ form textarea {
     min-height: 100px;
 }
 
-/* Style the Jen Story radio buttons */
 .checkbox-group {
     display: flex;
     gap: 15px;
-    align-items: center;
-}
-
-.checkbox-group label {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 15px; /* Adjust space between radio buttons */
-}
+    align-items: center; /* Aligns items vertically within the flex container */
+  }
+  
+  .checkbox-group label {
+    margin-right: 10px; /* Adds space between the label and radio button */
+  }
   
   .checkbox-group input[type="radio"] {
     margin-left: 5px; /* Adds space between the label and radio button */
-}
-  
+    font-weight: normal;
+  }
 
 form button {
     background-color: #34B3A8;
