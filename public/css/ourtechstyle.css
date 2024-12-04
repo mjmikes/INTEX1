@@ -830,3 +830,13 @@ footer {
     height: 400px; /* You can adjust this value as needed */
   }
   
+
+  .quote-vest {
+    display: flex;
+    flex-direction: column; /* Stacks the paragraphs vertically */
+    justify-content: center; /* Centers text vertically */
+    align-items: center; /* Centers text horizontally */
+    text-align: center; /* Centers the text inside each <p> tag */
+/* Makes the section take up the full height of the viewport *//* Optional: Adds some padding inside the section */
+}
+
