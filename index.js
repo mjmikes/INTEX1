@@ -170,8 +170,14 @@ app.get('/messages', async (req, res) => {
             )
             .orderBy('contact_us.created_at', 'desc') // Orders messages by creation time
             .then(messages => {
-                console.log(messages); // Log to inspect the data structure
-                res.render('messages', { messages }); // Pass the messages data to EJS template
+                // Format the created_at field to Mountain Time Zone
+                messages = messages.map(message => {
+                    message.created_at = moment(message.created_at)
+                        .tz('America/Denver') // Set to Mountain Time Zone
+                        .format('YYYY-MM-DD HH:mm'); // Customize format as desired
+                    return message;
+                });
+                res.render('messages', { messages }); // Pass the formatted messages data to EJS template
             })
             .catch(error => {
                 console.error('Error querying database:', error);
