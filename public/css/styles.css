@@ -1039,3 +1039,51 @@ form button:hover {
         min-width: 100%; /* Makes each form field full width on mobile */
     }
 }
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Head Styling */
+thead {
+    background-color: #34B3A8;  /* Header background color to match the brand */
+    color: white;  /* Text color for header */
+}
+
+th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;  /* Makes header text uppercase */
+    letter-spacing: 1px;
+}
+
+/* Table Row Styling */
+tbody tr {
+    border-bottom: 1px solid #ddd;  /* Light border for row separation */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;  /* Hover effect for rows */
+}
+
+/* Table Data Styling */
+td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Empty Table Row */
+td[colspan="23"] {
+    text-align: center;
+    padding: 20px;
+    font-size: 16px;
+    color: #888;
+}
