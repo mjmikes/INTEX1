@@ -30,12 +30,17 @@ app.use((req, res, next) => {
     next();  // Proceed to the next middleware/route handler
 });
 
+app.use((req, res, next) => {
+    res.locals.errorMessage = req.session.errorMessage || false;  // Make isAdmin available in all views
+    next();  // Proceed to the next middleware/route handler
+});
+
 
 // Mock admin table for the sake of this example
-const adminTable = {
-    username: 'admin',
-    password: 'admin'
-  };
+const adminTable = [
+    { username: 'admin', password: 'admin' } // Example credentials
+];
+
 
 const knex = require("knex")({
     client: "pg",
@@ -217,18 +222,6 @@ app.post("/RequestEvent", async (req, res) => {
 });
 
 
-
-// Admin login form submission route (POST request to authenticate)
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  if (username === adminTable.username && password === adminTable.password) {
-    req.session.isAdmin = true;  // Store admin login state in session
-    res.redirect('/');  // Redirect to home page after successful login
-  } else {
-    res.redirect('/login');  // Invalid login, stay on login page
-  }
-});
-
 //Home Page
 app.get('/', (req, res) => {
     console.log(req.session);  // Log the entire session object
@@ -249,6 +242,29 @@ app.get('/logout', (req, res) => {
         res.redirect('/');
     });
 });
+
+// POST route to handle login
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Check if both fields are filled out
+    if (!username || !password) {
+        return res.render('login', { errorMessage: 'Username and password are required.' });
+    }
+
+    // Find the user in the adminTable array
+    const user = adminTable.find(user => user.username === username && user.password === password);
+
+    // If no matching user or incorrect credentials
+    if (!user) {
+        return res.render('login', { errorMessage: 'Invalid username or password.' });
+    }
+
+    // Successful login, store admin session and redirect
+    req.session.isAdmin = true;
+    res.redirect('/');
+});
+
 
 
 
