@@ -1,5 +1,6 @@
 const express = require("express");
 const passport = require("passport");
+const LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
 const flash = require("connect-flash");
 const knex = require("knex")({
@@ -233,10 +234,9 @@ app.get('/event_dashboard', isAuthenticated, (req, res) => {
 
 // Logout route
 app.get('/logout', (req, res) => {
-    req.logout((err) => {
-        if (err) return next(err);
-        res.redirect('/');  // Redirect to home page after logout
-    });
+    req.logout();  // No need for a callback
+    res.redirect('/');  // Redirect to home page after logout
 });
+
 
 app.listen(port, () => console.log(`Server is listening on port ${port}!`));
