@@ -215,8 +215,8 @@ app.post('/requestEvent', (req, res) => {
     children_under_10,
     jen_story,
     event_space_description,
-    round_tables,
-    rectangle_tables,
+    round_tables_count,
+    rectangle_tables_count,
     possible_date_1,
     possible_date_2,
   } = req.body;
@@ -268,8 +268,8 @@ app.post('/requestEvent', (req, res) => {
         children_under_10,
         jen_story,
         event_space_description,
-        round_tables,
-        rectangle_tables,
+        round_tables_count,
+        rectangle_tables_count,
         possible_date_1,
         possible_date_2,
         event_contact_id: contactId, // Use the generated Event Contact ID
