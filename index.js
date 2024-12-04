@@ -198,7 +198,7 @@ app.post("/addEventRequest1", (req, res) => {
       });
 });
 
-app.post('/addEventRequest', (req, res) => {
+app.post('/request_event', (req, res) => {
   const {
     event_name,
     event_contact_first_name,
