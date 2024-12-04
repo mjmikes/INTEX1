@@ -397,13 +397,16 @@ form textarea {
     align-items: center;
 }
 
-.checkbox-group input[type="radio"] {
-    margin-right: 5px;
+.checkbox-group label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px; /* Adjust space between radio buttons */
 }
-
-.checkbox-group .checkbox-label {
-    font-weight: normal;
+  
+  .checkbox-group input[type="radio"] {
+    margin-left: 5px; /* Adds space between the label and radio button */
 }
+  
 
 form button {
     background-color: #34B3A8;
