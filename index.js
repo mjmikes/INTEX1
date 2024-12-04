@@ -446,7 +446,7 @@ app.post('/login', (req, res) => {
 
 
 // volunteer section
-app.get('/volunteers', (res, req) => {
+app.get('/volunteers', (req, res) => {
     try {
         knex('volunteer_info')
         .select(
