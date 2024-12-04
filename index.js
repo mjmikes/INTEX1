@@ -18,7 +18,7 @@ const knex = require("knex")({
     connection: {
         host: "awseb-e-3dmmzs5fan-stack-awsebrdsdatabase-rm7jlczpxzug.cr82swsq26ts.us-east-1.rds.amazonaws.com",
         user: "ebroot",
-        password: "your_password",
+        password: "admin123",
         database: "ebdb",
         port: 5433,
         ssl: { rejectUnauthorized: false }
@@ -76,7 +76,7 @@ app.use(express.static('public'));
 // POST ROUTES TO UPDATE DATA
 
 app.post("/addEventRequest", (req, res) => {
-    console.log(req.body);  // Log all data
+    
     const {
         event_name, event_contact_first_name, event_contact_last_name,
         event_contact_phone, event_contact_email, event_type, event_location_address,
@@ -85,6 +85,8 @@ app.post("/addEventRequest", (req, res) => {
         expected_participants, children_under_10, jen_story, event_space_description,
         round_tables, rectangle_tables, possible_date_1, possible_date_2
     } = req.body;
+
+    console.log(req.body);  // Log all data
 
     // Insert into event_contact table
     knex('event_contact')
