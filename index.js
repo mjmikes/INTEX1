@@ -399,7 +399,7 @@ app.post("/submit-contact", async (req, res) => {
             message 
         });
         // Redirect to a success page
-        res.redirect('/volunteers');
+        res.redirect('/#contact-us-form');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
         res.status(500).send('Internal Server Error');
