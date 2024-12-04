@@ -272,7 +272,6 @@ app.get('requested_events', async (req, res) => {
                 'event_location.event_state',
                 'event_location.event_zip'
             );
-        
         // Pass data to the view
         res.render('requested_events', { requested_events: eventData[0] });
     } catch (error) {
