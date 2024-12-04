@@ -71,6 +71,14 @@ app.get('/jens_story', (req, res) => {
     res.render('jens_story');
 });
 
+// get route to add_admin page
+app.get('/add_admin', (req, res) => {
+    res.render('add_admin');
+});
+
+app.get('/how_to_get_involved.ejs', (req, res) => {
+    res.render('how_to_get_involved.ejs');
+});
 
 // get route for the admin page
 app.get('/admin', (req, res) => {
@@ -244,7 +252,7 @@ app.post("/submit-volunteer", async (req, res) => {
         willing_to_travel_state,
         willing_to_teach,
         willing_to_lead,
-        soure,
+        source,
         details
     } = req.body;
     try {
@@ -275,16 +283,34 @@ app.post("/submit-volunteer", async (req, res) => {
     }
 });
 
-// Admin login form submission route (POST request to authenticate)
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  if (username === adminTable.username && password === adminTable.password) {
-    req.session.isAdmin = true;  // Store admin login state in session
-    res.redirect('/');  // Redirect to home page after successful login
-  } else {
-    res.redirect('/login');  // Invalid login, stay on login page
-  }
+// Post route to send admin form data to database
+app.post("/add-admin", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        username,
+        password
+    } = req.body;
+    try {
+        // Insert into admin table
+        await knex('admin').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            username,
+            password
+        });
+        // Redirect to a success page
+        res.redirect('/volunteers');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
 
 //Home Page
 app.get('/', (req, res) => {
