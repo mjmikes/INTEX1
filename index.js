@@ -248,8 +248,7 @@ app.post("/RequestEvent", async (req, res) => {
     }
 });
 
-// Get Route to display records from the event_request table to the requested_events.ejs page for the admin
-// Assuming you're using Express
+// Get Route to display records from the contact_us table
 app.get('/messages', async (req, res) => {
     try {
         // Assuming you're using Knex or a query builder like it
