@@ -190,7 +190,7 @@ app.post("/addEventRequest", (req, res) => {
       });
 });
 
-app.post("/addEventRequest", async (req, res) => {
+app.post("/RequestEvent", async (req, res) => {
     const {
         event_name,
         first_name,
