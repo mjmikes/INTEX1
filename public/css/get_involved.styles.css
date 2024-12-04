@@ -390,20 +390,22 @@ form textarea {
     min-height: 100px;
 }
 
+/* Make the radio button and text align vertically */
 .checkbox-group {
     display: flex;
-    gap: 15px;
+    flex-direction: column;
+  }
+  
+  .checkbox-group label {
+    display: flex;
     align-items: center;
-}
-
-.checkbox-group input[type="radio"] {
-    margin-right: 5px;
-}
-
-.checkbox-group .checkbox-label {
+    margin-bottom: 10px; /* Optional: Adds space between each label */
+  }
+  
+  .checkbox-group input[type="radio"] {
+    margin-right: 8px; /* Adds a small gap between the radio button and the text */
     font-weight: normal;
-}
-
+  }
 
 form button {
     background-color: #34B3A8;
