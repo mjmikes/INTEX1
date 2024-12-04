@@ -15,14 +15,9 @@ body {
 
 /* Keep the header fixed at the top */
 header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    /* Makes sure the navbar stays on top of the content */
-    background-color: rgba(255, 255, 255, 0.9); /* Optional: add some transparency */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: small shadow for a clean look */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
 }
 
 .navbar {
@@ -92,6 +87,7 @@ header {
 .sidebar.active {
     width: 250px; /* Width of the sidebar */
 }
+
 .navbar-toggler {
     background-color: transparent;
     border: none;
@@ -128,7 +124,6 @@ header {
 .navbar-collapse {
     display: flex;
     align-items: center; /* Vertically center the nav items */
-    justify-content: flex-start; /* Align items to the left (default) */
 }
 
 .logout-option {
@@ -226,6 +221,7 @@ header {
     display: flex;
     align-items: center;
 }
+
 .main-menu li a {
     font-weight: bold; /* Make the text bold */
     color: #000; /* Adjust the color if needed (default is black) */
@@ -245,7 +241,6 @@ header {
     color: #34B3A8;
 }
 
-/* Hero Section */
 /* Hero Section */
 .hero {
     position: relative;  /* Allows absolute positioning of text */
@@ -638,6 +633,8 @@ footer p {
 
 .login-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 80%;
     max-width: 900px;
     min-height: 500px;
@@ -645,6 +642,12 @@ footer p {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     overflow: hidden;
+
+    position: absolute;  /* Allow precise positioning */
+    top: 50%;            /* Center vertically */
+    left: 50%;           /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position to center the container */
+    margin-top: 80px;    /* Space the container below the header */
 }
 
 
@@ -663,8 +666,9 @@ footer p {
 }
 
 .login-form {
+    background-color: #fff;
     flex: 1;
-    padding: 40px;
+    padding: 20px 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
