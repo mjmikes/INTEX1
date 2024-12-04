@@ -25,7 +25,12 @@
           <li><a href="/request_event">Request Event</a></li>
           <li><a href="/jens_story">Jen's Story</a></li>
           <li><a href="/our_tech">Our Tech</a></li>
-          <li><a href="/login">Admin Login</a></li>
+          <!-- Conditionally show Admin Login or Logout based on isAdmin -->
+          <% if (isAdmin) { %>
+            <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
+        <% } else { %>
+            <li><a href="/login">Admin Login</a></li>
+        <% } %>
           <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
           <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
           <div class="navbar-toggler">
@@ -42,6 +47,11 @@
           <li><a href="/faqs">FAQs</a></li>
           <li><a href="/sponsor_us">Sponsor Us</a></li>
           <li><a href="/upcoming_events">Upcominig Events</a></li>
+          <% if (isAdmin) { %>
+            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+            <li><a href="/completed_events"><b>Completed Events</b></a></li>
+            <li><a href="/volunteers"><b>Volunteers</b></a></li>
+        <% } %>
         </ul>
     </div>
     </nav>

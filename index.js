@@ -3,6 +3,8 @@ const { default: test } = require("node:test");
 
 let app = express();
 
+const session = require('express-session');
+
 let path = require("path");
 
 const port = process.env.PORT || 5500;
@@ -10,6 +12,30 @@ const port = process.env.PORT || 5500;
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({extended: true}));
+
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+
+// Session setup
+app.use(session({
+    secret: 'your-secret-key',  // Choose a strong secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }  // set to true if using HTTPS
+}));
+
+// Middleware to make `isAdmin` available globally for all routes
+app.use((req, res, next) => {
+    res.locals.isAdmin = req.session.isAdmin || false;  // Make isAdmin available in all views
+    next();  // Proceed to the next middleware/route handler
+});
+
+
+// Mock admin table for the sake of this example
+const adminTable = {
+    username: 'admin',
+    password: 'admin'
+  };
 
 const knex = require("knex")({
     client: "pg",
@@ -29,10 +55,6 @@ const knex = require("knex")({
 
 // GET ROUTES TO ACCESS PAGES
 
-// get route for the landing page (index.ejs1)
-app.get("/", (req,res) => {
-    res.render("index.ejs")
-});
 
 // get route for the login page
 app.get('/login', (req, res) => {
@@ -74,59 +96,51 @@ app.get('/donate', (req, res) => {
     res.render('donate');
 });
 
-// Home page
-app.get("/", (req, res) => {
-    res.render("index.ejs");
-});
-
 // Contact Us page
 app.get("/contact_us", (req, res) => {
-    res.render("contact_us.ejs");
+    res.render("contact_us");
 });
 
 // FAQs page
 app.get("/faqs", (req, res) => {
-    res.render("faqs.ejs");
+    res.render("faqs");
 });
 
 // Our Tech page
 app.get("/our_tech", (req, res) => {
-    res.render("our_tech.ejs");
+    res.render("our_tech");
 });
 
 // Sponsor Us page
 app.get("/sponsor_us", (req, res) => {
-    res.render("sponsor_us.ejs");
+    res.render("sponsor_us");
 });
 
 // Upcoming Events page
 app.get("/upcoming_events", (req, res) => {
-    res.render("upcoming_events.ejs");
+    res.render("upcoming_events");
 });
 
 // Requested Events page 
 app.get("/requested_events", (req, res) => {
-    res.render("requested_events.ejs");
+    res.render("requested_events");
 });
 
 // Completed Events page (protected by authentication)
 app.get("/completed_events", (req, res) => {
-    res.render("completed_events.ejs");
+    res.render("completed_events");
 });
 
 // Volunteers page (protected by authentication)
 app.get("/volunteers", (req, res) => {
-    res.render("volunteers.ejs");
+    res.render("volunteers");
 });
 
 // Event Dashboard page (protected by authentication)
 app.get("/event_dashboard", (req, res) => {
-    res.render("event_dashboard.ejs");
+    res.render("event_dashboard");
 });
 
-
-// Serve static files from the "public" directory
-app.use(express.static('public'));
 
 
 // POST ROUTES TO UPDATE DATA
@@ -277,6 +291,25 @@ app.post('/request_event', (req, res) => {
       console.error('Error adding event request:', error);
       res.status(500).send('Internal Server Error');
     });
+});
+
+
+
+// Admin login form submission route (POST request to authenticate)
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  if (username === adminTable.username && password === adminTable.password) {
+    req.session.isAdmin = true;  // Store admin login state in session
+    res.redirect('/');  // Redirect to home page after successful login
+  } else {
+    res.redirect('/login');  // Invalid login, stay on login page
+  }
+});
+
+//Home Page
+app.get('/', (req, res) => {
+    console.log(req.session);  // Log the entire session object
+    res.render('index');
 });
 
 
