@@ -52,14 +52,6 @@ app.get('/admin', (req, res) => {
 
 // get route for the request event page
 app.get('/request_event', async (req, res) => {
-    try {
-        await knex.raw('SELECT 1');
-        console.log('Database connection is working');
-    } catch (error) {
-        console.error("Database connection error:", error);
-        res.status(500).send("Database is not connected");
-        return;  // Prevents the code from continuing if there is an error
-    }
     res.render('request_event');
 });
 
@@ -198,7 +190,7 @@ app.post("/addEventRequest", (req, res) => {
       });
 });
 
-app.post('/request_event', (req, res) => {
+app.post('/requestEvent', (req, res) => {
   const {
     event_name,
     event_contact_first_name,
@@ -236,7 +228,7 @@ app.post('/request_event', (req, res) => {
       event_contact_phone,
       event_contact_email,
     })
-    .returning('id') // For PostgreSQL, returns the inserted ID
+    .returning('event_contact_id') // For PostgreSQL, returns the inserted ID
     .then((ids) => {
       contactId = ids[0]; // Store the generated Event Contact ID
       // Insert into event_location and retrieve its ID
@@ -245,10 +237,10 @@ app.post('/request_event', (req, res) => {
         event_city: event_location_city,
         event_state: event_location_state,
         event_zip: event_location_zip,
-      }).returning('id');
+      }).returning('event_location_id');
     })
-    .then((ids) => {
-      locationId = ids[0]; // Store the generated Event Location ID
+    .then((idss) => {
+      locationId = idss[0]; // Store the generated Event Location ID
       // Insert into event_request with the retrieved foreign keys
       return knex('event_request').insert({
         event_name,
