@@ -126,6 +126,26 @@ header {
     align-items: center; /* Vertically center the nav items */
 }
 
+.circle-icon {
+    width: 50px;           /* Set the width and height to make it circular */
+    height: 50px;
+    border-radius: 50%;    /* Makes it a perfect circle */
+    background-color: #34B3A8;  /* Set the background color (you can change this) */
+    color: white;          /* Text color */
+    display: flex;         /* Flexbox for centering the text */
+    justify-content: center;  /* Horizontally center the text */
+    align-items: center;   /* Vertically center the text */
+    font-size: 24px;       /* Adjust the size of the letter */
+    font-weight: bold;     /* Bold letter */
+    text-transform: uppercase; /* Uppercase the letter */
+    cursor: pointer;
+}
+
+.circle-icon:hover{
+    background-color: #2a8e80;
+    transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
 /* Styling for the logo text link */
 .logo-link {
     text-decoration: none; /* Remove underline from the link */
@@ -399,6 +419,7 @@ header {
     padding: 30px 20px;
     background-color: lightgray; /* Light background color for footer */
     color: #333;  /* Dark text color */
+
 }
 
 /* Contact Section */
