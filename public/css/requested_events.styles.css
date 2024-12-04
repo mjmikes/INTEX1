@@ -717,17 +717,18 @@ td[colspan="23"] {
     border-collapse: collapse; /* Optional: Remove spacing between table cells */
 }
 
-/* Basic style for submit button */
+/* Style for all buttons in forms */
 form button[type="submit"] {
-    border: none; /* Remove border */
-    background: none; /* Remove background */
-    cursor: pointer; /* Pointer cursor */
-    padding: 5px 8px; /* Basic padding */
-    font-size: 12px; /* Small font size */
-    color: inherit; /* Inherit text color */
+    padding: 5px 8px; /* Adjust padding for smaller size */
+    font-size: 12px; /* Smaller font size */
+    border: 1px solid #ccc; /* Simple border */
+    background: none; /* No background */
+    cursor: pointer; /* Pointer cursor on hover */
+    color: #333; /* Default text color */
 }
 
 /* Hover effect */
 form button[type="submit"]:hover {
-    color: inherit; /* Keep the text color the same on hover */
+    border-color: #666; /* Slightly darker border on hover */
+    color: #000; /* Darker text color on hover */
 }
