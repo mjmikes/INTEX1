@@ -131,7 +131,7 @@ app.use(express.static('public'));
 
 // POST ROUTES TO UPDATE DATA
 
-app.post("/addEventRequest1", (req, res) => {
+app.post("/addEventRequest", (req, res) => {
     const {
         event_name, event_contact_first_name, event_contact_last_name,
         event_contact_phone, event_contact_email, event_type, event_location_address,
