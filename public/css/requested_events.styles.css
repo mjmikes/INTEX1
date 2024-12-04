@@ -716,3 +716,18 @@ td[colspan="23"] {
     width: 100%; /* Optional: Ensure the table adapts to its content */
     border-collapse: collapse; /* Optional: Remove spacing between table cells */
 }
+
+/* Basic style for submit button */
+form button[type="submit"] {
+    border: none; /* Remove border */
+    background: none; /* Remove background */
+    cursor: pointer; /* Pointer cursor */
+    padding: 4px 6px; /* Basic padding */
+    font-size: 10px; /* Small font size */
+    color: inherit; /* Inherit text color */
+}
+
+/* Hover effect */
+form button[type="submit"]:hover {
+    color: inherit; /* Keep the text color the same on hover */
+}
