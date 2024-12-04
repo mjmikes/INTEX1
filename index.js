@@ -76,8 +76,8 @@ app.get('/add_admin', (req, res) => {
     res.render('add_admin');
 });
 
-app.get('/how_to_get_involved.ejs', (req, res) => {
-    res.render('how_to_get_involved.ejs');
+app.get('/how_to_get_involved', (req, res) => {
+    res.render('how_to_get_involved');
 });
 
 // get route for the admin page
@@ -358,6 +358,33 @@ app.post("/add-admin", async (req, res) => {
     }
 });
 
+// Post route to send admin form data to database
+app.post("/contact_us", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        username,
+        password
+    } = req.body;
+    try {
+        // Insert into admin table
+        await knex('admin').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            username,
+            password
+        });
+        // Redirect to a success page
+        res.redirect('/volunteers');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 //Home Page
 app.get('/', (req, res) => {

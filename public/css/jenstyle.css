@@ -468,7 +468,7 @@ header {
 /* Footer container */
 .footer {
     text-align: center;  /* Centers all content inside the footer */
-    padding: 30px 20px;
+    padding: 0px 0px;
     background-color: lightgray; /* Light background color for footer */
     color: #333;  /* Dark text color */
 
@@ -545,10 +545,7 @@ footer p {
         width: 100%;
     }
 
-    .footer {
-        flex-direction: column;
-        align-items: center;
-    }
+
 }
 
 
@@ -717,12 +714,6 @@ footer p {
     margin: 0 auto;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-}
 
 .gen-story {
     margin: 40px auto;
