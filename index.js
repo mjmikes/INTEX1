@@ -485,6 +485,42 @@ app.get('/', (res, req) => {
       });
   });
 
+  // Post route to send admin form data to database
+app.post("/submit-contact", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        city,
+        state,
+        message,
+    } = req.body;
+
+    try {
+        // Insert into admin table
+        await knex('contact_us').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            city,
+            state,
+            message,
+        });
+
+        // Render the index page with a success message
+        res.render("index", {
+            successMessage: "Thank you for reaching out! We will get back to you shortly.",
+        });
+    } catch (error) {
+        console.error("Error inserting volunteer data:", error);
+        res.status(500).render("index", {
+            errorMessage: "Something went wrong. Please try again later.",
+        });
+    }
+});
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
