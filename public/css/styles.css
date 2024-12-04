@@ -120,26 +120,40 @@ header {
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 1000;
-    
+    font-family: Arial, sans-serif;
+    border-radius: 5px;
+    width: 180px;  /* Adjust width to suit the links */
 }
-
 
 .logout-option.show {
     display: block;  /* Make it visible */
-    opacity: 10;  /* Fade in */
+    opacity: 1;  /* Fade in */
     z-index: 1000;
 }
 
-.logout-option button {
-    padding: 10px 20px;
-    font-size: 16px;
+/* Styling for each logout link */
+.logout-link {
+    display: block;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;  /* Remove underline */
+    margin-bottom: 5px;  /* Space between links */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add hover effects for the links */
+.logout-link:hover {
     background-color: #FBB711;
     color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-
 }
+
+/* Optional: Styling for the "Logout" button */
+.logout-option button {
+    display: none;  /* You no longer need a button with the links */
+}
+
 
 .logout-option button:hover {
     background-color: #FF9D00;

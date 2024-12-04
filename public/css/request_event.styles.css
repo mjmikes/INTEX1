@@ -125,6 +125,78 @@ header {
     align-items: center;
 }
 
+.circle-icon {
+    width: 50px;           /* Set the width and height to make it circular */
+    height: 50px;
+    border-radius: 50%;    /* Makes it a perfect circle */
+    background-color: #34B3A8;  /* Set the background color (you can change this) */
+    color: white;          /* Text color */
+    display: flex;         /* Flexbox for centering the text */
+    justify-content: center;  /* Horizontally center the text */
+    align-items: center;   /* Vertically center the text */
+    font-size: 24px;       /* Adjust the size of the letter */
+    font-weight: bold;     /* Bold letter */
+    text-transform: uppercase; /* Uppercase the letter */
+    cursor: pointer;
+}
+
+.circle-icon:hover{
+    background-color: #2a8e80;
+    transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
+.logout-option {
+    display: none;  /* Initially hidden */
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    border-radius: 5px;
+    width: 180px;  /* Adjust width to suit the links */
+}
+
+.logout-option.show {
+    display: block;  /* Make it visible */
+    opacity: 1;  /* Fade in */
+    z-index: 1000;
+}
+
+/* Styling for each logout link */
+.logout-link {
+    display: block;
+    padding: 8px 15px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;  /* Remove underline */
+    margin-bottom: 5px;  /* Space between links */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add hover effects for the links */
+.logout-link:hover {
+    background-color: #FBB711;
+    color: white;
+}
+
+/* Optional: Styling for the "Logout" button */
+.logout-option button {
+    display: none;  /* You no longer need a button with the links */
+}
+
+
+.logout-option button:hover {
+    background-color: #FF9D00;
+}
+
+
 /* Styling for the logo text link */
 .logo-link {
     text-decoration: none; /* Remove underline from the link */

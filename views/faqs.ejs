@@ -23,9 +23,24 @@
                     <li><a href="/request_event">Request Event</a></li>
                     <li><a href="/jens_story">Jen's Story</a></li>
                     <li><a href="/our_tech">Our Tech</a></li>
-                    <li><a href="/login">Admin Login</a></li>
                     <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+                     <!-- Conditionally show icon based on isAdmin -->
+                     <% if (isAdmin) { %>
+                        <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
+                        <div id="logout-option" class="logout-option">
+                            <!-- Link for Contact Messages and Sponsor Messages -->
+                            <a href="/messages" class="logout-link"><b>Messages</b></a>
+                            
+                            <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
+                            <a href="/help" class="logout-link"><b>Help</b></a>
+                            
+                            <!-- Link for Logout -->
+                            <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
+                        </div>
+                    <% } else { %>
+                        <li><a href="/login">Login</a></li>
+                    <% } %>
                     <div class="navbar-toggler">
                         <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
                     </div>
@@ -39,7 +54,12 @@
                         <li><a href="/contact_us">Contact Us</a></li>
                         <li><a href="/faqs">FAQs</a></li>
                         <li><a href="/sponsor_us">Sponsor Us</a></li>
-                        <li><a href="/upcoming_events">Upcominig Events</a></li>
+                        <li><a href="/upcoming_events">Upcoming Events</a></li>
+                        <% if (isAdmin) { %>
+                            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+                            <li><a href="/completed_events"><b>Completed Events</b></a></li>
+                            <li><a href="/volunteers"><b>Volunteers</b></a></li>
+                        <% } %>
                     </ul>
                 </div>
         </nav>
@@ -55,8 +75,7 @@
                 <span class="arrow">▼</span>
             </div>
             <div class="faq-answer">
-                <p>Jen got the idea for the Turtle Shelter Project in 2015 to help keep people experiencing homelessness from freezing to death. We officially incorporated 3 April 2017, on Jen's sobriety anniversary. Our 501c3 status was granted in 2018.</p>
-                <p>Between September 2017 and January 2018, with a combined 450 volunteer hours, we completed 50 prototype vests to be tested.</p>
+                <p>Jen got the idea for the Turtle Shelter Project in 2015 to help keep people experiencing homelessness from freezing to death. We officially incorporated 3 April 2017, on Jen's sobriety anniversary. Our 501c3 status was granted in 2018. Between September 2017 and January 2018, with a combined 450 volunteer hours, we completed 50 prototype vests to be tested.</p>
             </div>
         </div>
 
@@ -122,8 +141,7 @@
                 <span class="arrow">▼</span>
             </div>
             <div class="faq-answer">
-                <p>YES YES YES! We can send parts of the vests to be cut, marked, and/or completed by your group and sent back to us, or we can provide materials and training so you can complete entire vests and distribute them in your area.</p>
-                <p>We live by the motto that every person can serve, and we will accommodate anyone who wants to help - we are only limited by our funding. Send us a note in CONTACT US or SCHEDULE YOUR OWN EVENT and we will coordinate the best project for you and/or your group.</p>
+                <p>YES YES YES! We can send parts of the vests to be cut, marked, and/or completed by your group and sent back to us, or we can provide materials and training so you can complete entire vests and distribute them in your area. We live by the motto that every person can serve, and we will accommodate anyone who wants to help - we are only limited by our funding. Send us a note in CONTACT US or SCHEDULE YOUR OWN EVENT and we will coordinate the best project for you and/or your group.</p>
             </div>
         </div>
 
@@ -134,8 +152,7 @@
                 <span class="arrow">▼</span>
             </div>
             <div class="faq-answer">
-                <p>Our overhead costs are very limited because our staff is 100% volunteer. We have no paid employees. Our yearly operating costs include business registration, website hosting and support, post office box rental, and liability insurance. Other expenses have been to purchase things like scissors and sewing machines. During 2018 these costs were about 25% of our total budget.</p>
-                <p>Also, if you would like to make a donation specifically for materials or a certain part of our project, we will honor your request.</p>
+                <p>Our overhead costs are very limited because our staff is 100% volunteer. We have no paid employees. Our yearly operating costs include business registration, website hosting and support, post office box rental, and liability insurance. Other expenses have been to purchase things like scissors and sewing machines. During 2018 these costs were about 25% of our total budget. Also, if you would like to make a donation specifically for materials or a certain part of our project, we will honor your request.</p>
             </div>
         </div>
 

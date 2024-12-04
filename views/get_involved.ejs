@@ -22,17 +22,32 @@
       </div>
       <div class="navbar-collapse">
         <ul class="main-menu">
-          <li><a href="/request_event">Request Event</a></li>
-          <li><a href="/jens_story">Jen's Story</a></li>
-          <li><a href="/our_tech">Our Tech</a></li>
-          <li><a href="/login">Admin Login</a></li>
-          <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
-          <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
-          <div class="navbar-toggler">
-            <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
-        </div>
-    </ul>
-</div>
+            <li><a href="/request_event">Request Event</a></li>
+            <li><a href="/jens_story">Jen's Story</a></li>
+            <li><a href="/our_tech">Our Tech</a></li>
+            <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
+            <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+             <!-- Conditionally show icon based on isAdmin -->
+             <% if (isAdmin) { %>
+                <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
+                <div id="logout-option" class="logout-option">
+                    <!-- Link for Contact Messages and Sponsor Messages -->
+                    <a href="/messages" class="logout-link"><b>Messages</b></a>
+                    
+                    <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
+                    <a href="/help" class="logout-link"><b>Help</b></a>
+                    
+                    <!-- Link for Logout -->
+                    <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
+                </div>
+            <% } else { %>
+                <li><a href="/login">Login</a></li>
+            <% } %>
+            <div class="navbar-toggler">
+              <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
+          </div>
+        </ul>
+    </div>
     <div class="sidebar" id="sidebar">
         <!-- Close button -->
         <button class="close-btn" onclick="toggleSidebar()">×</button>
@@ -41,7 +56,12 @@
           <li><a href="/contact_us">Contact Us</a></li>
           <li><a href="/faqs">FAQs</a></li>
           <li><a href="/sponsor_us">Sponsor Us</a></li>
-          <li><a href="/upcoming_events">Upcominig Events</a></li>
+          <li><a href="/upcoming_events">Upcoming Events</a></li>
+          <% if (isAdmin) { %>
+            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+            <li><a href="/completed_events"><b>Completed Events</b></a></li>
+            <li><a href="/volunteers"><b>Volunteers</b></a></li>
+        <% } %>
         </ul>
     </div>
     </nav>
@@ -55,11 +75,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="firstName" class="form-label">First Name:</label>
-          <input type="text" id="firstName" name="firstName" class="form-input" required>
+          <input type="text" id="firstName" name="first_name" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="lastName" class="form-label">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" class="form-input" required>
+          <input type="text" id="lastName" name="last_name" class="form-input" required>
         </div>
       </div>
 
@@ -78,40 +98,40 @@
       <!-- Form Row 3 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="eventName" class="form-label">Address:</label>
-          <input type="text" id="eventName" name="eventName" class="form-input" required>
+          <label for="address" class="form-label">Address:</label>
+          <input type="text" id="address" name="address" class="form-input" required>
         </div>
         <div class="form-group">
-          <label for="address" class="form-label">City:</label>
-          <input type="text" id="address" name="address" class="form-input" required>
+          <label for="city" class="form-label">City:</label>
+          <input type="text" id="city" name="city" class="form-input" required>
         </div>
       </div>
 
       <!-- Form Row 4 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="city" class="form-label">State:</label>
-          <input type="text" id="city" name="city" class="form-input" required>
+          <label for="state" class="form-label">State:</label>
+          <input type="text" id="state" name="state" class="form-input" required>
         </div>
         <div class="form-group">
-          <label for="state" class="form-label">Zip Code:</label>
-          <input type="text" id="state" name="state" class="form-input" required>
+          <label for="zip" class="form-label">Zip Code:</label>
+          <input type="text" id="zip" name="zip" class="form-input" required>
         </div>
       </div>
 
       <!-- Form Row 5 -->
       <div class="form-row">
         <div class="form-group">
-            <label for="eventType" class="form-label">Sewing Level:</label>
-            <select id="eventType" name="eventType" class="form-select" required>
+            <label for="sewing_level" class="form-label">Sewing Level:</label>
+            <select id="sewing_level" name="sewing_level" class="form-select" required>
               <option value="Sewing">Beginner</option>
               <option value="Non-Sewing">Intermediate</option>
               <option value="Both">Advanced</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="duration" class="form-label">Hours available each Month:</label>
-            <input type="number" id="duration" name="duration" class="form-input" min="1" required>
+            <label for="monthly_hour_availability" class="form-label">Hours available each Month (estimate):</label>
+            <input type="number" id="monthly_hour_availability" name="monthly_hour_availability" class="form-input" min="1" required>
           </div>
       </div>
 
@@ -121,11 +141,11 @@
           <label class="form-label">Willing to travel out of County:</label>
           <div class="checkbox-group">
             <label for="outOfCountyYes" class="checkbox-label">
-              <input type="radio" id="outOfCountyYes" name="outOfCounty" value="Yes">
+              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes">
               Yes
             </label>
             <label for="outOfCountyNo" class="checkbox-label">
-              <input type="radio" id="outOfCountyNo" name="outOfCounty" value="No">
+              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No">
               No
             </label>
           </div>
@@ -134,11 +154,11 @@
           <label class="form-label">Willing to travel out of State:</label>
           <div class="checkbox-group">
             <label for="outOfStateYes" class="checkbox-label">
-              <input type="radio" id="outOfStateYes" name="outOfState" value="Yes">
+              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes">
               Yes
             </label>
             <label for="outOfStateNo" class="checkbox-label">
-              <input type="radio" id="outOfStateNo" name="outOfState" value="No">
+              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No">
               No
             </label>
           </div>
@@ -151,11 +171,11 @@
           <label class="form-label">Willing to teach:</label>
           <div class="checkbox-group">
             <label for="teachYes" class="checkbox-label">
-              <input type="radio" id="teachYes" name="teach" value="Yes">
+              <input type="radio" id="teachYes" name="willing_to_teach" value="Yes">
               Yes
             </label>
             <label for="teachNo" class="checkbox-label">
-              <input type="radio" id="teachNo" name="teach" value="No">
+              <input type="radio" id="teachNo" name="willing_to_teach" value="No">
               No
             </label>
           </div>
@@ -164,11 +184,11 @@
           <label class="form-label">Willing to Lead:</label>
           <div class="checkbox-group">
             <label for="leadYes" class="checkbox-label">
-              <input type="radio" id="leadYes" name="lead" value="Yes">
+              <input type="radio" id="leadYes" name="willing_to_lead" value="Yes">
               Yes
             </label>
             <label for="leadNo" class="checkbox-label">
-              <input type="radio" id="leadNo" name="lead" value="No">
+              <input type="radio" id="leadNo" name="willing_to_lead" value="No">
               No
             </label>
           </div>
@@ -178,8 +198,8 @@
       <!-- Form Row 8 (How did you hear about us?) -->
       <div class="form-row">
         <div class="form-group">
-          <label for="howDidYouHear" class="form-label">How did you hear about us?</label>
-          <select id="howDidYouHear" name="howDidYouHear" class="form-select" required>
+          <label for="soure" class="form-label">How did you hear about us?</label>
+          <select id="soure" name="soure" class="form-select" required>
             <option value="Friend/Family">Friend/Family</option>
             <option value="Social Media">Social Media</option>
             <option value="Online">Online</option>
@@ -195,7 +215,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="additionalInfo" class="form-label">What should we know about you:</label>
-          <textarea id="additionalInfo" name="additionalInfo" class="form-textarea" rows="4" required></textarea>
+          <textarea id="additionalInfo" name="details" class="form-textarea" rows="4" required></textarea>
         </div>
       </div>
 
