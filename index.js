@@ -440,9 +440,9 @@ app.post('/login', (req, res) => {
 });
 
 
-// volunteer section
+// volunteer sectionk
 
-app.get('/', (res, req) => {
+app.get('/', (res,) => {
     knex('Tables')
     .select('Tables.admin',
         'Tables.admin',
@@ -456,11 +456,8 @@ app.get('/', (res, req) => {
         'Tables.volunteer_info'
     )
     .then(Tables => {
-        // Render the index.ejs template and pass the data
-        // usamos res.render para q funcione con routes, aqui pokemon tambien se refiere a la variable no al table
         res.render('index', { Tables });
       })
-      //PARA EL TEST TENGO QUE RECORDAR ESTO ASI COMO ES, Simplemente es decide que si es q hay un error entonces lo avise
       .catch(error => {
         console.error('Error querying database:', error);
         res.status(500).send('Internal Server Error Volunteer');
@@ -468,5 +465,8 @@ app.get('/', (res, req) => {
   });
 
 
+
+
+  
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
