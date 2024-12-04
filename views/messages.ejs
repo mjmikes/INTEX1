@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate | Turtle Shelter Project</title>
-    <!-- Link to the correct CSS file for the donate page -->
-    <link rel="stylesheet" href="/css/donate.styles.css">
+    <title>Turtle Shelter Project</title>
+    <link rel="stylesheet" href="/css/requested_events.styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
     <header>
@@ -23,7 +23,7 @@
                     <li><a href="/request_event">Request Event</a></li>
                     <li><a href="/jens_story">Jen's Story</a></li>
                     <li><a href="/our_tech">Our Tech</a></li>
-                    <li><button class="btn-secondary" onclick="location.href='/how_to_get_involved'">Get Involved</button></li>
+                    <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
                      <!-- Conditionally show icon based on isAdmin -->
                      <% if (isAdmin) { %>
@@ -51,7 +51,7 @@
                     <button class="close-btn" onclick="toggleSidebar()">×</button>
                     <!-- Sidebar Links -->
                     <ul class="sidebar-links">
-                        <li><a href="/#contact-us-form">Contact Us</a></li>
+                        <li><a href="/contact_us">Contact Us</a></li>
                         <li><a href="/faqs">FAQs</a></li>
                         <li><a href="/sponsor_us">Sponsor Us</a></li>
                         <li><a href="/upcoming_events">Upcoming Events</a></li>
@@ -60,58 +60,48 @@
                             <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
                             <li><a href="/completed_events"><b>Completed Events</b></a></li>
                             <li><a href="/volunteers"><b>Volunteers</b></a></li>
-                            <li><a href="/user_maintenance"><b>User Maintenance</b></a></li>
                         <% } %>
                     </ul>
                 </div>
         </nav>
     </header>
-
-    <!-- Main content with background and overlay -->
-    <main>
-
-        <section class="hero">
-            <div class="hero-overlay"></div> 
-            <img src="images/donate.avif" alt="Creating a World">
-            <div class="hero-text">
-                <h2>START SAVING LIVES <br> DONATE TODAY </h2>
-                <div class="button-group">
-                    <button class="btn-primary-hero" onclick="window.location.href='https://turtleshelterproject.org/checkout/donate?donatePageId=5b6a44c588251b72932df5a0';">
-                        <i class="fas fa-heart"></i> Donate Now
-                    </button>
-                    
-                </div>
-            </div>
-        </section>
-        <section class="donate-section">
-            <div class="donate-overlay"></div> <!-- Overlay -->
-            <div class="donate-container">
-                <h2>Donate to the Turtle Shelter Project</h2>
-                <p>
-                    Each $30 tax-deductible donation to the Turtle Shelter Project will provide 
-                    a high-tech foam vest for a youth or adult experiencing homelessness. 
-                    You can tell us where you would like the vest or vests sent to, 
-                    or we will send them to where there is the greatest need.
-                </p>
-                <h3>How to Donate:</h3>
-                <div class="button-group">
-                    <p>Donate securely online:</p>
-                    <a href="https://turtleshelterproject.org/checkout/donate?donatePageId=5b6a44c588251b72932df5a0" class="btn-primary">Donate Now</a>
-                </div>
-                <div class="donate-address">
-                    <p>Or you can mail a check to:</p>
-                    <address>
-                        Turtle Shelter Project<br>
-                        PO Box 382<br>
-                        Kaysville, Utah 84037
-                    </address>
-                </div>
-                <p class="donate-small-text">
-                    The Turtle Shelter Project is a 501 (c)(3) non-profit, EIN 82-1035303.
-                </p>
-            </div>
-        </section>
-    </main>
+        <h1>Contact Us Submissions</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Submission ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th class="message-column">Message</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (submissions && submissions.length > 0) { %>
+                    <% submissions.forEach(submission => { %>
+                        <tr>
+                            <td><%= submission.submission_id %></td>
+                            <td><%= submission.first_name %></td>
+                            <td><%= submission.last_name %></td>
+                            <td><%= submission.phone %></td>
+                            <td><%= submission.email %></td>
+                            <td><%= submission.city %></td>
+                            <td><%= submission.state %></td>
+                            <td class="message-column"><%= submission.message %></td>
+                            <td><%= submission.timestamp %></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="9">No submissions found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
     <footer>
         <div class="footer">
             <!-- Contact Information -->
@@ -139,6 +129,8 @@
             <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
         </div>
     </footer>
+    
+    
     <script src="js/app.js"></script>
 </body>
 </html>
