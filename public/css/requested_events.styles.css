@@ -704,29 +704,6 @@ td[colspan="23"] {
     color: #888;
 }
 
-/* Style for all buttons in forms */
-form button[type="submit"] {
-    padding: 5px 8px; /* Adjust padding for smaller size */
-    font-size: 12px; /* Smaller font size */
-    border: 1px solid #ccc; /* Simple border */
-    background: none; /* No background */
-    cursor: pointer; /* Pointer cursor on hover */
-    color: #333; /* Default text color */
-    outline: none; /* Remove outline (default focus outline) */
-    box-shadow: none; /* Remove any box shadow (focus or hover) */
-}
-
-/* Hover effect */
-form button[type="submit"]:hover {
-    border-color: #666; /* Slightly darker border on hover */
-    color: #000; /* Darker text color on hover */
-}
-
-/* Remove focus outline */
-form button[type="submit"]:focus {
-    outline: none; /* Remove focus outline when the button is clicked */
-}
-
 
 .table-container {
     width: 100%; /* Full width of the container */
