@@ -75,7 +75,7 @@ app.get('/jens_story', (req, res) => {
 });
 
 app.get('/user_maintenance', (req, res) => {
-    res.render('user_maintenace');
+    res.render('user_maintenance');
 });
 
 // get route to add_admin page
@@ -153,9 +153,10 @@ app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
 });
 
+const moment = require('moment-timezone'); // Ensure this is at the top of your file
+
 app.get('/messages', async (req, res) => {
     try {
-        // Fetching contact submissions with Knex query
         knex('contact_us')
             .select(
                 'contact_us.submission_id',
@@ -168,10 +169,21 @@ app.get('/messages', async (req, res) => {
                 'contact_us.message',
                 'contact_us.created_at'
             )
-            .orderBy('contact_us.created_at', 'desc') // Orders messages by creation time
+            .orderBy('contact_us.created_at', 'desc')
             .then(messages => {
-                console.log(messages); // Log to inspect the data structure
-                res.render('messages', { messages }); // Pass the messages data to EJS template
+                // Loop through each message and format the created_at field
+                messages.forEach(message => {
+                    console.log('Original created_at:', message.created_at); // Debugging step
+
+                    // Use the moment constructor with the format if needed
+                    message.created_at = moment(message.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ') // Adjust format as needed
+                        .tz('America/Denver') // Convert to Mountain Time Zone
+                        .format('YYYY-MM-DD HH:mm'); // Desired format for display
+
+                    console.log('Formatted created_at:', message.created_at); // Debugging step
+                });
+
+                res.render('messages', { messages }); // Pass the formatted messages data to the template
             })
             .catch(error => {
                 console.error('Error querying database:', error);
@@ -182,6 +194,7 @@ app.get('/messages', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
 
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
