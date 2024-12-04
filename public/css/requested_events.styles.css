@@ -717,34 +717,17 @@ td[colspan="23"] {
     border-collapse: collapse; /* Optional: Remove spacing between table cells */
 }
 
-/* Container for the buttons */
-.button-container {
-    display: grid; /* Use grid layout for better control */
-    grid-template-rows: auto auto; /* Two rows for two buttons */
-    gap: 10px; /* Space between buttons */
-}
-
-/* Style for submit buttons */
+/* Basic style for submit button */
 form button[type="submit"] {
-    padding: 6px 12px; /* Smaller padding for compact button */
-    font-size: 12px; /* Smaller font size */
-    border: 1px solid #ccc; /* Light border */
-    background-color: transparent; /* Transparent background */
-    color: #333; /* Dark text color */
-    cursor: pointer; /* Pointer cursor on hover */
-    width: auto; /* Button width will adjust based on content */
-    border-radius: 3px; /* Slightly rounded corners */
-    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    border: none; /* Remove border */
+    background: none; /* Remove background */
+    cursor: pointer; /* Pointer cursor */
+    padding: 5px 8px; /* Basic padding */
+    font-size: 12px; /* Small font size */
+    color: inherit; /* Inherit text color */
 }
 
 /* Hover effect */
 form button[type="submit"]:hover {
-    border-color: #666; /* Slightly darker border on hover */
-    color: #000; /* Darker text color on hover */
-}
-
-/* Focus effect */
-form button[type="submit"]:focus {
-    outline: none; /* Removes default focus outline */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Adds subtle shadow on focus */
+    color: inherit; /* Keep the text color the same on hover */
 }
