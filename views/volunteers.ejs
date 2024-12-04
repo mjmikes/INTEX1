@@ -86,20 +86,27 @@
       </tr>
     </thead>
 <tbody>
-    <% if (Tables.length > 0) { %>
-      <% Tables.forEach(row => { %>
+    <% if (volunteer_info.length > 0) { %>
+      <% volunteer_info.forEach(function(volunteer) => { %>
         <tr>
-          <input type="hidden" value="row.id">
-          <input type="hidden" value="row.poke_type_id">
-          <!-- td significa table details, que es que vamos a agregar information al table -->
-          <td><%= row.description %></td>
-          <td><%= row.base_total %></td>
-          <td><%= new Date(row.date_created).toLocaleDateString('en-US') %></td> <!-- Format date -->
-          <td><%= row.active_poke ? 'Yes' : 'No' %></td>
-          <td><%= row.gender %></td>
-          <td><%= row.poke_type_description %></td>
+          <input type="hidden" value="volunteer.event_id">
+          <td><%= volunteer.first_name volunteer.last_name %></td>
+          <td><%= volunteer.address %></td>
+          <td><%= volunteer.city %></td>
+          <td><%= volunteer.state %></td>
+          <td><%= volunteer.zip %></td>
+          <td><%= volunteer.phone %></td>
+          <td><%= volunteer.email %></td>
+          <td><%= volunteer.source %></td>
+          <td><%= volunteer.sewing_level %></td>
+          <td><%= volunteer.monthly_hour_availability %></td>
+          <td><%= volunteer.willing_to_teach ? 'T' : 'F' %></td>
+          <td><%= volunteer.willing_to_lead ? 'T' : 'F' %></td>
+          <td><%= volunteer.travel_county %></td>
+          <td><%= volunteer.willing_to_travel_state %></td>
+          <td><%= volunteer.details %></td>
           <td>
-            <form action="/editTables/<%= row.id %>" method="GET" style="display:inline;">
+            <form action="/editTables/<%= volunteer.id %>" method="GET" style="display:inline;">
               <button type="submit">Edit</button>
             </form>
             <form action="/deleteTables/<%= row.id %>" method="POST" style="display:inline;">
