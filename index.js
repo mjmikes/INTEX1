@@ -40,8 +40,8 @@ app.get('/login', (req, res) => {
 });
 
 // get route for the jen's page
-app.get('/jen', (req, res) => {
-    res.render('login');
+app.get('/jens_story', (req, res) => {
+    res.render('jens_story');
 });
 
 
@@ -55,9 +55,9 @@ app.get('/request_event', (req, res) => {
     res.render('request_event');
 });
 
-// get route for the volunteer page
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer');
+// get route for the get involved page
+app.get('/get_involved', (req, res) => {
+    res.render('get_involved');
 });
 
 // get route for the donate page
