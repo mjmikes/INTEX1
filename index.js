@@ -158,9 +158,19 @@ app.get("/volunteer_success_page", (req, res) => {
 });
 
 // Display Messages page 
-app.get("/messages", (req, res) => {
-    res.render("messages");
+app.get('/messages', async (req, res) => {
+    try {
+        // Assuming you're using a database query to fetch data
+        const submissions = await db.query('SELECT * FROM contact_us ORDER BY timestamp DESC');
+        
+        // Pass the submissions array to the EJS view
+        res.render('messages', { submissions });
+    } catch (error) {
+        console.error('Error fetching submissions:', error);
+        res.status(500).send('Server Error');
+    }
 });
+
 
 
 // Post route to send event request form data to database
@@ -440,9 +450,9 @@ app.post('/login', (req, res) => {
 });
 
 
-// volunteer section
+// volunteer sectionk
 
-app.get('/', (res, req) => {
+app.get('/', (res,) => {
     knex('Tables')
     .select('Tables.admin',
         'Tables.admin',
@@ -456,11 +466,8 @@ app.get('/', (res, req) => {
         'Tables.volunteer_info'
     )
     .then(Tables => {
-        // Render the index.ejs template and pass the data
-        // usamos res.render para q funcione con routes, aqui pokemon tambien se refiere a la variable no al table
         res.render('index', { Tables });
       })
-      //PARA EL TEST TENGO QUE RECORDAR ESTO ASI COMO ES, Simplemente es decide que si es q hay un error entonces lo avise
       .catch(error => {
         console.error('Error querying database:', error);
         res.status(500).send('Internal Server Error Volunteer');
@@ -468,5 +475,8 @@ app.get('/', (res, req) => {
   });
 
 
+
+
+  
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
