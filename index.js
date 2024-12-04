@@ -51,9 +51,18 @@ app.get('/admin', (req, res) => {
 });
 
 // get route for the request event page
-app.get('/request_event', (req, res) => {
+app.get('/request_event', async (req, res) => {
+    try {
+        await knex.raw('SELECT 1');
+        console.log('Database connection is working');
+    } catch (error) {
+        console.error("Database connection error:", error);
+        res.status(500).send("Database is not connected");
+        return;  // Prevents the code from continuing if there is an error
+    }
     res.render('request_event');
 });
+
 
 // get route for the get involved page
 app.get('/get_involved', (req, res) => {
@@ -65,13 +74,64 @@ app.get('/donate', (req, res) => {
     res.render('donate');
 });
 
+// Home page
+app.get("/", (req, res) => {
+    res.render("index.ejs");
+});
+
+// Contact Us page
+app.get("/contact_us", (req, res) => {
+    res.render("contact_us.ejs");
+});
+
+// FAQs page
+app.get("/faqs", (req, res) => {
+    res.render("faqs.ejs");
+});
+
+// Our Tech page
+app.get("/our_tech", (req, res) => {
+    res.render("our_tech.ejs");
+});
+
+// Sponsor Us page
+app.get("/sponsor_us", (req, res) => {
+    res.render("sponsor_us.ejs");
+});
+
+// Upcoming Events page
+app.get("/upcoming_events", (req, res) => {
+    res.render("upcoming_events.ejs");
+});
+
+// Requested Events page 
+app.get("/requested_events", (req, res) => {
+    res.render("requested_events.ejs");
+});
+
+// Completed Events page (protected by authentication)
+app.get("/completed_events", (req, res) => {
+    res.render("completed_events.ejs");
+});
+
+// Volunteers page (protected by authentication)
+app.get("/volunteers", (req, res) => {
+    res.render("volunteers.ejs");
+});
+
+// Event Dashboard page (protected by authentication)
+app.get("/event_dashboard", (req, res) => {
+    res.render("event_dashboard.ejs");
+});
+
+
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 
 
 // POST ROUTES TO UPDATE DATA
 
-app.post("/addEventRequest", (req, res) => {
+app.post("/addEventRequest1", (req, res) => {
     const {
         event_name, event_contact_first_name, event_contact_last_name,
         event_contact_phone, event_contact_email, event_type, event_location_address,
@@ -136,6 +196,87 @@ app.post("/addEventRequest", (req, res) => {
         console.error('Error inserting event_contact or event_location:', error);
         res.status(500).send('Internal Server Error');
       });
+});
+
+app.post('/addEventRequest', (req, res) => {
+  const {
+    event_name,
+    event_contact_first_name,
+    event_contact_last_name,
+    event_contact_phone,
+    event_contact_email,
+    event_type,
+    event_location_address,
+    event_location_city,
+    event_location_state,
+    event_location_zip,
+    event_start_time,
+    event_duration,
+    event_description,
+    expected_advanced_sewers,
+    sewing_machines_available,
+    expected_participants,
+    children_under_10,
+    jen_story,
+    event_space_description,
+    round_tables,
+    rectangle_tables,
+    possible_date_1,
+    possible_date_2,
+  } = req.body;
+
+  let contactId;
+  let locationId;
+
+  // Insert into event_contact and retrieve its ID
+  knex('event_contact')
+    .insert({
+      event_contact_first_name,
+      event_contact_last_name,
+      event_contact_phone,
+      event_contact_email,
+    })
+    .returning('id') // For PostgreSQL, returns the inserted ID
+    .then((ids) => {
+      contactId = ids[0]; // Store the generated Event Contact ID
+      // Insert into event_location and retrieve its ID
+      return knex('event_location').insert({
+        event_address: event_location_address,
+        event_city: event_location_city,
+        event_state: event_location_state,
+        event_zip: event_location_zip,
+      }).returning('id');
+    })
+    .then((ids) => {
+      locationId = ids[0]; // Store the generated Event Location ID
+      // Insert into event_request with the retrieved foreign keys
+      return knex('event_request').insert({
+        event_name,
+        event_type,
+        event_start_time,
+        event_duration,
+        event_description,
+        expected_advanced_sewers,
+        sewing_machines_available,
+        expected_participants,
+        children_under_10,
+        jen_story,
+        event_space_description,
+        round_tables,
+        rectangle_tables,
+        possible_date_1,
+        possible_date_2,
+        event_contact_id: contactId, // Use the generated Event Contact ID
+        event_location_id: locationId, // Use the generated Event Location ID
+      });
+    })
+    .then(() => {
+      res.redirect('/'); // Redirect after all inserts are complete
+    })
+    .catch((error) => {
+      console.error('Error adding event request:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });
 
 

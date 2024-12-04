@@ -160,82 +160,22 @@ function logout() {
     window.location.href = '/';  // Assuming '/' corresponds to your index.ejs page
 }
 
-// app.js (or server.js)
 
-const express = require('express');
-const passport = require('passport');
-const session = require('express-session');
-const app = express();
+document.addEventListener('DOMContentLoaded', function () {
+    // Add event listeners to all FAQ questions
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function () {
+            const answer = this.nextElementSibling; // Get the associated answer (faq-answer)
+            const arrow = this.querySelector('.arrow'); // Get the arrow inside the question
 
-// Assuming you've already set up Passport.js and other dependencies like body-parser, etc.
-const passportConfig = require('./passport-config')(passport);
-
-// Express session configuration
-app.use(session({
-    secret: 'yourSecretKey',
-    resave: false,
-    saveUninitialized: true
-}));
-
-// Initialize Passport
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Define the isAuthenticated middleware function
-function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();  // Allow access to the requested page
-    }
-    res.redirect('/login');  // Redirect to login if not authenticated
-}
-
-// Routes
-
-// Public Routes (no authentication required)
-app.get('/', (req, res) => {
-    res.render('index'); // Your home page
-});
-
-app.get('/login', (req, res) => {
-    res.render('login');  // Your login page
-});
-
-// Login POST (Passport authentication)
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/admin',
-    failureRedirect: '/login',
-    failureFlash: true
-}));
-
-// Admin Dashboard (protected route)
-app.get('/admin', isAuthenticated, (req, res) => {
-    res.render('admin-dashboard');  // Admin page
-});
-
-// Protected routes (only accessible when logged in)
-app.get('/requested_events', isAuthenticated, (req, res) => {
-    res.render('requested-events');  // Your requested events page
-});
-
-app.get('/completed_events', isAuthenticated, (req, res) => {
-    res.render('completed-events');  // Your completed events page
-});
-
-// Other admin pages protected by isAuthenticated middleware
-app.get('/volunteers', isAuthenticated, (req, res) => {
-    res.render('volunteers');  // Volunteers page
-});
-
-app.get('/event_dashboard', isAuthenticated, (req, res) => {
-    res.render('event-dashboard');  // Event dashboard page
-});
-
-// Logout route
-app.get('/logout', (req, res) => {
-    req.logout((err) => {
-        if (err) return next(err);
-        res.redirect('/');  // Redirect to home page after logout
+            // Toggle the visibility of the answer and the rotation of the arrow
+            answer.classList.toggle('open');
+            arrow.classList.toggle('open');
+        });
     });
 });
+
+
+
 
 
