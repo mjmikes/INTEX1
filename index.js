@@ -171,8 +171,6 @@ app.get('/messages', async (req, res) => {
     }
 });
 
-
-
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
     const {
@@ -379,27 +377,29 @@ app.post("/add-admin", async (req, res) => {
 });
 
 // Post route to send admin form data to database
-app.post("/contact_us", async (req, res) => {
+app.post("/submit-contact", async (req, res) => {
     const {
         first_name,
         last_name,
         phone,
         email,
-        username,
-        password
+        city,
+        state,
+        message 
     } = req.body;
     try {
         // Insert into admin table
-        await knex('admin').insert({
+        await knex('contact-us').insert({
             first_name,
             last_name,
             phone,
             email,
-            username,
-            password
+            city,
+            state,
+            message 
         });
         // Redirect to a success page
-        res.redirect('/volunteers');
+        res.redirect('/#contact-us-form');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
         res.status(500).send('Internal Server Error');
@@ -450,9 +450,9 @@ app.post('/login', (req, res) => {
 });
 
 
-// volunteer sectionk
+// volunteer section
 
-app.get('/', (res,) => {
+app.get('/', (res, req) => {
     knex('Tables')
     .select('Tables.admin',
         'Tables.admin',
@@ -466,8 +466,11 @@ app.get('/', (res,) => {
         'Tables.volunteer_info'
     )
     .then(Tables => {
+        // Render the index.ejs template and pass the data
+        // usamos res.render para q funcione con routes, aqui pokemon tambien se refiere a la variable no al table
         res.render('index', { Tables });
       })
+      //PARA EL TEST TENGO QUE RECORDAR ESTO ASI COMO ES, Simplemente es decide que si es q hay un error entonces lo avise
       .catch(error => {
         console.error('Error querying database:', error);
         res.status(500).send('Internal Server Error Volunteer');
@@ -475,8 +478,5 @@ app.get('/', (res,) => {
   });
 
 
-
-
-  
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
