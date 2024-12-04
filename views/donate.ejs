@@ -23,14 +23,24 @@
                     <li><a href="/request_event">Request Event</a></li>
                     <li><a href="/jens_story">Jen's Story</a></li>
                     <li><a href="/our_tech">Our Tech</a></li>
-                    <!-- Conditionally show Admin Login or Logout based on isAdmin -->
-                    <% if (isAdmin) { %>
-                        <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
-                    <% } else { %>
-                        <li><a href="/login">Admin Login</a></li>
-                    <% } %>
                     <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+                     <!-- Conditionally show icon based on isAdmin -->
+                     <% if (isAdmin) { %>
+                        <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
+                        <div id="logout-option" class="logout-option">
+                            <!-- Link for Contact Messages and Sponsor Messages -->
+                            <a href="/messages" class="logout-link"><b>Messages</b></a>
+                            
+                            <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
+                            <a href="/help" class="logout-link"><b>Help</b></a>
+                            
+                            <!-- Link for Logout -->
+                            <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
+                        </div>
+                    <% } else { %>
+                        <li><a href="/login">Login</a></li>
+                    <% } %>
                     <div class="navbar-toggler">
                         <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
                     </div>

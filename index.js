@@ -300,6 +300,21 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/logout', (req, res) => {
+    // Reset isAdmin to false
+    req.session.isAdmin = false;
+    
+    // Destroy the session (this logs the user out completely)
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send('Failed to logout');
+        }
+
+        // Redirect to the homepage (or any other page)
+        res.redirect('/');
+    });
+});
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
