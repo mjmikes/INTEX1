@@ -106,16 +106,17 @@
               <td><%= eventData.event_space_description %></td>
               <td><%= eventData.possible_date_1 %></td>
               <td><%= eventData.possible_date_2 %></td>
+              <td><%= eventData.event_start_time %></td>
+              <td><%= eventData.event_duration %></td>
+              <td><%= eventData.event_type %></td>
               <td><%= eventData.expected_advanced_sewers %></td>
               <td><%= eventData.sewing_machines_available %></td>
               <td><%= eventData.expected_participants %></td>
               <td><%= eventData.children_under_10 %></td>
               <td><%= eventData.jen_story ? 'Yes' : 'No' %></td>
-              <td><%= eventData.event_space_description %></td>
               <td><%= eventData.round_tables_count %></td>
               <td><%= eventData.rectangle_tables_count %></td>
-              <td><%= new Date(eventData.possible_date_1).toLocaleDateString('en-US') %></td>
-              <td><%= new Date(eventData.possible_date_2).toLocaleDateString('en-US') %></td>
+              <td><%= eventData.event_space_description %></td>
               <td>
                 <form action="/editEvent/<%= eventData.event_id %>" method="GET" style="display:inline;">
                   <button type="submit">Edit</button>
