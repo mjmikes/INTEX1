@@ -245,7 +245,7 @@ header {
     font-weight: bold; /* Make the text bold */
     color: #000; /* Adjust the color if needed (default is black) */
     text-decoration: none; /* Remove underline from links */
-    font-size: 18px; /* Adjust font size */
+    font-size: 16px; /* Adjust font size */
     padding: 10px 15px; /* Optional: add some padding around the link */
 }
 
