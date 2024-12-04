@@ -152,21 +152,35 @@ app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
 });
 
-// Display Messages page 
 app.get('/messages', async (req, res) => {
     try {
-        // Assuming you're using a database query to fetch data
-        const submissions = await db.query('SELECT * FROM contact_us ORDER BY timestamp DESC');
-        
-        // Pass the submissions array to the EJS view
-        res.render('messages', { submissions });
+        // Fetching contact submissions with Knex query
+        knex('contact_us')
+            .select(
+                'contact_us.submission_id',
+                'contact_us.first_name',
+                'contact_us.last_name',
+                'contact_us.phone',
+                'contact_us.email',
+                'contact_us.city',
+                'contact_us.state',
+                'contact_us.message',
+                'contact_us.created_at'
+            )
+            .orderBy('contact_us.created_at', 'desc') // Orders messages by creation time
+            .then(messages => {
+                console.log(messages); // Log to inspect the data structure
+                res.render('messages', { messages }); // Pass the messages data to EJS template
+            })
+            .catch(error => {
+                console.error('Error querying database:', error);
+                res.status(500).send('Internal Server Error');
+            });
     } catch (error) {
-        console.error('Error fetching submissions:', error);
+        console.error('Error fetching messages:', error);
         res.status(500).send('Server Error');
     }
 });
-
-
 
 // Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
