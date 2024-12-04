@@ -73,6 +73,10 @@ app.get('/jens_story', (req, res) => {
     res.render('jens_story');
 });
 
+app.get('/user_maintenance', (req, res) => {
+    res.render('user_maintenance');
+});
+
 // get route to add_admin page
 app.get('/add_admin', (req, res) => {
     res.render('add_admin');
