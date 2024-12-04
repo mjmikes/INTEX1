@@ -68,27 +68,44 @@
     <table>
         <thead>
           <tr>
-            <th>Pokemon</th>
-            <th>Base Total</th>
-            <th>Date Created</th>
-            <th>Active</th>
-            <th>Gender</th>
-            <th>Type</th>
-            <th>Actions</th>
+            <th>Event Request</th>
+            <th>Contact Name</th>
+            <th>Contact Phone</th>
+            <th>Contact Email</th>
+            <th>Event Address</th>
+            <th>Event City</th>
+            <th>Event State</th>
+            <th>Event Zip</th>
+            <th>Event Space Description</th>
+            <th>Possible Date 1</th>
+            <th>Possible Date 2</th>
+            <th>Event Start Time</th>
+            <th>Event Duration (hrs)</th>
+            <th>Event Type</th>
+            <th>Expected Sewers</th>
+            <th>Sewing Machines</th>
+            <th>Expected Participants</th>
+            <th>Kids Under Age 10</th>
+            <th>Story</th>
+            <th>Available Round Tables</th>
+            <th>Available Rectangle Tables</th>
+            <th>Event Description</th>
           </tr>
         </thead>
         <tbody>
           <% if (requested_events) { %>
             <tr>
               <input type="hidden" value="<%= eventData.event_id %>">
-              <input type="hidden" value="<%= eventData.event_contact_id %>">
-              <input type="hidden" value="<%= eventData.event_location_id %>">
-              <td><%= eventData.event_name %></td>
               <td><%= eventData.first_name %> <%= eventData.last_name %></td>
               <td><%= eventData.phone %></td>
               <td><%= eventData.event_contact_email %></td>
-              <td><%= eventData.event_type %></td>
-              <td><%= eventData.event_description %></td>
+              <td><%= eventData.event_address %></td>
+              <td><%= eventData.event_city %></td>
+              <td><%= eventData.event_state %></td>
+              <td><%= eventData.event_zip %></td>
+              <td><%= eventData.event_space_description %></td>
+              <td><%= eventData.possible_date_1 %></td>
+              <td><%= eventData.possible_date_2 %></td>
               <td><%= eventData.expected_advanced_sewers %></td>
               <td><%= eventData.sewing_machines_available %></td>
               <td><%= eventData.expected_participants %></td>
