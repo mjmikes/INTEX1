@@ -73,6 +73,10 @@ app.get('/jens_story', (req, res) => {
     res.render('jens_story');
 });
 
+app.get('/user_maintenance', (req, res) => {
+    res.render('user_maintenance');
+});
+
 // get route to add_admin page
 app.get('/add_admin', (req, res) => {
     res.render('add_admin');
@@ -151,6 +155,11 @@ app.get("/event_success_page", (req, res) => {
 // Volunteer Success page 
 app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
+});
+
+// Display Messages page 
+app.get("/messages", (req, res) => {
+    res.render("messages");
 });
 
 
