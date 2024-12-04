@@ -236,11 +236,12 @@ app.post("/RequestEvent", async (req, res) => {
 });
 
 // Get Route to display records from the event_request table to the requested_events.ejs page for the admin
-app.get('/requested_events/:event_id', async (req, res) => {  // Ensure the correct route parameter
-    try {
-        const event_id = req.params.event_id;
+// Assuming you're using Express
+app.get('/requested_events/:event_id', async (req, res) => {
+    const event_id = req.params.event_id;
 
-        // Fetch event details from multiple tables
+    try {
+        // Fetch the event data using Knex or another query builder
         const eventData = await knex('event_request')
             .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
             .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
@@ -273,13 +274,19 @@ app.get('/requested_events/:event_id', async (req, res) => {  // Ensure the corr
                 'event_location.event_zip'
             );
 
-        // Since eventData is an array, we can access the first element directly
-        res.render('requested_events', { requested_events: eventData[0] });  // Send only the first event if found
+        if (eventData.length > 0) {
+            // Pass the first event's data to the EJS template
+            res.render('requested_events', { requested_events: eventData[0] });
+        } else {
+            res.status(404).send('Event not found');
+        }
+
     } catch (error) {
         console.error('Error fetching event data:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 
 // Post route to send volunteer form data to database
