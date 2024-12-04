@@ -7,6 +7,8 @@ const session = require('express-session');
 
 let path = require("path");
 
+let security = false;
+
 const port = process.env.PORT || 5500;
 
 app.set("view engine", "ejs");
@@ -126,11 +128,6 @@ app.get("/upcoming_events", (req, res) => {
     res.render("upcoming_events");
 });
 
-// Requested Events page 
-app.get("/requested_events", (req, res) => {
-    res.render("requested_events");
-});
-
 // Completed Events page (protected by authentication)
 app.get("/completed_events", (req, res) => {
     res.render("completed_events");
@@ -236,15 +233,13 @@ app.post("/RequestEvent", async (req, res) => {
 });
 
 // Get Route to display records from the event_request table to the requested_events.ejs page for the admin
-app.get('requested_events', async (req, res) => {
+// Assuming you're using Express
+app.get('/requested_events', async (req, res) => {
     try {
-        const event_id = req.params.event_id;
-        
-        // Fetch event details from multiple tables
-        const eventData = await knex('event_request')
+        // Fetch all event data using Knex or another query builder
+        knex('event_request')
             .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
             .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
-            .where('event_request.event_id', event_id)
             .select(
                 'event_request.event_id',
                 'event_request.event_name',
@@ -271,9 +266,16 @@ app.get('requested_events', async (req, res) => {
                 'event_location.event_city',
                 'event_location.event_state',
                 'event_location.event_zip'
-            );
-        // Pass data to the view
-        res.render('requested_events', { requested_events: eventData[0] });
+            )
+            .then(event_request => {
+                // Render the index.ejs template and pass the data
+                // We use res.render to work with ejs files we use res.redirct to work with routes
+                res.render('requested_events', { event_request, security });
+            })
+            .catch(error => {
+                console.error('Error querying database:', error);
+                res.status(500).send('Internal Server Error');
+            });
     } catch (error) {
         console.error('Error fetching event data:', error);
         res.status(500).send('Internal Server Error');
