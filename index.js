@@ -139,6 +139,7 @@ app.get("/event_success_page", (req, res) => {
 });
 
 
+// Post route to send event request form data to database
 app.post("/RequestEvent", async (req, res) => {
     const {
         event_name,
@@ -216,7 +217,53 @@ app.post("/RequestEvent", async (req, res) => {
     }
 });
 
-
+// Post route to send volunteer form data to database
+app.post("/submit-volunteer", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        address,
+        city,
+        state,
+        zip,
+        sewing_level,
+        monthly_hour_availability,
+        willing_to_travel_county,
+        willing_to_travel_state,
+        willing_to_teach,
+        willing_to_lead,
+        soure,
+        details
+    } = req.body;
+    try {
+        // Insert into volunteer_info table
+        await knex('volunteer_info').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            address,
+            city,
+            state,
+            zip,
+            sewing_level,
+            monthly_hour_availability,
+            willing_to_travel_county,
+            willing_to_travel_state,
+            willing_to_teach,
+            willing_to_lead,
+            source,
+            details
+        });
+        // Redirect to a success page
+        res.redirect('/volunteer_success_page');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 // Admin login form submission route (POST request to authenticate)
 app.post('/login', (req, res) => {
