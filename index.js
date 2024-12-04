@@ -131,7 +131,7 @@ app.use(express.static('public'));
 
 // POST ROUTES TO UPDATE DATA
 
-app.post("/addEventRequest", (req, res) => {
+app.post("/addEventRequest1", (req, res) => {
     const {
         event_name, event_contact_first_name, event_contact_last_name,
         event_contact_phone, event_contact_email, event_type, event_location_address,
@@ -196,6 +196,87 @@ app.post("/addEventRequest", (req, res) => {
         console.error('Error inserting event_contact or event_location:', error);
         res.status(500).send('Internal Server Error');
       });
+});
+
+app.post('/addEventRequest', (req, res) => {
+  const {
+    event_name,
+    event_contact_first_name,
+    event_contact_last_name,
+    event_contact_phone,
+    event_contact_email,
+    event_type,
+    event_location_address,
+    event_location_city,
+    event_location_state,
+    event_location_zip,
+    event_start_time,
+    event_duration,
+    event_description,
+    expected_advanced_sewers,
+    sewing_machines_available,
+    expected_participants,
+    children_under_10,
+    jen_story,
+    event_space_description,
+    round_tables,
+    rectangle_tables,
+    possible_date_1,
+    possible_date_2,
+  } = req.body;
+
+  let contactId;
+  let locationId;
+
+  // Insert into event_contact and retrieve its ID
+  knex('event_contact')
+    .insert({
+      event_contact_first_name,
+      event_contact_last_name,
+      event_contact_phone,
+      event_contact_email,
+    })
+    .returning('id') // For PostgreSQL, returns the inserted ID
+    .then((ids) => {
+      contactId = ids[0]; // Store the generated Event Contact ID
+      // Insert into event_location and retrieve its ID
+      return knex('event_location').insert({
+        event_address: event_location_address,
+        event_city: event_location_city,
+        event_state: event_location_state,
+        event_zip: event_location_zip,
+      }).returning('id');
+    })
+    .then((ids) => {
+      locationId = ids[0]; // Store the generated Event Location ID
+      // Insert into event_request with the retrieved foreign keys
+      return knex('event_request').insert({
+        event_name,
+        event_type,
+        event_start_time,
+        event_duration,
+        event_description,
+        expected_advanced_sewers,
+        sewing_machines_available,
+        expected_participants,
+        children_under_10,
+        jen_story,
+        event_space_description,
+        round_tables,
+        rectangle_tables,
+        possible_date_1,
+        possible_date_2,
+        event_contact_id: contactId, // Use the generated Event Contact ID
+        event_location_id: locationId, // Use the generated Event Location ID
+      });
+    })
+    .then(() => {
+      res.redirect('/'); // Redirect after all inserts are complete
+    })
+    .catch((error) => {
+      console.error('Error adding event request:', error);
+      res.status(500).send('Internal Server Error');
+    });
 });
 
 
