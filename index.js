@@ -9,6 +9,8 @@ const port = process.env.PORT || 5500;
 
 app.set("view engine", "ejs");
 
+app.use(express.json()); // For parsing application/json
+
 app.use(express.urlencoded({extended: true}));
 
 const knex = require("knex")({
@@ -67,6 +69,8 @@ app.get('/donate', (req, res) => {
 
 // Serve static files from the "public" directory
 app.use(express.static('public'));
+
+
 
 
 // POST ROUTES TO UPDATE DATA
