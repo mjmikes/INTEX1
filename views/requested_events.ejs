@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turtle Shelter Project</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/requested_events.styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
@@ -69,14 +69,10 @@
     <table>
         <thead>
             <tr>
-                <th>Event Request</th>
                 <th>Contact Name</th>
                 <th>Contact Phone</th>
                 <th>Contact Email</th>
-                <th>Event Address</th>
-                <th>Event City</th>
-                <th>Event State</th>
-                <th>Event Zip</th>
+                <th>Event Location</th>
                 <th>Event Space Description</th>
                 <th>Possible Date 1</th>
                 <th>Possible Date 2</th>
@@ -102,14 +98,11 @@
                         <td><%= event.first_name %> <%= event.last_name %></td>
                         <td><%= event.phone %></td>
                         <td><%= event.event_contact_email %></td>
-                        <td><%= event.event_address %></td>
-                        <td><%= event.event_city %></td>
-                        <td><%= event.event_state %></td>
-                        <td><%= event.event_zip %></td>
+                        <td><%= event.event_address %> <%= event.event_city %>, <%= event.event_state %> <%= event.event_zip %></td>
                         <td><%= event.event_space_description %></td>
-                        <td><%= event.possible_date_1 %></td>
-                        <td><%= event.possible_date_2 %></td>
-                        <td><%= event.event_start_time %></td>
+                        <td><%= event.possible_date_1.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
+                        <td><%= event.possible_date_2.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
+                        <td><%= event.event_start_time.split(':').slice(0, 2).join(':') %></td>
                         <td><%= event.event_duration %></td>
                         <td><%= event.event_type %></td>
                         <td><%= event.expected_advanced_sewers %></td>
