@@ -240,7 +240,7 @@ app.post('/requestEvent', (req, res) => {
       phone,
       event_contact_email,
     })
-    .returning('id') // Retrieve the auto-generated ID (matches your schema)
+    .returning('event_contact_id') // Retrieve the auto-generated ID (matches your schema)
     .then(([id]) => {
       contactId = id; // Store the generated Event Contact ID
       // Insert into event_location and retrieve its auto-generated ID
@@ -251,7 +251,7 @@ app.post('/requestEvent', (req, res) => {
           event_state: event_location_state,
           event_zip: event_location_zip,
         })
-        .returning('id');
+        .returning('event_location_id');
     })
     .then(([id]) => {
       locationId = id; // Store the generated Event Location ID
