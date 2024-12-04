@@ -15,14 +15,9 @@ body {
 
 /* Keep the header fixed at the top */
 header {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    /* Makes sure the navbar stays on top of the content */
-    background-color: rgba(255, 255, 255, 0.9); /* Optional: add some transparency */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: small shadow for a clean look */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
 }
 
 .navbar {
@@ -92,6 +87,7 @@ header {
 .sidebar.active {
     width: 250px; /* Width of the sidebar */
 }
+
 .navbar-toggler {
     background-color: transparent;
     border: none;
@@ -128,7 +124,6 @@ header {
 .navbar-collapse {
     display: flex;
     align-items: center; /* Vertically center the nav items */
-    justify-content: flex-start; /* Align items to the left (default) */
 }
 
 .circle-icon {
@@ -175,6 +170,7 @@ header {
 /* Hover Effect: Change color for both icon and text when hovering over the whole logo */
 .logo-link:hover {
     color: #34B3A8;  /* Change both icon and text to this color */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);  /* Glow effect */
 }
 
 /* Optional: Active state (when clicked) to revert to original color */
@@ -194,6 +190,7 @@ header {
     display: flex;
     align-items: center;
 }
+
 .main-menu li a {
     font-weight: bold; /* Make the text bold */
     color: #000; /* Adjust the color if needed (default is black) */
@@ -422,6 +419,7 @@ header {
     padding: 30px 20px;
     background-color: lightgray; /* Light background color for footer */
     color: #333;  /* Dark text color */
+
 }
 
 /* Contact Section */

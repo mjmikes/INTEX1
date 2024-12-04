@@ -46,7 +46,7 @@
           <li><a href="/contact_us">Contact Us</a></li>
           <li><a href="/faqs">FAQs</a></li>
           <li><a href="/sponsor_us">Sponsor Us</a></li>
-          <li><a href="/upcoming_events">Upcominig Events</a></li>
+          <li><a href="/upcoming_events">Upcoming Events</a></li>
           <% if (isAdmin) { %>
             <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
             <li><a href="/completed_events"><b>Completed Events</b></a></li>
@@ -60,17 +60,17 @@
   <!-- Main Content -->
   <main>
     <h1 class="form-header">Event Request Form</h1>
-    <form action="/request_event" method="POST" class="event-form">
+    <form action="/requestEvent" method="POST" class="event-form">
       
       <!-- Form Row 1 -->
       <div class="form-row">
         <div class="form-group">
           <label for="firstName" class="form-label">First Name:</label>
-          <input type="text" id="firstName" name="event_contact_first_name" class="form-input" required>
+          <input type="text" id="firstName" name="first_name" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="lastName" class="form-label">Last Name:</label>
-          <input type="text" id="lastName" name="event_contact_last_name" class="form-input" required>
+          <input type="text" id="lastName" name="last_name" class="form-input" required>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="phone" class="form-label">Phone:</label>
-          <input type="tel" id="phone" name="event_contact_phone" class="form-input" required>
+          <input type="tel" id="phone" name="phone" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="email" class="form-label">Email:</label>
@@ -184,11 +184,11 @@
           <label class="form-label">Would you like Jen to tell her story at the start:</label>
           <div class="checkbox-group">
             <label for="jenStoryYes" class="checkbox-label">
-              <input type="radio" id="jenStoryYes" name="jen_story" value="Yes">
+              <input type="radio" id="jenStoryYes" name="jen_story" value="True">
               Yes
             </label>
             <label for="jenStoryNo" class="checkbox-label">
-              <input type="radio" id="jenStoryNo" name="jen_story" value="No">
+              <input type="radio" id="jenStoryNo" name="jen_story" value="False">
               No
             </label>
           </div>
@@ -199,11 +199,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="roundTables" class="form-label">Available Round Tables:</label>
-          <input type="number" id="roundTables" name="round_tables" class="form-input" min="0">
+          <input type="number" id="roundTables" name="round_tables_count" class="form-input" min="0">
         </div>
         <div class="form-group">
           <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
-          <input type="number" id="rectangleTables" name="rectangle_tables" class="form-input" min="0">
+          <input type="number" id="rectangleTables" name="rectangle_tables_count" class="form-input" min="0">
         </div>
       </div>
 
