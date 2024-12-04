@@ -280,6 +280,34 @@ app.post("/submit-volunteer", async (req, res) => {
     }
 });
 
+// Post route to send admin form data to database
+app.post("/add-admin", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        username,
+        password
+    } = req.body;
+    try {
+        // Insert into admin table
+        await knex('admin').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            username,
+            password
+        });
+        // Redirect to a success page
+        res.redirect('/volunteers');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 //Home Page
 app.get('/', (req, res) => {
