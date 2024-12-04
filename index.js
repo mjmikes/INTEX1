@@ -130,7 +130,7 @@ app.post("/addEventRequest", (req, res) => {
                 round_tables: round_tables,
                 rectangle_tables: rectangle_tables,
                 possible_date_1: possible_date_1,
-                possible_date_2: possible_date_2
+                possible_date_2: possibleDate2
             }).then(() => {
                 // After inserting data, send redirect to send a success message
                 res.redirect('/event_success_page');  
