@@ -702,6 +702,8 @@ footer {
 }
 
 .gen-story h2 {
+    padding: 20px;
+    font-family: Arial, sans-serif;
     text-align: center;
     font-size: 28px;
     font-weight: bold;
