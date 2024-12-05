@@ -1263,6 +1263,86 @@ app.post('/scheduled_events/:id', async (req, res) => {
       res.status(500).send('An error occurred while updating the event.');
     }
     
-  });
+});
+
+
+app.post("/admin_scheduled_events", async (req, res) => {
+  const {
+      event_name,
+      first_name,
+      last_name,
+      phone,
+      event_contact_email,
+      event_type,
+      event_address,
+      event_city,
+      event_state,
+      event_zip,
+      event_start_time,
+      event_duration,
+      event_description,
+      expected_advanced_sewers,
+      sewing_machines_available,
+      expected_participants,
+      children_under_10,
+      jen_story,
+      event_space_description,
+      round_tables_count,
+      rectangle_tables_count,
+      possible_date_1,
+      possible_date_2,
+      event_status = 'scheduled'
+  } = req.body;
+
+  try {
+      // Insert into event_contact table
+      const [eventContact] = await knex('event_contact')
+          .returning('event_contact_id')
+          .insert({
+              first_name,
+              last_name,
+              phone,
+              event_contact_email
+          });
+
+      // Insert into event_location table
+      const [eventLocation] = await knex('event_location')
+          .returning('event_location_id')
+          .insert({
+              event_address: event_address,
+              event_city: event_city,
+              event_state: event_state,
+              event_zip: event_zip
+          });
+
+      // Insert into event_request table
+      await knex('event_request').insert({
+          event_name,
+          event_contact_id: eventContact.event_contact_id, // Extract the actual ID
+          event_type,
+          event_location_id: eventLocation.event_location_id, // Extract the actual ID
+          event_start_time,
+          event_duration,
+          event_description,
+          expected_advanced_sewers,
+          sewing_machines_available,
+          expected_participants,
+          children_under_10,
+          jen_story,
+          event_space_description,
+          round_tables_count,
+          rectangle_tables_count,
+          possible_date_1,
+          possible_date_2,
+          event_status
+      });
+
+      // Redirect to a success page
+      res.redirect('/event_success_page');
+  } catch (error) {
+      console.error('Error inserting event data:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
