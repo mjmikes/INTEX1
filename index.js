@@ -48,10 +48,10 @@ const adminTable = [
 const knex = require("knex")({
     client: "pg",
     connection: {
-        host : process.env.RDS_HOSTNAME || "awseb-e-3dmmzs5fan-stack-awsebrdsdatabase-rm7jlczpxzug.cr82swsq26ts.us-east-1.rds.amazonaws.com",
-        user : process.env.RDS_USERNAME || "ebroot",
-        password : process.env.RDS_PASSWORD || "admin123",
-        database : process.env.RDS_DB_NAME || "ebdb",
+        host : process.env.RDS_HOSTNAME || "localhost",
+        user : process.env.RDS_USERNAME || "postgres",
+        password : process.env.RDS_PASSWORD || "admin1",
+        database : process.env.RDS_DB_NAME || "test",
         port : process.env.RDS_PORT || 5433,
         ssl : process.env.DB_SSL ? { rejectUnauthorized: false } : false
     },
@@ -67,6 +67,10 @@ const knex = require("knex")({
 // get route for the login page
 app.get('/login', (req, res) => {
     res.render('login');
+});
+
+app.get('/help', (req, res) => {
+    res.render('help');
 });
 
 // get route for the jen's page
@@ -153,9 +157,16 @@ app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
 });
 
+// Sponsor Success page 
+app.get("/sponsor_success_page", (req, res) => {
+    res.render("sponsor_success_page");
+});
+
+// Get route for showing the contact us and sponsor us form submissions
 app.get('/messages', async (req, res) => {
     try {
-        knex('contact_us')
+        // Fetch contact_us messages
+        const contactMessages = await knex('contact_us')
             .select(
                 'contact_us.submission_id',
                 'contact_us.first_name',
@@ -167,26 +178,42 @@ app.get('/messages', async (req, res) => {
                 'contact_us.message',
                 'contact_us.created_at'
             )
-            .orderBy('contact_us.created_at', 'desc')
-            .then(messages => {
-                // Loop through each message and format the created_at field
-                messages.forEach(message => {
-                    console.log('Original created_at:', message.created_at); // Debugging step
+            .orderBy('contact_us.created_at', 'desc');
 
-                    // Use the moment constructor with the format if needed
-                    message.created_at = moment(message.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ') // Adjust format as needed
-                        .tz('America/Denver') // Convert to Mountain Time Zone
-                        .format('YYYY-MM-DD HH:mm'); // Desired format for display
+        // Format the created_at field for contact_us messages
+        contactMessages.forEach(message => {
+            console.log('Original created_at (contact_us):', message.created_at);
+            message.created_at = moment(message.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+                .tz('America/Denver')
+                .format('YYYY-MM-DD HH:mm');
+            console.log('Formatted created_at (contact_us):', message.created_at);
+        });
 
-                    console.log('Formatted created_at:', message.created_at); // Debugging step
-                });
+        // Fetch sponsor_us messages
+        const sponsorMessages = await knex('sponsor_us')
+            .select(
+                'sponsor_us.submission_id',
+                'sponsor_us.first_name',
+                'sponsor_us.last_name',
+                'sponsor_us.email',
+                'sponsor_us.organization_name',
+                'sponsor_us.message',
+                'sponsor_us.created_at'
+            )
+            .orderBy('sponsor_us.created_at', 'desc');
 
-                res.render('messages', { messages }); // Pass the formatted messages data to the template
-            })
-            .catch(error => {
-                console.error('Error querying database:', error);
-                res.status(500).send('Internal Server Error');
-            });
+        // Format the created_at field for sponsor_us messages
+        sponsorMessages.forEach(sponmessage => {
+            console.log('Original created_at (sponsor_us):', sponmessage.created_at);
+            sponmessage.created_at = moment(sponmessage.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+                .tz('America/Denver')
+                .format('YYYY-MM-DD HH:mm');
+            console.log('Formatted created_at (sponsor_us):', sponmessage.created_at);
+        });
+
+        // Render the 'messages' template with both sets of messages
+        res.render('messages', { contactMessages, sponsorMessages });
+
     } catch (error) {
         console.error('Error fetching messages:', error);
         res.status(500).send('Server Error');
@@ -427,6 +454,32 @@ app.post("/submit-volunteer", async (req, res) => {
     }
 });
 
+// Post route to send sponsor form data to database
+app.post("/submit-sponsor", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        email,
+        organization_name,
+        message
+    } = req.body;
+    try {
+        // Insert into volunteer_info table
+        await knex('sponsor_us').insert({
+            first_name,
+            last_name,
+            email,
+            organization_name,
+            message
+        });
+        // Redirect to a success page
+        res.redirect('/sponsor_success_page');
+    } catch (error) {
+        console.error('Error inserting sponsor data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 // Post route to send admin form data to database
 app.post("/add-admin", async (req, res) => {
     const {
@@ -527,42 +580,37 @@ app.post('/login', (req, res) => {
 });
 
 // volunteer section
-app.get('/volunteers', (req, res) => {
+app.get('/volunteers', async (req, res) => {
     try {
-        knex('volunteer_info')
-        .select(
-            'volunteer_info.volunteer_id',
-            'volunteer_info.first_name',
-            'volunteer_info.last_name',
-            'volunteer_info.address',
-            'volunteer_info.city',
-            'volunteer_info.state',
-            'volunteer_info.zip',
-            'volunteer_info.phone',
-            'volunteer_info.email',
-            'volunteer_info.source',
-            'volunteer_info.sewing_level',
-            'volunteer_info.monthly_hour_availability',
-            'volunteer_info.willing_to_teach',
-            'volunteer_info.willing_to_lead',
-            'volunteer_info.willing_to_travel_county',
-            'volunteer_info.willing_to_travel_state',
-            'volunteer_info.details',
-        )
-        .then(volunteer_info => {
-                // Render the index.ejs template and pass the data
-                // We use res.render to work with ejs files we use res.redirct to work with routes
-                res.render('volunteers', { volunteer_info, security });
-        })
-            .catch(error => {
-                console.error('Error querying database:', error);
-                res.status(500).send('Internal Server Error');
-        });
+        const volunteer_info = await knex('volunteer_info')
+            .select(
+                'volunteer_id',
+                'first_name',
+                'last_name',
+                'address',
+                'city',
+                'state',
+                'zip',
+                'phone',
+                'email',
+                'source',
+                'sewing_level',
+                'monthly_hour_availability',
+                'willing_to_teach',
+                'willing_to_lead',
+                'willing_to_travel_county',
+                'willing_to_travel_state',
+                'details'
+            );
+
+        // Render the 'volunteers' view and pass the data
+        res.render('volunteers', { volunteer_info });
     } catch (error) {
-        console.error('Error fetching event data:', error);
+        console.error('Error querying database for volunteers:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
   // Post route to send admin form data to database
 app.post("/submit-contact", async (req, res) => {

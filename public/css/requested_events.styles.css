@@ -722,16 +722,46 @@ form button[type="submit"]:hover {
 }
 
 .table-container {
-    width: 100%; /* Full width of the container */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    overflow-y: hidden; /* Prevent vertical scrolling */
-    border: 1px solid #ccc; /* Optional: Add a border for clarity */
+    width: 100%;
+    max-width: 800px; /* Limita el ancho máximo de la tabla */
+    margin: 0 auto; /* Centra el contenedor */
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .table-container table {
-    width: 100%; /* Optional: Ensure the table adapts to its content */
-    border-collapse: collapse; /* Optional: Remove spacing between table cells */
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle un toque profesional */
 }
+
+table th,
+table td {
+    min-width: 120px; /* Ancho mínimo de las celdas */
+    padding: 10px; /* Espaciado interno de las celdas */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+th {
+    background-color: #34B3A8; /* Color de fondo para el encabezado */
+    color: white; /* Color del texto en el encabezado */
+    text-transform: uppercase; /* Texto en mayúsculas */
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd; /* Bordes para separar filas */
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el cursor */
+}
+
+
 
 .button-container {
     display: flex;
