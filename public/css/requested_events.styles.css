@@ -726,7 +726,7 @@ table {
 
 /* Table Header and Cell Styling */
 th, td {
-    padding: 2px 4px; /* Reduced padding for skinnier rows */
+    padding: 4px 8px; /* Reduced padding for skinnier rows */
     line-height: 1.2; /* Tighter spacing within cells */
     font-size: 14px;
     text-align: center;
