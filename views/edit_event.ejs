@@ -134,17 +134,17 @@
         </div>
       </div>
 
-      <!-- Form Row 6
+      <!-- Form Row 6-->
       <div class="form-row">
         <div class="form-group">
           <label for="possibleDate1" class="form-label">Possible Date 1:</label>
-          <input type="date" id="possibleDate1" name="possible_date_1" class="form-input" required>
+          <input type="date" id="possibleDate1" name="possible_date_1" value="<%= event_request.possible_date_1 %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="possibleDate2" class="form-label">Possible Date 2:</label>
-          <input type="date" id="possibleDate2" name="possible_date_2" class="form-input">
+          <input type="date" id="possibleDate2" name="possible_date_2" value="<%= event_request.possible_date_2 %>" class="form-input">
         </div>
-      </div>-->
+      </div>
 
       <!-- Form Row 7 -->
       <div class="form-row">
@@ -228,7 +228,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="eventDescription" class="form-label">Event Description:</label>
-          <textarea id="eventDescription" name="event_description" value="<%= event_request.event_description %>" class="form-textarea" rows="4" required></textarea>
+          <textarea id="eventDescription" name="event_description" class="form-textarea" rows="4" required><%= event_request.event_description %></textarea>
         </div>
       </div>
 
