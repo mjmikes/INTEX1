@@ -722,11 +722,13 @@ form button[type="submit"]:hover {
 }
 
 .table-container {
-    width: 100%; /* Full width of the container */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    overflow-y: hidden; /* Prevent vertical scrolling */
-    border: 1px solid #ccc; /* Optional: Add a border for clarity */
+    width: 100%; /* Ancho completo del contenedor */
+    max-width: 100%; /* Asegura que no exceda el ancho del contenedor padre */
+    overflow-x: auto; /* Permite el desplazamiento horizontal */
+    border: 1px solid #ccc; /* Bordes para claridad */
+    white-space: nowrap; /* Evita el salto de línea de las celdas */
 }
+
 
 .table-container table {
     width: 100%; /* Optional: Ensure the table adapts to its content */
