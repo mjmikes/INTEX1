@@ -61,6 +61,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Event Name</th>
                     <th>Contact Name</th>
                     <th>Contact Phone</th>
                     <th>Contact Email</th>
@@ -90,6 +91,7 @@
                     <% event_request.forEach(function(event) { %> 
                         <tr>
                             <input type="hidden" value="<%= event.event_id %>">
+                            <td><%= event.event_name %></td>
                             <td><%= event.first_name %> <%= event.last_name %></td>
                             <td><%= event.phone %></td>
                             <td><%= event.event_contact_email %></td>
