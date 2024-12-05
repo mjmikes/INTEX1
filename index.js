@@ -322,18 +322,20 @@ app.get('/requested_events', async (req, res) => {
     }
 });
 
-app.post('/deleteEvent/:id', (req, res) => {
-    const id = req.params.id;
-    knex('event_request')
-      .where('id', id)
-      .del() // Deletes the record with the specified ID
-      .then(() => {
-        res.redirect('/requested_events'); // Redirect to the Pokémon list after deletion
-      })
-      .catch(error => {
-        console.error('Error deleting Event:', error);
+app.post('/deleteEvent/:id', async (req, res) => {
+    const { id } = req.params; // Get the submission_id from the URL
+    try {
+        // Delete the message with the given submission_id
+        await knex('event_request')
+            .where('id', id) // Find the record with the given ID
+            .del(); // Delete the record
+
+        // Redirect back to the messages page after deleting
+        res.redirect('/requested_events');
+    } catch (error) {
+        console.error('Error deleting message:', error);
         res.status(500).send('Internal Server Error');
-      });
+    }
 });
 
 

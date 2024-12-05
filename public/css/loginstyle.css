@@ -226,7 +226,7 @@ header {
     font-weight: bold; /* Make the text bold */
     color: #000; /* Adjust the color if needed (default is black) */
     text-decoration: none; /* Remove underline from links */
-    font-size: 18px; /* Adjust font size */
+    font-size: 16px; /* Adjust font size */
     padding: 10px 15px; /* Optional: add some padding around the link */
 }
 
@@ -657,6 +657,7 @@ footer p {
     align-items: center;
     justify-content: center;
     background: #f4f4f4; /* Backup color in case the image doesn't load */
+    margin-left: 40px;
 }
 
 .login-image img {
