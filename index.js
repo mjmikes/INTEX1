@@ -461,41 +461,60 @@ app.get('/editEvent/:id', async (req, res) => {
 });
 
 app.post('/editEvent/:id', (req, res) => {
-    const { id } = req.params; // Get the event_id from the URL
-    const {
-        event_name, first_name, last_name, phone, event_contact_email, event_type, event_location_address,
-        event_location_city, event_location_state, event_location_zip, event_start_time, event_duration,
-        event_description, expected_advanced_sewers, sewing_machines_available, expected_participants,
-        children_under_10, jen_story, event_space_description, round_tables_count, rectangle_tables_count,
-        possible_date_1,possible_date_2, actual_date
-    } = req.body;
-    // Update the Event in the database
-    try {
-      knex('event_request')
-        .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
-        .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
-        .where('event_id', id)
-        .update({
-          event_name: event_name, first_name: first_name, last_name: last_name, phone: phone,
-          event_contact_email: event_contact_email, event_type: event_type,
-          event_location_address: event_location_address, event_location_city: event_location_city,
-          event_location_state: event_location_state, event_location_zip: event_location_zip,
-          event_start_time: event_start_time, event_duration: event_duration,
-          event_description: event_description, expected_advanced_sewers: expected_advanced_sewers,
-          sewing_machines_available: sewing_machines_available, expected_participants: expected_participants,
-          children_under_10: children_under_10, jen_story: jen_story,
-          event_space_description: event_space_description, round_tables_count: round_tables_count,
-          rectangle_tables_count: rectangle_tables_count, possible_date_1: possible_date_1,
-          possible_date_2: possible_date_2, actual_date: actual_date
-        })
-      .then(() => {
-        res.redirect('/requested_events'); // Redirect to the list of Pokémon after saving
-      })
-      .catch(error => {
-        console.error('Error updating Events:', error);
-        res.status(500).send('Internal Server Error');
-      });
-    } catch (error) {
+  const { id } = req.params;
+  const {
+      event_name, first_name, last_name, phone, event_contact_email, event_type, event_location_address,
+      event_location_city, event_location_state, event_location_zip, event_start_time, event_duration,
+      event_description, expected_advanced_sewers, sewing_machines_available, expected_participants,
+      children_under_10, jen_story, event_space_description, round_tables_count, rectangle_tables_count,
+      possible_date_1, possible_date_2, actual_date
+  } = req.body;
+
+  try {
+      // First, update the event_contact table
+      knex('event_contact')
+          .where('event_contact_id', id)
+          .update({
+              first_name: first_name,
+              last_name: last_name,
+              phone: phone,
+              event_contact_email: event_contact_email
+          })
+          .then(() => {
+              // Then, update the event_location table
+              return knex('event_location')
+                  .where('event_location_id', id)
+                  .update({
+                      event_location_address: event_location_address,
+                      event_location_city: event_location_city,
+                      event_location_state: event_location_state,
+                      event_location_zip: event_location_zip
+                  });
+          })
+          .then(() => {
+              // Finally, update the event_request table
+              return knex('event_request')
+                  .where('event_id', id)
+                  .update({
+                      event_name: event_name, event_type: event_type, event_start_time: event_start_time,
+                      event_duration: event_duration, event_description: event_description,
+                      expected_advanced_sewers: expected_advanced_sewers,
+                      sewing_machines_available: sewing_machines_available,
+                      expected_participants: expected_participants, children_under_10: children_under_10,
+                      jen_story: jen_story, event_space_description: event_space_description,
+                      round_tables_count: round_tables_count, rectangle_tables_count: rectangle_tables_count,
+                      possible_date_1: possible_date_1, possible_date_2: possible_date_2,
+                      actual_date: actual_date
+                  });
+          })
+          .then(() => {
+              res.redirect('/requested_events'); // Redirect after saving
+          })
+          .catch(error => {
+              console.error('Error updating Events:', error);
+              res.status(500).send('Internal Server Error');
+          });
+  } catch (error) {
       console.error('Error editing event:', error);
       res.status(500).send('Internal Server Error');
   }
