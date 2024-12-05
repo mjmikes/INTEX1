@@ -60,7 +60,7 @@
                             <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
                             <li><a href="/completed_events"><b>Completed Events</b></a></li>
                             <li><a href="/volunteers"><b>Volunteers</b></a></li>
-                            <li><a href="/user_maintenance"><b>User Maintenance</b></a></li>
+                            <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
                         <% } %>
                     </ul>
                 </div>
@@ -77,44 +77,24 @@
                     <th>Email</th>
                     <th>Username</th>
                     <th>Password</th>
-                    <th>Actions</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
-                <% if (event_request.length > 0) { %> <!-- Check if there are admins -->
-                    <% event_request.forEach(function(event) { %> <!-- Loop through events -->
+                <% if (admin_records.length > 0) { %> <!-- Check if there are admin records -->
+                    <% admin_records.forEach(function(admin) { %> <!-- Loop through admin records -->
                         <tr>
-                            <input type="hidden" value="<%= event.event_id %>">
-                            <td><%= event.first_name %> <%= event.last_name %></td>
-                            <td><%= event.phone %></td>
-                            <td><%= event.event_contact_email %></td>
-                            <td><%= event.event_address %> <%= event.event_city %>, <%= event.event_state %> <%= event.event_zip %></td>
-                            <td><%= event.event_space_description %></td>
-                            <td><%= event.possible_date_1.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
-                            <td><%= event.possible_date_2.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
-                            <td><%= event.event_start_time.split(':').slice(0, 2).join(':') %></td>
-                            <td><%= event.event_duration %></td>
-                            <td><%= event.event_type %></td>
-                            <td><%= event.expected_advanced_sewers %></td>
-                            <td><%= event.sewing_machines_available %></td>
-                            <td><%= event.expected_participants %></td>
-                            <td><%= event.children_under_10 %></td>
-                            <td><%= event.jen_story ? 'Yes' : 'No' %></td>
-                            <td><%= event.round_tables_count %></td>
-                            <td><%= event.rectangle_tables_count %></td>
-                            <td><%= event.event_description %></td>
+                            <input type="hidden" value="<%= admin.admin_id %>"> <!-- Hidden field for admin ID -->
+                            <td><%= admin.first_name %></td>
+                            <td><%= admin.last_name %></td>
+                            <td><%= admin.phone %></td>
+                            <td><%= admin.email %></td>
+                            <td><%= admin.username %></td>
+                            <td><%= admin.password %></td>
                             <td>
                                 <div class="button-container">
-                                  <form action="/editEvent/<%= event.event_id %>" method="GET" style="display:inline;">
-                                    <button type="submit">Edit/View</button>
-                                  </form>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button-container"></div>
-                                    <form action="/deleteEvent/<%= event.event_id %>" method="POST" style="display:inline;">
-                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                                    <form action="/deleteAdmin/<%= admin.admin_id %>" method="POST" style="display:inline;">
+                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this record? This user will no longer have access.');">Delete</button>
                                     </form>
                                 </div>
                             </td>
@@ -122,12 +102,15 @@
                     <% }); %>
                 <% } else { %>
                     <tr>
-                        <td colspan="23">No event data available</td>
+                        <td colspan="8">No admin data available</td>
                     </tr>
                 <% } %>
             </tbody>
+            <form action="/add_admin" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+            <button type="submit">Add Admin</button>
         </table>
     </div>
+    
     <footer>
         <div class="footer">
             <!-- Contact Information -->

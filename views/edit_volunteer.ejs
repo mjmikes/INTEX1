@@ -1,87 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get Involved | Turtle Shelter Project</title>
-  <link rel="stylesheet" href="/css/get_involved.styles.css"> <!-- Update the path as needed -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Volunteer | Turtle Shelter Project</title>
+    <link rel="stylesheet" href="/css/request_event.styles.css"> <!-- Update the path as needed -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
-  <script src="js/app.js"></script>
-  <!-- Header -->
-  <header>
-    <nav class="navbar">
-      <div class="navbar-brand">
-        <a href="/" class="logo-link">
-          <i class="fas fa-home"></i> <!-- Home icon -->
-          <span class="logo-text">Turtle Shelter Project</span>
-      </a>
+    <script src="js/app.js"></script>
+    <!-- Header -->
+    <header>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <a href="/" class="logo-link">
+            <i class="fas fa-home"></i> <!-- Home icon -->
+            <span class="logo-text">Turtle Shelter Project</span>
+        </a>
+        </div>
+        <div class="navbar-collapse">
+          <ul class="main-menu">
+              <li><a href="/request_event">Request Event</a></li>
+              <li><a href="/jens_story">Jen's Story</a></li>
+              <li><a href="/our_tech">Our Tech</a></li>
+              <li><button class="btn-secondary" onclick="location.href='/how_to_get_involved'">Get Involved</button></li>
+              <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+               <!-- Conditionally show icon based on isAdmin -->
+               <% if (isAdmin) { %>
+                  <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
+                  <div id="logout-option" class="logout-option">
+                      <!-- Link for Contact Messages and Sponsor Messages -->
+                      <a href="/messages" class="logout-link"><b>Messages</b></a>
+                      
+                      <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
+                      <a href="/help" class="logout-link"><b>Help</b></a>
+                      
+                      <!-- Link for Logout -->
+                      <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
+                  </div>
+              <% } else { %>
+                  <li><a href="/login">Login</a></li>
+              <% } %>
+              <div class="navbar-toggler">
+                <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
+            </div>
+          </ul>
       </div>
-      <div class="navbar-collapse">
-        <ul class="main-menu">
-            <li><a href="/request_event">Request Event</a></li>
-            <li><a href="/jens_story">Jen's Story</a></li>
-            <li><a href="/our_tech">Our Tech</a></li>
-            <li><button class="btn-secondary" onclick="location.href='/how_to_get_involved'">Get Involved</button></li>
-            <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
-             <!-- Conditionally show icon based on isAdmin -->
-             <% if (isAdmin) { %>
-                <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
-                <div id="logout-option" class="logout-option">
-                    <!-- Link for Contact Messages and Sponsor Messages -->
-                    <a href="/messages" class="logout-link"><b>Messages</b></a>
-                    
-                    <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
-                    <a href="/help" class="logout-link"><b>Help</b></a>
-                    
-                    <!-- Link for Logout -->
-                    <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
-                </div>
-            <% } else { %>
-                <li><a href="/login">Login</a></li>
-            <% } %>
-            <div class="navbar-toggler">
-              <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
-          </div>
-        </ul>
-    </div>
-    <div class="sidebar" id="sidebar">
-        <!-- Close button -->
-        <button class="close-btn" onclick="toggleSidebar()">×</button>
-        <!-- Sidebar Links -->
-        <ul class="sidebar-links">
-          <li><a href="/#contact-us-form">Contact Us</a></li>
-          <li><a href="/faqs">FAQs</a></li>
-          <li><a href="/sponsor_us">Sponsor Us</a></li>
-          <li><a href="/upcoming_events">Upcoming Events</a></li>
-          <% if (isAdmin) { %>
-            <li><a href="/requested_events"><b>Requested Events</b></a></li>
-            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
-            <li><a href="/completed_events"><b>Completed Events</b></a></li>
-            <li><a href="/volunteers"><b>Volunteers</b></a></li>
-            <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
-        <% } %>
-        </ul>
-    </div>
-    </nav>
-  </header>
+      <div class="sidebar" id="sidebar">
+          <!-- Close button -->
+          <button class="close-btn" onclick="toggleSidebar()">×</button>
+          <!-- Sidebar Links -->
+          <ul class="sidebar-links">
+            <li><a href="/#contact-us-form">Contact Us</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <li><a href="/sponsor_us">Sponsor Us</a></li>
+            <li><a href="/upcoming_events">Upcoming Events</a></li>
+            <% if (isAdmin) { %>
+              <li><a href="/requested_events"><b>Requested Events</b></a></li>
+              <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+              <li><a href="/completed_events"><b>Completed Events</b></a></li>
+              <li><a href="/volunteers"><b>Volunteers</b></a></li>
+              <li><a href="/user_maintenance"><b>User Maintenance</b></a></li>
+          <% } %>
+          </ul>
+      </div>
+      </nav>
+    </header>
 
   <!-- Main Content -->
   <main>
-    <h1 class="form-header">Volunteer Form</h1>
+    <h1 class="form-header">Edit Volunteer</h1>
     <form action="/submit-volunteer" method="POST" class="event-form">
       <!-- Form Row 1 -->
       <div class="form-row">
         <div class="form-group">
           <label for="firstName" class="form-label">First Name:</label>
-          <input type="text" id="firstName" name="first_name" class="form-input" required>
+          <input type="text" id="firstName" name="first_name" value="<%= volunteer_info.first_name %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="lastName" class="form-label">Last Name:</label>
-          <input type="text" id="lastName" name="last_name" class="form-input" required>
+          <input type="text" id="lastName" name="last_name" value="<%= volunteer_info.last_name %>" class="form-input" required>
         </div>
       </div>
 
@@ -89,11 +87,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="phone" class="form-label">Phone:</label>
-          <input type="tel" id="phone" name="phone" class="form-input" required>
+          <input type="tel" id="phone" name="phone" value="<%= volunteer_info.phone %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" id="email" name="email" class="form-input" required>
+          <input type="email" id="email" name="email" value="<%= volunteer_info.email %>"  class="form-input" required>
         </div>
       </div>
 
@@ -101,11 +99,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="address" class="form-label">Address:</label>
-          <input type="text" id="address" name="address" class="form-input" required>
+          <input type="text" id="address" name="address" value="<%= volunteer_info.address %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="city" class="form-label">City:</label>
-          <input type="text" id="city" name="city" class="form-input" required>
+          <input type="text" id="city" name="city" value="<%= volunteer_info.city %>" class="form-input" required>
         </div>
       </div>
 
@@ -113,11 +111,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="state" class="form-label">State:</label>
-          <input type="text" id="state" name="state" class="form-input" required>
+          <input type="text" id="state" name="state" value="<%= volunteer_info.state %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="zip" class="form-label">Zip Code:</label>
-          <input type="text" id="zip" name="zip" class="form-input" required>
+          <input type="text" id="zip" name="zip" value="<%= volunteer_info.zip %>" class="form-input" required>
         </div>
       </div>
 
@@ -125,7 +123,7 @@
       <div class="form-row">
         <div class="form-group">
             <label for="sewing_level" class="form-label">Sewing Level:</label>
-            <select id="sewing_level" name="sewing_level" class="form-select" required>
+            <select id="sewing_level" name="sewing_level" value="<%= volunteer_info.sewing_level %>" class="form-select" required>
               <option value="Sewing">Beginner</option>
               <option value="Non-Sewing">Intermediate</option>
               <option value="Both">Advanced</option>
@@ -133,7 +131,7 @@
           </div>
           <div class="form-group">
             <label for="monthly_hour_availability" class="form-label">Hours available each Month (estimate):</label>
-            <input type="number" id="monthly_hour_availability" name="monthly_hour_availability" class="form-input" min="1" required>
+            <input type="number" id="monthly_hour_availability" name="monthly_hour_availability" value="<%= volunteer_info.monthly_hour_availability %>" class="form-input" min="1" required>
           </div>
       </div>
 
@@ -253,4 +251,5 @@
     </div>
 </footer>
 </main
-
+</body>
+</html>

@@ -82,11 +82,6 @@ app.get('/user_maintenance', (req, res) => {
     res.render('user_maintenance');
 });
 
-// get route to add_admin page
-app.get('/add_admin', (req, res) => {
-    res.render('add_admin');
-});
-
 app.get('/how_to_get_involved', (req, res) => {
     res.render('how_to_get_involved');
 });
@@ -160,6 +155,11 @@ app.get("/volunteer_success_page", (req, res) => {
 // Sponsor Success page 
 app.get("/sponsor_success_page", (req, res) => {
     res.render("sponsor_success_page");
+});
+
+// Add admin page
+app.get('/add_admin', (req, res) => {
+    res.render('add_admin'); // Assumes your EJS file is named `add_admin.ejs`
 });
 
 // Get route for showing the contact us and sponsor us form submissions
@@ -349,10 +349,11 @@ app.get('/requested_events', async (req, res) => {
     }
 });
 
-app.get('/user_maintenance', async (req, res) => {
+app.get('/user_maintenance_view', async (req, res) => {
     try {
         // Fetch all admin data using Knex
         const admin_records = await knex('admin').select(
+            'admin_id',
             'first_name',
             'last_name',
             'phone',
@@ -370,7 +371,6 @@ app.get('/user_maintenance', async (req, res) => {
 });
 
 
-
 app.post('/deleteEvent/:id', async (req, res) => {
     const { id } = req.params; // Get the event_id from the URL
     try {
@@ -385,6 +385,79 @@ app.post('/deleteEvent/:id', async (req, res) => {
         console.error('Error deleting event:', error);
         res.status(500).send('Internal Server Error');
     }
+});
+
+app.get('/editEvent/:id', async (req, res) => {
+  const { id } = req.params; // Extract the event ID from the route parameter
+  try {
+    knex('event_request')
+      .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
+      .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
+      .select(
+        'event_request.event_id',
+        'event_request.event_name',
+        'event_request.event_type',
+        'event_request.event_start_time',
+        'event_request.event_duration',
+        'event_request.event_description',
+        'event_request.expected_advanced_sewers',
+        'event_request.sewing_machines_available',
+        'event_request.expected_participants',
+        'event_request.children_under_10',
+        'event_request.jen_story',
+        'event_request.event_space_description',
+        'event_request.round_tables_count',
+        'event_request.rectangle_tables_count',
+        'event_request.possible_date_1',
+        'event_request.possible_date_2',
+        'event_request.actual_date',
+        'event_contact.first_name',
+        'event_contact.last_name',
+        'event_contact.phone',
+        'event_contact.event_contact_email',
+        'event_location.event_address',
+        'event_location.event_city',
+        'event_location.event_state',
+        'event_location.event_zip'
+      )
+      .where('event_request.event_id', id) // Filter by the event ID
+      .first() // Retrieve only one event
+      .then(event_request => {
+        if (!event_request) {
+          return res.status(404).send('Event not found');
+        }
+
+        // Separate out contact and location data
+        const event_contact = {
+          first_name: event_request.first_name,
+          last_name: event_request.last_name,
+          phone: event_request.phone,
+          email: event_request.event_contact_email
+        };
+
+        const event_location = {
+          address: event_request.event_address,
+          city: event_request.event_city,
+          state: event_request.event_state,
+          zip: event_request.event_zip
+        };
+
+        // Render the template with all data passed to it
+        res.render('edit_event', {
+          event_id: id,
+          event_request, // Full event data
+          event_contact, // Separate contact details
+          event_location // Separate location details
+        });
+      })
+      .catch(error => {
+        console.error('Error querying database:', error);
+        res.status(500).send('Internal Server Error');
+      });
+  } catch (error) {
+    console.error('Error fetching event data:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 app.post('/editEvent/:id', (req, res) => {
@@ -504,7 +577,7 @@ app.post("/submit-sponsor", async (req, res) => {
 });
 
 // Post route to send admin form data to database
-app.post("/add-admin", async (req, res) => {
+app.post("/add_admin", async (req, res) => {
     const {
         first_name,
         last_name,
@@ -524,7 +597,7 @@ app.post("/add-admin", async (req, res) => {
             password
         });
         // Redirect to a success page
-        res.redirect('/volunteers');
+        res.redirect('/user_maintenance_view');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
         res.status(500).send('Internal Server Error');
@@ -688,7 +761,120 @@ app.post('/deleteMessage/:submission_id', async (req, res) => {
     }
 });
 
+app.post('/deleteAdmin/:id', async (req, res) => {
+    const adminId = req.params.id; // Extract the admin_id from the URL
 
+    try {
+        // Use Knex to delete the admin record by admin_id
+        await knex('admin')
+            .where('admin_id', adminId) // Match on the correct column name
+            .del();
+
+        console.log(`Admin with ID ${adminId} successfully deleted.`);
+        // Redirect to the user maintenance page after deletion
+        res.redirect('/user_maintenance');
+    } catch (error) {
+        console.error('Error deleting admin:', error);
+        res.status(500).send('Error deleting admin record.');
+    }
+});
+
+app.get('/edit_volunteer/:id', async (req, res) => {
+    const { id } = req.params; // Extract the volunteer ID from the route parameter
+  
+    try {
+        const volunteer_data = await knex('volunteer_info')
+            .select(
+                'volunteer_info.volunteer_id',
+                'volunteer_info.first_name',
+                'volunteer_info.last_name',
+                'volunteer_info.address',
+                'volunteer_info.city',
+                'volunteer_info.state',
+                'volunteer_info.zip',
+                'volunteer_info.phone',
+                'volunteer_info.email',
+                'volunteer_info.source',
+                'volunteer_info.sewing_level',
+                'volunteer_info.monthly_hour_availability',
+                'volunteer_info.willing_to_teach',
+                'volunteer_info.willing_to_lead',
+                'volunteer_info.willing_to_travel_county',
+                'volunteer_info.willing_to_travel_state',
+                'volunteer_info.details'
+            )
+            .where('volunteer_info.volunteer_id', id) // Filter by the volunteer ID
+            .first(); // Retrieve only one record
+  
+        if (!volunteer_data) {
+            return res.status(404).send('Volunteer not found');
+        }
+  
+        // Render the 'edit_volunteer' template, passing the volunteer data
+        res.render('edit_volunteer', {
+            volunteer: volunteer_data // Pass the volunteer data to the view
+        });
+    } catch (error) {
+        console.error('Error retrieving volunteer:', error);
+        res.status(500).send('An error occurred while retrieving the volunteer information.');
+    }
+});
+
+app.post("/edit_volunteer_data", async (req, res) => {
+    const {
+        volunteer_id,
+        first_name,
+        last_name,
+        address,
+        city,
+        state,
+        zip,
+        phone,
+        email,
+        source,
+        sewing_level,
+        monthly_hour_availability,
+        willing_to_teach,
+        willing_to_lead,
+        willing_to_travel_county,
+        willing_to_travel_state,
+        details
+    } = req.body;
+
+    try {
+        // Update the existing volunteer record
+        await knex('volunteer_info')
+            .where('volunteer_id', volunteer_id) // Find the record by volunteer_id
+            .update({
+                first_name,
+                last_name,
+                address,
+                city,
+                state,
+                zip,
+                phone,
+                email,
+                source,
+                sewing_level,
+                monthly_hour_availability,
+                willing_to_teach,
+                willing_to_lead,
+                willing_to_travel_county,
+                willing_to_travel_state,
+                details
+            });
+
+        // Render the index page with a success message
+        res.render("volunteers", {
+            successMessage: "Volunteer information updated successfully.",
+        });
+    } catch (error) {
+        console.error("Error updating volunteer data:", error);
+        res.status(500).render("index", {
+            errorMessage: "Something went wrong. Please try again later.",
+        });
+    }
+});
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
