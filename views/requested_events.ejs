@@ -56,10 +56,8 @@
                 </div>
         </nav>
     </header>
-    <main>
-        <h1>Pending Event Requests</h1>
-    </main>
     <div class="table-container">
+        <h1>Pending Event Requests</h1>
         <table>
             <thead>
                 <tr>
@@ -129,6 +127,9 @@
                         <td colspan="23">No event data available</td>
                     </tr>
                 <% } %>
+                <form action="/request_event" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+                    <button class="btn-add" type="submit"><i class="fas fa-plus"></i>  Add Event</button>
+                    <br>
             </tbody>
         </table>
     </div>
