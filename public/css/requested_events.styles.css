@@ -743,6 +743,7 @@ thead th {
 
 /* Table Body Row Styling */
 tbody tr {
+    height: auto;
     border-bottom: 1px solid #ddd;
     transition: background-color 0.3s ease;
 }
@@ -764,7 +765,7 @@ td {
 /* Empty Table Row */
 td[colspan="23"] {
     text-align: center;
-    padding: 10px;
+    padding: 4px;
     font-size: 16px;
     color: #888;
 }
