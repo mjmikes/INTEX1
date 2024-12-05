@@ -781,7 +781,6 @@ td {
     text-align: center;
     font-size: 13px; /* Slightly smaller font size for compact rows */
     color: #333;
-    white-space: nowrap; /* Prevents text wrapping */
     overflow: hidden;
     text-overflow: ellipsis; /* Adds ellipsis for overflowing text */
 }
