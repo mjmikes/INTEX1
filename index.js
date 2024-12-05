@@ -539,6 +539,7 @@ app.get('/completeEvent/:id', async (req, res) => {
       knex('event_request')
         .select(
           'actual_date',
+          'event_name',
           'expected_participants',
           'event_start_time',
           'event_duration'
