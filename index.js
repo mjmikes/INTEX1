@@ -130,10 +130,6 @@ app.get("/sponsor_us", (req, res) => {
     res.render("sponsor_us");
 });
 
-// Completed Events page (protected by authentication)
-app.get("/completed_events", (req, res) => {
-    res.render("completed_events");
-});
 
 // Event Dashboard page (protected by authentication)
 app.get("/event_dashboard", (req, res) => {
@@ -423,11 +419,10 @@ app.get('/user_maintenance_view', async (req, res) => {
 
 app.get('/completed_events', async (req, res) => {
     try {
-        // Fetch data by joining the necessary tables
         const completed_event = await knex('event_request')
-            .join('completed_event', 'event_request.event_id', '=', 'completed_event.event_id') // Join with completed_event
-            .join('event_production', 'event_request.event_id', '=', 'event_production.event_id') // Join with event_production
-            .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id') // Join with event_contact
+            .join('completed_event', 'event_request.event_id', '=', 'completed_event.event_id')
+            .join('event_production', 'event_request.event_id', '=', 'event_production.event_id')
+            .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
             .select(
                 'event_request.event_id',
                 'event_request.event_name',
@@ -438,20 +433,22 @@ app.get('/completed_events', async (req, res) => {
                 'event_contact.event_contact_email',
                 'completed_event.participants_count',
                 'event_production.completed_collar',
-                'event_production.completed_vest',
-                'event_production.completed_envelope',
                 'event_production.completed_pocket',
+                'event_production.completed_envelope',
+                'event_production.completed_vest',
                 'event_production.finished_vest'
             )
-            .orderBy('completed_event.actual_event_date', 'desc'); // Optionally order by event date
+            .where('event_request.event_status', 'completed') // Filter only completed events
+            .orderBy('completed_event.actual_event_date', 'desc');
 
-        // Render the completed_events view with the retrieved data
+        // Render the completed_events view
         res.render('completed_events', { completed_event });
     } catch (error) {
-        console.error('Error fetching completed event data:', error);
-        res.status(500).send('An error occurred while fetching the completed event data.');
+        console.error('Error fetching completed events:', error);
+        res.status(500).send('An error occurred while fetching the completed events.');
     }
 });
+
 
 
 
@@ -602,6 +599,51 @@ app.get('/editEvent/:id', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+app.get('/editCEvent/:id', async (req, res) => {
+    const { id } = req.params; // Extract event ID from route parameters
+
+    try {
+        // Query the database for event details
+        const eventRequest = await knex('event_request').where('event_id', id).first();
+        if (!eventRequest) {
+            return res.status(404).send('Event not found');
+        }
+
+        // Query the database for contact details
+        const eventContact = await knex('event_contact').where('event_contact_id', eventRequest.event_contact_id).first();
+        if (!eventContact) {
+            return res.status(404).send('Event contact not found');
+        }
+
+        // Query the database for location details
+        const eventLocation = await knex('event_location').where('event_location_id', eventRequest.event_location_id).first();
+        if (!eventLocation) {
+            return res.status(404).send('Event location not found');
+        }
+
+        // Query the database for completed event details
+        const completedEvent = await knex('completed_event').where('event_id', id).first();
+
+        // Query the database for event production details
+        const eventProduction = await knex('event_production').where('event_id', id).first();
+
+        // Render the form with the retrieved data
+        res.render('edit_event_form', {
+            event_id: id,
+            event_request: eventRequest,
+            event_contact: eventContact,
+            event_location: eventLocation,
+            completed_event: completedEvent || {}, // Handle case where completed_event is null
+            event_production: eventProduction || {}, // Handle case where event_production is null
+        });
+    } catch (error) {
+        console.error('Error fetching event details:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
 
 app.get('/completeEvent/:id', async (req, res) => {
     const { id } = req.params; // Extract the event ID from the route parameter
@@ -1373,59 +1415,59 @@ app.post('/scheduled_events/:id', async (req, res) => {
 app.post('/completed_events/:id', async (req, res) => {
     const { id } = req.params;
     const {
-      event_name,
-      actual_date,
-      event_start_time,
-      event_duration,
-      participants_count,
-      completed_collar,
-      completed_pocket,
-      completed_envelope,
-      completed_vest,
-      finished_vest
-    } = req.body;
-  
-    try {
-      // Step 1: Update the event_request table
-      console.log('Updating event_request table');
-      await knex('event_request')
-        .where('event_id', id)
-        .update({
-          event_name,
-          event_start_time,
-          event_duration,
-          event_status: 'completed',
-        });
-  
-      // Step 2: Insert a new record into completed_event table
-      console.log('Inserting into completed_event table');
-      await knex('completed_event').insert({
-        event_id: id, // Ensure the event_id from event_request is inserted into completed_event
+        event_name,
+        actual_date,
+        event_start_time,
+        event_duration,
         participants_count,
-        actual_event_date: actual_date,
-        actual_event_start_time: event_start_time,
-        actual_event_duration: parseInt(event_duration, 10),
-      });
-  
-      // Step 3: Insert a new record into event_production table
-      console.log('Inserting into event_production table');
-      await knex('event_production').insert({
-        event_id: id, // Ensure the event_id from event_request is inserted into event_production
         completed_collar,
         completed_pocket,
         completed_envelope,
         completed_vest,
         finished_vest,
-      });
-  
-      // Redirect to upcoming_events page
-      res.redirect('/upcoming_events');
-    } catch (error) {
-      console.error('Error updating event:', error);
-      res.status(500).send('An error occurred while updating the event.');
-    }
-  });
+        event_status = 'completed' // Default value
+    } = req.body;
 
+    try {
+        // Step 1: Update the event_request table
+        console.log('Updating event_request table');
+        await knex('event_request')
+            .where('event_id', id)
+            .update({
+                event_name,
+                event_start_time,
+                event_duration,
+                event_status, // Update the status
+            });
+
+        // Step 2: Insert a new record into completed_event table
+        console.log('Inserting into completed_event table');
+        await knex('completed_event').insert({
+            event_id: id, // Ensure the event_id from event_request is inserted into completed_event
+            participants_count,
+            actual_event_date: actual_date,
+            actual_event_start_time: event_start_time,
+            actual_event_duration: parseInt(event_duration, 10),
+        });
+
+        // Step 3: Insert a new record into event_production table
+        console.log('Inserting into event_production table');
+        await knex('event_production').insert({
+            event_id: id, // Ensure the event_id from event_request is inserted into event_production
+            completed_collar,
+            completed_pocket,
+            completed_envelope,
+            completed_vest,
+            finished_vest,
+        });
+
+        // Redirect to completed_events page
+        res.redirect('/upcoming_events'); // Redirect to the completed events list
+    } catch (error) {
+        console.error('Error updating event:', error);
+        res.status(500).send('An error occurred while updating the event.');
+    }
+});
 
   app.get('/editUpcomingEvent/:id', async (req, res) => {
     const { id } = req.params; // Extract the event ID from the route parameter

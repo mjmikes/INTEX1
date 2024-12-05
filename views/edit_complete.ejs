@@ -69,163 +69,143 @@
     </nav>
   </header>
 
-  <!-- Main Content -->
   <main>
-    <h1 class="form-header">Event Request Form</h1>
-    <form action="/requestEvent" method="POST" class="event-form">
-      
-      <!-- Form Row 1 -->
+    <h1 class="form-header">Edit Event</h1>
+    <form action="/editEvent/<%= event_id %>" method="POST" class="event-form">
+      <!-- Event Details -->
       <div class="form-row">
         <div class="form-group">
-          <label for="firstName" class="form-label">First Name:</label>
-          <input type="text" id="firstName" name="first_name" class="form-input" required>
+          <label for="eventName">Event Name:</label>
+          <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" required>
         </div>
         <div class="form-group">
-          <label for="lastName" class="form-label">Last Name:</label>
-          <input type="text" id="lastName" name="last_name" class="form-input" required>
+          <label for="eventType">Event Type:</label>
+          <input type="text" id="eventType" name="event_type" value="<%= event_request.event_type %>" required>
         </div>
       </div>
 
-      <!-- Form Row 2 -->
+      <!-- Contact Information -->
       <div class="form-row">
         <div class="form-group">
-          <label for="phone" class="form-label">Phone:</label>
-          <input type="tel" id="phone" name="phone" class="form-input" required>
+          <label for="firstName">Contact First Name:</label>
+          <input type="text" id="firstName" name="first_name" value="<%= event_contact.first_name %>" required>
         </div>
         <div class="form-group">
-          <label for="email" class="form-label">Email:</label>
-          <input type="email" id="email" name="event_contact_email" class="form-input" required>
+          <label for="lastName">Contact Last Name:</label>
+          <input type="text" id="lastName" name="last_name" value="<%= event_contact.last_name %>" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Contact Phone:</label>
+          <input type="tel" id="phone" name="phone" value="<%= event_contact.phone %>" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Contact Email:</label>
+          <input type="email" id="email" name="event_contact_email" value="<%= event_contact.event_contact_email %>" required>
         </div>
       </div>
 
-      <!-- Form Row 3 -->
+      <!-- Location -->
       <div class="form-row">
         <div class="form-group">
-          <label for="eventName" class="form-label">Event Name:</label>
-          <input type="text" id="eventName" name="event_name" class="form-input" required>
+          <label for="address">Address:</label>
+          <input type="text" id="address" name="event_address" value="<%= event_location.event_address %>" required>
         </div>
         <div class="form-group">
-          <label for="address" class="form-label">Address:</label>
-          <input type="text" id="address" name="event_address" class="form-input" required>
+          <label for="city">City:</label>
+          <input type="text" id="city" name="event_city" value="<%= event_location.event_city %>" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="state">State:</label>
+          <input type="text" id="state" name="event_state" value="<%= event_location.event_state %>" required>
+        </div>
+        <div class="form-group">
+          <label for="zip">Zip Code:</label>
+          <input type="text" id="zip" name="event_zip" value="<%= event_location.event_zip %>" required>
         </div>
       </div>
 
-      <!-- Form Row 4 -->
+      <!-- Event Scheduling -->
       <div class="form-row">
         <div class="form-group">
-          <label for="city" class="form-label">City:</label>
-          <input type="text" id="city" name="event_city" class="form-input" required>
+          <label for="startTime">Event Start Time:</label>
+          <input type="time" id="startTime" name="event_start_time" value="<%= event_request.event_start_time %>" required>
         </div>
         <div class="form-group">
-          <label for="state" class="form-label">State:</label>
-          <input type="text" id="state" name="event_state" class="form-input" required>
+          <label for="duration">Event Duration (hrs):</label>
+          <input type="number" id="duration" name="event_duration" value="<%= event_request.event_duration %>" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="possibleDate1">Possible Date 1:</label>
+          <input type="date" id="possibleDate1" name="possible_date_1" value="<%= event_request.possible_date_1 %>" required>
+        </div>
+        <div class="form-group">
+          <label for="possibleDate2">Possible Date 2:</label>
+          <input type="date" id="possibleDate2" name="possible_date_2" value="<%= event_request.possible_date_2 %>">
         </div>
       </div>
 
-      <!-- Form Row 5 -->
+      <!-- Event Details -->
       <div class="form-row">
         <div class="form-group">
-          <label for="zip" class="form-label">Zip Code:</label>
-          <input type="text" id="zip" name="event_zip" class="form-input" required>
+          <label for="expectedParticipants">Expected Participants:</label>
+          <input type="number" id="expectedParticipants" name="expected_participants" value="<%= event_request.expected_participants %>" required>
         </div>
         <div class="form-group">
-          <label for="spaceSize" class="form-label">Event Space Description:</label>
-          <input type="text" id="spaceSize" name="event_space_description" class="form-input" required>
+          <label for="advancedSewers">Expected Advanced Sewers:</label>
+          <input type="number" id="advancedSewers" name="expected_advanced_sewers" value="<%= event_request.expected_advanced_sewers %>">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="sewingMachines">Sewing Machines Available:</label>
+          <input type="number" id="sewingMachines" name="sewing_machines_available" value="<%= event_request.sewing_machines_available %>">
+        </div>
+        <div class="form-group">
+          <label for="childrenUnder10">Children Under Age 10:</label>
+          <input type="number" id="childrenUnder10" name="children_under_10" value="<%= event_request.children_under_10 %>">
         </div>
       </div>
 
-      <!-- Form Row 6 -->
+      <!-- Event Space -->
       <div class="form-row">
         <div class="form-group">
-          <label for="possibleDate1" class="form-label">Possible Date 1:</label>
-          <input type="date" id="possibleDate1" name="possible_date_1" class="form-input" required>
-        </div>
-        <div class="form-group">
-          <label for="possibleDate2" class="form-label">Possible Date 2:</label>
-          <input type="date" id="possibleDate2" name="possible_date_2" class="form-input">
+          <label for="eventSpaceDescription">Event Space Description:</label>
+          <textarea id="eventSpaceDescription" name="event_space_description" rows="3" required><%= event_request.event_space_description %></textarea>
         </div>
       </div>
 
-      <!-- Form Row 7 -->
+      <!-- Tables -->
       <div class="form-row">
         <div class="form-group">
-          <label for="startTime" class="form-label">Event Start Time:</label>
-          <input type="time" id="startTime" name="event_start_time" class="form-input" required>
+          <label for="roundTables">Available Round Tables:</label>
+          <input type="number" id="roundTables" name="round_tables_count" value="<%= event_request.round_tables_count %>">
         </div>
         <div class="form-group">
-          <label for="duration" class="form-label">Event Duration (hrs):</label>
-          <input type="number" id="duration" name="event_duration" class="form-input" min="1" required>
+          <label for="rectangleTables">Available Rectangle Tables:</label>
+          <input type="number" id="rectangleTables" name="rectangle_tables_count" value="<%= event_request.rectangle_tables_count %>">
         </div>
       </div>
 
-      <!-- Form Row 8 -->
+      <!-- Jen's Story -->
       <div class="form-row">
         <div class="form-group">
-          <label for="eventType" class="form-label">Event Type:</label>
-          <select id="eventType" name="event_type" class="form-select" required>
-            <option value="Sewing">Sewing</option>
-            <option value="Non-Sewing">Non-Sewing</option>
-            <option value="Both">Both</option>
+          <label for="jenStory">Jen's Story:</label>
+          <select id="jenStory" name="jen_story">
+            <option value="true" <%= event_request.jen_story ? 'selected' : '' %>>Yes</option>
+            <option value="false" <%= !event_request.jen_story ? 'selected' : '' %>>No</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="advancedSewers" class="form-label">Expected Advanced Sewers:</label>
-          <input type="number" id="advancedSewers" name="expected_advanced_sewers" class="form-input" min="0" required>
-        </div>
       </div>
 
-      <!-- Form Row 9 -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="sewingMachines" class="form-label">Sewing Machines Available:</label>
-          <input type="number" id="sewingMachines" name="sewing_machines_available" class="form-input" min="0" required>
-        </div>
-        <div class="form-group">
-          <label for="participants" class="form-label"># of Expected Participants:</label>
-          <input type="number" id="participants" name="expected_participants" class="form-input" min="1" required>
-        </div>
-      </div>
-
-      <!-- Form Row 10 -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="kidsUnder10" class="form-label"># of Kids Under Age 10:</label>
-          <input type="number" id="kidsUnder10" name="children_under_10" class="form-input" min="0">
-        </div>
-
-        <div class="form-group">
-          <label for="jenStory" class="form-label">Jen Story:</label>
-          <select id="jenStory" name="jen_story" class="form-select">
-            <option value="True">Yes</option>
-            <option value="False">No</option>
-          </select>
-        </div>
-      </div>
-
-        <!-- Form Row 11 -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="roundTables" class="form-label">Available Round Tables:</label>
-          <input type="number" id="roundTables" name="round_tables_count" class="form-input" min="0">
-        </div>
-        <div class="form-group">
-          <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
-          <input type="number" id="rectangleTables" name="rectangle_tables_count" class="form-input" min="0">
-        </div>
-      </div>
-
-      <!-- Form Row 12 -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="eventDescription" class="form-label">Event Description:</label>
-          <textarea id="eventDescription" name="event_description" class="form-textarea" rows="4" required></textarea>
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" class="form-submit-btn">Submit</button>
-      
+      <button type="submit" class="form-submit-btn">Save Changes</button>
     </form>
+  </main>
     <footer>
       <div class="footer">
           <!-- Contact Information -->
