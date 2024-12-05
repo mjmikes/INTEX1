@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/request_event.styles.css"> <!-- Update the path as needed -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
+<main>
     <script src="js/app.js"></script>
     <!-- Header -->
     <header>
@@ -189,7 +189,7 @@
               Yes
             </label>
             <label for="leadNo" class="checkbox-label">
-              <input type="radio" id="leadNo" name="willing_to_lead" value="No" <%= volunteer_info.willing_to_lead
+              <input type="radio" id="leadNo" name="willing_to_lead" value="No" <%= volunteer_info.willing_to_lead === 'No' ? 'checked' : '' %> >
                === 'No' ? 'checked' : '' %> >
               No
             </label>
@@ -201,7 +201,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="soure" class="form-label">How did you hear about us?</label>
-          <select id="soure" name="soure" class="form-select" required>
+          <select id="soure" name="soure" value="<%= volunteer_info.source %>" class="form-select" required>
             <option value="Friend/Family">Friend/Family</option>
             <option value="Social Media">Social Media</option>
             <option value="Online">Online</option>
@@ -217,7 +217,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="additionalInfo" class="form-label">What should we know about you:</label>
-          <textarea id="additionalInfo" name="details" class="form-textarea" rows="4" required></textarea>
+          <textarea id="additionalInfo" name="details" value="<%= volunteer_info.details %>"  class="form-textarea" rows="4" required></textarea>
         </div>
       </div>
 
@@ -253,5 +253,3 @@
     </div>
 </footer>
 </main
-</body>
-</html>
