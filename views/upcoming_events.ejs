@@ -150,9 +150,11 @@
                         <td colspan="<%= isAdmin ? 23 : 3 %>">No event data available</td>
                     </tr>                    
                 <% } %>
+                <% if (isAdmin) { %>
                 <form action="/admin_schedule_event" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
                     <button class="btn-add" type="submit"><i class="fas fa-plus"></i>  Add Event</button>
                     <br>
+                    <% } %>
             </tbody>
         </table>
     </div>
