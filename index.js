@@ -540,10 +540,10 @@ app.post('/editEvent/:id', async (req, res) => {
     phone,
     event_contact_email,
     event_type,
-    event_location_address,
-    event_location_city,
-    event_location_state,
-    event_location_zip,
+    event_address,
+    event_city,
+    event_state,
+    event_zip,
     event_start_time,
     event_duration,
     event_description,
@@ -575,10 +575,10 @@ app.post('/editEvent/:id', async (req, res) => {
     await knex('event_location')
       .where('event_location_id', id)
       .update({
-        address: event_location_address,
-        city: event_location_city,
-        state: event_location_state,
-        zip: event_location_zip,
+        event_address: event_address,
+        event_city: event_city,
+        event_state: event_state,
+        event_zip: event_zip,
       });
 
     // Update event_request table
