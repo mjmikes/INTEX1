@@ -79,6 +79,7 @@
                     <th>Available Round Tables</th>
                     <th>Available Rectangle Tables</th>
                     <th>Event Description</th>
+                    <th>Event Status</th>
                     <th>Action</th>
                     <th>Action</th>
                     <th>Delete</th>
@@ -107,6 +108,7 @@
                             <td><%= event.round_tables_count %></td>
                             <td><%= event.rectangle_tables_count %></td>
                             <td><%= event.event_description %></td>
+                            <td><%= event.event_status %></td>
                             <td>
                                 <div class="table-action-buttons">
                                     <form action="/editEvent/<%= event.event_id %>" method="GET" style="display:inline;">

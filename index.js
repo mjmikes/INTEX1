@@ -1190,8 +1190,9 @@ app.get('/editAdmin/:id', async (req, res) => {
 });
 
 
-app.post('/updateAdmin', async (req, res) => {
-    const { admin_id, first_name, last_name, phone, email, username, password } = req.body;
+app.post('/updateAdmin/:admin_id', async (req, res) => {
+    const { admin_id } = req.params; // Retrieve admin_id from the route
+    const { first_name, last_name, phone, email, username, password } = req.body;
 
     if (!admin_id) {
         return res.status(400).send("Admin ID is required for updating.");
