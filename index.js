@@ -501,19 +501,19 @@ app.post('/editEvent/:id', (req, res) => {
             event_name: event_name,
             event_type: event_type,
             event_start_time: event_start_time,
-            event_duration: event_duration_int,
+            event_duration: event_duration,
             event_description: event_description,
-            expected_advanced_sewers: expected_advanced_sewers_int,
-            sewing_machines_available: sewing_machines_available_int,
-            expected_participants: expected_participants_int,
-            children_under_10: children_under_10_int,
+            expected_advanced_sewers: expected_advanced_sewers,
+            sewing_machines_available: sewing_machines_available,
+            expected_participants: expected_participants,
+            children_under_10: children_under_10,
             jen_story: jen_story,
             event_space_description: event_space_description,
-            round_tables_count: round_tables_count_int,
-            rectangle_tables_count: rectangle_tables_count_int,
+            round_tables_count: round_tables_count,
+            rectangle_tables_count: rectangle_tables_count,
             possible_date_1: possible_date_1,
             possible_date_2: possible_date_2,
-            actual_date: actual_date_obj
+            actual_date: actual_date
           });
       })
       .then(() => {
