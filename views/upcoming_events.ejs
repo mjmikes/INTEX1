@@ -90,6 +90,7 @@
                             <input type="hidden" value="<%= event.event_id %>">
                             <td><%= event.actual_date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
                             <td><%= event.event_start_time.split(':').slice(0, 2).join(':') %></td>
+                            <% if (isAdmin) { %>
                             <td><%= event.first_name %> <%= event.last_name %></td>
                             <td><%= event.phone %></td>
                             <td><%= event.event_contact_email %></td>
@@ -126,12 +127,18 @@
                                     </form>
                                 </div>
                             </td>
+                            <% } else { %>
+                                <!-- Non-admin view -->
+                                <td><%= event.first_name %> <%= event.last_name %></td>
+                                <td><%= event.event_address %> <%= event.event_city %>, <%= event.event_state %></td>
+                                <td><button class="btn-signup" onclick="location.href='/signupEvent/<%= event.event_id %>'">Volunteer</button></td>
+                            <% } %>
                         </tr>
                     <% }); %>
                 <% } else { %>
                     <tr>
-                        <td colspan="23">No event data available</td>
-                    </tr>
+                        <td colspan="<%= isAdmin ? 23 : 3 %>">No event data available</td>
+                    </tr>                    
                 <% } %>
                 <form action="/request_event" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
                     <button class="btn-add" type="submit"><i class="fas fa-plus"></i>  Add Event</button>
@@ -167,8 +174,6 @@
             <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
         </div>
     </footer>
-    
-    
     <script src="js/app.js"></script>
 </body>
 </html>
