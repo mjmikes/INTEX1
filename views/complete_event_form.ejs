@@ -81,11 +81,11 @@
         <div class="form-row">
           <div class="form-group">
             <label for="eventName" class="form-label">Event Name:</label>
-            <input type="text" id="eventName" name="event_name" value="<%= event.event_name %>" class="form-input" required>
+            <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" class="form-input" required>
           </div>
           <div class="form-group">
             <label for="actualDate" class="form-label">Date:</label>
-            <input type="date" id="actualDate" name="actual_date" value="<%= event.actual_date %>" class="form-input" required>
+            <input type="date" id="actualDate" name="actual_date" value="<%= event_request.actual_date %>" class="form-input" required>
           </div>
         </div>
   
@@ -93,11 +93,11 @@
         <div class="form-row">
           <div class="form-group">
             <label for="startTime" class="form-label">Event Start Time:</label>
-            <input type="time" id="startTime" name="event_start_time" value="<%= event.event_start_time %>" class="form-input" required>
+            <input type="time" id="startTime" name="event_start_time" value="<%= event_request.event_start_time %>" class="form-input" required>
           </div>
           <div class="form-group">
             <label for="duration" class="form-label">Event Duration (hrs):</label>
-            <input type="number" id="duration" name="event_duration" value="<%= event.event_duration %>" class="form-input" min="1" required>
+            <input type="number" id="duration" name="event_duration" value="<%= event_request.event_duration %>" class="form-input" min="1" required>
           </div>
         </div>
   
@@ -109,7 +109,7 @@
           </div>
           <div class="form-group">
             <label for="expectedParticipants" class="form-label">Expected Participants:</label>
-            <div id="expectedParticipants" class="form-static"><%= event.expected_participants %></div>
+            <div id="expectedParticipants" class="form-static"><%= event_request.expected_participants %></div>
           </div>
         </div>
       </div>
