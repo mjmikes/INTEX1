@@ -463,22 +463,18 @@ app.get('/editEvent/:id', async (req, res) => {
 app.post('/editEvent/:id', (req, res) => {
   const { id } = req.params;
   const {
-    event_name, first_name, last_name, phone, event_contact_email, event_type, event_location_address,
-    event_location_city, event_location_state, event_location_zip, event_start_time, event_duration,
-    event_description, expected_advanced_sewers, sewing_machines_available, expected_participants,
-    children_under_10, jen_story, event_space_description, round_tables_count, rectangle_tables_count,
-    possible_date_1, possible_date_2, actual_date
+    event_name = req.body.event_name, first_name = req.body.first_name, last_name = req.body.last_name, 
+    phone = req.body.phone, event_contact_email = req.body.contact_email, event_type = req.body.event_type, 
+    event_location_address = req.body.event_location_address, event_location_city = req.body.event_location_city,
+    event_location_state = req.body.event_location_state, event_location_zip = req.body.event_location_zip, 
+    event_start_time = req.body.event_start_time, event_duration = req.body.event_duration,
+    event_description = req.body.event_description, expected_advanced_sewers = req.body.expected_advanced_sewers, 
+    sewing_machines_available = req.body.sewing_machines_available, expected_participants = req.body.expected_participants,
+    children_under_10 = req.body.children_under_10, jen_story = req.body.jen_story, 
+    event_space_description = req.body.event_space_description, round_tables_count = req.body.round_tables_count, 
+    rectangle_tables_count = req.body.rectangle_tables_count, possible_date_1 = req.body.possible_date_1, 
+    possible_date_2 = req.body.possible_date_2, actual_date = req.body.actual_date
   } = req.body;
-
-  // Ensure proper type conversion
-  const event_duration_int = parseInt(event_duration);
-  const expected_advanced_sewers_int = parseInt(expected_advanced_sewers);
-  const sewing_machines_available_int = parseInt(sewing_machines_available);
-  const expected_participants_int = parseInt(expected_participants);
-  const children_under_10_int = parseInt(children_under_10);
-  const round_tables_count_int = parseInt(round_tables_count);
-  const rectangle_tables_count_int = parseInt(rectangle_tables_count);
-  const actual_date_obj = actual_date ? new Date(actual_date) : null;
 
   try {
     // First, update the event_contact table
@@ -536,7 +532,6 @@ app.post('/editEvent/:id', (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
 
 
 // Post route to send volunteer form data to database
