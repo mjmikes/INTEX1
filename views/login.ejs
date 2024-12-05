@@ -57,7 +57,10 @@
                 </div>
         </nav>
     </header>
-
+    <section class="hero">
+        <div class="hero-overlay"></div> 
+        <img src="images/smiling_homeless2.jpg" alt="Creating a World">
+    </section>
     <div class="login-container">
         <div class="login-image">
             <img src="/images/loginimg.jpg" alt="Login Side Image">
@@ -71,7 +74,6 @@
                     <p style="color: red; font-weight: bold;"><%= errorMessage %></p>
                 <% } %>
             </div>
-
             <form action="/login" method="POST">
                 <div class="form-group">
                     <input type="text" id="username" name="username" placeholder="Username" required>
@@ -86,6 +88,33 @@
             
         </div>
     </div>
+    <footer>
+        <div class="footer">
+            <!-- Contact Information -->
+            <div class="contact">
+                <h2>Connect with Us!</h2>
+                <p>Phone: 801-872-3190</p>
+                <p>Email: turtleshelterproject@gmail.com</p>
+                <p>Address: PO Box 382, Kaysville, UT 84037</p>
+            </div>
+    
+            <!-- Social Media Links (Icons) -->
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/turtle-shelter-project-6aa0aa1a4/" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/turtleshelterproject/" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/turtleshelterproject" target="_blank" class="social-icon">
+                    <i class="fab fa-facebook"></i>
+                </a>
+            </div>
+    
+            <!-- Copyright Text -->
+            <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
+        </div>
+    </footer>
 
     <!-- Simple client-side validation -->
     <script src="js/app.js"></script>
