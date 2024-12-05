@@ -154,7 +154,7 @@ app.get("/volunteer_success_page", (req, res) => {
 });
 
 // Sponsor Success page 
-app.get("/volunteer_success_page", (req, res) => {
+app.get("/sponsor_success_page", (req, res) => {
     res.render("sponsor_success_page");
 });
 
