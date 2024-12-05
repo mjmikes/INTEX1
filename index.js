@@ -375,6 +375,7 @@ app.get('/upcoming_events', async (req, res) => {
                 'event_request.possible_date_1',
                 'event_request.possible_date_2',
                 'event_request.actual_date',
+                'event_request.event_status',
                 'event_contact.first_name',
                 'event_contact.last_name',
                 'event_contact.phone',
