@@ -365,6 +365,46 @@ app.post('/deleteEvent/:id', async (req, res) => {
     }
 });
 
+app.post('/editEvent/:id', (req, res) => {
+    const {
+        event_name, first_name, last_name, phone, event_contact_email, event_type, event_location_address,
+        event_location_city, event_location_state, event_location_zip, event_start_time, event_duration,
+        event_description, expected_advanced_sewers, sewing_machines_available, expected_participants,
+        children_under_10, jen_story, event_space_description, round_tables_count, rectangle_tables_count,
+        possible_date_1,possible_date_2, actual_date
+    } = req.body;
+    // Update the Event in the database
+    try {
+      knex('event_request')
+        .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
+        .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
+        .where('event_id', id)
+        .update({
+          event_name: event_name, first_name: first_name, last_name: last_name, phone: phone,
+          event_contact_email: event_contact_email, event_type: event_type,
+          event_location_address: event_location_address, event_location_city: event_location_city,
+          event_location_state: event_location_state, event_location_zip: event_location_zip,
+          event_start_time: event_start_time, event_duration: event_duration,
+          event_description: event_description, expected_advanced_sewers: expected_advanced_sewers,
+          sewing_machines_available: sewing_machines_available, expected_participants: expected_participants,
+          children_under_10: children_under_10, jen_story: jen_story,
+          event_space_description: event_space_description, round_tables_count: round_tables_count,
+          rectangle_tables_count: rectangle_tables_count, possible_date_1: possible_date_1,
+          possible_date_2: possible_date_2, actual_date: actual_date
+        })
+      .then(() => {
+        res.redirect('/requested_events'); // Redirect to the list of Pokémon after saving
+      })
+      .catch(error => {
+        console.error('Error updating Events:', error);
+        res.status(500).send('Internal Server Error');
+      });
+    } catch (error) {
+      console.error('Error editing event:', error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
 
 // Post route to send volunteer form data to database
 app.post("/submit-volunteer", async (req, res) => {
@@ -540,42 +580,37 @@ app.post('/login', (req, res) => {
 });
 
 // volunteer section
-app.get('/volunteers', (req, res) => {
+app.get('/volunteers', async (req, res) => {
     try {
-        knex('volunteer_info')
-        .select(
-            'volunteer_info.volunteer_id',
-            'volunteer_info.first_name',
-            'volunteer_info.last_name',
-            'volunteer_info.address',
-            'volunteer_info.city',
-            'volunteer_info.state',
-            'volunteer_info.zip',
-            'volunteer_info.phone',
-            'volunteer_info.email',
-            'volunteer_info.source',
-            'volunteer_info.sewing_level',
-            'volunteer_info.monthly_hour_availability',
-            'volunteer_info.willing_to_teach',
-            'volunteer_info.willing_to_lead',
-            'volunteer_info.willing_to_travel_county',
-            'volunteer_info.willing_to_travel_state',
-            'volunteer_info.details',
-        )
-        .then(volunteer_info => {
-                // Render the index.ejs template and pass the data
-                // We use res.render to work with ejs files we use res.redirct to work with routes
-                res.render('volunteers', { volunteer_info, security });
-        })
-            .catch(error => {
-                console.error('Error querying database:', error);
-                res.status(500).send('Internal Server Error');
-        });
+        const volunteer_info = await knex('volunteer_info')
+            .select(
+                'volunteer_id',
+                'first_name',
+                'last_name',
+                'address',
+                'city',
+                'state',
+                'zip',
+                'phone',
+                'email',
+                'source',
+                'sewing_level',
+                'monthly_hour_availability',
+                'willing_to_teach',
+                'willing_to_lead',
+                'willing_to_travel_county',
+                'willing_to_travel_state',
+                'details'
+            );
+
+        // Render the 'volunteers' view and pass the data
+        res.render('volunteers', { volunteer_info });
     } catch (error) {
-        console.error('Error fetching event data:', error);
+        console.error('Error querying database for volunteers:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
   // Post route to send admin form data to database
 app.post("/submit-contact", async (req, res) => {
