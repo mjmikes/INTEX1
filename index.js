@@ -38,6 +38,11 @@ app.use((req, res, next) => {
     next();  // Proceed to the next middleware/route handler
 });
 
+app.use((req, res, next) => {
+    res.locals.admin = null; // Default value
+    next();
+});
+
 
 
 
@@ -74,9 +79,6 @@ app.get('/jens_story', (req, res) => {
     res.render('jens_story');
 });
 
-app.get('/user_maintenance', (req, res) => {
-    res.render('user_maintenance');
-});
 
 app.get('/how_to_get_involved', (req, res) => {
     res.render('how_to_get_involved');
@@ -805,7 +807,7 @@ app.post('/deleteAdmin/:id', async (req, res) => {
 
         console.log(`Admin with ID ${adminId} successfully deleted.`);
         // Redirect to the user maintenance page after deletion
-        res.redirect('/user_maintenance');
+        res.redirect('/user_maintenance_view');
     } catch (error) {
         console.error('Error deleting admin:', error);
         res.status(500).send('Error deleting admin record.');
@@ -912,6 +914,82 @@ app.post("/edit_volunteer_data", async (req, res) => {
         });
     }
 });
+
+app.get('/editAdmin/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const admin = await knex('admin')
+            .select('admin_id', 'first_name', 'last_name', 'phone', 'email', 'username', 'password')
+            .where('admin_id', id)
+            .first();
+
+        console.log('Fetched Admin:', admin); // Debugging
+
+        if (!admin) {
+            return res.status(404).send('Admin not found');
+        }
+
+        res.render('add_admin', { admin });
+    } catch (error) {
+        console.error('Error fetching admin data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+app.post('/updateAdmin', async (req, res) => {
+    const { admin_id, first_name, last_name, phone, email, username, password } = req.body;
+
+    if (!admin_id) {
+        return res.status(400).send("Admin ID is required for updating.");
+    }
+
+    try {
+        await knex('admin')
+            .where({ admin_id })
+            .update({
+                first_name,
+                last_name,
+                phone,
+                email,
+                username,
+                password,
+            });
+
+        res.redirect('/user_maintenance_view');
+    } catch (error) {
+        console.error("Error updating admin:", error);
+        res.status(500).send("Error updating admin.");
+    }
+});
+
+
+
+
+
+app.post('/deleteAdmin/:id', async (req, res) => {
+    const { id } = req.params; // Extract the admin_id from the URL
+
+    if (!id) {
+        return res.status(400).send('Admin ID is required.');
+    }
+
+    try {
+        const rowsDeleted = await knex('admin').where('admin_id', id).del();
+
+        if (rowsDeleted === 0) {
+            return res.status(404).send('Admin not found.');
+        }
+
+        console.log(`Admin with ID ${id} successfully deleted.`);
+        res.redirect('/user_maintenance_view'); // Redirect to the appropriate page
+    } catch (error) {
+        console.error('Error deleting admin:', error);
+        res.status(500).send('Error deleting admin record.');
+    }
+});
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
