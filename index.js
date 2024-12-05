@@ -736,6 +736,25 @@ app.post('/deleteMessage/:submission_id', async (req, res) => {
     }
 });
 
+app.post('/deleteAdmin/:id', async (req, res) => {
+    const adminId = req.params.id; // Extract the admin_id from the URL
+
+    try {
+        // Use Knex to delete the admin record by admin_id
+        await knex('admin')
+            .where('admin_id', adminId) // Match on the correct column name
+            .del();
+
+        console.log(`Admin with ID ${adminId} successfully deleted.`);
+        // Redirect to the user maintenance page after deletion
+        res.redirect('/user_maintenance');
+    } catch (error) {
+        console.error('Error deleting admin:', error);
+        res.status(500).send('Error deleting admin record.');
+    }
+});
+
+
 
 
 
