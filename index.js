@@ -335,7 +335,7 @@ app.get('/requested_events', async (req, res) => {
             .then(event_request => {
                 // Render the index.ejs template and pass the data
                 // We use res.render to work with ejs files we use res.redirct to work with routes
-                res.render('requested_events', { event_request, security });
+                res.render('requested_events', { event_request });
             })
             .catch(error => {
                 console.error('Error querying database:', error);
@@ -458,19 +458,19 @@ app.get('/editEvent/:id', async (req, res) => {
   }
 });
 
-app.post('/editEvent/:id', (req, res) => {
+app.post('/meditEvent/:id', (req, res) => {
   const { id } = req.params;
   const {
     event_name = req.body.event_name, first_name = req.body.first_name, last_name = req.body.last_name, 
     phone = req.body.phone, event_contact_email = req.body.contact_email, event_type = req.body.event_type, 
     event_location_address = req.body.event_location_address, event_location_city = req.body.event_location_city,
     event_location_state = req.body.event_location_state, event_location_zip = req.body.event_location_zip, 
-    event_start_time = req.body.event_start_time, event_duration = req.body.event_duration,
-    event_description = req.body.event_description, expected_advanced_sewers = req.body.expected_advanced_sewers, 
-    sewing_machines_available = req.body.sewing_machines_available, expected_participants = req.body.expected_participants,
-    children_under_10 = req.body.children_under_10, jen_story = req.body.jen_story, 
-    event_space_description = req.body.event_space_description, round_tables_count = req.body.round_tables_count, 
-    rectangle_tables_count = req.body.rectangle_tables_count, possible_date_1 = req.body.possible_date_1, 
+    event_start_time = req.body.event_start_time, event_duration = parseInt(req.body.event_duration),
+    event_description = req.body.event_description, expected_advanced_sewers = parseInt(req.body.expected_advanced_sewers), 
+    sewing_machines_available = parseInt(req.body.sewing_machines_available), expected_participants = parseInt(req.body.expected_participants),
+    children_under_10 = parseInt(req.body.children_under_10), jen_story = req.body.jen_story === 'yes' || req.body.jen_story === 'true' || false, 
+    event_space_description = req.body.event_space_description, round_tables_count = parseInt(req.body.round_tables_count), 
+    rectangle_tables_count = parseInt(req.body.rectangle_tables_count), possible_date_1 = req.body.possible_date_1, 
     possible_date_2 = req.body.possible_date_2, actual_date = req.body.actual_date
   } = req.body;
 
@@ -503,19 +503,19 @@ app.post('/editEvent/:id', (req, res) => {
             event_name: event_name,
             event_type: event_type,
             event_start_time: event_start_time,
-            event_duration: event_duration_int,
+            event_duration: event_duration,
             event_description: event_description,
-            expected_advanced_sewers: expected_advanced_sewers_int,
-            sewing_machines_available: sewing_machines_available_int,
-            expected_participants: expected_participants_int,
-            children_under_10: children_under_10_int,
+            expected_advanced_sewers: expected_advanced_sewers,
+            sewing_machines_available: sewing_machines_available,
+            expected_participants: expected_participants,
+            children_under_10: children_under_10,
             jen_story: jen_story,
             event_space_description: event_space_description,
-            round_tables_count: round_tables_count_int,
-            rectangle_tables_count: rectangle_tables_count_int,
+            round_tables_count: round_tables_count,
+            rectangle_tables_count: rectangle_tables_count,
             possible_date_1: possible_date_1,
             possible_date_2: possible_date_2,
-            actual_date: actual_date_obj
+            actual_date: actual_date
           });
       })
       .then(() => {
@@ -530,6 +530,87 @@ app.post('/editEvent/:id', (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+app.post('/editEvent/:id', async (req, res) => {
+  const { id } = req.params;
+  const {
+    event_name,
+    first_name,
+    last_name,
+    phone,
+    event_contact_email,
+    event_type,
+    event_location_address,
+    event_location_city,
+    event_location_state,
+    event_location_zip,
+    event_start_time,
+    event_duration,
+    event_description,
+    expected_advanced_sewers,
+    sewing_machines_available,
+    expected_participants,
+    children_under_10,
+    jen_story,
+    event_space_description,
+    round_tables_count,
+    rectangle_tables_count,
+    possible_date_1,
+    possible_date_2,
+    actual_date,
+  } = req.body;
+
+  try {
+    // Update event_contact table
+    await knex('event_contact')
+      .where('contact_id', id)
+      .update({
+        first_name: first_name,
+        last_name: last_name,
+        phone: phone,
+        email: event_contact_email,
+      });
+
+    // Update event_location table
+    await knex('event_location')
+      .where('location_id', id)
+      .update({
+        address: event_location_address,
+        city: event_location_city,
+        state: event_location_state,
+        zip: event_location_zip,
+      });
+
+    // Update event_request table
+    await knex('event_request')
+      .where('event_id', id)
+      .update({
+        event_name: event_name,
+        event_type: event_type,
+        event_start_time: event_start_time,
+        event_duration: parseInt(event_duration, 10),
+        event_description: event_description,
+        expected_advanced_sewers: parseInt(expected_advanced_sewers, 10),
+        sewing_machines_available: parseInt(sewing_machines_available, 10),
+        expected_participants: parseInt(expected_participants, 10),
+        children_under_10: parseInt(children_under_10, 10),
+        jen_story: jen_story === 'True' || jen_story === true,
+        event_space_description: event_space_description,
+        round_tables_count: parseInt(round_tables_count, 10),
+        rectangle_tables_count: parseInt(rectangle_tables_count, 10),
+        possible_date_1: possible_date_1 || null,
+        possible_date_2: possible_date_2 || null,
+        actual_date: actual_date || null,
+      });
+
+    // Redirect or send success response
+    res.redirect(`/eventDetails/${id}`);
+  } catch (error) {
+    console.error('Error updating event:', error);
+    res.status(500).send('An error occurred while updating the event.');
+  }
+});
+
 
 
 // Post route to send volunteer form data to database
