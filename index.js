@@ -994,7 +994,7 @@ app.get('/editVolunteer/:id', async (req, res) => {
 });
 
 
-app.post('/editVolunteer', async (req, res) => {
+app.post('/editVolunteer/:id', async (req, res) => {
     const {
         volunteer_id,
         first_name,
@@ -1039,7 +1039,7 @@ app.post('/editVolunteer', async (req, res) => {
             });
 
         // Render the index page with a success message
-        res.render("volunteers", {
+        res.redirect("/volunteers", {
             successMessage: "Volunteer information updated successfully.",
         });
     } catch (error) {
