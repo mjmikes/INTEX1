@@ -1300,7 +1300,7 @@ app.post('/scheduled_events/:id', async (req, res) => {
 });
 
 
-app.post("/admin_scheduled_events", async (req, res) => {
+app.post("/admin_schedule_events", async (req, res) => {
   const {
       event_name,
       first_name,
