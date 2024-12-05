@@ -69,10 +69,10 @@
         <table>
             <thead>
                 <tr>
+                    <th>Event Name</th>
                     <th>Event Date</th>
                     <th>Event Start Time</th>
                     <% if (isAdmin) { %>
-                        <th>Event Name</th>
                         <th>Contact Name</th>
                         <th>Contact Phone</th>
                         <th>Contact Email</th>
@@ -93,9 +93,8 @@
                         <th>Delete</th>
                     <% } else { %>
                         <th>Event Duration (hrs)</th>
-                        <th>Event Name</th>
                         <th>Event Location</th>
-                        <th>Event Type</th>
+                        <th>Event Description</th>
                         <th>Volunteer</th>
                     <% } %>
                 </tr>
@@ -105,6 +104,7 @@
                     <% event_request.forEach(function(event) { %> 
                         <tr>
                             <input type="hidden" value="<%= event.event_id %>">
+                            <td><%= event.event_name %></td>
                             <td><%= event.actual_date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
                             <td><%= event.event_start_time.split(':').slice(0, 2).join(':') %></td>
                             <% if (isAdmin) { %>
@@ -148,9 +148,8 @@
                             <% } else { %>
                                 <!-- Non-admin view -->
                                 <td><%= event.event_duration %></td>
-                                <td><%= event.event_name %></td>
                                 <td><%= event.event_address %> <%= event.event_city %>, <%= event.event_state %></td>
-                                <td><%= event.event_type %></td>
+                                <td><%= event.event_description %></td>
                                 <td><button class="btn-signup" onclick="location.href='/get_involved'">Volunteer</button></td>
                             <% } %>
                         </tr>
