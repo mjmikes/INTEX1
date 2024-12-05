@@ -71,8 +71,8 @@
 
   <!-- Main Content -->
   <main>
-    <h1 class="form-header">Scheduled Event Form</h1>
-    <form action="/scheduled_events/<%= event_id %>" method="POST" class="event-form">
+    <h1 class="form-header">Schedule Event Form</h1>
+    <form action="/scheduled_events/<%= event.event_id %>" method="POST" class="event-form">
       
       <!-- Form Row 1 -->
       <div class="form-row">
@@ -130,7 +130,7 @@
         </div>
         <div class="form-group">
             <label for="actualEventDate" class="form-label">Actual Event Date:</label>
-            <input type="date" id="actualEventDate" name="actual_date" class="form-input">
+            <input type="date" id="actualEventDate" name="actual_date" class="form-input" required>
         </div>
       </div>
 
