@@ -349,7 +349,7 @@ app.get('/requested_events', async (req, res) => {
     }
 });
 
-app.get('/user_maintenance', async (req, res) => {
+app.get('/user_maintenance_view', async (req, res) => {
     try {
         // Fetch all admin data using Knex
         const admin_records = await knex('admin').select(
