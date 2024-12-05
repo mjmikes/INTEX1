@@ -442,14 +442,27 @@ header {
     font-weight: bold;
 }
 
-.btn-signup:hover {
-    background-color: #ff9d00;
+.btn-add:hover {
+    background-color: #2a8e80;
     transform: scale(1.05); /* Slightly increase the size on hover */
     cursor: pointer;
 }
 
 
+.btn-add {
+    background-color: #34B3A8;
+    color: white;
+    border-radius: 15px; 
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
 
+.btn-signup:hover {
+    background-color: #ff9d00;
+    transform: scale(1.05); /* Slightly increase the size on hover */
+    cursor: pointer;
+}
 
 
 /* Sponsors Section */
