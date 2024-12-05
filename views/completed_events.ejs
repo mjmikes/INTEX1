@@ -82,7 +82,7 @@
                     <th>Completed Envelope Pieces</th>
                     <th>Completed Vest Pieces</th>
                     <th>Finished Vests</th>
-                    <th>Edit</th>
+                    <th>Edit/View</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -104,14 +104,14 @@
                             <td><%= event.finished_vest %></td>
                             <td>
                                 <div class="table-action-buttons">
-                                    <form action="/editVolunteer/<%= event.volunteer_id %>" method="GET">
-                                        <button type="submit" class="btn-edit-event">Edit</button>
+                                    <form action="/editCevent/<%= event_id %>" method="GET">
+                                        <button type="submit" class="btn-edit-event">Edit/View</button>
                                     </form>
                                 </div>
                             </td>
                             <td>
                                 <div class="table-action-buttons">
-                                    <form action="/deleteVolunteer/<%= event.volunteer_id %>" method="POST">
+                                    <form action="/deleteVolunteer/<%= event_id %>" method="POST">
                                         <button type="submit" class="btn-delete-event" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
                                     </form>
                                 </div>
