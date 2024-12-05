@@ -233,10 +233,10 @@ app.post("/RequestEvent", async (req, res) => {
         phone,
         event_contact_email,
         event_type,
-        event_location_address,
-        event_location_city,
-        event_location_state,
-        event_location_zip,
+        event_address,
+        event_city,
+        event_state,
+        event_zip,
         event_start_time,
         event_duration,
         event_description,
@@ -267,10 +267,10 @@ app.post("/RequestEvent", async (req, res) => {
         const [eventLocation] = await knex('event_location')
             .returning('event_location_id')
             .insert({
-                event_address: event_location_address,
-                event_city: event_location_city,
-                event_state: event_location_state,
-                event_zip: event_location_zip
+                event_address: event_address,
+                event_city: event_city,
+                event_state: event_state,
+                event_zip: event_zip
             });
 
         // Insert into event_request table
