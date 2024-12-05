@@ -110,43 +110,45 @@
             
             <section>
                 <h1>Sponsor Us Messages</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Submission ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Organization Name</th>
-                            <th class="message-column">Message</th>
-                            <th>Timestamp</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% if (sponsorMessages && sponsorMessages.length > 0) { %>
-                            <% sponsorMessages.forEach(sponmessage => { %>
-                                <tr>
-                                    <td><%= sponmessage.submission_id %></td>
-                                    <td><%= sponmessage.first_name %></td>
-                                    <td><%= sponmessage.last_name %></td>
-                                    <td><%= sponmessage.email %></td>
-                                    <td><%= sponmessage.organization_name %></td>
-                                    <td class="message-column"><%= sponmessage.message %></td>
-                                    <td><%= sponmessage.created_at %></td>
-                                    <td style="text-align: center;">
-                                        <form action="/deleteMessage/<%= sponmessage.submission_id %>" method="POST">
-                                            <button type="submit">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            <% }) %>
-                        <% } else { %>
+                <div>
+                    <table>
+                        <thead>
                             <tr>
-                                <td colspan="7">No sponsor submissions found.</td>
+                                <th>Submission ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Organization Name</th>
+                                <th class="message-column">Message</th>
+                                <th>Timestamp</th>
                             </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% if (sponsorMessages && sponsorMessages.length > 0) { %>
+                                <% sponsorMessages.forEach(sponmessage => { %>
+                                    <tr>
+                                        <td><%= sponmessage.submission_id %></td>
+                                        <td><%= sponmessage.first_name %></td>
+                                        <td><%= sponmessage.last_name %></td>
+                                        <td><%= sponmessage.email %></td>
+                                        <td><%= sponmessage.organization_name %></td>
+                                        <td class="message-column"><%= sponmessage.message %></td>
+                                        <td><%= sponmessage.created_at %></td>
+                                        <td style="text-align: center;">
+                                            <form action="/deleteMessage/<%= sponmessage.submission_id %>" method="POST">
+                                                <button type="submit">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="7">No sponsor submissions found.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
             </section>
     <footer>
         <div class="footer">
