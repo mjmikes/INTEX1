@@ -462,7 +462,6 @@ app.post('/deleteEvent/:id', async (req, res) => {
         res.redirect('/requested_events');
     } catch (error) {
         console.error('Error deleting event:', error.stack || error);
-        res.status(500).send('Internal Server Error');
     }
 });
 
