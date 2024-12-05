@@ -24,7 +24,7 @@
                     <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
                     <% if (isAdmin) { %>
-                        <div class="circle-icon" onclick="toggleLogout()">J</div>
+                        <div class="circle-icon" onclick="toggleLogout()">A</div>
                         <div id="logout-option" class="logout-option">
                             <a href="/messages" class="logout-link"><b>Messages</b></a>
                             <a href="/help" class="logout-link"><b>Help</b></a>
@@ -117,7 +117,7 @@
                     </tr>
                 <% } %>
                 <form action="/get_involved1" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
-                    <button class="btn-add" type="submit"><i class="fas fa-plus"></i> Manually Add Volunteer</button>
+                    <button class="btn-add" type="submit"><i class="fas fa-plus"></i> Add Volunteer</button>
                 </form>
             </tbody>
         </table>
