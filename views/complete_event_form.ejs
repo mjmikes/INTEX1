@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Request | Turtle Shelter Project</title>
+  <link rel="stylesheet" href="/css/request_event.styles.css"> <!-- Update the path as needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a href="/" class="logo-link">
+          <i class="fas fa-home"></i> <!-- Home icon -->
+          <span class="logo-text">Turtle Shelter Project</span>
+      </a>
+      </div>
+      <div class="navbar-collapse">
+        <ul class="main-menu">
+            <li><a href="/request_event">Request Event</a></li>
+            <li><a href="/jens_story">Jen's Story</a></li>
+            <li><a href="/our_tech">Our Tech</a></li>
+            <li><button class="btn-secondary" onclick="location.href='/how_to_get_involved'">Get Involved</button></li>
+            <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+             <!-- Conditionally show icon based on isAdmin -->
+             <% if (isAdmin) { %>
+                <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
+                <div id="logout-option" class="logout-option">
+                    <!-- Link for Contact Messages and Sponsor Messages -->
+                    <a href="/messages" class="logout-link"><b>Messages</b></a>
+                    
+                    <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
+                    <a href="/help" class="logout-link"><b>Help</b></a>
+                    
+                    <!-- Link for Logout -->
+                    <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
+                </div>
+            <% } else { %>
+                <li><a href="/login">Login</a></li>
+            <% } %>
+            <div class="navbar-toggler">
+              <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
+          </div>
+        </ul>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <!-- Close button -->
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <!-- Sidebar Links -->
+        <ul class="sidebar-links">
+          <li><a href="/#contact-us-form">Contact Us</a></li>
+          <li><a href="/faqs">FAQs</a></li>
+          <li><a href="/sponsor_us">Sponsor Us</a></li>
+          <li><a href="/upcoming_events">Upcoming Events</a></li>
+          <% if (isAdmin) { %>
+            <li><a href="/requested_events"><b>Requested Events</b></a></li>
+            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+            <li><a href="/completed_events"><b>Completed Events</b></a></li>
+            <li><a href="/volunteers"><b>Volunteers</b></a></li>
+            <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
+        <% } %>
+        </ul>
+    </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <!-- Main Content -->
+  <main>
+    <h1 class="form-header">Completed Event Information</h1>
+    <form action="/completed_events/<%= event_request.event_id %>" method="POST" class="event-form">
+  
+      <!-- Top Section: Event Details -->
+      <div class="form-section">
+        <h2 class="section-header">Event Details</h2>
+  
+        <!-- Form Row 1 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eventName" class="form-label">Event Name:</label>
+            <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="actualDate" class="form-label">Date:</label>
+            <input type="date" id="actualDate" name="actual_date" value="<%= event_request.actual_date %>" class="form-input" required>
+          </div>
+        </div>
+  
+        <!-- Form Row 2 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="startTime" class="form-label">Event Start Time:</label>
+            <input type="time" id="startTime" name="event_start_time" value="<%= event_request.event_start_time %>" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="duration" class="form-label">Event Duration (hrs):</label>
+            <input type="number" id="duration" name="event_duration" value="<%= event_request.event_duration %>" class="form-input" min="1" required>
+          </div>
+        </div>
+  
+        <!-- Form Row 3 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expectedParticipants" class="form-label">Expected Participants:</label>
+            <div id="expectedParticipants" class="form-static"><%= event_request.expected_participants %></div>
+          </div>
+          <div class="form-group">
+            <label for="participantsCount" class="form-label">Actual Participants Count:</label>
+            <input type="number" id="participantsCount" name="participants_count" class="form-input" min="0" required>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Bottom Section: Completed Products -->
+      <div class="form-section">
+        <h2 class="section-header">Production</h2>
+  
+        <!-- Form Row 5 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="completedCollars" class="form-label">Completed Collar Pieces:</label>
+            <input type="number" id="completedCollars" name="completed_collars" class="form-input" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="completedPockets" class="form-label">Completed Pocket Pieces:</label>
+            <input type="number" id="completedPockets" name="completed_pocket" class="form-input" min="0" required>
+          </div>
+        </div>
+  
+        <!-- Form Row 6 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="completedEnvelopes" class="form-label">Completed Envelope Pieces:</label>
+            <input type="number" id="completedEnvelopes" name="completed_envelope" class="form-input" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="completedVests" class="form-label">Completed Vest Pieces:</label>
+            <input type="number" id="completedVests" name="completed_vest" class="form-input" min="0" required>
+          </div>
+        </div>
+  
+        <!-- Final Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="finishedVests" class="form-label">Finished Vests:</label>
+            <input type="number" id="finishedVests" name="finished_vest" class="form-input" min="0" required>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="form-row">
+        <button type="submit" class="form-submit">Submit</button>
+      </div>
+    </form>
+  </main>
+  
+  
+  
