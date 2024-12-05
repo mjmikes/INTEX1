@@ -430,14 +430,14 @@ app.get('/editEvent/:id', async (req, res) => {
           first_name: event_request.first_name,
           last_name: event_request.last_name,
           phone: event_request.phone,
-          email: event_request.event_contact_email
+          event_contact_email: event_request.event_contact_email
         };
 
         const event_location = {
-          address: event_request.event_address,
-          city: event_request.event_city,
-          state: event_request.event_state,
-          zip: event_request.event_zip
+          event_address: event_request.event_address,
+          event_city: event_request.event_city,
+          event_state: event_request.event_state,
+          event_zip: event_request.event_zip
         };
 
         // Render the template with all data passed to it
