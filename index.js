@@ -423,24 +423,37 @@ app.get('/user_maintenance_view', async (req, res) => {
 
 app.get('/completed_events', async (req, res) => {
     try {
-        // Fetch all admin data using Knex
-        const admin_records = await knex('admin').select(
-            'admin_id',
-            'first_name',
-            'last_name',
-            'phone',
-            'email',
-            'username',
-            'password'
-        );
+        // Fetch data by joining the necessary tables
+        const completed_event = await knex('event_request')
+            .join('completed_event', 'event_request.event_id', '=', 'completed_event.event_id') // Join with completed_event
+            .join('event_production', 'event_request.event_id', '=', 'event_production.event_id') // Join with event_production
+            .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id') // Join with event_contact
+            .select(
+                'event_request.event_id',
+                'event_request.event_name',
+                'completed_event.actual_event_date',
+                'event_contact.first_name',
+                'event_contact.last_name',
+                'event_contact.phone',
+                'event_contact.event_contact_email',
+                'completed_event.participants_count',
+                'event_production.completed_collar',
+                'event_production.completed_vest',
+                'event_production.completed_envelope',
+                'event_production.completed_pocket',
+                'event_production.finished_vest'
+            )
+            .orderBy('completed_event.actual_event_date', 'desc'); // Optionally order by event date
 
-        // Render the user_maintenance_view template with admin_records
-        res.render('user_maintenance_view', { admin_records }); // Pass the admin data to the EJS template
+        // Render the completed_events view with the retrieved data
+        res.render('completed_events', { completed_event });
     } catch (error) {
-        console.error('Error fetching admin data:', error);
-        res.status(500).send('An error occurred while fetching user maintenance data.');
+        console.error('Error fetching completed event data:', error);
+        res.status(500).send('An error occurred while fetching the completed event data.');
     }
 });
+
+
 
 
 app.post('/deleteEvent/:id', async (req, res) => {
