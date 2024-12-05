@@ -1417,7 +1417,7 @@ app.post('/completed_events/:id', async (req, res) => {
         });
 
         // Redirect to completed_events page
-        res.redirect('/completed_events'); // Redirect to the completed events list
+        res.redirect('/upcoming_events'); // Redirect to the completed events list
     } catch (error) {
         console.error('Error updating event:', error);
         res.status(500).send('An error occurred while updating the event.');
