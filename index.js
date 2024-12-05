@@ -130,11 +130,6 @@ app.get("/sponsor_us", (req, res) => {
     res.render("sponsor_us");
 });
 
-// Upcoming Events page
-app.get("/upcoming_events", (req, res) => {
-    res.render("upcoming_events");
-});
-
 // Completed Events page (protected by authentication)
 app.get("/completed_events", (req, res) => {
     res.render("completed_events");
