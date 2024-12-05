@@ -79,7 +79,8 @@
                     <th>Available Round Tables</th>
                     <th>Available Rectangle Tables</th>
                     <th>Event Description</th>
-                    <th>Actions</th>
+                    <th>Action</th>
+                    <th>Action</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -110,6 +111,13 @@
                                 <div class="table-action-buttons">
                                     <form action="/editEvent/<%= event.event_id %>" method="GET" style="display:inline;">
                                         <button type="submit" class="btn-edit-event">Edit/View</button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-action-buttons">
+                                    <form action="/scheduleEvent/<%= event.event_id %>" method="GET" style="display:inline;">
+                                        <button type="submit" class="btn-edit-event">Schedule</button>
                                     </form>
                                 </div>
                             </td>
