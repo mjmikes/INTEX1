@@ -800,4 +800,16 @@ td[colspan="23"] {
     transform: scale(1.05);
 }
 
+/* Sxchedule Button Styling */
+.table-action-buttons .btn-schedule-event {
+    background-color: #E38C8C
+    ;
+    color: white;
+}
+
+.table-action-buttons .btn-schedule-event:hover {
+    background-color: #74e174;
+    transform: scale(1.05);
+}
+
 
