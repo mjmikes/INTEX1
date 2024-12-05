@@ -657,6 +657,7 @@ footer p {
     align-items: center;
     justify-content: center;
     background: #f4f4f4; /* Backup color in case the image doesn't load */
+    margin-left: 40px;
 }
 
 .login-image img {
