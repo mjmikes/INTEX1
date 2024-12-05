@@ -842,7 +842,8 @@ app.get('/editVolunteer/:id', async (req, res) => {
     }
 });
 
-app.post("/edit_volunteer_data", async (req, res) => {
+//app.post("/edit_volunteer_data", async (req, res) => {
+app.post("/editVolunteer", async (req, res) => {
     const {
         volunteer_id,
         first_name,
