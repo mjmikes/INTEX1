@@ -995,9 +995,8 @@ app.get('/editVolunteer/:id', async (req, res) => {
 
 
 app.post('/editVolunteer/:id', async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params; // Get the volunteer ID from the route parameter
     const {
-        volunteer_id,
         first_name,
         last_name,
         address,
@@ -1017,9 +1016,9 @@ app.post('/editVolunteer/:id', async (req, res) => {
     } = req.body;
 
     try {
-        // Update the existing volunteer record
+        // Update the existing volunteer record using the volunteer ID from the URL
         await knex('volunteer_info')
-            .where('volunteer_id', volunteer_id) // Find the record by volunteer_id
+            .where('volunteer_id', id) // Use the 'id' from the URL
             .update({
                 first_name,
                 last_name,
@@ -1039,10 +1038,8 @@ app.post('/editVolunteer/:id', async (req, res) => {
                 details
             });
 
-        // Render the index page with a success message
-        res.redirect("/volunteers", {
-            successMessage: "Volunteer information updated successfully.",
-        });
+        // Redirect to the volunteers page after successful update
+        res.redirect('/volunteers'); // Assuming '/volunteers' is your list page
     } catch (error) {
         console.error("Error updating volunteer data:", error);
         res.status(500).render("index", {
@@ -1050,6 +1047,7 @@ app.post('/editVolunteer/:id', async (req, res) => {
         });
     }
 });
+
 
 app.get('/editAdmin/:id', async (req, res) => {
     const { id } = req.params;
