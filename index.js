@@ -1046,9 +1046,6 @@ app.post('/updateAdmin', async (req, res) => {
 });
 
 
-
-
-
 app.post('/deleteAdmin/:id', async (req, res) => {
     const { id } = req.params; // Extract the admin_id from the URL
 
