@@ -310,6 +310,7 @@ app.get('/requested_events', async (req, res) => {
         knex('event_request')
             .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
             .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
+            .where('event_request.event_status', 'pending')
             .select(
                 'event_request.event_id',
                 'event_request.event_name',
@@ -1216,6 +1217,80 @@ app.post('/deleteVolunteer/:id', async (req, res) => {
     }
 });
 
-
+app.post('/scheduled_events/:id', async (req, res) => {
+    const { id } = req.params;
+    const {
+      event_name,
+      first_name,
+      last_name,
+      phone,
+      event_contact_email,
+      event_type,
+      event_address,
+      event_city,
+      event_state,
+      event_zip,
+      event_start_time,
+      event_duration,
+      event_description,
+      expected_advanced_sewers,
+      sewing_machines_available,
+      expected_participants,
+      children_under_10,
+      jen_story,
+      round_tables_count,
+      rectangle_tables_count,
+      actual_date,
+    } = req.body;
+  
+    try {
+      // Update event_contact table
+      await knex('event_contact')
+        .where('event_contact_id', id)
+        .update({
+          first_name: first_name,
+          last_name: last_name,
+          phone: phone,
+          event_contact_email: event_contact_email,
+        });
+  
+      // Update event_location table
+      await knex('event_location')
+        .where('event_location_id', id)
+        .update({
+          event_address: event_address,
+          event_city: event_city,
+          event_state: event_state,
+          event_zip: event_zip,
+        });
+  
+      // Update event_request table
+      await knex('event_request')
+        .where('event_id', id)
+        .update({
+          event_name: event_name,
+          event_type: event_type,
+          event_start_time: event_start_time,
+          event_duration: parseInt(event_duration, 10),
+          event_description: event_description,
+          expected_advanced_sewers: parseInt(expected_advanced_sewers, 10),
+          sewing_machines_available: parseInt(sewing_machines_available, 10),
+          expected_participants: parseInt(expected_participants, 10),
+          children_under_10: parseInt(children_under_10, 10),
+          jen_story: jen_story === 'True' || jen_story === true,
+          round_tables_count: parseInt(round_tables_count, 10),
+          rectangle_tables_count: parseInt(rectangle_tables_count, 10),
+          actual_date: actual_date || null,
+          event_status: 'scheduled' 
+        });
+    
+      // Redirect to requested_events page
+      res.redirect('/requested_events');
+    } catch (error) {
+      console.error('Error updating event:', error);
+      res.status(500).send('An error occurred while updating the event.');
+    }
+    
+  });
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))

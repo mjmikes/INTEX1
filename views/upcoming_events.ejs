@@ -6,7 +6,6 @@
     <title>Requested Events | Turtle Shelter Project</title>
     <link rel="stylesheet" href="/css/requested_events.styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body>
     <header>
@@ -17,7 +16,6 @@
                     <span class="logo-text">Turtle Shelter Project</span>
                 </a>
             </div>
-            
             <div class="navbar-collapse">
                 <ul class="main-menu">
                     <li><a href="/request_event">Request Event</a></li>
@@ -25,17 +23,11 @@
                     <li><a href="/our_tech">Our Tech</a></li>
                     <li><button class="btn-secondary" onclick="location.href='/get_involved'">Get Involved</button></li>
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
-                     <!-- Conditionally show icon based on isAdmin -->
                      <% if (isAdmin) { %>
                         <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
                         <div id="logout-option" class="logout-option">
-                            <!-- Link for Contact Messages and Sponsor Messages -->
                             <a href="/messages" class="logout-link"><b>Messages</b></a>
-                            
-                            <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
                             <a href="/help" class="logout-link"><b>Help</b></a>
-                            
-                            <!-- Link for Logout -->
                             <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
                         </div>
                     <% } else { %>
@@ -47,9 +39,7 @@
                 </ul>
             </div>
                 <div class="sidebar" id="sidebar">
-                    <!-- Close button -->
                     <button class="close-btn" onclick="toggleSidebar()">×</button>
-                    <!-- Sidebar Links -->
                     <ul class="sidebar-links">
                         <li><a href="#contact-us-form">Contact Us</a></li>
                         <li><a href="/faqs">FAQs</a></li>
@@ -67,7 +57,7 @@
         </nav>
     </header>
     <div class="table-container">
-        <h1>Pending Event Requests</h1>
+        <h1>Scheduled Events</h1>
         <table>
             <thead>
                 <tr>
@@ -75,9 +65,11 @@
                     <th>Contact Phone</th>
                     <th>Contact Email</th>
                     <th>Event Location</th>
-                    <th>Actual Date</th>
+                    <th>Event Space Description</th>
+                    <th>Possible Date 1</th>
+                    <th>Possible Date 2</th>
                     <th>Event Start Time</th>
-                    <th>Expected Duration (hrs)</th>
+                    <th>Event Duration (hrs)</th>
                     <th>Event Type</th>
                     <th>Expected Sewers</th>
                     <th>Sewing Machines</th>
@@ -87,13 +79,14 @@
                     <th>Available Round Tables</th>
                     <th>Available Rectangle Tables</th>
                     <th>Event Description</th>
-                    <th>Actions</th>
+                    <th>Action</th>
+                    <th>Action</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <% if (event_request.length > 0) { %> <!-- Check if there are events -->
-                    <% event_request.forEach(function(event) { %> <!-- Loop through events -->
+                    <% event_request.forEach(function(event) { %> 
                         <tr>
                             <input type="hidden" value="<%= event.event_id %>">
                             <td><%= event.first_name %> <%= event.last_name %></td>
@@ -115,16 +108,23 @@
                             <td><%= event.rectangle_tables_count %></td>
                             <td><%= event.event_description %></td>
                             <td>
-                                <div class="button-container">
-                                  <form action="/editEvent/<%= event.event_id %>" method="GET" style="display:inline;">
-                                    <button type="submit">Edit/View</button>
-                                  </form>
+                                <div class="table-action-buttons">
+                                    <form action="/editEvent/<%= event.event_id %>" method="GET" style="display:inline;">
+                                        <button type="submit" class="btn-edit-event">Edit/View</button>
+                                    </form>
                                 </div>
                             </td>
                             <td>
-                                <div class="button-container"></div>
+                                <div class="table-action-buttons">
+                                    <form action="/scheduleEvent/<%= event.event_id %>" method="GET" style="display:inline;">
+                                        <button type="submit" class="btn-schedule-event">Schedule</button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-action-buttons">
                                     <form action="/deleteEvent/<%= event.event_id %>" method="POST" style="display:inline;">
-                                        <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                                        <button type="submit" class="btn-delete-event" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
                                     </form>
                                 </div>
                             </td>
@@ -135,6 +135,9 @@
                         <td colspan="23">No event data available</td>
                     </tr>
                 <% } %>
+                <form action="/request_event" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+                    <button class="btn-add" type="submit"><i class="fas fa-plus"></i>  Add Event</button>
+                    <br>
             </tbody>
         </table>
     </div>
