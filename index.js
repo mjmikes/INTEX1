@@ -609,106 +609,14 @@ app.get('/scheduleEvent/:id', async (req, res) => {
   }
 });
 
-app.post('/meditEvent/:id', (req, res) => {
-  const { id } = req.params;
-  const {
-    event_name = req.body.event_name, first_name = req.body.first_name, last_name = req.body.last_name, 
-    phone = req.body.phone, event_contact_email = req.body.contact_email, event_type = req.body.event_type, 
-    event_location_address = req.body.event_location_address, event_location_city = req.body.event_location_city,
-    event_location_state = req.body.event_location_state, event_location_zip = req.body.event_location_zip, 
-    event_start_time = req.body.event_start_time, event_duration = parseInt(req.body.event_duration),
-    event_description = req.body.event_description, expected_advanced_sewers = parseInt(req.body.expected_advanced_sewers), 
-    sewing_machines_available = parseInt(req.body.sewing_machines_available), expected_participants = parseInt(req.body.expected_participants),
-    children_under_10 = parseInt(req.body.children_under_10), jen_story = req.body.jen_story === 'yes' || req.body.jen_story === 'true' || false, 
-    event_space_description = req.body.event_space_description, round_tables_count = parseInt(req.body.round_tables_count), 
-    rectangle_tables_count = parseInt(req.body.rectangle_tables_count), possible_date_1 = req.body.possible_date_1, 
-    possible_date_2 = req.body.possible_date_2, actual_date = req.body.actual_date
-  } = req.body;
-
-  try {
-    // First, update the event_contact table
-    knex('event_contact')
-      .where('event_contact.contact_id', id)
-      .update({
-        first_name: first_name,
-        last_name: last_name,
-        phone: phone,
-        event_contact_email: event_contact_email
-      })
-      .then(() => {
-        // Then, update the event_location table
-        return knex('event_location')
-          .where('event_location.event_id', id)
-          .update({
-            event_location_address: event_location_address,
-            event_location_city: event_location_city,
-            event_location_state: event_location_state,
-            event_location_zip: event_location_zip
-          });
-      })
-      .then(() => {
-        // Finally, update the event_request table
-        return knex('event_request')
-          .where('event_request.event_id', id)
-          .update({
-            event_name: event_name,
-            event_type: event_type,
-            event_start_time: event_start_time,
-            event_duration: event_duration,
-            event_description: event_description,
-            expected_advanced_sewers: expected_advanced_sewers,
-            sewing_machines_available: sewing_machines_available,
-            expected_participants: expected_participants,
-            children_under_10: children_under_10,
-            jen_story: jen_story,
-            event_space_description: event_space_description,
-            round_tables_count: round_tables_count,
-            rectangle_tables_count: rectangle_tables_count,
-            possible_date_1: possible_date_1,
-            possible_date_2: possible_date_2,
-            actual_date: actual_date
-          });
-      })
-      .then(() => {
-        res.redirect('/requested_events'); // Redirect after saving
-      })
-      .catch(error => {
-        console.error('Error updating event:', error);
-        res.status(500).send('Internal Server Error');
-      });
-  } catch (error) {
-    console.error('Error editing event:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
 
 app.post('/editEvent/:id', async (req, res) => {
   const { id } = req.params;
   const {
-    event_name,
-    first_name,
-    last_name,
-    phone,
-    event_contact_email,
-    event_type,
-    event_address,
-    event_city,
-    event_state,
-    event_zip,
-    event_start_time,
-    event_duration,
-    event_description,
-    expected_advanced_sewers,
-    sewing_machines_available,
-    expected_participants,
-    children_under_10,
-    jen_story,
-    event_space_description,
-    round_tables_count,
-    rectangle_tables_count,
-    possible_date_1,
-    possible_date_2,
-    actual_date,
+    event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
+    event_state,event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
+    sewing_machines_available, expected_participants, children_under_10, jen_story, event_space_description,
+    round_tables_count, rectangle_tables_count, possible_date_1, possible_date_2, actual_date,
   } = req.body;
 
   try {
@@ -760,7 +668,6 @@ app.post('/editEvent/:id', async (req, res) => {
     console.error('Error updating event:', error);
     res.status(500).send('An error occurred while updating the event.');
   }
-  
 });
 
 
@@ -768,22 +675,9 @@ app.post('/editEvent/:id', async (req, res) => {
 // Post route to send volunteer form data to database
 app.post("/submit-volunteer", async (req, res) => {
     const {
-        first_name,
-        last_name,
-        phone,
-        email,
-        address,
-        city,
-        state,
-        zip,
-        sewing_level,
-        monthly_hour_availability,
-        willing_to_travel_county,
-        willing_to_travel_state,
-        willing_to_teach,
-        willing_to_lead,
-        source,
-        details
+        first_name, last_name, phone, email, address, city, state, zip, sewing_level,
+        monthly_hour_availability, willing_to_travel_county, willing_to_travel_state,
+        willing_to_teach, willing_to_lead, source, details
     } = req.body;
     try {
         // Insert into volunteer_info table
@@ -812,6 +706,7 @@ app.post("/submit-volunteer", async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 // Post route to send volunteer form data to database
 app.post("/submit-volunteer1", async (req, res) => {
@@ -861,6 +756,7 @@ app.post("/submit-volunteer1", async (req, res) => {
     }
 });
 
+
 // Post route to send sponsor form data to database
 app.post("/submit-sponsor", async (req, res) => {
     const {
@@ -886,6 +782,7 @@ app.post("/submit-sponsor", async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 // Post route to send admin form data to database
 app.post("/add_admin", async (req, res) => {
@@ -915,6 +812,7 @@ app.post("/add_admin", async (req, res) => {
     }
 });
 
+
 // Post route to send admin form data to database
 app.post("/contact_us", async (req, res) => {
     const {
@@ -943,11 +841,13 @@ app.post("/contact_us", async (req, res) => {
     }
 });
 
+
 //Home Page
 app.get('/', (req, res) => {
     console.log(req.session);  // Log the entire session object
     res.render('index');
 });
+
 
 app.get('/logout', (req, res) => {
     // Reset isAdmin to false
@@ -963,6 +863,7 @@ app.get('/logout', (req, res) => {
         res.redirect('/');
     });
 });
+
 
 // POST route to handle login
 app.post('/login', async (req, res) => {
@@ -1060,6 +961,7 @@ app.post("/submit-contact", async (req, res) => {
     }
 });
 
+
 app.post('/deleteMessage/:submission_id', async (req, res) => {
     const { submission_id } = req.params; // Get the submission_id from the URL
 
@@ -1076,6 +978,7 @@ app.post('/deleteMessage/:submission_id', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 app.post('/deleteAdmin/:id', async (req, res) => {
     const adminId = req.params.id; // Extract the admin_id from the URL
@@ -1097,7 +1000,6 @@ app.post('/deleteAdmin/:id', async (req, res) => {
 
 
 // EDIT VOLUNTEER
-
 app.get('/editVolunteer/:id', async (req, res) => {
     const { id } = req.params; // Extract the volunteer ID from the route parameter
   
@@ -1268,6 +1170,7 @@ app.post('/deleteAdmin/:id', async (req, res) => {
     }
 });
 
+
 app.post('/deleteVolunteer/:id', async (req, res) => {
     const { id } = req.params; // Extract the volunteer_id from the URL
 
@@ -1289,6 +1192,7 @@ app.post('/deleteVolunteer/:id', async (req, res) => {
         res.status(500).send('Error deleting admin record.');
     }
 });
+
 
 app.post('/scheduled_events/:id', async (req, res) => {
     const { id } = req.params;
