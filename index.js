@@ -333,7 +333,7 @@ app.get('/requested_events', async (req, res) => {
             .then(event_request => {
                 // Render the index.ejs template and pass the data
                 // We use res.render to work with ejs files we use res.redirct to work with routes
-                res.render('requested_events', { event_request, security });
+                res.render('requested_events', { event_request });
             })
             .catch(error => {
                 console.error('Error querying database:', error);
