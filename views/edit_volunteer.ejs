@@ -142,11 +142,11 @@
           <label class="form-label">Willing to travel out of County:</label>
           <div class="checkbox-group">
             <label for="outOfCountyYes" class="checkbox-label">
-              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes" <%= volunteer_info.travel_county === 'Yes' ? 'checked' : '' %> >
+              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes" <%= volunteer_info.willing_to_travel_county === 'Yes' ? 'checked' : '' %> >
               Yes
             </label>
             <label for="outOfCountyNo" class="checkbox-label">
-              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No" <%= volunteer_info.travel_county === 'No' ? 'checked' : '' %> >
+              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No" <%= volunteer_info.willing_to_travel_county === 'No' ? 'checked' : '' %> >
               No
             </label>
           </div>
@@ -155,11 +155,11 @@
           <label class="form-label">Willing to travel out of State:</label>
           <div class="checkbox-group">
             <label for="outOfStateYes" class="checkbox-label">
-              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes" <%= volunteer_info.willing_to_travel_county === 'Yes' ? 'checked' : '' %> >
+              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes" <%= volunteer_info.willing_to_travel_state === 'Yes' ? 'checked' : '' %> >
               Yes
             </label>
             <label for="outOfStateNo" class="checkbox-label">
-              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No" <%= volunteer_info.willing_to_travel_county === 'No' ? 'checked' : '' %> >
+              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No" <%= volunteer_info.willing_to_travel_state === 'No' ? 'checked' : '' %> >
               No
             </label>
           </div>
@@ -217,7 +217,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="additionalInfo" class="form-label">What should we know about you:</label>
-          <textarea id="additionalInfo" name="details" value="<%= volunteer_info.details %>"  class="form-textarea" rows="4" required></textarea>
+          <textarea id="additionalInfo" name="details" class="form-textarea" rows="4" required><%= volunteer_info.details %></textarea>
         </div>
       </div>
 
