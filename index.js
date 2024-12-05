@@ -820,5 +820,61 @@ app.get('/edit_volunteer/:id', async (req, res) => {
     }
 });
 
+app.post("/edit_volunteer_data", async (req, res) => {
+    const {
+        volunteer_id,
+        first_name,
+        last_name,
+        address,
+        city,
+        state,
+        zip,
+        phone,
+        email,
+        source,
+        sewing_level,
+        monthly_hour_availability,
+        willing_to_teach,
+        willing_to_lead,
+        willing_to_travel_county,
+        willing_to_travel_state,
+        details
+    } = req.body;
+
+    try {
+        // Update the existing volunteer record
+        await knex('volunteer_info')
+            .where('volunteer_id', volunteer_id) // Find the record by volunteer_id
+            .update({
+                first_name,
+                last_name,
+                address,
+                city,
+                state,
+                zip,
+                phone,
+                email,
+                source,
+                sewing_level,
+                monthly_hour_availability,
+                willing_to_teach,
+                willing_to_lead,
+                willing_to_travel_county,
+                willing_to_travel_state,
+                details
+            });
+
+        // Render the index page with a success message
+        res.render("volunteers", {
+            successMessage: "Volunteer information updated successfully.",
+        });
+    } catch (error) {
+        console.error("Error updating volunteer data:", error);
+        res.status(500).render("index", {
+            errorMessage: "Something went wrong. Please try again later.",
+        });
+    }
+});
+
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
