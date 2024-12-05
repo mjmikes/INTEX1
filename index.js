@@ -389,7 +389,6 @@ app.post('/deleteEvent/:id', async (req, res) => {
 
 app.get('/editEvent/:id', async (req, res) => {
   const { id } = req.params; // Extract the event ID from the route parameter
-
   try {
     knex('event_request')
       .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
