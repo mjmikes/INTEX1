@@ -130,10 +130,6 @@ app.get("/sponsor_us", (req, res) => {
     res.render("sponsor_us");
 });
 
-// Completed Events page (protected by authentication)
-app.get("/completed_events", (req, res) => {
-    res.render("completed_events");
-});
 
 // Event Dashboard page (protected by authentication)
 app.get("/event_dashboard", (req, res) => {
