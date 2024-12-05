@@ -71,7 +71,7 @@
   <!-- Main Content -->
   <main>
     <h1 class="form-header">Completed Event Information</h1>
-    <form action="/completed_events/<%= event_request.event_id %>" method="POST" class="event-form">
+    <form action="/completed_events/<%= event.event_id %>" method="POST" class="event-form">
   
       <!-- Top Section: Event Details -->
       <div class="form-section">
@@ -81,11 +81,11 @@
         <div class="form-row">
           <div class="form-group">
             <label for="eventName" class="form-label">Event Name:</label>
-            <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" class="form-input" required>
+            <input type="text" id="eventName" name="event_name" value="<%= event.event_name %>" class="form-input" required>
           </div>
           <div class="form-group">
             <label for="actualDate" class="form-label">Date:</label>
-            <input type="date" id="actualDate" name="actual_date" value="<%= event_request.actual_date %>" class="form-input" required>
+            <input type="date" id="actualDate" name="actual_date" value="<%= event.actual_date %>" class="form-input" required>
           </div>
         </div>
   
@@ -93,27 +93,27 @@
         <div class="form-row">
           <div class="form-group">
             <label for="startTime" class="form-label">Event Start Time:</label>
-            <input type="time" id="startTime" name="event_start_time" value="<%= event_request.event_start_time %>" class="form-input" required>
+            <input type="time" id="startTime" name="event_start_time" value="<%= event.event_start_time %>" class="form-input" required>
           </div>
           <div class="form-group">
             <label for="duration" class="form-label">Event Duration (hrs):</label>
-            <input type="number" id="duration" name="event_duration" value="<%= event_request.event_duration %>" class="form-input" min="1" required>
+            <input type="number" id="duration" name="event_duration" value="<%= event.event_duration %>" class="form-input" min="1" required>
           </div>
         </div>
   
         <!-- Form Row 3 -->
         <div class="form-row">
           <div class="form-group">
-            <label for="expectedParticipants" class="form-label">Expected Participants:</label>
-            <div id="expectedParticipants" class="form-static"><%= event_request.expected_participants %></div>
-          </div>
-          <div class="form-group">
             <label for="participantsCount" class="form-label">Actual Participants Count:</label>
             <input type="number" id="participantsCount" name="participants_count" class="form-input" min="0" required>
           </div>
+          <div class="form-group">
+            <label for="expectedParticipants" class="form-label">Expected Participants:</label>
+            <div id="expectedParticipants" class="form-static"><%= event.expected_participants %></div>
+          </div>
         </div>
       </div>
-  
+      <br><br>
       <!-- Bottom Section: Completed Products -->
       <div class="form-section">
         <h2 class="section-header">Production</h2>
@@ -122,7 +122,7 @@
         <div class="form-row">
           <div class="form-group">
             <label for="completedCollars" class="form-label">Completed Collar Pieces:</label>
-            <input type="number" id="completedCollars" name="completed_collars" class="form-input" min="0" required>
+            <input type="number" id="completedCollars" name="completed_collar" class="form-input" min="0" required>
           </div>
           <div class="form-group">
             <label for="completedPockets" class="form-label">Completed Pocket Pieces:</label>
