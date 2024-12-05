@@ -421,19 +421,46 @@ app.get('/user_maintenance_view', async (req, res) => {
 
 app.post('/deleteEvent/:id', async (req, res) => {
     const { id } = req.params; // Get the event_id from the URL
-    try {
-        // Delete the event with the given event_id
-        await knex('event_request')
-            .where('event_id', id) // Find the record with the given event_id
-            .del(); // Delete the record
 
-        // Redirect back to the requested events page after deleting
+    try {
+        // Start a transaction to ensure all deletions occur together
+        await knex.transaction(async (trx) => {
+            // Fetch the related event_contact_id and event_location_id first
+            const event = await trx('event_request')
+                .select('event_contact_id', 'event_location_id')
+                .where('event_id', id)
+                .first();
+
+            if (event) {
+                // Delete the associated event_contact record
+                if (event.event_contact_id) {
+                    await trx('event_contact')
+                        .where('event_contact_id', event.event_contact_id)
+                        .del();
+                }
+
+                // Delete the associated event_location record
+                if (event.event_location_id) {
+                    await trx('event_location')
+                        .where('event_location_id', event.event_location_id)
+                        .del();
+                }
+
+                // Delete the main event record
+                await trx('event_request')
+                    .where('event_id', id)
+                    .del();
+            }
+        });
+
+        // Redirect back to the requested events page after deletion
         res.redirect('/requested_events');
     } catch (error) {
         console.error('Error deleting event:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 app.get('/editEvent/:id', async (req, res) => {
   const { id } = req.params; // Extract the event ID from the route parameter
