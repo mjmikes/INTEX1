@@ -82,11 +82,6 @@ app.get('/user_maintenance', (req, res) => {
     res.render('user_maintenance');
 });
 
-// get route to add_admin page
-app.get('/add_admin', (req, res) => {
-    res.render('add_admin');
-});
-
 app.get('/how_to_get_involved', (req, res) => {
     res.render('how_to_get_involved');
 });
@@ -583,7 +578,7 @@ app.post("/submit-sponsor", async (req, res) => {
 });
 
 // Post route to send admin form data to database
-app.post("/add-admin", async (req, res) => {
+app.post("/add_admin", async (req, res) => {
     const {
         first_name,
         last_name,
