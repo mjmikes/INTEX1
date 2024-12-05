@@ -387,50 +387,55 @@ app.post('/deleteEvent/:id', async (req, res) => {
 });
 
 app.get('/editEvent/:id', async (req, res) => {
+  const { id } = req.params; // Extract the event ID from the route parameter
+
   try {
-      // Fetch all event data using Knex or another query builder
-      knex('event_request')
-          .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
-          .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
-          .select(
-              'event_request.event_id',
-              'event_request.event_name',
-              'event_request.event_type',
-              'event_request.event_start_time',
-              'event_request.event_duration',
-              'event_request.event_description',
-              'event_request.expected_advanced_sewers',
-              'event_request.sewing_machines_available',
-              'event_request.expected_participants',
-              'event_request.children_under_10',
-              'event_request.jen_story',
-              'event_request.event_space_description',
-              'event_request.round_tables_count',
-              'event_request.rectangle_tables_count',
-              'event_request.possible_date_1',
-              'event_request.possible_date_2',
-              'event_request.actual_date',
-              'event_contact.first_name',
-              'event_contact.last_name',
-              'event_contact.phone',
-              'event_contact.event_contact_email',
-              'event_location.event_address',
-              'event_location.event_city',
-              'event_location.event_state',
-              'event_location.event_zip'
-          )
-          .then(event_request => {
-              // Render the index.ejs template and pass the data
-              // We use res.render to work with ejs files we use res.redirct to work with routes
-              res.render('edit_event', { event_request, security });
-          })
-          .catch(error => {
-              console.error('Error querying database:', error);
-              res.status(500).send('Internal Server Error');
-          });
+    knex('event_request')
+      .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
+      .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
+      .select(
+        'event_request.event_id',
+        'event_request.event_name',
+        'event_request.event_type',
+        'event_request.event_start_time',
+        'event_request.event_duration',
+        'event_request.event_description',
+        'event_request.expected_advanced_sewers',
+        'event_request.sewing_machines_available',
+        'event_request.expected_participants',
+        'event_request.children_under_10',
+        'event_request.jen_story',
+        'event_request.event_space_description',
+        'event_request.round_tables_count',
+        'event_request.rectangle_tables_count',
+        'event_request.possible_date_1',
+        'event_request.possible_date_2',
+        'event_request.actual_date',
+        'event_contact.first_name',
+        'event_contact.last_name',
+        'event_contact.phone',
+        'event_contact.event_contact_email',
+        'event_location.event_address',
+        'event_location.event_city',
+        'event_location.event_state',
+        'event_location.event_zip'
+      )
+      .where('event_request.event_id', id) // Filter by the event ID
+      .first() // Retrieve only one event
+      .then(event_request => {
+        if (!event_request) {
+          return res.status(404).send('Event not found');
+        }
+
+        res.render('edit_event', { event_id: id, event_request }); // Pass event_id and the event data
+      })
+      .catch(error => {
+        console.error('Error querying database:', error);
+        res.status(500).send('Internal Server Error');
+      });
   } catch (error) {
-      console.error('Error fetching event data:', error);
-      res.status(500).send('Internal Server Error');
+    console.error('Error fetching event data:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 
