@@ -463,12 +463,12 @@ app.post('/editEvent/:id', (req, res) => {
     phone = req.body.phone, event_contact_email = req.body.contact_email, event_type = req.body.event_type, 
     event_location_address = req.body.event_location_address, event_location_city = req.body.event_location_city,
     event_location_state = req.body.event_location_state, event_location_zip = req.body.event_location_zip, 
-    event_start_time = req.body.event_start_time, event_duration = req.body.event_duration,
-    event_description = req.body.event_description, expected_advanced_sewers = req.body.expected_advanced_sewers, 
-    sewing_machines_available = req.body.sewing_machines_available, expected_participants = req.body.expected_participants,
-    children_under_10 = req.body.children_under_10, jen_story = req.body.jen_story, 
-    event_space_description = req.body.event_space_description, round_tables_count = req.body.round_tables_count, 
-    rectangle_tables_count = req.body.rectangle_tables_count, possible_date_1 = req.body.possible_date_1, 
+    event_start_time = req.body.event_start_time, event_duration = parseInt(req.body.event_duration),
+    event_description = req.body.event_description, expected_advanced_sewers = parseInt(req.body.expected_advanced_sewers), 
+    sewing_machines_available = parseInt(req.body.sewing_machines_available), expected_participants = parseInt(req.body.expected_participants),
+    children_under_10 = req.body.children_under_10, jen_story = req.body.jen_story === 'yes' || req.body.jen_story === 'true' || false, 
+    event_space_description = req.body.event_space_description, round_tables_count = parseInt(req.body.round_tables_count), 
+    rectangle_tables_count = parseInt(req.body.rectangle_tables_count), possible_date_1 = req.body.possible_date_1, 
     possible_date_2 = req.body.possible_date_2, actual_date = req.body.actual_date
   } = req.body;
 
