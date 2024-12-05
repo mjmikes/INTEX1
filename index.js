@@ -323,17 +323,17 @@ app.get('/requested_events', async (req, res) => {
 });
 
 app.post('/deleteEvent/:id', async (req, res) => {
-    const { id } = req.params; // Get the submission_id from the URL
+    const { id } = req.params; // Get the event_id from the URL
     try {
-        // Delete the message with the given submission_id
+        // Delete the event with the given event_id
         await knex('event_request')
-            .where('id', id) // Find the record with the given ID
+            .where('event_id', id) // Find the record with the given event_id
             .del(); // Delete the record
 
-        // Redirect back to the messages page after deleting
+        // Redirect back to the requested events page after deleting
         res.redirect('/requested_events');
     } catch (error) {
-        console.error('Error deleting message:', error);
+        console.error('Error deleting event:', error);
         res.status(500).send('Internal Server Error');
     }
 });
