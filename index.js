@@ -366,6 +366,7 @@ app.post('/deleteEvent/:id', async (req, res) => {
 });
 
 app.post('/editEvent/:id', (req, res) => {
+    const { id } = req.params; // Get the event_id from the URL
     const {
         event_name, first_name, last_name, phone, event_contact_email, event_type, event_location_address,
         event_location_city, event_location_state, event_location_zip, event_start_time, event_duration,
