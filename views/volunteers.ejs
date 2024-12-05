@@ -82,7 +82,7 @@
                     <% if (volunteer_info.length > 0) { %>
                         <% volunteer_info.forEach(function(volunteer) { %>
                             <tr>
-                                <input type="hidden" value="<%= volunteer_info.volunteer_id %>">
+                                <input type="hidden" value="<%= volunteer.volunteer_id %>">
                                 <td><%= volunteer.first_name %> <%= volunteer.last_name %></td>
                                 <td><%= volunteer.address %>, <%= volunteer.city %>, <%= volunteer.state %> <%= volunteer.zip %></td>
                                 <td><%= volunteer.phone %></td>
