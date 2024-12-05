@@ -370,7 +370,6 @@ app.get('/user_maintenance', async (req, res) => {
 });
 
 
-
 app.post('/deleteEvent/:id', async (req, res) => {
     const { id } = req.params; // Get the event_id from the URL
     try {
