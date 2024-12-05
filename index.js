@@ -1403,7 +1403,80 @@ app.post('/completed_events/:id', async (req, res) => {
       res.status(500).send('An error occurred while updating the event.');
     }
   });
+
+
+  app.get('/editUpcomingEvent/:id', async (req, res) => {
+    const { id } = req.params; // Extract the event ID from the route parameter
+    try {
+      knex('event_request')
+        .join('event_contact', 'event_request.event_contact_id', '=', 'event_contact.event_contact_id')
+        .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
+        .select(
+          'event_request.event_id',
+          'event_request.event_name',
+          'event_request.event_type',
+          'event_request.event_start_time',
+          'event_request.event_duration',
+          'event_request.event_description',
+          'event_request.expected_advanced_sewers',
+          'event_request.sewing_machines_available',
+          'event_request.expected_participants',
+          'event_request.children_under_10',
+          'event_request.jen_story',
+          'event_request.event_space_description',
+          'event_request.round_tables_count',
+          'event_request.rectangle_tables_count',
+          'event_request.possible_date_1',
+          'event_request.possible_date_2',
+          'event_request.actual_date',
+          'event_contact.first_name',
+          'event_contact.last_name',
+          'event_contact.phone',
+          'event_contact.event_contact_email',
+          'event_location.event_address',
+          'event_location.event_city',
+          'event_location.event_state',
+          'event_location.event_zip'
+        )
+        .where('event_request.event_id', id) // Filter by the event ID
+        .first() // Retrieve only one event
+        .then(event_request => {
+          if (!event_request) {
+            return res.status(404).send('Event not found');
+          }
   
+          // Separate out contact and location data
+          const event_contact = {
+            first_name: event_request.first_name,
+            last_name: event_request.last_name,
+            phone: event_request.phone,
+            event_contact_email: event_request.event_contact_email
+          };
+  
+          const event_location = {
+            event_address: event_request.event_address,
+            event_city: event_request.event_city,
+            event_state: event_request.event_state,
+            event_zip: event_request.event_zip
+          };
+  
+          // Render the template with all data passed to it
+          res.render('edit_upcoming_event', {
+            event_id: id,
+            event_request, // Full event data
+            event_contact, // Separate contact details
+            event_location // Separate location details
+          });
+        })
+        .catch(error => {
+          console.error('Error querying database:', error);
+          res.status(500).send('Internal Server Error');
+        });
+    } catch (error) {
+      console.error('Error fetching event data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
 
 

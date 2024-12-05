@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Request | Turtle Shelter Project</title>
+  <link rel="stylesheet" href="/css/request_event.styles.css"> <!-- Update the path as needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <script src="js/app.js"></script>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a href="/" class="logo-link">
+          <i class="fas fa-home"></i> <!-- Home icon -->
+          <span class="logo-text">Turtle Shelter Project</span>
+      </a>
+      </div>
+      <div class="navbar-collapse">
+        <ul class="main-menu">
+            <li><a href="/request_event">Request Event</a></li>
+            <li><a href="/jens_story">Jen's Story</a></li>
+            <li><a href="/our_tech">Our Tech</a></li>
+            <li><button class="btn-secondary" onclick="location.href='/how_to_get_involved'">Get Involved</button></li>
+            <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+             <!-- Conditionally show icon based on isAdmin -->
+             <% if (isAdmin) { %>
+                <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
+                <div id="logout-option" class="logout-option">
+                    <!-- Link for Contact Messages and Sponsor Messages -->
+                    <a href="/messages" class="logout-link"><b>Messages</b></a>
+                    
+                    <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
+                    <a href="/help" class="logout-link"><b>Help</b></a>
+                    
+                    <!-- Link for Logout -->
+                    <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
+                </div>
+            <% } else { %>
+                <li><a href="/login">Login</a></li>
+            <% } %>
+            <div class="navbar-toggler">
+              <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
+          </div>
+        </ul>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <!-- Close button -->
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <!-- Sidebar Links -->
+        <ul class="sidebar-links">
+          <li><a href="/#contact-us-form">Contact Us</a></li>
+          <li><a href="/faqs">FAQs</a></li>
+          <li><a href="/sponsor_us">Sponsor Us</a></li>
+          <li><a href="/upcoming_events">Upcoming Events</a></li>
+          <% if (isAdmin) { %>
+            <li><a href="/requested_events"><b>Requested Events</b></a></li>
+            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+            <li><a href="/completed_events"><b>Completed Events</b></a></li>
+            <li><a href="/volunteers"><b>Volunteers</b></a></li>
+            <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
+        <% } %>
+        </ul>
+    </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h1 class="form-header">Edit Pending Request</h1>
+    <form action="/editUpcomingEvent/<%= event_id %>" method="POST" class="event-form">
+      
+      <!-- Form Row 1 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName" class="form-label">First Name:</label>
+          <input type="text" id="firstName" name="first_name" value="<%= event_contact.first_name %>" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName" class="form-label">Last Name:</label>
+          <input type="text" id="lastName" name="last_name" value="<%= event_contact.last_name %>" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 2 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone:</label>
+          <input type="tel" id="phone" name="phone" value="<%= event_contact.phone %>" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" id="email" name="event_contact_email" value="<%= event_contact.event_contact_email %>" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 3 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="eventName" class="form-label">Event Name:</label>
+          <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="address" class="form-label">Address:</label>
+          <input type="text" id="address" name="event_address" value="<%= event_location.event_address %>" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 4 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city" class="form-label">City:</label>
+          <input type="text" id="city" name="event_city" value="<%= event_location.event_city %>" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="state" class="form-label">State:</label>
+          <input type="text" id="state" name="event_state" value="<%= event_location.event_state %>" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 5 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="zip" class="form-label">Zip Code:</label>
+          <input type="text" id="zip" name="event_zip" value="<%= event_location.event_zip %>" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="spaceSize" class="form-label">Event Space Description:</label>
+          <input type="text" id="spaceSize" name="event_space_description" value="<%= event_request.event_space_description %>" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 6-->
+      <div class="form-row">
+        <div class="form-group">
+            <label for="possibleDate1" class="form-label">Possible Date 1:</label>
+            <input type="date" id="possibleDate1" name="possible_date_1" value="<%= event_request.possible_date_1 ? event_request.possible_date_1.toISOString().split('T')[0] : '' %>" class="form-input" required>
+        </div>          
+        <div class="form-group">
+            <label for="possibleDate2" class="form-label">Possible Date 2:</label>
+            <input type="date" id="possibleDate2" name="possible_date_2" value="<%= event_request.possible_date_2 ? event_request.possible_date_2.toISOString().split('T')[0] : '' %>" class="form-input">
+        </div>          
+      </div>
+
+      <!-- Form Row 7 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startTime" class="form-label">Event Start Time:</label>
+          <input type="time" id="startTime" name="event_start_time" value="<%= event_request.event_start_time %>" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="duration" class="form-label">Event Duration (hrs):</label>
+          <input type="number" id="duration" name="event_duration" value="<%= event_request.event_duration %>" class="form-input" min="1" required>
+        </div>
+      </div>
+
+      <!-- Form Row 8 -->
+      <div class="form-row">
+        <div class="form-group">
+            <label for="eventType" class="form-label">Event Type:</label>
+            <select id="eventType" name="event_type" class="form-select" required>
+              <option value="Sewing" <%= event_request.event_type === 'Sewing' ? 'selected' : '' %>>Sewing</option>
+              <option value="Non-Sewing" <%= event_request.event_type === 'Non-Sewing' ? 'selected' : '' %>>Non-Sewing</option>
+              <option value="Both" <%= event_request.event_type === 'Both' ? 'selected' : '' %>>Both</option>
+            </select>
+          </div>          
+        <div class="form-group">
+          <label for="advancedSewers" class="form-label">Expected Advanced Sewers:</label>
+          <input type="number" id="advancedSewers" name="expected_advanced_sewers" value="<%= event_request.expected_advanced_sewers %>" class="form-input" min="0" required>
+        </div>
+      </div>
+
+      <!-- Form Row 9 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="sewingMachines" class="form-label">Sewing Machines Available:</label>
+          <input type="number" id="sewingMachines" name="sewing_machines_available" value="<%= event_request.sewing_machines_available %>" class="form-input" min="0" required>
+        </div>
+        <div class="form-group">
+          <label for="participants" class="form-label"># of Expected Participants:</label>
+          <input type="number" id="participants" name="expected_participants" value="<%= event_request.expected_participants %>" class="form-input" min="1" required>
+        </div>
+      </div>
+
+      <!-- Form Row 10 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="kidsUnder10" class="form-label"># of Kids Under Age 10:</label>
+          <input type="number" id="kidsUnder10" name="children_under_10" value="<%= event_request.children_under_10 %>" class="form-input" min="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="jenStory" class="form-label">Jen Story:</label>
+            <select id="jenStory" name="jen_story" class="form-select">
+              <option value="True" <%= event_request.jen_story === true ? 'selected' : '' %>>Yes</option>
+              <option value="False" <%= event_request.jen_story === false ? 'selected' : '' %>>No</option>
+            </select>
+        </div>         
+      </div>
+
+        <!-- Form Row 11 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="roundTables" class="form-label">Available Round Tables:</label>
+          <input type="number" id="roundTables" name="round_tables_count" value="<%= event_request.round_tables_count %>" class="form-input" min="0">
+        </div>
+        <div class="form-group">
+          <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
+          <input type="number" id="rectangleTables" name="rectangle_tables_count" value="<%= event_request.round_tables_count %>" class="form-input" min="0">
+        </div>
+      </div>
+
+      <!-- Form Row 12 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="eventDescription" class="form-label">Event Description:</label>
+          <textarea id="eventDescription" name="event_description" class="form-textarea" rows="4" required><%= event_request.event_description %></textarea>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="form-submit-btn">Save Edits</button>
+      
+    </form>
+    <footer>
+      <div class="footer">
+          <!-- Contact Information -->
+          <div class="contact">
+              <h2>Connect with Us!</h2>
+              <p>Phone: 801-872-3190</p>
+              <p>Email: turtleshelterproject@gmail.com</p>
+              <p>Address: PO Box 382, Kaysville, UT 84037</p>
+          </div>
+  
+          <!-- Social Media Links (Icons) -->
+          <div class="social-icons">
+              <a href="https://www.linkedin.com/in/turtle-shelter-project-6aa0aa1a4/" target="_blank" class="social-icon">
+                  <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="https://www.instagram.com/turtleshelterproject/" target="_blank" class="social-icon">
+                  <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://www.facebook.com/turtleshelterproject" target="_blank" class="social-icon">
+                  <i class="fab fa-facebook"></i>
+              </a>
+          </div>
+  
+          <!-- Copyright Text -->
+          <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
+      </div>
+  </footer>
+</main>
