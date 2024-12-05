@@ -353,6 +353,7 @@ app.get('/user_maintenance', async (req, res) => {
     try {
         // Fetch all admin data using Knex
         const admin_records = await knex('admin').select(
+            'admin_id',
             'first_name',
             'last_name',
             'phone',
