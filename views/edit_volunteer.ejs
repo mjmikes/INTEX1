@@ -71,6 +71,7 @@
   <main>
     <h1 class="form-header">Edit Volunteer</h1>
     <form action="/submit-volunteer" method="POST" class="event-form">
+      <input type="hidden" name="volunteer_id" value="<%= volunteer.volunteer_id %>">
       <!-- Form Row 1 -->
       <div class="form-row">
         <div class="form-group">
@@ -141,11 +142,11 @@
           <label class="form-label">Willing to travel out of County:</label>
           <div class="checkbox-group">
             <label for="outOfCountyYes" class="checkbox-label">
-              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes">
+              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes" <%= volunteer_info.travel_county === 'Yes' ? 'checked' : '' %> >
               Yes
             </label>
             <label for="outOfCountyNo" class="checkbox-label">
-              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No">
+              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No" <%= volunteer_info.travel_county === 'No' ? 'checked' : '' %> >
               No
             </label>
           </div>
@@ -154,11 +155,11 @@
           <label class="form-label">Willing to travel out of State:</label>
           <div class="checkbox-group">
             <label for="outOfStateYes" class="checkbox-label">
-              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes">
+              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes" <%= volunteer_info.willing_to_travel_county === 'Yes' ? 'checked' : '' %> >
               Yes
             </label>
             <label for="outOfStateNo" class="checkbox-label">
-              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No">
+              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No" <%= volunteer_info.willing_to_travel_county === 'No' ? 'checked' : '' %> >
               No
             </label>
           </div>
@@ -171,11 +172,11 @@
           <label class="form-label">Willing to teach:</label>
           <div class="checkbox-group">
             <label for="teachYes" class="checkbox-label">
-              <input type="radio" id="teachYes" name="willing_to_teach" value="Yes">
+              <input type="radio" id="teachYes" name="willing_to_teach" value="Yes" <%= volunteer_info.willing_to_teach === 'Yes' ? 'checked' : '' %> >
               Yes
             </label>
             <label for="teachNo" class="checkbox-label">
-              <input type="radio" id="teachNo" name="willing_to_teach" value="No">
+              <input type="radio" id="teachNo" name="willing_to_teach" value="No" <%= volunteer_info.willing_to_teach === 'No' ? 'checked' : '' %> >
               No
             </label>
           </div>
@@ -184,11 +185,12 @@
           <label class="form-label">Willing to Lead:</label>
           <div class="checkbox-group">
             <label for="leadYes" class="checkbox-label">
-              <input type="radio" id="leadYes" name="willing_to_lead" value="Yes">
+              <input type="radio" id="leadYes" name="willing_to_lead" value="Yes" <%= volunteer_info.willing_to_lead === 'Yes' ? 'checked' : '' %> >
               Yes
             </label>
             <label for="leadNo" class="checkbox-label">
-              <input type="radio" id="leadNo" name="willing_to_lead" value="No">
+              <input type="radio" id="leadNo" name="willing_to_lead" value="No" <%= volunteer_info.willing_to_lead
+               === 'No' ? 'checked' : '' %> >
               No
             </label>
           </div>
