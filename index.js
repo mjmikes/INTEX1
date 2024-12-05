@@ -1121,6 +1121,28 @@ app.post('/deleteAdmin/:id', async (req, res) => {
     }
 });
 
+app.post('/deleteVolunteer/:id', async (req, res) => {
+    const { id } = req.params; // Extract the volunteer_id from the URL
+
+    if (!id) {
+        return res.status(400).send('Volunteer ID is required.');
+    }
+
+    try {
+        const rowsDeleted = await knex('volunteer_info').where('volunteer_id', id).del();
+
+        if (rowsDeleted === 0) {
+            return res.status(404).send('Volunteer not found.');
+        }
+
+        console.log(`Volunteer with ID ${id} successfully deleted.`);
+        res.redirect('/volunteers'); // Redirect to the appropriate page
+    } catch (error) {
+        console.error('Error deleting volunteer:', error);
+        res.status(500).send('Error deleting admin record.');
+    }
+});
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
