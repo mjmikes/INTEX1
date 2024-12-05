@@ -722,18 +722,20 @@ form button[type="submit"]:hover {
 }
 
 .table-container {
-    width: 100%; /* Ancho completo del contenedor */
-    max-width: 100%; /* Asegura que no exceda el ancho del contenedor padre */
-    overflow-x: auto; /* Permite el desplazamiento horizontal */
-    border: 1px solid #ccc; /* Bordes para claridad */
-    white-space: nowrap; /* Evita el salto de línea de las celdas */
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    padding: 10px; /* Añade padding para claridad */
 }
-
 
 .table-container table {
-    width: 100%; /* Optional: Ensure the table adapts to its content */
-    border-collapse: collapse; /* Optional: Remove spacing between table cells */
+    display: block; /* Asegura que la tabla se ajuste dentro del contenedor */
+    width: 100%;
+    border-collapse: collapse;
 }
+
 
 .button-container {
     display: flex;
