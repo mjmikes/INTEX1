@@ -71,7 +71,7 @@
 
   <!-- Main Content -->
   <main>
-    <h1 class="form-header">Edit Pending Request</h1>
+    <h1 class="form-header">Edit Upcoming Event</h1>
     <form action="/editUpcomingEvent/<%= event_id %>" method="POST" class="event-form">
       
       <!-- Form Row 1 -->
@@ -130,7 +130,7 @@
         </div>
         <div class="form-group">
           <label for="actualEventDate" class="form-label">Actual Event Date:</label>
-          <input type="date" id="actualEventDate" name="actual_date" class="form-input" required>
+          <input type="date" id="actualEventDate" name="actual_date" value="<%= event_request.actual_date %> class="form-input" required>
         </div>
       </div>
 
