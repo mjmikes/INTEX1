@@ -1358,6 +1358,8 @@ app.post('/completed_events/:id', async (req, res) => {
         .where('event_id', id)
         .update({
           event_name,
+          event_start_time,
+          event_duration,
           event_status: 'completed',
         });
   
