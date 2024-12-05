@@ -128,22 +128,11 @@
           <label for="zip" class="form-label">Zip Code:</label>
           <input type="text" id="zip" name="event_zip" value="<%= event_location.event_zip %>" class="form-input" required>
         </div>
+        <div class="form-row">
         <div class="form-group">
-          <label for="spaceSize" class="form-label">Event Space Description:</label>
-          <input type="text" id="spaceSize" name="event_space_description" value="<%= event_request.event_space_description %>" class="form-input" required>
+            <label for="actualEventDate" class="form-label">Actual Event Date:</label>
+            <input type="date" id="actualEventDate" name="actual_date" class="form-input" required>
         </div>
-      </div>
-
-      <!-- Form Row 6-->
-      <div class="form-row">
-        <div class="form-group">
-            <label for="possibleDate1" class="form-label">Possible Date 1:</label>
-            <input type="date" id="possibleDate1" name="possible_date_1" value="<%= event_request.possible_date_1 ? event_request.possible_date_1.toISOString().split('T')[0] : '' %>" class="form-input" required>
-        </div>          
-        <div class="form-group">
-            <label for="possibleDate2" class="form-label">Possible Date 2:</label>
-            <input type="date" id="possibleDate2" name="possible_date_2" value="<%= event_request.possible_date_2 ? event_request.possible_date_2.toISOString().split('T')[0] : '' %>" class="form-input">
-        </div>          
       </div>
 
       <!-- Form Row 7 -->
@@ -214,6 +203,14 @@
         </div>
       </div>
 
+
+      <div>
+        <div class="form-group">
+            <label for="spaceSize" class="form-label">Event Space Description:</label>
+            <input type="text" id="spaceSize" name="event_space_description" value="<%= event_request.event_space_description %>" class="form-input" required>
+        </div>
+      </div>
+      
       <!-- Form Row 12 -->
       <div class="form-row">
         <div class="form-group">
