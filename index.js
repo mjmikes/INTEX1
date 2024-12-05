@@ -568,7 +568,7 @@ app.post('/editEvent/:id', async (req, res) => {
         first_name: first_name,
         last_name: last_name,
         phone: phone,
-        email: event_contact_email,
+        event_contact_email: event_contact_email,
       });
 
     // Update event_location table
