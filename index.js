@@ -590,7 +590,7 @@ app.get('/completeEvent/:id', async (req, res) => {
           // Render the form with the retrieved data
           res.render('complete_event_form', {
             event_id: id, // Pass the event ID for reference
-            event // Pass the event data
+            event_request : event // Pass the event data
           });
         })
         .catch(error => {
