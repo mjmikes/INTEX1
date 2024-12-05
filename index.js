@@ -244,7 +244,8 @@ app.post("/requestEvent", async (req, res) => {
         round_tables_count,
         rectangle_tables_count,
         possible_date_1,
-        possible_date_2
+        possible_date_2,
+        event_status
     } = req.body;
 
     try {
@@ -286,7 +287,8 @@ app.post("/requestEvent", async (req, res) => {
             round_tables_count,
             rectangle_tables_count,
             possible_date_1,
-            possible_date_2
+            possible_date_2,
+            event_status
         });
 
         // Redirect to a success page
@@ -1209,6 +1211,7 @@ app.post('/scheduled_events/:id', async (req, res) => {
       round_tables_count,
       rectangle_tables_count,
       actual_date,
+      event_status
     } = req.body;
   
     try {
