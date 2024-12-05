@@ -73,6 +73,7 @@
                     <th>Event Date</th>
                     <th>Event Start Time</th>
                     <% if (isAdmin) { %>
+                        <th>Event Name</th>
                         <th>Contact Name</th>
                         <th>Contact Phone</th>
                         <th>Contact Email</th>
@@ -108,6 +109,7 @@
                             <td><%= event.actual_date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
                             <td><%= event.event_start_time.split(':').slice(0, 2).join(':') %></td>
                             <% if (isAdmin) { %>
+                            <td><%= event.event_name %></td>
                             <td><%= event.first_name %> <%= event.last_name %></td>
                             <td><%= event.phone %></td>
                             <td><%= event.event_contact_email %></td>
