@@ -405,6 +405,32 @@ app.post("/submit-volunteer", async (req, res) => {
     }
 });
 
+// Post route to send sponsor form data to database
+app.post("/submit-sponsor", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        email,
+        organization_name,
+        message
+    } = req.body;
+    try {
+        // Insert into volunteer_info table
+        await knex('sponsor_us').insert({
+            first_name,
+            last_name,
+            email,
+            organization_name,
+            message
+        });
+        // Redirect to a success page
+        res.redirect('/sponsor_success_page');
+    } catch (error) {
+        console.error('Error inserting sponsor data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 // Post route to send admin form data to database
 app.post("/add-admin", async (req, res) => {
     const {
