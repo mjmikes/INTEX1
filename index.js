@@ -102,7 +102,7 @@ app.get('/get_involved', (req, res) => {
 
 // get route for the get involved page
 app.get('/get_involved1', (req, res) => {
-    res.render('get_involved1');
+    res.render('get_involved2');
 });
 
 // get route for the donate page

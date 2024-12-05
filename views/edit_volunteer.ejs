@@ -135,31 +135,45 @@
             <input type="number" id="monthly_hour_availability" name="monthly_hour_availability" value="<%= volunteer_info.monthly_hour_availability %>" class="form-input" min="1" required>
           </div>
       </div>
-
+      
       <!-- Form Row 6 -->
+      <div class="form-row"></div>
+        <div class="form-group">
+          <label for="outOfCountyYes" class="form-label">Willing to travel out of County:</label>
+          <select id="outOfCountyYes" name="willing_to_travel_county" class="form-select">
+            <option value="True" <%= volunteer_info.travel_county === true ? 'selected' : '' %>>Yes</option>
+            <option value="False" <%= volunteer_info.travel_county === false ? 'selected' : '' %>>No</option>
+          </select>
+      </div>         
+    </div>
+
+<!-- 
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Willing to travel out of County:</label>
           <div class="checkbox-group">
             <label for="outOfCountyYes" class="checkbox-label">
-              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes" <%= volunteer_info.willing_to_travel_county === 'Yes' ? 'checked' : '' %> >
+              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes" <%= volunteer_info.willing_to_travel_county === true ? 'checked' : '' %> >
               Yes
             </label>
             <label for="outOfCountyNo" class="checkbox-label">
-              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No" <%= volunteer_info.willing_to_travel_county === 'No' ? 'checked' : '' %> >
+              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No" <%= volunteer_info.willing_to_travel_county === false ? 'checked' : '' %> >
               No
             </label>
           </div>
         </div>
+      -->
+
+
         <div class="form-group">
           <label class="form-label">Willing to travel out of State:</label>
           <div class="checkbox-group">
             <label for="outOfStateYes" class="checkbox-label">
-              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes" <%= volunteer_info.willing_to_travel_state === 'Yes' ? 'checked' : '' %> >
+              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes" <%= volunteer_info.willing_to_travel_state === true ? 'checked' : '' %> >
               Yes
             </label>
             <label for="outOfStateNo" class="checkbox-label">
-              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No" <%= volunteer_info.willing_to_travel_state === 'No' ? 'checked' : '' %> >
+              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No" <%= volunteer_info.willing_to_travel_state === false ? 'checked' : '' %> >
               No
             </label>
           </div>
@@ -172,11 +186,11 @@
           <label class="form-label">Willing to teach:</label>
           <div class="checkbox-group">
             <label for="teachYes" class="checkbox-label">
-              <input type="radio" id="teachYes" name="willing_to_teach" value="Yes" <%= volunteer_info.willing_to_teach === 'Yes' ? 'checked' : '' %> >
+              <input type="radio" id="teachYes" name="willing_to_teach" value="Yes" <%= volunteer_info.willing_to_teach === true ? 'checked' : '' %> >
               Yes
             </label>
             <label for="teachNo" class="checkbox-label">
-              <input type="radio" id="teachNo" name="willing_to_teach" value="No" <%= volunteer_info.willing_to_teach === 'No' ? 'checked' : '' %> >
+              <input type="radio" id="teachNo" name="willing_to_teach" value="No" <%= volunteer_info.willing_to_teach === false ? 'checked' : '' %> >
               No
             </label>
           </div>
@@ -185,17 +199,17 @@
           <label class="form-label">Willing to Lead:</label>
           <div class="checkbox-group">
             <label for="leadYes" class="checkbox-label">
-              <input type="radio" id="leadYes" name="willing_to_lead" value="Yes" <%= volunteer_info.willing_to_lead === 'Yes' ? 'checked' : '' %> >
+              <input type="radio" id="leadYes" name="willing_to_lead" value="Yes" <%= volunteer_info.willing_to_lead === true ? 'checked' : '' %> >
               Yes
             </label>
             <label for="leadNo" class="checkbox-label">
-              <input type="radio" id="leadNo" name="willing_to_lead" value="No" <%= volunteer_info.willing_to_lead === 'No' ? 'checked' : '' %> >
-               === 'No' ? 'checked' : '' %> >
+              <input type="radio" id="leadNo" name="willing_to_lead" value="No" <%= volunteer_info.willing_to_lead === false ? 'checked' : '' %> >
               No
             </label>
           </div>
         </div>
       </div>
+
 
       <!-- Form Row 8 (How did you hear about us?) -->
       <div class="form-row">
