@@ -1300,6 +1300,62 @@ app.post('/scheduled_events/:id', async (req, res) => {
     
 });
 
+app.post('/completed_events/:id', async (req, res) => {
+    const { id } = req.params;
+    const {
+      event_name,
+      actual_date,
+      event_start_time,
+      event_duration,
+      participants_count,
+      completed_collar,
+      completed_pocket,
+      completed_envelope,
+      completed_vest,
+      finished_vest
+    } = req.body;
+  
+    try {
+  
+        // Update event_request table
+        await knex('completed_event')
+            .where('event_id', id)
+            .insert({
+            participants_count: participants_count,
+            actual_event_date: actual_date,
+            actual_event_start_time: event_start_time,
+            actual_event_duration: parseInt(event_duration, 10), 
+            });
+
+            // Update event_contact table
+        await knex('event_request')
+        .where('event_id', id)
+        .update({
+            event_name: event_name,
+            event_status: 'completed'
+        });
+
+        // Update event_location table
+        await knex('event_production')
+        .where('event_id', id)
+        .insert({
+            completed_collar: completed_collar,
+            completed_pocket: completed_pocket,
+            completed_envelope: completed_envelope,
+            completed_vest: completed_vest,
+            finished_vest: finished_vest
+        });
+    
+      // Redirect to requested_events page
+      res.redirect('/upcoming_events');
+    } catch (error) {
+      console.error('Error updating event:', error);
+      res.status(500).send('An error occurred while updating the event.');
+    }
+    
+});
+
+
 
 // get route for the admin_schedule_event event page
 app.get('/admin_schedule_event', async (req, res) => {
@@ -1331,6 +1387,7 @@ app.post("/admin_scheduled_events", async (req, res) => {
       rectangle_tables_count,
       possible_date_1,
       possible_date_2,
+      actual_date,
       event_status = 'scheduled'
   } = req.body;
 
@@ -1374,6 +1431,7 @@ app.post("/admin_scheduled_events", async (req, res) => {
           rectangle_tables_count,
           possible_date_1,
           possible_date_2,
+          actual_date,
           event_status
       });
 
