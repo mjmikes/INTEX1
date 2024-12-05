@@ -27,7 +27,7 @@
                     <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
                      <!-- Conditionally show icon based on isAdmin -->
                      <% if (isAdmin) { %>
-                        <div class="circle-icon" onclick="toggleLogout()">J</div> <!-- Circle icon with the initial J -->
+                        <div class="circle-icon" onclick="toggleLogout()">A</div> <!-- Circle icon with the initial J -->
                         <div id="logout-option" class="logout-option">
                             <!-- Link for Contact Messages and Sponsor Messages -->
                             <a href="/messages" class="logout-link"><b>Messages</b></a>
@@ -92,7 +92,7 @@
                             <td><%= event.event_name %></td>
                             <td><%= event.actual_event_date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
                             <td><%= event.first_name %> <%= event.last_name %></td>
-                            <td><%= event.email %></td>
+                            <td><%= event.event_contact_email %></td>
                             <td><%= event.phone %></td>
                             <td><%= event.participants_count %></td>
                             <td><%= event.completed_collar %></td>
@@ -102,14 +102,14 @@
                             <td><%= event.finished_vest %></td>
                             <td>
                                 <div class="table-action-buttons">
-                                    <form action="/editVolunteer/<%= volunteer.volunteer_id %>" method="GET">
+                                    <form action="/editVolunteer/<%= event.volunteer_id %>" method="GET">
                                         <button type="submit" class="btn-edit-event">Edit</button>
                                     </form>
                                 </div>
                             </td>
                             <td>
                                 <div class="table-action-buttons">
-                                    <form action="/deleteVolunteer/<%= volunteer.volunteer_id %>" method="POST">
+                                    <form action="/deleteVolunteer/<%= event.volunteer_id %>" method="POST">
                                         <button type="submit" class="btn-delete-event" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
                                     </form>
                                 </div>
