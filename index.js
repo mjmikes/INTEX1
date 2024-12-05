@@ -1299,8 +1299,12 @@ app.post('/scheduled_events/:id', async (req, res) => {
     
 });
 
+// get route for the request event page
+app.get('/admin_schedule_event', async (req, res) => {
+  res.render('admin_schedule_event');
+});
 
-app.post("/admin_schedule_event", async (req, res) => {
+app.post("/admin_scheduled_events", async (req, res) => {
   const {
       event_name,
       first_name,
