@@ -433,7 +433,28 @@ app.get('/editEvent/:id', async (req, res) => {
           return res.status(404).send('Event not found');
         }
 
-        res.render('edit_event', { event_id: id, event_request }); // Pass event_id and the event data
+        // Separate out contact and location data
+        const event_contact = {
+          first_name: event_request.first_name,
+          last_name: event_request.last_name,
+          phone: event_request.phone,
+          email: event_request.event_contact_email
+        };
+
+        const event_location = {
+          address: event_request.event_address,
+          city: event_request.event_city,
+          state: event_request.event_state,
+          zip: event_request.event_zip
+        };
+
+        // Render the template with all data passed to it
+        res.render('edit_event', {
+          event_id: id,
+          event_request, // Full event data
+          event_contact, // Separate contact details
+          event_location // Separate location details
+        });
       })
       .catch(error => {
         console.error('Error querying database:', error);
