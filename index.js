@@ -1321,12 +1321,16 @@ app.post('/completed_events/:id', async (req, res) => {
     } = req.body;
   
     try {
+      console.log(`Received request to update event with id: ${id}`);
+      
       // Check if the event already exists
       const existingEvent = await knex('completed_event')
         .where('event_id', id)
         .first();
-  
+      
       if (existingEvent) {
+        console.log(`Event with id: ${id} already exists, updating...`);
+        
         // If record exists, update it
         await knex('completed_event')
           .where('event_id', id)
@@ -1336,7 +1340,11 @@ app.post('/completed_events/:id', async (req, res) => {
             actual_event_start_time: event_start_time,
             actual_event_duration: parseInt(event_duration, 10),
           });
+          
+        console.log(`Completed event with id: ${id} has been updated.`);
       } else {
+        console.log(`Event with id: ${id} does not exist, creating new event...`);
+        
         // If record does not exist, insert a new one and get the event_id
         const [completedEvent] = await knex('completed_event')
           .returning('event_id')
@@ -1348,7 +1356,8 @@ app.post('/completed_events/:id', async (req, res) => {
           });
   
         const eventId = completedEvent.event_id;
-  
+        console.log(`New completed event created with event_id: ${eventId}`);
+        
         // Insert into event_production table with the same event_id
         await knex('event_production').insert({
           event_id: eventId,
@@ -1359,6 +1368,8 @@ app.post('/completed_events/:id', async (req, res) => {
           finished_vest,
         });
   
+        console.log(`Event production data inserted for event_id: ${eventId}`);
+        
         // Update event_request table with the same event_id
         await knex('event_request')
           .where('event_id', id)
@@ -1366,15 +1377,19 @@ app.post('/completed_events/:id', async (req, res) => {
             event_name,
             event_status: 'completed',
           });
+  
+        console.log(`Event request updated for event_id: ${id}`);
       }
   
       // Redirect to upcoming_events page
+      console.log('Redirecting to /upcoming_events');
       res.redirect('/upcoming_events');
     } catch (error) {
       console.error('Error updating event:', error);
       res.status(500).send('An error occurred while updating the event.');
     }
   });
+  
   
   
 
