@@ -326,7 +326,7 @@ app.post('/deleteEvent/:id', async (req, res) => {
     const { id } = req.params; // Get the submission_id from the URL
     try {
         // Delete the message with the given submission_id
-        await knex('contact_us')
+        await knex('event_request')
             .where('id', id) // Find the record with the given ID
             .del(); // Delete the record
 
