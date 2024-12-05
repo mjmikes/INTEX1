@@ -1352,44 +1352,58 @@ app.post('/completed_events/:id', async (req, res) => {
     } = req.body;
   
     try {
+      // Insert or update completed_event table
+      const existingEvent = await knex('completed_event')
+        .where('event_id', id)
+        .first();
   
-        // Update event_request table
+      if (existingEvent) {
+        // If record exists, update it
         await knex('completed_event')
             .where('event_id', id)
             .insert({
             participants_count: participants_count,
             actual_event_date: actual_date,
             actual_event_start_time: event_start_time,
-            actual_event_duration: parseInt(event_duration, 10), 
-            });
-
-            // Update event_contact table
-        await knex('event_request')
+            actual_event_duration: parseInt(event_duration, 10),
+          });
+      } else {
+        // If record does not exist, insert a new one
+        await knex('completed_event').insert({
+          event_id: id,
+          participants_count,
+          actual_event_date: actual_date,
+          actual_event_start_time: event_start_time,
+          actual_event_duration: parseInt(event_duration, 10),
+        });
+      }
+  
+      // Update event_request table
+      await knex('event_request')
         .where('event_id', id)
         .update({
-            event_name: event_name,
-            event_status: 'completed'
+          event_name,
+          event_status: 'completed',
         });
-
-        // Update event_location table
-        await knex('event_production')
-        .where('event_id', id)
-        .insert({
-            completed_collar: completed_collar,
-            completed_pocket: completed_pocket,
-            completed_envelope: completed_envelope,
-            completed_vest: completed_vest,
-            finished_vest: finished_vest
-        });
-    
-      // Redirect to requested_events page
+  
+      // Insert into event_production table
+      await knex('event_production').insert({
+        event_id: id,
+        completed_collar,
+        completed_pocket,
+        completed_envelope,
+        completed_vest,
+        finished_vest,
+      });
+  
+      // Redirect to upcoming_events page
       res.redirect('/upcoming_events');
     } catch (error) {
       console.error('Error updating event:', error);
       res.status(500).send('An error occurred while updating the event.');
     }
-    
-});
+  });
+  
 
 
 
