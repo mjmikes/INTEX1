@@ -466,7 +466,7 @@ app.post('/editEvent/:id', (req, res) => {
     event_start_time = req.body.event_start_time, event_duration = parseInt(req.body.event_duration),
     event_description = req.body.event_description, expected_advanced_sewers = parseInt(req.body.expected_advanced_sewers), 
     sewing_machines_available = parseInt(req.body.sewing_machines_available), expected_participants = parseInt(req.body.expected_participants),
-    children_under_10 = req.body.children_under_10, jen_story = req.body.jen_story === 'yes' || req.body.jen_story === 'true' || false, 
+    children_under_10 = parseInt(req.body.children_under_10), jen_story = req.body.jen_story === 'yes' || req.body.jen_story === 'true' || false, 
     event_space_description = req.body.event_space_description, round_tables_count = parseInt(req.body.round_tables_count), 
     rectangle_tables_count = parseInt(req.body.rectangle_tables_count), possible_date_1 = req.body.possible_date_1, 
     possible_date_2 = req.body.possible_date_2, actual_date = req.body.actual_date
