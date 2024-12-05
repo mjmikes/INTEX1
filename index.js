@@ -162,6 +162,11 @@ app.get("/sponsor_success_page", (req, res) => {
     res.render("sponsor_success_page");
 });
 
+// Add admin page
+app.get('/add_admin', (req, res) => {
+    res.render('add_admin'); // Assumes your EJS file is named `add_admin.ejs`
+});
+
 // Get route for showing the contact us and sponsor us form submissions
 app.get('/messages', async (req, res) => {
     try {
@@ -758,6 +763,30 @@ app.post('/deleteAdmin/:id', async (req, res) => {
         res.status(500).send('Error deleting admin record.');
     }
 });
+
+app.post('/add_admin', async (req, res) => {
+    const { first_name, last_name, phone, email, username, password } = req.body;
+
+    try {
+        // Insert new admin into the database
+        await knex('admin').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            username,
+            password
+        });
+
+        console.log(`New admin ${first_name} ${last_name} added successfully.`);
+        // Redirect to the user maintenance page or any other route
+        res.redirect('/user_maintenance_view');
+    } catch (error) {
+        console.error('Error adding admin:', error);
+        res.status(500).send('An error occurred while adding the admin.');
+    }
+});
+
 
 
 
