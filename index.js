@@ -421,6 +421,27 @@ app.get('/user_maintenance_view', async (req, res) => {
     }
 });
 
+app.get('/completed_events', async (req, res) => {
+    try {
+        // Fetch all admin data using Knex
+        const admin_records = await knex('admin').select(
+            'admin_id',
+            'first_name',
+            'last_name',
+            'phone',
+            'email',
+            'username',
+            'password'
+        );
+
+        // Render the user_maintenance_view template with admin_records
+        res.render('user_maintenance_view', { admin_records }); // Pass the admin data to the EJS template
+    } catch (error) {
+        console.error('Error fetching admin data:', error);
+        res.status(500).send('An error occurred while fetching user maintenance data.');
+    }
+});
+
 
 app.post('/deleteEvent/:id', async (req, res) => {
     const { id } = req.params;
