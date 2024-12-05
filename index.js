@@ -48,10 +48,10 @@ const adminTable = [
 const knex = require("knex")({
     client: "pg",
     connection: {
-        host : process.env.RDS_HOSTNAME || "awseb-e-3dmmzs5fan-stack-awsebrdsdatabase-rm7jlczpxzug.cr82swsq26ts.us-east-1.rds.amazonaws.com",
-        user : process.env.RDS_USERNAME || "ebroot",
-        password : process.env.RDS_PASSWORD || "admin123",
-        database : process.env.RDS_DB_NAME || "ebdb",
+        host : process.env.RDS_HOSTNAME || "localhost",
+        user : process.env.RDS_USERNAME || "postgres",
+        password : process.env.RDS_PASSWORD || "admin1",
+        database : process.env.RDS_DB_NAME || "test",
         port : process.env.RDS_PORT || 5433,
         ssl : process.env.DB_SSL ? { rejectUnauthorized: false } : false
     },
@@ -67,6 +67,10 @@ const knex = require("knex")({
 // get route for the login page
 app.get('/login', (req, res) => {
     res.render('login');
+});
+
+app.get('/help', (req, res) => {
+    res.render('help');
 });
 
 // get route for the jen's page
@@ -151,6 +155,11 @@ app.get("/event_success_page", (req, res) => {
 // Volunteer Success page 
 app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
+});
+
+// Sponsor Success page 
+app.get("/sponsor_success_page", (req, res) => {
+    res.render("sponsor_success_page");
 });
 
 // Get route for showing the contact us and sponsor us form submissions
@@ -401,6 +410,32 @@ app.post("/submit-volunteer", async (req, res) => {
         res.redirect('/volunteer_success_page');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Post route to send sponsor form data to database
+app.post("/submit-sponsor", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        email,
+        organization_name,
+        message
+    } = req.body;
+    try {
+        // Insert into volunteer_info table
+        await knex('sponsor_us').insert({
+            first_name,
+            last_name,
+            email,
+            organization_name,
+            message
+        });
+        // Redirect to a success page
+        res.redirect('/sponsor_success_page');
+    } catch (error) {
+        console.error('Error inserting sponsor data:', error);
         res.status(500).send('Internal Server Error');
     }
 });
