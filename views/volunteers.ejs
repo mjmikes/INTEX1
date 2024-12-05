@@ -34,12 +34,12 @@
                         <li><a href="/login">Login</a></li>
                     <% } %>
                     <div class="navbar-toggler" onclick="toggleSidebar()">
-                        <i style="font-size: x-large;"class="fas fa-bars"></i>
+                        <i style="font-size: x-large;" class="fas fa-bars"></i>
                     </div>
                 </ul>
             </div>
             <div class="sidebar" id="sidebar">
-                <button class="close-btn" onclick="toggleSidebar()">×</button>
+                <button class="close-btn" onclick="toggleSidebar()">&times;</button>
                 <ul class="sidebar-links">
                     <li><a href="#contact-us-form">Contact Us</a></li>
                     <li><a href="/faqs">FAQs</a></li>
@@ -57,71 +57,71 @@
         </nav>
     </header>
     
-        <div class="table-container">
-            <h1>Volunteers</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Volunteer Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Source</th>
-                        <th>Sewing Level</th>
-                        <th>Monthly Availability (Hrs)</th>
-                        <th>Willing to Teach</th>
-                        <th>Willing to Lead</th>
-                        <th>Travel Out of County</th>
-                        <th>Travel Out of State</th>
-                        <th>Volunteer Details</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (volunteer_info.length > 0) { %>
-                        <% volunteer_info.forEach(function(volunteer) { %>
-                            <tr>
-                                <input type="hidden" value="<%= volunteer.volunteer_id %>">
-                                <td><%= volunteer.first_name %> <%= volunteer.last_name %></td>
-                                <td><%= volunteer.address %>, <%= volunteer.city %>, <%= volunteer.state %> <%= volunteer.zip %></td>
-                                <td><%= volunteer.phone %></td>
-                                <td><%= volunteer.email %></td>
-                                <td><%= volunteer.source %></td>
-                                <td><%= volunteer.sewing_level %></td>
-                                <td><%= volunteer.monthly_hour_availability %></td>
-                                <td><%= volunteer.willing_to_teach ? 'Yes' : 'No' %></td>
-                                <td><%= volunteer.willing_to_lead ? 'Yes' : 'No' %></td>
-                                <td><%= volunteer.travel_county ? 'Yes' : 'No' %></td>
-                                <td><%= volunteer.willing_to_travel_state ? 'Yes' : 'No' %></td>
-                                <td><%= volunteer.details %></td>
-                                <td> class="table-action-buttons"
-                                    <div class="table-action-buttons">
-                                        <form action="/editVolunteer/<%= volunteer.volunteer_id %>" method="GET">
-                                            <button type="submit" class="btn-edit-event">Edit</button>
-                                        </form>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="table-action-buttons">
-                                        <form action="/deleteVolunteer/<%= volunteer.volunteer_id %>" method="POST">
-                                            <button type="submit" class="btn-delete-event" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        <% }); %>
-                    <% } else { %>
+    <div class="table-container">
+        <h1>Volunteers</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Volunteer Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Source</th>
+                    <th>Sewing Level</th>
+                    <th>Monthly Availability (Hrs)</th>
+                    <th>Willing to Teach</th>
+                    <th>Willing to Lead</th>
+                    <th>Travel Out of County</th>
+                    <th>Travel Out of State</th>
+                    <th>Volunteer Details</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (volunteer_info.length > 0) { %>
+                    <% volunteer_info.forEach(function(volunteer) { %>
                         <tr>
-                            <td colspan="14">No data available</td>
+                            <input type="hidden" value="<%= volunteer.volunteer_id %>">
+                            <td><%= volunteer.first_name %> <%= volunteer.last_name %></td>
+                            <td><%= volunteer.address %>, <%= volunteer.city %>, <%= volunteer.state %> <%= volunteer.zip %></td>
+                            <td><%= volunteer.phone %></td>
+                            <td><%= volunteer.email %></td>
+                            <td><%= volunteer.source %></td>
+                            <td><%= volunteer.sewing_level %></td>
+                            <td><%= volunteer.monthly_hour_availability %></td>
+                            <td><%= volunteer.willing_to_teach ? 'Yes' : 'No' %></td>
+                            <td><%= volunteer.willing_to_lead ? 'Yes' : 'No' %></td>
+                            <td><%= volunteer.travel_county ? 'Yes' : 'No' %></td>
+                            <td><%= volunteer.willing_to_travel_state ? 'Yes' : 'No' %></td>
+                            <td><%= volunteer.details %></td>
+                            <td class="table-action-buttons">
+                                <div class="table-action-buttons">
+                                    <form action="/editVolunteer/<%= volunteer.volunteer_id %>" method="GET">
+                                        <button type="submit" class="btn-edit-event">Edit</button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-action-buttons">
+                                    <form action="/deleteVolunteer/<%= volunteer.volunteer_id %>" method="POST">
+                                        <button type="submit" class="btn-delete-event" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
-                    <% } %>
-                    <form action="/get_involved" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
-                        <button class="btn-add" type="submit"><i class="fas fa-plus"></i> Manually Add Volunteer</button>
-                        <br>
-                </tbody>
-            </table>
-        </div>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="14">No data available</td>
+                    </tr>
+                <% } %>
+                <form action="/get_involved" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+                    <button class="btn-add" type="submit"><i class="fas fa-plus"></i> Manually Add Volunteer</button>
+                </form>
+            </tbody>
+        </table>
+    </div>
     <footer>
         <div class="footer">
             <div class="contact">
