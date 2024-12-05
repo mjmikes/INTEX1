@@ -847,7 +847,7 @@ app.get('/editVolunteer/:id', async (req, res) => {
   
         // Render the 'edit_volunteer' template, passing the volunteer data
         res.render('edit_volunteer', {
-            volunteer: volunteer_data // Pass the volunteer data to the view
+            volunteer_info: volunteer_data // Pass as 'volunteer_info'
         });
     } catch (error) {
         console.error('Error retrieving volunteer:', error);
@@ -855,8 +855,8 @@ app.get('/editVolunteer/:id', async (req, res) => {
     }
 });
 
-//app.post("/edit_volunteer_data", async (req, res) => {
-app.post("/editVolunteer", async (req, res) => {
+
+app.post("/edit_volunteer_data", async (req, res) => {
     const {
         volunteer_id,
         first_name,

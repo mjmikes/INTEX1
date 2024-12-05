@@ -325,6 +325,51 @@ header {
 }
 
 /* Buttons Styling */
+.btn-add {
+    background-color: #34B3A8;
+    color: white;
+    border-radius: 15px; 
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.btn-add:hover {
+    background-color: #2a8e80;
+    transform: scale(1.05); /* Slightly increase the size on hover */
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: #34B3A8;
+    color: white;
+    border-radius: 10px; 
+    padding: 5px 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.btn-edit:hover {
+    background-color: #2a8e80;
+    transform: scale(1.05); /* Slightly increase the size on hover */
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #E38C8C;
+    color: white;
+    border-radius: 10px; 
+    padding: 5px 15px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.btn-delete:hover {
+    background-color: #D25F5F;
+    transform: scale(1.05); /* Slightly increase the size on hover */
+    cursor: pointer;
+}
+
 .btn-primary,
 .btn-secondary {
     padding: 12px 20px;

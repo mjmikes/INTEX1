@@ -50,16 +50,15 @@
                         <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
                         <li><a href="/completed_events"><b>Completed Events</b></a></li>
                         <li><a href="/volunteers"><b>Volunteers</b></a></li>
-                        <li><a href="/user_maintenance"><b>User Maintenance</b></a></li>
+                        <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
                     <% } %>
                 </ul>
             </div>
         </nav>
     </header>
-    <main>
-        <h1>Volunteers</h1>
-    </main>
+    
         <div class="table-container">
+            <h1>Volunteers</h1>
             <table>
                 <thead>
                     <tr>
@@ -114,6 +113,8 @@
                         </tr>
                     <% } %>
                 </tbody>
+                <form action="/get_involved" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
+                    <button class="btn-add" type="submit"><i class="fas fa-plus"></i> Add Volunteer</button>
             </table>
         </div>
     <footer>
