@@ -195,15 +195,12 @@
         <div class="form-group">
           <label class="form-label">Would you like Jen to tell her story at the start:</label>
           <div class="checkbox-group">
-            <label for="jenStoryYes" class="checkbox-label">
-              <input type="radio" id="jenStoryYes" name="jen_story" value="True" <%= event_request.jen_story === 'True' ? 'checked' : '' %>>
-              Yes
-            </label>
-            <label for="jenStoryNo" class="checkbox-label">
-              <input type="radio" id="jenStoryNo" name="jen_story" value="False" <%= event_request.jen_story === 'False' ? 'checked' : '' %>>
-              No
-            </label>
-          </div>
+            <label for="jenStory" class="checkbox-label">Jen Story:</label>
+            <select id="jenStory" name="jen_story" value="<%= event_request.jen_story %>" class="form-select">
+              <option value="True">Yes</option>
+              <option value="False">No</option>
+            </select>
+          </div>          
         </div>
       </div>
 
@@ -219,11 +216,19 @@
         </div>
       </div>
 
+      <!-- Form Row 6-->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="possibleDate2" class="form-label">Actual Event Date:</label>
+          <input type="date" id="actualEventDate" name="actual_date" class="form-input">
+        </div>
+      </div>
+
       <!-- Form Row 12 -->
       <div class="form-row">
         <div class="form-group">
           <label for="eventDescription" class="form-label">Event Description:</label>
-          <textarea id="eventDescription" name="event_description" value="<%= event_request.event_description %>" class="form-textarea" rows="4" required></textarea>
+          <textarea id="eventDescription" name="event_description" value="<%= event_request.description %>" class="form-textarea" rows="4" required></textarea>
         </div>
       </div>
 
