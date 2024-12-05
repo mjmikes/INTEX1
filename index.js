@@ -48,10 +48,10 @@ const adminTable = [
 const knex = require("knex")({
     client: "pg",
     connection: {
-        host : process.env.RDS_HOSTNAME || "awseb-e-3dmmzs5fan-stack-awsebrdsdatabase-rm7jlczpxzug.cr82swsq26ts.us-east-1.rds.amazonaws.com",
-        user : process.env.RDS_USERNAME || "ebroot",
-        password : process.env.RDS_PASSWORD || "admin123",
-        database : process.env.RDS_DB_NAME || "ebdb",
+        host : process.env.RDS_HOSTNAME || "localhost",
+        user : process.env.RDS_USERNAME || "postgres",
+        password : process.env.RDS_PASSWORD || "admin1",
+        database : process.env.RDS_DB_NAME || "test",
         port : process.env.RDS_PORT || 5433,
         ssl : process.env.DB_SSL ? { rejectUnauthorized: false } : false
     },
@@ -67,6 +67,10 @@ const knex = require("knex")({
 // get route for the login page
 app.get('/login', (req, res) => {
     res.render('login');
+});
+
+app.get('/help', (req, res) => {
+    res.render('help');
 });
 
 // get route for the jen's page
