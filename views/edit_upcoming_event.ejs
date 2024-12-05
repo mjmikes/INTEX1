@@ -130,7 +130,7 @@
         </div>
         <div class="form-group">
           <label for="actualEventDate" class="form-label">Actual Event Date:</label>
-          <input type="date" id="actualEventDate" name="actual_date" value="<%= event_request.actual_date %>" class="form-input" required>
+          <input type="date" id="actualEventDate" name="actual_date" value="<%= event_request.actual_date ? event_request.actual_date.toISOString().split('T')[0] : '' %>" class="form-input" required>
         </div>
       </div>
 
