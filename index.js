@@ -607,13 +607,14 @@ app.post('/editEvent/:id', async (req, res) => {
         possible_date_2: possible_date_2 || null,
         actual_date: actual_date || null,
       });
-
-    // Redirect or send success response
-    res.redirect(`/eventDetails/${id}`);
+  
+    // Redirect to requested_events page
+    res.redirect('/requested_events');
   } catch (error) {
     console.error('Error updating event:', error);
     res.status(500).send('An error occurred while updating the event.');
   }
+  
 });
 
 
