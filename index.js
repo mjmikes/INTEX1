@@ -533,6 +533,40 @@ app.get('/editEvent/:id', async (req, res) => {
   }
 });
 
+app.get('/completeEvent/:id', async (req, res) => {
+    const { id } = req.params; // Extract the event ID from the route parameter
+    try {
+      knex('event_request')
+        .select(
+          'actual_date',
+          'expected_participants',
+          'event_start_time',
+          'event_duration'
+        )
+        .where('event_id', id) // Filter by the event ID
+        .first() // Retrieve only one event
+        .then(event => {
+          if (!event) {
+            return res.status(404).send('Event not found');
+          }
+  
+          // Render the form with the retrieved data
+          res.render('complete_event_form', {
+            event_id: id, // Pass the event ID for reference
+            event // Pass the event data
+          });
+        })
+        .catch(error => {
+          console.error('Error querying database:', error);
+          res.status(500).send('Internal Server Error');
+        });
+    } catch (error) {
+      console.error('Error fetching event data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+
 app.get('/scheduleEvent/:id', async (req, res) => {
   const { id } = req.params; // Extract the event ID from the route parameter
   try {
