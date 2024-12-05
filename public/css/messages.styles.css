@@ -660,12 +660,12 @@ form textarea {
 /* Table Container Styling */
 .table-container {
     max-width: 90%; /* Keeps the table centered and wide */
-    margin: 20px auto;
+    margin: 10px auto;
     overflow-x: auto;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    padding: 10px;
+    padding: 0px;
     min-height: 60vh;
     max-height: 80vh;
     overflow-y: auto;
@@ -682,7 +682,7 @@ table {
 /* Table Header and Cell Styling */
 th, td {
     padding: 4px 8px; /* Reduced padding for skinnier rows */
-    line-height: 3; /* Tighter spacing within cells */
+    line-height: 1.6; /* Standard row height */
     font-size: 14px;
     text-align: center;
 }
@@ -706,14 +706,32 @@ tbody tr:hover {
     background-color: #f9f9f9; /* Subtle hover effect */
 }
 
-/* Specific Adjustments for Data Cells */
-td {
-    text-align: center;
-    font-size: 13px; /* Slightly smaller font size for compact rows */
-    color: #333;
-    white-space: nowrap; /* Prevents text wrapping */
-    overflow: hidden;
-    text-overflow: ellipsis; /* Adds ellipsis for overflowing text */
+/* Specific Button Cell Styling */
+td.action-cell {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+/* Button Styling for Table Actions */
+.table-action-buttons button,
+.btn-delete-event {
+    background-color: #E38C8C; /* Delete button background */
+    color: white; /* Text color */
+    border: none; /* Remove borders */
+    padding: 8px 15px; /* Button padding */
+    font-size: 14px; /* Readable font size */
+    font-weight: bold; /* Bold text */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: all 0.3s ease; /* Smooth transition */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Button Hover Effect */
+.btn-delete-event:hover {
+    background-color: #D25F5F; /* Darker red for hover */
+    transform: scale(1.05); /* Slight enlargement */
 }
 
 /* Empty Table Row */
@@ -722,13 +740,6 @@ td[colspan="23"] {
     padding: 10px;
     font-size: 16px;
     color: #888;
-}
-
-/* Button Styling for Table Actions */
-.table-action-buttons button {
-    padding: 5px 10px; /* Smaller buttons for skinnier rows */
-    font-size: 2px; /* Slightly smaller font size */
-    border-radius: 4px; /* Compact button style */
 }
 
 /* Edit Button Styling */
@@ -742,16 +753,5 @@ td[colspan="23"] {
     transform: scale(1.05);
 }
 
-/* Delete Button Styling */
-.table-action-buttons .btn-delete-event {
-    background-color: #E38C8C
-    ;
-    color: white;
-}
-
-.table-action-buttons .btn-delete-event:hover {
-    background-color: #D25F5F;
-    transform: scale(1.05);
-}
 
 
