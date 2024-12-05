@@ -1352,43 +1352,31 @@ app.post('/completed_events/:id', async (req, res) => {
     } = req.body;
   
     try {
-      // Insert or update completed_event table
-      const existingEvent = await knex('completed_event')
-        .where('event_id', id)
-        .first();
-  
-      if (existingEvent) {
-        // If record exists, update it
-        await knex('completed_event')
-            .where('event_id', id)
-            .insert({
-            participants_count: participants_count,
-            actual_event_date: actual_date,
-            actual_event_start_time: event_start_time,
-            actual_event_duration: parseInt(event_duration, 10),
-          });
-      } else {
-        // If record does not exist, insert a new one
-        await knex('completed_event').insert({
-          event_id: id,
-          participants_count,
-          actual_event_date: actual_date,
-          actual_event_start_time: event_start_time,
-          actual_event_duration: parseInt(event_duration, 10),
-        });
-      }
-  
-      // Update event_request table
+      // Step 1: Update the event_request table
+      console.log('Updating event_request table');
       await knex('event_request')
         .where('event_id', id)
         .update({
           event_name,
+          event_start_time,
+          event_duration,
           event_status: 'completed',
         });
   
-      // Insert into event_production table
+      // Step 2: Insert a new record into completed_event table
+      console.log('Inserting into completed_event table');
+      await knex('completed_event').insert({
+        event_id: id, // Ensure the event_id from event_request is inserted into completed_event
+        participants_count,
+        actual_event_date: actual_date,
+        actual_event_start_time: event_start_time,
+        actual_event_duration: parseInt(event_duration, 10),
+      });
+  
+      // Step 3: Insert a new record into event_production table
+      console.log('Inserting into event_production table');
       await knex('event_production').insert({
-        event_id: id,
+        event_id: id, // Ensure the event_id from event_request is inserted into event_production
         completed_collar,
         completed_pocket,
         completed_envelope,
@@ -1477,8 +1465,6 @@ app.post('/completed_events/:id', async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   });
-
-
 
 // get route for the admin_schedule_event event page
 app.get('/admin_schedule_event', async (req, res) => {
