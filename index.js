@@ -995,6 +995,7 @@ app.get('/editVolunteer/:id', async (req, res) => {
 
 
 app.post('/editVolunteer/:id', async (req, res) => {
+    const { id } = req.params;
     const {
         volunteer_id,
         first_name,
