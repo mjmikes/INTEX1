@@ -66,20 +66,21 @@
       </div>
       </nav>
     </header>
-  <body>
+
   <!-- Main Content -->
   <main>
     <h1 class="form-header">Edit Volunteer</h1>
     <form action="/submit-volunteer" method="POST" class="event-form">
+      <input type="hidden" name="volunteer_id" value="<%= volunteer.volunteer_id %>">
       <!-- Form Row 1 -->
       <div class="form-row">
         <div class="form-group">
           <label for="firstName" class="form-label">First Name:</label>
-          <input type="text" id="firstName" name="first_name" class="form-input" required>
+          <input type="text" id="firstName" name="first_name" value="<%= volunteer_info.first_name %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="lastName" class="form-label">Last Name:</label>
-          <input type="text" id="lastName" name="last_name" class="form-input" required>
+          <input type="text" id="lastName" name="last_name" value="<%= volunteer_info.last_name %>" class="form-input" required>
         </div>
       </div>
 
@@ -87,11 +88,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="phone" class="form-label">Phone:</label>
-          <input type="tel" id="phone" name="phone" class="form-input" required>
+          <input type="tel" id="phone" name="phone" value="<%= volunteer_info.phone %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" id="email" name="email" class="form-input" required>
+          <input type="email" id="email" name="email" value="<%= volunteer_info.email %>"  class="form-input" required>
         </div>
       </div>
 
@@ -99,11 +100,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="address" class="form-label">Address:</label>
-          <input type="text" id="address" name="address" class="form-input" required>
+          <input type="text" id="address" name="address" value="<%= volunteer_info.address %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="city" class="form-label">City:</label>
-          <input type="text" id="city" name="city" class="form-input" required>
+          <input type="text" id="city" name="city" value="<%= volunteer_info.city %>" class="form-input" required>
         </div>
       </div>
 
@@ -111,11 +112,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="state" class="form-label">State:</label>
-          <input type="text" id="state" name="state" class="form-input" required>
+          <input type="text" id="state" name="state" value="<%= volunteer_info.state %>" class="form-input" required>
         </div>
         <div class="form-group">
           <label for="zip" class="form-label">Zip Code:</label>
-          <input type="text" id="zip" name="zip" class="form-input" required>
+          <input type="text" id="zip" name="zip" value="<%= volunteer_info.zip %>" class="form-input" required>
         </div>
       </div>
 
@@ -123,7 +124,7 @@
       <div class="form-row">
         <div class="form-group">
             <label for="sewing_level" class="form-label">Sewing Level:</label>
-            <select id="sewing_level" name="sewing_level" class="form-select" required>
+            <select id="sewing_level" name="sewing_level" value="<%= volunteer_info.sewing_level %>" class="form-select" required>
               <option value="Sewing">Beginner</option>
               <option value="Non-Sewing">Intermediate</option>
               <option value="Both">Advanced</option>
@@ -131,7 +132,7 @@
           </div>
           <div class="form-group">
             <label for="monthly_hour_availability" class="form-label">Hours available each Month (estimate):</label>
-            <input type="number" id="monthly_hour_availability" name="monthly_hour_availability" class="form-input" min="1" required>
+            <input type="number" id="monthly_hour_availability" name="monthly_hour_availability" value="<%= volunteer_info.monthly_hour_availability %>" class="form-input" min="1" required>
           </div>
       </div>
 
