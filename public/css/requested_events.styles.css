@@ -732,3 +732,15 @@ form button[type="submit"]:hover {
     width: 100%; /* Optional: Ensure the table adapts to its content */
     border-collapse: collapse; /* Optional: Remove spacing between table cells */
 }
+
+.button-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px; /* Add some spacing between buttons */
+    align-items: center; /* Center buttons horizontally (optional) */
+    margin-top: 10px; /* Add some spacing from the content above */
+}
+
+.button-container form {
+    margin: 0; /* Remove default margin */
+}
