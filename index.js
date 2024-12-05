@@ -1330,6 +1330,7 @@ app.post("/admin_scheduled_events", async (req, res) => {
       rectangle_tables_count,
       possible_date_1,
       possible_date_2,
+      actual_date,
       event_status = 'scheduled'
   } = req.body;
 
@@ -1373,6 +1374,7 @@ app.post("/admin_scheduled_events", async (req, res) => {
           rectangle_tables_count,
           possible_date_1,
           possible_date_2,
+          actual_date,
           event_status
       });
 
