@@ -456,7 +456,7 @@ app.get('/editEvent/:id', async (req, res) => {
   }
 });
 
-app.post('/editEvent/:id', (req, res) => {
+app.post('/meditEvent/:id', (req, res) => {
   const { id } = req.params;
   const {
     event_name = req.body.event_name, first_name = req.body.first_name, last_name = req.body.last_name, 
@@ -528,6 +528,87 @@ app.post('/editEvent/:id', (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+app.post('/editEvent/:id', async (req, res) => {
+  const { id } = req.params;
+  const {
+    event_name,
+    first_name,
+    last_name,
+    phone,
+    event_contact_email,
+    event_type,
+    event_location_address,
+    event_location_city,
+    event_location_state,
+    event_location_zip,
+    event_start_time,
+    event_duration,
+    event_description,
+    expected_advanced_sewers,
+    sewing_machines_available,
+    expected_participants,
+    children_under_10,
+    jen_story,
+    event_space_description,
+    round_tables_count,
+    rectangle_tables_count,
+    possible_date_1,
+    possible_date_2,
+    actual_date,
+  } = req.body;
+
+  try {
+    // Update event_contact table
+    await knex('event_contact')
+      .where('contact_id', id)
+      .update({
+        first_name: first_name,
+        last_name: last_name,
+        phone: phone,
+        email: event_contact_email,
+      });
+
+    // Update event_location table
+    await knex('event_location')
+      .where('location_id', id)
+      .update({
+        address: event_location_address,
+        city: event_location_city,
+        state: event_location_state,
+        zip: event_location_zip,
+      });
+
+    // Update event_request table
+    await knex('event_request')
+      .where('event_id', id)
+      .update({
+        event_name: event_name,
+        event_type: event_type,
+        event_start_time: event_start_time,
+        event_duration: parseInt(event_duration, 10),
+        event_description: event_description,
+        expected_advanced_sewers: parseInt(expected_advanced_sewers, 10),
+        sewing_machines_available: parseInt(sewing_machines_available, 10),
+        expected_participants: parseInt(expected_participants, 10),
+        children_under_10: parseInt(children_under_10, 10),
+        jen_story: jen_story === 'True' || jen_story === true,
+        event_space_description: event_space_description,
+        round_tables_count: parseInt(round_tables_count, 10),
+        rectangle_tables_count: parseInt(rectangle_tables_count, 10),
+        possible_date_1: possible_date_1 || null,
+        possible_date_2: possible_date_2 || null,
+        actual_date: actual_date || null,
+      });
+
+    // Redirect or send success response
+    res.redirect(`/eventDetails/${id}`);
+  } catch (error) {
+    console.error('Error updating event:', error);
+    res.status(500).send('An error occurred while updating the event.');
+  }
+});
+
 
 
 // Post route to send volunteer form data to database
