@@ -801,7 +801,7 @@ app.post('/deleteAdmin/:id', async (req, res) => {
 
 // EDIT VOLUNTEER
 
-app.post('/edit_volunteer/:id', async (req, res) => {
+app.get('/editVolunteer/:id', async (req, res) => {
     const { id } = req.params; // Extract the volunteer ID from the route parameter
   
     try {
