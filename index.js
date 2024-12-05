@@ -153,9 +153,11 @@ app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
 });
 
+// Get route for showing the contact us and sponsor us form submissions
 app.get('/messages', async (req, res) => {
     try {
-        knex('contact_us')
+        // Fetch contact_us messages
+        const contactMessages = await knex('contact_us')
             .select(
                 'contact_us.submission_id',
                 'contact_us.first_name',
@@ -167,26 +169,42 @@ app.get('/messages', async (req, res) => {
                 'contact_us.message',
                 'contact_us.created_at'
             )
-            .orderBy('contact_us.created_at', 'desc')
-            .then(messages => {
-                // Loop through each message and format the created_at field
-                messages.forEach(message => {
-                    console.log('Original created_at:', message.created_at); // Debugging step
+            .orderBy('contact_us.created_at', 'desc');
 
-                    // Use the moment constructor with the format if needed
-                    message.created_at = moment(message.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ') // Adjust format as needed
-                        .tz('America/Denver') // Convert to Mountain Time Zone
-                        .format('YYYY-MM-DD HH:mm'); // Desired format for display
+        // Format the created_at field for contact_us messages
+        contactMessages.forEach(message => {
+            console.log('Original created_at (contact_us):', message.created_at);
+            message.created_at = moment(message.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+                .tz('America/Denver')
+                .format('YYYY-MM-DD HH:mm');
+            console.log('Formatted created_at (contact_us):', message.created_at);
+        });
 
-                    console.log('Formatted created_at:', message.created_at); // Debugging step
-                });
+        // Fetch sponsor_us messages
+        const sponsorMessages = await knex('sponsor_us')
+            .select(
+                'sponsor_us.submission_id',
+                'sponsor_us.first_name',
+                'sponsor_us.last_name',
+                'sponsor_us.email',
+                'sponsor_us.organization_name',
+                'sponsor_us.message',
+                'sponsor_us.created_at'
+            )
+            .orderBy('sponsor_us.created_at', 'desc');
 
-                res.render('messages', { messages }); // Pass the formatted messages data to the template
-            })
-            .catch(error => {
-                console.error('Error querying database:', error);
-                res.status(500).send('Internal Server Error');
-            });
+        // Format the created_at field for sponsor_us messages
+        sponsorMessages.forEach(sponmessage => {
+            console.log('Original created_at (sponsor_us):', sponmessage.created_at);
+            sponmessage.created_at = moment(sponmessage.created_at, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+                .tz('America/Denver')
+                .format('YYYY-MM-DD HH:mm');
+            console.log('Formatted created_at (sponsor_us):', sponmessage.created_at);
+        });
+
+        // Render the 'messages' template with both sets of messages
+        res.render('messages', { contactMessages, sponsorMessages });
+
     } catch (error) {
         console.error('Error fetching messages:', error);
         res.status(500).send('Server Error');
