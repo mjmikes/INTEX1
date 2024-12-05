@@ -473,7 +473,7 @@ app.post('/editEvent/:id', (req, res) => {
   try {
       // First, update the event_contact table
       knex('event_contact')
-          .where('event_request.event_id', id)
+          .where('event_contact.contact_id', id)
           .update({
               first_name: first_name,
               last_name: last_name,
@@ -483,7 +483,7 @@ app.post('/editEvent/:id', (req, res) => {
           .then(() => {
               // Then, update the event_location table
               return knex('event_location')
-                  .where('event_request.event_id', id)
+                  .where('event_location.event_id', id)
                   .update({
                       event_location_address: event_location_address,
                       event_location_city: event_location_city,
@@ -798,7 +798,10 @@ app.post('/deleteAdmin/:id', async (req, res) => {
     }
 });
 
-app.get('/edit_volunteer/:id', async (req, res) => {
+
+// EDIT VOLUNTEER
+
+app.get('/editVolunteer/:id', async (req, res) => {
     const { id } = req.params; // Extract the volunteer ID from the route parameter
   
     try {
@@ -839,7 +842,8 @@ app.get('/edit_volunteer/:id', async (req, res) => {
     }
 });
 
-app.post("/edit_volunteer_data", async (req, res) => {
+//app.post("/edit_volunteer_data", async (req, res) => {
+app.post("/editVolunteer", async (req, res) => {
     const {
         volunteer_id,
         first_name,
