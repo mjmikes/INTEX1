@@ -71,7 +71,7 @@
 
   <!-- Main Content -->
   <main>
-    <h1 class="form-header">Event Request Form</h1>
+    <h1 class="form-header">Edit Pending Request</h1>
     <form action="/editEvent/<%= event_id %>" method="POST" class="event-form">
       
       <!-- Form Row 1 -->
@@ -211,14 +211,6 @@
         <div class="form-group">
           <label for="rectangleTables" class="form-label">Available Rectangle Tables:</label>
           <input type="number" id="rectangleTables" name="rectangle_tables_count" value="<%= event_request.round_tables_count %>" class="form-input" min="0">
-        </div>
-      </div>
-
-      <!-- Form Row 6-->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="actualEventDate" class="form-label">Actual Event Date:</label>
-          <input type="date" id="actualEventDate" name="actual_date" class="form-input">
         </div>
       </div>
 
