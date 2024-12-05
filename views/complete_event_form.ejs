@@ -142,15 +142,28 @@
           </div>
         </div>
   
-        <!-- Final Row -->
+        <!-- Form Row 7 -->
         <div class="form-row">
           <div class="form-group">
             <label for="finishedVests" class="form-label">Finished Vests:</label>
             <input type="number" id="finishedVests" name="finished_vest" class="form-input" min="0" required>
           </div>
         </div>
-      </div>
-  
+
+        <!-- Final Row -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="status" class="form-label">Event Status:</label>
+              <input
+                type="text"
+                id="status"
+                name="event_status"
+                class="form-input"
+                value="completed"
+                readonly
+                required
+              >
+            </div>
       <!-- Submit Button -->
       <div class="form-row">
         <button type="submit" class="form-submit">Submit</button>
