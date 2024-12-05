@@ -153,6 +153,11 @@ app.get("/volunteer_success_page", (req, res) => {
     res.render("volunteer_success_page");
 });
 
+// Sponsor Success page 
+app.get("/volunteer_success_page", (req, res) => {
+    res.render("sponsor_success_page");
+});
+
 // Get route for showing the contact us and sponsor us form submissions
 app.get('/messages', async (req, res) => {
     try {
