@@ -39,10 +39,6 @@ app.use((req, res, next) => {
 });
 
 
-// Mock admin table for the sake of this example
-const adminTable = [
-    { username: 'admin', password: 'admin' } // Example credentials
-];
 
 
 const knex = require("knex")({
@@ -691,26 +687,31 @@ app.get('/logout', (req, res) => {
 });
 
 // POST route to handle login
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
-    // Check if both fields are filled out
     if (!username || !password) {
         return res.render('login', { errorMessage: 'Username and password are required.' });
     }
 
-    // Find the user in the adminTable array
-    const user = adminTable.find(user => user.username === username && user.password === password);
+    try {
+        const admin = await knex('admin')
+            .select('username', 'password')
+            .where({ username })
+            .first();
 
-    // If no matching user or incorrect credentials
-    if (!user) {
-        return res.render('login', { errorMessage: 'Invalid username or password.' });
+        if (!admin || admin.password !== password) {
+            return res.render('login', { errorMessage: 'Invalid username or password.' });
+        }
+
+        req.session.isAdmin = true;
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error during login authentication:', error);
+        res.status(500).send('Internal Server Error');
     }
-
-    // Successful login, store admin session and redirect
-    req.session.isAdmin = true;
-    res.redirect('/');
 });
+
 
 // volunteer section
 app.get('/volunteers', async (req, res) => {
