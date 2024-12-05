@@ -66,6 +66,190 @@
       </div>
       </nav>
     </header>
-  
+  <body>
+  <!-- Main Content -->
+  <main>
+    <h1 class="form-header">Edit Volunteer</h1>
+    <form action="/submit-volunteer" method="POST" class="event-form">
+      <!-- Form Row 1 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName" class="form-label">First Name:</label>
+          <input type="text" id="firstName" name="first_name" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName" class="form-label">Last Name:</label>
+          <input type="text" id="lastName" name="last_name" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 2 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone:</label>
+          <input type="tel" id="phone" name="phone" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" id="email" name="email" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 3 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="address" class="form-label">Address:</label>
+          <input type="text" id="address" name="address" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="city" class="form-label">City:</label>
+          <input type="text" id="city" name="city" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 4 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="state" class="form-label">State:</label>
+          <input type="text" id="state" name="state" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="zip" class="form-label">Zip Code:</label>
+          <input type="text" id="zip" name="zip" class="form-input" required>
+        </div>
+      </div>
+
+      <!-- Form Row 5 -->
+      <div class="form-row">
+        <div class="form-group">
+            <label for="sewing_level" class="form-label">Sewing Level:</label>
+            <select id="sewing_level" name="sewing_level" class="form-select" required>
+              <option value="Sewing">Beginner</option>
+              <option value="Non-Sewing">Intermediate</option>
+              <option value="Both">Advanced</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="monthly_hour_availability" class="form-label">Hours available each Month (estimate):</label>
+            <input type="number" id="monthly_hour_availability" name="monthly_hour_availability" class="form-input" min="1" required>
+          </div>
+      </div>
+
+      <!-- Form Row 6 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Willing to travel out of County:</label>
+          <div class="checkbox-group">
+            <label for="outOfCountyYes" class="checkbox-label">
+              <input type="radio" id="outOfCountyYes" name="willing_to_travel_county" value="Yes">
+              Yes
+            </label>
+            <label for="outOfCountyNo" class="checkbox-label">
+              <input type="radio" id="outOfCountyNo" name="willing_to_travel_county" value="No">
+              No
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Willing to travel out of State:</label>
+          <div class="checkbox-group">
+            <label for="outOfStateYes" class="checkbox-label">
+              <input type="radio" id="outOfStateYes" name="willing_to_travel_state" value="Yes">
+              Yes
+            </label>
+            <label for="outOfStateNo" class="checkbox-label">
+              <input type="radio" id="outOfStateNo" name="willing_to_travel_state" value="No">
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Row 7 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Willing to teach:</label>
+          <div class="checkbox-group">
+            <label for="teachYes" class="checkbox-label">
+              <input type="radio" id="teachYes" name="willing_to_teach" value="Yes">
+              Yes
+            </label>
+            <label for="teachNo" class="checkbox-label">
+              <input type="radio" id="teachNo" name="willing_to_teach" value="No">
+              No
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Willing to Lead:</label>
+          <div class="checkbox-group">
+            <label for="leadYes" class="checkbox-label">
+              <input type="radio" id="leadYes" name="willing_to_lead" value="Yes">
+              Yes
+            </label>
+            <label for="leadNo" class="checkbox-label">
+              <input type="radio" id="leadNo" name="willing_to_lead" value="No">
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Row 8 (How did you hear about us?) -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="soure" class="form-label">How did you hear about us?</label>
+          <select id="soure" name="soure" class="form-select" required>
+            <option value="Friend/Family">Friend/Family</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Online">Online</option>
+            <option value="Local Church">Local Church</option>
+            <option value="Event">Event</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+
+      <!-- Form Row 9 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="additionalInfo" class="form-label">What should we know about you:</label>
+          <textarea id="additionalInfo" name="details" class="form-textarea" rows="4" required></textarea>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+  <footer>
+    <div class="footer">
+        <!-- Contact Information -->
+        <div class="contact">
+            <h2>Connect with Us!</h2>
+            <p>Phone: 801-872-3190</p>
+            <p>Email: turtleshelterproject@gmail.com</p>
+            <p>Address: PO Box 382, Kaysville, UT 84037</p>
+        </div>
+
+        <!-- Social Media Links (Icons) -->
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/turtle-shelter-project-6aa0aa1a4/" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/turtleshelterproject/" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/turtleshelterproject" target="_blank" class="social-icon">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+
+        <!-- Copyright Text -->
+        <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
+    </div>
+</footer>
+</main
 </body>
 </html>

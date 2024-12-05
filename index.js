@@ -779,10 +779,46 @@ app.post('/deleteAdmin/:id', async (req, res) => {
     }
 });
 
-
-
-
-
+app.get('/edit_volunteer/:id', async (req, res) => {
+    const { id } = req.params; // Extract the volunteer ID from the route parameter
+  
+    try {
+        const volunteer_data = await knex('volunteer_info')
+            .select(
+                'volunteer_info.volunteer_id',
+                'volunteer_info.first_name',
+                'volunteer_info.last_name',
+                'volunteer_info.address',
+                'volunteer_info.city',
+                'volunteer_info.state',
+                'volunteer_info.zip',
+                'volunteer_info.phone',
+                'volunteer_info.email',
+                'volunteer_info.source',
+                'volunteer_info.sewing_level',
+                'volunteer_info.monthly_hour_availability',
+                'volunteer_info.willing_to_teach',
+                'volunteer_info.willing_to_lead',
+                'volunteer_info.willing_to_travel_county',
+                'volunteer_info.willing_to_travel_state',
+                'volunteer_info.details'
+            )
+            .where('volunteer_info.volunteer_id', id) // Filter by the volunteer ID
+            .first(); // Retrieve only one record
+  
+        if (!volunteer_data) {
+            return res.status(404).send('Volunteer not found');
+        }
+  
+        // Render the 'edit_volunteer' template, passing the volunteer data
+        res.render('edit_volunteer', {
+            volunteer: volunteer_data // Pass the volunteer data to the view
+        });
+    } catch (error) {
+        console.error('Error retrieving volunteer:', error);
+        res.status(500).send('An error occurred while retrieving the volunteer information.');
+    }
+});
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
