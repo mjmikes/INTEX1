@@ -244,7 +244,8 @@ app.post("/requestEvent", async (req, res) => {
         round_tables_count,
         rectangle_tables_count,
         possible_date_1,
-        possible_date_2
+        possible_date_2,
+        event_status
     } = req.body;
 
     try {
@@ -286,7 +287,8 @@ app.post("/requestEvent", async (req, res) => {
             round_tables_count,
             rectangle_tables_count,
             possible_date_1,
-            possible_date_2
+            possible_date_2,
+            event_status
         });
 
         // Redirect to a success page
@@ -421,51 +423,41 @@ app.get('/user_maintenance_view', async (req, res) => {
 
 
 app.post('/deleteEvent/:id', async (req, res) => {
-    const { id } = req.params; // Get the event_id from the URL
+    const { id } = req.params;
 
     try {
-        // Start a transaction to ensure all deletions occur together
         await knex.transaction(async (trx) => {
-            // Check if the event exists and fetch related IDs
+            // Fetch the event
             const event = await trx('event_request')
                 .select('event_contact_id', 'event_location_id')
                 .where('event_id', id)
                 .first();
 
-            if (!event) {
-                console.error(`Event with ID ${id} does not exist.`);
-                return res.status(404).send('Event not found.');
+            if (event) {
+                console.log(`Deleting event with ID ${id}, contact ID ${event.event_contact_id}, location ID ${event.event_location_id}`);
+
+                // Delete the event in event_request first
+                await trx('event_request').where('event_id', id).del();
+
+                // Delete associated event_contact record
+                if (event.event_contact_id) {
+                    await trx('event_contact').where('event_contact_id', event.event_contact_id).del();
+                }
+
+                // Delete associated event_location record
+                if (event.event_location_id) {
+                    await trx('event_location').where('event_location_id', event.event_location_id).del();
+                }
             }
-
-            console.log(`Deleting event with ID ${id}, contact ID ${event.event_contact_id}, location ID ${event.event_location_id}`);
-
-            // Delete associated event_contact record
-            if (event.event_contact_id) {
-                await trx('event_contact')
-                    .where('event_contact_id', event.event_contact_id)
-                    .del();
-            }
-
-            // Delete associated event_location record
-            if (event.event_location_id) {
-                await trx('event_location')
-                    .where('event_location_id', event.event_location_id)
-                    .del();
-            }
-
-            // Delete the main event record
-            await trx('event_request')
-                .where('event_id', id)
-                .del();
         });
 
-        // Redirect back to the requested events page after deletion
         res.redirect('/requested_events');
     } catch (error) {
         console.error('Error deleting event:', error.stack || error);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 
 app.get('/editEvent/:id', async (req, res) => {
@@ -1220,6 +1212,7 @@ app.post('/scheduled_events/:id', async (req, res) => {
       round_tables_count,
       rectangle_tables_count,
       actual_date,
+      event_status
     } = req.body;
   
     try {
