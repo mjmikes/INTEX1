@@ -63,24 +63,32 @@
                 <tr>
                     <th>Event Date</th>
                     <th>Event Start Time</th>
-                    <th>Contact Name</th>
-                    <th>Contact Phone</th>
-                    <th>Contact Email</th>
-                    <th>Event Location</th>
-                    <th>Event Duration (hrs)</th>
-                    <th>Event Type</th>
-                    <th>Expected Sewers</th>
-                    <th>Sewing Machines</th>
-                    <th>Expected Participants</th>
-                    <th>Kids Under Age 10</th>
-                    <th>Story</th>
-                    <th>Available Round Tables</th>
-                    <th>Available Rectangle Tables</th>
-                    <th>Event Description</th>
-                    <th>Event Status</th>
-                    <th>Complete</th>
-                    <th>Edit/View</th>
-                    <th>Delete</th>
+                    <% if (isAdmin) { %>
+                        <th>Contact Name</th>
+                        <th>Contact Phone</th>
+                        <th>Contact Email</th>
+                        <th>Event Location</th>
+                        <th>Event Duration (hrs)</th>
+                        <th>Event Type</th>
+                        <th>Expected Sewers</th>
+                        <th>Sewing Machines</th>
+                        <th>Expected Participants</th>
+                        <th>Kids Under Age 10</th>
+                        <th>Story</th>
+                        <th>Available Round Tables</th>
+                        <th>Available Rectangle Tables</th>
+                        <th>Event Description</th>
+                        <th>Event Status</th>
+                        <th>Complete</th>
+                        <th>Edit/View</th>
+                        <th>Delete</th>
+                    <% } else { %>
+                        <th>Event Duration (hrs)</th>
+                        <th>Event Name</th>
+                        <th>Event Location</th>
+                        <th>Event Type</th>
+                        <th>Volunteer</th>
+                    <% } %>
                 </tr>
             </thead>
             <tbody>
@@ -129,8 +137,10 @@
                             </td>
                             <% } else { %>
                                 <!-- Non-admin view -->
-                                <td><%= event.first_name %> <%= event.last_name %></td>
+                                <td><%= event.event_duration %></td>
+                                <td><%= event.event_name %></td>
                                 <td><%= event.event_address %> <%= event.event_city %>, <%= event.event_state %></td>
+                                <td><%= event.event_type %></td>
                                 <td><button class="btn-signup" onclick="location.href='/signupEvent/<%= event.event_id %>'">Volunteer</button></td>
                             <% } %>
                         </tr>
