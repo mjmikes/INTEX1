@@ -72,7 +72,7 @@
   <!-- Main Content -->
   <main>
     <h1 class="form-header">Event Request Form</h1>
-    <form action="/editEvent/<%= event_id %>" method="POST" class="event-form">
+    <form action="/editEvent/<%= request_event.event_id %>" method="POST" class="event-form">
       
       <!-- Form Row 1 -->
       <div class="form-row">
@@ -230,9 +230,11 @@
         </div>
       </div>
 
+      <input type="hidden" name="event_contact_id" value="<%= event_contact.event_contact_id %>">
+      <input type="hidden" name="event_location_id" value="<%= event_location.event_location_id %>">
+
       <!-- Submit Button -->
       <button type="submit" class="form-submit-btn">Save Edits</button>
-      <button type="submit" class="form-submit-btn">Approve Event</button>
       
     </form>
     <footer>
