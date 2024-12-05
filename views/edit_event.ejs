@@ -137,13 +137,13 @@
       <!-- Form Row 6-->
       <div class="form-row">
         <div class="form-group">
-          <label for="possibleDate1" class="form-label">Possible Date 1:</label>
-          <input type="date" id="possibleDate1" name="possible_date_1" value="<%= event_request.possible_date_1 %>" class="form-input" required>
-        </div>
+            <label for="possibleDate1" class="form-label">Possible Date 1:</label>
+            <input type="date" id="possibleDate1" name="possible_date_1" value="<%= event_request.possible_date_1 ? event_request.possible_date_1.toISOString().split('T')[0] : '' %>" class="form-input" required>
+        </div>          
         <div class="form-group">
-          <label for="possibleDate2" class="form-label">Possible Date 2:</label>
-          <input type="date" id="possibleDate2" name="possible_date_2" value="<%= event_request.possible_date_2 %>" class="form-input">
-        </div>
+            <label for="possibleDate2" class="form-label">Possible Date 2:</label>
+            <input type="date" id="possibleDate2" name="possible_date_2" value="<%= event_request.possible_date_2 ? event_request.possible_date_2.toISOString().split('T')[0] : '' %>" class="form-input">
+        </div>          
       </div>
 
       <!-- Form Row 7 -->
@@ -161,13 +161,13 @@
       <!-- Form Row 8 -->
       <div class="form-row">
         <div class="form-group">
-          <label for="eventType" class="form-label">Event Type:</label>
-          <select id="eventType" name="event_type" value="<%= event_request.event_name %>" class="form-select" required>
-            <option value="Sewing">Sewing</option>
-            <option value="Non-Sewing">Non-Sewing</option>
-            <option value="Both">Both</option>
-          </select>
-        </div>
+            <label for="eventType" class="form-label">Event Type:</label>
+            <select id="eventType" name="event_type" class="form-select" required>
+              <option value="Sewing" <%= event_request.event_type === 'Sewing' ? 'selected' : '' %>>Sewing</option>
+              <option value="Non-Sewing" <%= event_request.event_type === 'Non-Sewing' ? 'selected' : '' %>>Non-Sewing</option>
+              <option value="Both" <%= event_request.event_type === 'Both' ? 'selected' : '' %>>Both</option>
+            </select>
+          </div>          
         <div class="form-group">
           <label for="advancedSewers" class="form-label">Expected Advanced Sewers:</label>
           <input type="number" id="advancedSewers" name="expected_advanced_sewers" value="<%= event_request.expected_advanced_sewers %>" class="form-input" min="0" required>
@@ -195,11 +195,11 @@
         
         <div class="form-group">
             <label for="jenStory" class="form-label">Jen Story:</label>
-            <select id="jenStory" name="jen_story" value="<%= event_request.event_name %>" class="form-select">
-              <option value="True">Yes</option>
-              <option value="False">No</option>
+            <select id="jenStory" name="jen_story" class="form-select">
+              <option value="True" <%= event_request.jen_story === true ? 'selected' : '' %>>Yes</option>
+              <option value="False" <%= event_request.jen_story === false ? 'selected' : '' %>>No</option>
             </select>
-        </div>
+        </div>         
       </div>
 
         <!-- Form Row 11 -->
