@@ -657,11 +657,11 @@ form textarea {
     }
 }
 
-/* Table Container Styling */
+/* General Table Container Styling */
 .table-container {
     max-width: 90%; /* Keeps the table centered and wide */
     margin: 20px auto;
-    overflow-x: auto;
+    overflow: hidden; /* Combined x and y scrolling */
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
@@ -669,89 +669,83 @@ form textarea {
     min-height: 60vh;
     max-height: 80vh;
     overflow-y: auto;
-    table-layout: fixed;
+    table-layout: fixed; /* Ensures consistent column widths */
 }
 
-/* Table Styling */
+/* General Table Styling */
 table {
     width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0; /* Removes additional spacing */
+    border-collapse: collapse; /* Removes gaps between table cells */
 }
 
-/* Table Header and Cell Styling */
+/* Header and Cell Styling (Consolidated) */
 th, td {
-    padding: 4px 8px; /* Reduced padding for skinnier rows */
-    line-height: 1.2; /* Tighter spacing within cells */
-    font-size: 14px;
+    padding: 4px 8px; /* Compact padding for smaller rows */
+    line-height: 1.2; /* Tighter spacing */
+    font-size: 13px; /* Compact font size */
     text-align: center;
-}
-
-/* Table Header Styling */
-thead th {
-    background-color: #34B3A8; /* Brand primary color */
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-bottom: 2px solid #2a8e80;
-}
-
-/* Table Body Row Styling */
-tbody tr {
-    border-bottom: 1px solid #ddd;
-    transition: background-color 0.3s ease;
-}
-
-tbody tr:hover {
-    background-color: #f9f9f9; /* Subtle hover effect */
-}
-
-/* Specific Adjustments for Data Cells */
-td {
-    text-align: center;
-    font-size: 13px; /* Slightly smaller font size for compact rows */
     color: #333;
     white-space: nowrap; /* Prevents text wrapping */
     overflow: hidden;
     text-overflow: ellipsis; /* Adds ellipsis for overflowing text */
 }
 
-/* Empty Table Row */
-td[colspan="23"] {
-    text-align: center;
-    padding: 10px;
-    font-size: 16px;
-    color: #888;
-}
-
-/* Button Styling for Table Actions */
-.table-action-buttons button {
-    padding: 5px 10px; /* Smaller buttons for skinnier rows */
-    font-size: 12px; /* Slightly smaller font size */
-    border-radius: 4px; /* Compact button style */
-}
-
-/* Edit Button Styling */
-.table-action-buttons .btn-edit-event {
-    background-color: #34B3A8;
+/* Header Specific Styling */
+thead th {
+    background-color: #34B3A8; /* Brand primary color */
     color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 2px solid #2a8e80; /* Slightly darker shade for border */
+}
+
+/* Body Row Styling */
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9; /* Light hover background */
+}
+
+/* Empty Row Styling */
+td[colspan="23"] {
+    padding: 10px;
+    font-size: 16px; /* Slightly larger font for empty state */
+    color: #888; /* Muted color */
+    text-align: center;
+}
+
+/* Button Styling (Consolidated for Consistency) */
+.table-action-buttons button {
+    padding: 5px 10px; /* Compact button size */
+    font-size: 12px; /* Smaller font */
+    border-radius: 4px; /* Rounded corners */
+    color: white; /* Consistent text color */
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Edit Button Specific Styling */
+.table-action-buttons .btn-edit-event {
+    background-color: #34B3A8; /* Brand color */
 }
 
 .table-action-buttons .btn-edit-event:hover {
-    background-color: #2a8e80;
-    transform: scale(1.05);
+    background-color: #2a8e80; /* Darker shade on hover */
+    transform: scale(1.05); /* Slight zoom effect */
 }
 
-/* Delete Button Styling */
+/* Delete Button Specific Styling */
 .table-action-buttons .btn-delete-event {
-    background-color: #E38C8C
-    ;
-    color: white;
+    background-color: #E38C8C; /* Soft red for delete action */
 }
 
 .table-action-buttons .btn-delete-event:hover {
-    background-color: #D25F5F;
-    transform: scale(1.05);
+    background-color: #D25F5F; /* Darker red on hover */
+    transform: scale(1.05); /* Slight zoom effect */
 }
+
 
 
