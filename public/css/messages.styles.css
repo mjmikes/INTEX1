@@ -682,7 +682,7 @@ table {
 /* Table Header and Cell Styling */
 th, td {
     padding: 4px 8px; /* Reduced padding for skinnier rows */
-    line-height: 1.2; /* Tighter spacing within cells */
+    line-height: 3; /* Tighter spacing within cells */
     font-size: 14px;
     text-align: center;
 }
@@ -698,9 +698,8 @@ thead th {
 
 /* Table Body Row Styling */
 tbody tr {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
     transition: background-color 0.3s ease;
-    
 }
 
 tbody tr:hover {
@@ -710,13 +709,11 @@ tbody tr:hover {
 /* Specific Adjustments for Data Cells */
 td {
     text-align: center;
-    font-size: 14px; /* Smaller font size */
-    line-height: 12px; /* Match line height to font size for compactness */
+    font-size: 13px; /* Slightly smaller font size for compact rows */
     color: #333;
-    padding: 2px 4px; /* Reduce padding */
+    white-space: nowrap; /* Prevents text wrapping */
     overflow: hidden;
     text-overflow: ellipsis; /* Adds ellipsis for overflowing text */
-    vertical-align: middle; /* Align content to the middle for compact rows */
 }
 
 /* Empty Table Row */
@@ -730,9 +727,8 @@ td[colspan="23"] {
 /* Button Styling for Table Actions */
 .table-action-buttons button {
     padding: 5px 10px; /* Smaller buttons for skinnier rows */
-    font-size: 12px; /* Slightly smaller font size */
+    font-size: 2px; /* Slightly smaller font size */
     border-radius: 4px; /* Compact button style */
-    display: flex;
 }
 
 /* Edit Button Styling */
@@ -748,7 +744,8 @@ td[colspan="23"] {
 
 /* Delete Button Styling */
 .table-action-buttons .btn-delete-event {
-    background-color: #E38C8C;
+    background-color: #E38C8C
+    ;
     color: white;
 }
 
