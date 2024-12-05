@@ -448,7 +448,7 @@ app.post('/deleteEvent/:id', async (req, res) => {
 
                 // Delete the main event record
                 await trx('event_request')
-                    .where('event_id', id)
+                    .where('event_id', event.id)
                     .del();
             }
         });
