@@ -1435,8 +1435,8 @@ app.post("/admin_scheduled_events", async (req, res) => {
           event_status
       });
 
-      // Redirect to a success page
-      res.redirect('/event_success_page');
+      // Redirect to upcoming events
+      res.redirect('/upcoming_events');
   } catch (error) {
       console.error('Error inserting event data:', error);
       res.status(500).send('Internal Server Error');
