@@ -473,7 +473,7 @@ app.post('/editEvent/:id', (req, res) => {
   try {
       // First, update the event_contact table
       knex('event_contact')
-          .where('event_contact_id', id)
+          .where('event_request.event_id', id)
           .update({
               first_name: first_name,
               last_name: last_name,
@@ -483,7 +483,7 @@ app.post('/editEvent/:id', (req, res) => {
           .then(() => {
               // Then, update the event_location table
               return knex('event_location')
-                  .where('event_location_id', id)
+                  .where('event_request.event_id', id)
                   .update({
                       event_location_address: event_location_address,
                       event_location_city: event_location_city,
@@ -494,7 +494,7 @@ app.post('/editEvent/:id', (req, res) => {
           .then(() => {
               // Finally, update the event_request table
               return knex('event_request')
-                  .where('event_id', id)
+                  .where('event_request.event_id', id)
                   .update({
                       event_name: event_name, event_type: event_type, event_start_time: event_start_time,
                       event_duration: event_duration, event_description: event_description,
