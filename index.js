@@ -451,7 +451,12 @@ app.post('/deleteEvent/:id', async (req, res) => {
             }
         });
 
-        res.redirect('/requested_events');
+        const currentPage = req.body.currentPage;
+        if (currentPage) {
+          res.redirect(currentPage); // Redirect to the page from the hidden input
+        } else {
+          res.redirect('/'); // Fallback if no currentPage is provided
+        }
     } catch (error) {
         console.error('Error deleting event:', error.stack || error);
         res.status(500).send('Internal Server Error');
@@ -554,7 +559,7 @@ app.get('/completeEvent/:id', async (req, res) => {
           // Render the form with the retrieved data
           res.render('complete_event_form', {
             event_id: id, // Pass the event ID for reference
-            event // Pass the event data
+            event_request: event // Pass the event data
           });
         })
         .catch(error => {
