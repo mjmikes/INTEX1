@@ -62,11 +62,11 @@
             <thead>
                 <tr>
                     <th>Event Date</th>
+                    <th>Event Start Time</th>
                     <th>Contact Name</th>
                     <th>Contact Phone</th>
                     <th>Contact Email</th>
                     <th>Event Location</th>
-                    <th>Event Start Time</th>
                     <th>Event Duration (hrs)</th>
                     <th>Event Type</th>
                     <th>Expected Sewers</th>
@@ -78,6 +78,7 @@
                     <th>Available Rectangle Tables</th>
                     <th>Event Description</th>
                     <th>Action</th>
+                    <th>Action</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -87,11 +88,11 @@
                         <tr>
                             <input type="hidden" value="<%= event.event_id %>">
                             <td><%= event.actual_date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></td>
+                            <td><%= event.event_start_time.split(':').slice(0, 2).join(':') %></td>
                             <td><%= event.first_name %> <%= event.last_name %></td>
                             <td><%= event.phone %></td>
                             <td><%= event.event_contact_email %></td>
                             <td><%= event.event_address %> <%= event.event_city %>, <%= event.event_state %> <%= event.event_zip %></td>
-                            <td><%= event.event_start_time.split(':').slice(0, 2).join(':') %></td>
                             <td><%= event.event_duration %></td>
                             <td><%= event.event_type %></td>
                             <td><%= event.expected_advanced_sewers %></td>
