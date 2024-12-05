@@ -724,16 +724,22 @@ form button[type="submit"]:hover {
 .table-container {
     width: 100%;
     max-width: 100%;
-    overflow-x: auto;
+    overflow-x: auto; /* Permite el desplazamiento horizontal */
     border: 1px solid #ccc;
-    white-space: nowrap;
+    white-space: nowrap; /* Evita el salto de línea de las celdas */
     padding: 10px; /* Añade padding para claridad */
+    box-sizing: border-box; /* Asegura que el padding no exceda el ancho */
 }
 
 .table-container table {
     display: block; /* Asegura que la tabla se ajuste dentro del contenedor */
-    width: 100%;
+    width: auto; /* Ajusta la tabla automáticamente */
     border-collapse: collapse;
+    box-sizing: border-box; /* Asegura que el ancho de la tabla no exceda */
+}
+
+th, td {
+    min-width: 150px; /* Ajusta según sea necesario para evitar que las celdas colapsen */
 }
 
 
