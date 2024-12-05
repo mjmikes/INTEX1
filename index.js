@@ -430,7 +430,7 @@ app.get('/editEvent/:id', async (req, res) => {
           first_name: event_request.first_name,
           last_name: event_request.last_name,
           phone: event_request.phone,
-          email: event_request.event_contact_email
+          event_contact_email: event_request.event_contact_email
         };
 
         const event_location = {
