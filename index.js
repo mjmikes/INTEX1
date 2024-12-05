@@ -353,6 +353,7 @@ app.get('/user_maintenance', async (req, res) => {
     try {
         // Fetch all admin data using Knex
         const admin_records = await knex('admin').select(
+            'admin_id',
             'first_name',
             'last_name',
             'phone',
@@ -739,6 +740,25 @@ app.post('/deleteMessage/:submission_id', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.post('/deleteAdmin/:id', async (req, res) => {
+    const adminId = req.params.id; // Extract the admin_id from the URL
+
+    try {
+        // Use Knex to delete the admin record by admin_id
+        await knex('admin')
+            .where('admin_id', adminId) // Match on the correct column name
+            .del();
+
+        console.log(`Admin with ID ${adminId} successfully deleted.`);
+        // Redirect to the user maintenance page after deletion
+        res.redirect('/user_maintenance');
+    } catch (error) {
+        console.error('Error deleting admin:', error);
+        res.status(500).send('Error deleting admin record.');
+    }
+});
+
 
 
 
