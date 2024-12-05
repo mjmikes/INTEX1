@@ -100,6 +100,11 @@ app.get('/get_involved', (req, res) => {
     res.render('get_involved');
 });
 
+// get route for the get involved page
+app.get('/get_involved1', (req, res) => {
+    res.render('get_involved2');
+});
+
 // get route for the donate page
 app.get('/donate', (req, res) => {
     res.render('donate');
@@ -430,14 +435,14 @@ app.get('/editEvent/:id', async (req, res) => {
           first_name: event_request.first_name,
           last_name: event_request.last_name,
           phone: event_request.phone,
-          email: event_request.event_contact_email
+          event_contact_email: event_request.event_contact_email
         };
 
         const event_location = {
-          address: event_request.event_address,
-          city: event_request.event_city,
-          state: event_request.event_state,
-          zip: event_request.event_zip
+          event_address: event_request.event_address,
+          event_city: event_request.event_city,
+          event_state: event_request.event_state,
+          event_zip: event_request.event_zip
         };
 
         // Render the template with all data passed to it
@@ -655,6 +660,54 @@ app.post("/submit-volunteer", async (req, res) => {
         });
         // Redirect to a success page
         res.redirect('/volunteer_success_page');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Post route to send volunteer form data to database
+app.post("/submit-volunteer1", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        address,
+        city,
+        state,
+        zip,
+        sewing_level,
+        monthly_hour_availability,
+        willing_to_travel_county,
+        willing_to_travel_state,
+        willing_to_teach,
+        willing_to_lead,
+        source,
+        details
+    } = req.body;
+    try {
+        // Insert into volunteer_info table
+        await knex('volunteer_info').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            address,
+            city,
+            state,
+            zip,
+            sewing_level,
+            monthly_hour_availability,
+            willing_to_travel_county,
+            willing_to_travel_state,
+            willing_to_teach,
+            willing_to_lead,
+            source,
+            details
+        });
+        // Redirect to a success page
+        res.redirect('/volunteers');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
         res.status(500).send('Internal Server Error');
@@ -1044,9 +1097,6 @@ app.post('/updateAdmin', async (req, res) => {
         res.status(500).send("Error updating admin.");
     }
 });
-
-
-
 
 
 app.post('/deleteAdmin/:id', async (req, res) => {
