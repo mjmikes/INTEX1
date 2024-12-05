@@ -451,18 +451,49 @@ app.post('/deleteEvent/:id', async (req, res) => {
             }
         });
 
-        const currentPage = req.body.currentPage;
-        if (currentPage) {
-          res.redirect(currentPage); // Redirect to the page from the hidden input
-        } else {
-          res.redirect('/'); // Fallback if no currentPage is provided
-        }
+        res.redirect('/requested_events');
     } catch (error) {
         console.error('Error deleting event:', error.stack || error);
         res.status(500).send('Internal Server Error');
     }
 });
 
+
+app.post('/adminDeleteEvent/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      await knex.transaction(async (trx) => {
+          // Fetch the event
+          const event = await trx('event_request')
+              .select('event_contact_id', 'event_location_id')
+              .where('event_id', id)
+              .first();
+
+          if (event) {
+              console.log(`Deleting event with ID ${id}, contact ID ${event.event_contact_id}, location ID ${event.event_location_id}`);
+
+              // Delete the event in event_request first
+              await trx('event_request').where('event_id', id).del();
+
+              // Delete associated event_contact record
+              if (event.event_contact_id) {
+                  await trx('event_contact').where('event_contact_id', event.event_contact_id).del();
+              }
+
+              // Delete associated event_location record
+              if (event.event_location_id) {
+                  await trx('event_location').where('event_location_id', event.event_location_id).del();
+              }
+          }
+      });
+
+      res.redirect('/upcoming_events');
+  } catch (error) {
+      console.error('Error deleting event:', error.stack || error);
+      res.status(500).send('Internal Server Error');
+  }
+});
 
 
 app.get('/editEvent/:id', async (req, res) => {
@@ -559,7 +590,7 @@ app.get('/completeEvent/:id', async (req, res) => {
           // Render the form with the retrieved data
           res.render('complete_event_form', {
             event_id: id, // Pass the event ID for reference
-            event_request: event // Pass the event data
+            event // Pass the event data
           });
         })
         .catch(error => {
@@ -1317,62 +1348,48 @@ app.post('/completed_events/:id', async (req, res) => {
       completed_pocket,
       completed_envelope,
       completed_vest,
-      finished_vest,
+      finished_vest
     } = req.body;
   
     try {
-      // Insert or update completed_event table
-      const existingEvent = await knex('completed_event')
-        .where('event_id', id)
-        .first();
   
-      if (existingEvent) {
-        // If record exists, update it
+        // Update event_request table
         await knex('completed_event')
-          .where('event_id', id)
-          .update({
-            participants_count,
+            .where('event_id', id)
+            .insert({
+            participants_count: participants_count,
             actual_event_date: actual_date,
             actual_event_start_time: event_start_time,
-            actual_event_duration: parseInt(event_duration, 10),
-          });
-      } else {
-        // If record does not exist, insert a new one
-        await knex('completed_event').insert({
-          event_id: id,
-          participants_count,
-          actual_event_date: actual_date,
-          actual_event_start_time: event_start_time,
-          actual_event_duration: parseInt(event_duration, 10),
-        });
-      }
-  
-      // Update event_request table
-      await knex('event_request')
+            actual_event_duration: parseInt(event_duration, 10), 
+            });
+
+            // Update event_contact table
+        await knex('event_request')
         .where('event_id', id)
         .update({
-          event_name,
-          event_status: 'completed',
+            event_name: event_name,
+            event_status: 'completed'
         });
-  
-      // Insert into event_production table
-      await knex('event_production').insert({
-        event_id: id,
-        completed_collar,
-        completed_pocket,
-        completed_envelope,
-        completed_vest,
-        finished_vest,
-      });
-  
-      // Redirect to upcoming_events page
+
+        // Update event_location table
+        await knex('event_production')
+        .where('event_id', id)
+        .insert({
+            completed_collar: completed_collar,
+            completed_pocket: completed_pocket,
+            completed_envelope: completed_envelope,
+            completed_vest: completed_vest,
+            finished_vest: finished_vest
+        });
+    
+      // Redirect to requested_events page
       res.redirect('/upcoming_events');
     } catch (error) {
       console.error('Error updating event:', error);
       res.status(500).send('An error occurred while updating the event.');
     }
-  });
-  
+    
+});
 
 
 
