@@ -195,7 +195,7 @@
         <div class="form-group">
           <label class="form-label">Would you like Jen to tell her story at the start:</label>
           <div class="checkbox-group">
-            <label for="jenStory" class="checkbox-label">Jen Story:</label>
+            <label for="jenStory" class="checkbox-label"></label>
             <select id="jenStory" name="jen_story" value="<%= event_request.jen_story %>" class="form-select">
               <option value="True">Yes</option>
               <option value="False">No</option>
@@ -233,7 +233,8 @@
       </div>
 
       <!-- Submit Button -->
-      <button type="submit" class="form-submit-btn">Submit</button>
+      <button type="submit" class="form-submit-btn">Save Edits</button>
+      <button type="submit" class="form-submit-btn">Approve Event</button>
       
     </form>
     <footer>
