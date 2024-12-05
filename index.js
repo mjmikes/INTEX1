@@ -100,6 +100,11 @@ app.get('/get_involved', (req, res) => {
     res.render('get_involved');
 });
 
+// get route for the get involved page
+app.get('/get_involved1', (req, res) => {
+    res.render('get_involved1');
+});
+
 // get route for the donate page
 app.get('/donate', (req, res) => {
     res.render('donate');
@@ -655,6 +660,54 @@ app.post("/submit-volunteer", async (req, res) => {
         });
         // Redirect to a success page
         res.redirect('/volunteer_success_page');
+    } catch (error) {
+        console.error('Error inserting volunteer data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Post route to send volunteer form data to database
+app.post("/submit-volunteer1", async (req, res) => {
+    const {
+        first_name,
+        last_name,
+        phone,
+        email,
+        address,
+        city,
+        state,
+        zip,
+        sewing_level,
+        monthly_hour_availability,
+        willing_to_travel_county,
+        willing_to_travel_state,
+        willing_to_teach,
+        willing_to_lead,
+        source,
+        details
+    } = req.body;
+    try {
+        // Insert into volunteer_info table
+        await knex('volunteer_info').insert({
+            first_name,
+            last_name,
+            phone,
+            email,
+            address,
+            city,
+            state,
+            zip,
+            sewing_level,
+            monthly_hour_availability,
+            willing_to_travel_county,
+            willing_to_travel_state,
+            willing_to_teach,
+            willing_to_lead,
+            source,
+            details
+        });
+        // Redirect to a success page
+        res.redirect('/volunteers');
     } catch (error) {
         console.error('Error inserting volunteer data:', error);
         res.status(500).send('Internal Server Error');
