@@ -605,31 +605,28 @@ app.get('/editCEvent/:id', async (req, res) => {
 
     try {
         // Query the database for event details
-        const eventRequest = await knex('event_request')
-            .where('event_id', id)
-            .first();
-
+        const eventRequest = await knex('event_request').where('event_id', id).first();
         if (!eventRequest) {
             return res.status(404).send('Event not found');
         }
 
         // Query the database for contact details
-        const eventContact = await knex('event_contact')
-            .where('event_contact_id', eventRequest.event_contact_id)
-            .first();
-
+        const eventContact = await knex('event_contact').where('event_contact_id', eventRequest.event_contact_id).first();
         if (!eventContact) {
             return res.status(404).send('Event contact not found');
         }
 
         // Query the database for location details
-        const eventLocation = await knex('event_location')
-            .where('event_location_id', eventRequest.event_location_id)
-            .first();
-
+        const eventLocation = await knex('event_location').where('event_location_id', eventRequest.event_location_id).first();
         if (!eventLocation) {
             return res.status(404).send('Event location not found');
         }
+
+        // Query the database for completed event details
+        const completedEvent = await knex('completed_event').where('event_id', id).first();
+
+        // Query the database for event production details
+        const eventProduction = await knex('event_production').where('event_id', id).first();
 
         // Render the form with the retrieved data
         res.render('edit_event_form', {
@@ -637,12 +634,15 @@ app.get('/editCEvent/:id', async (req, res) => {
             event_request: eventRequest,
             event_contact: eventContact,
             event_location: eventLocation,
+            completed_event: completedEvent || {}, // Handle case where completed_event is null
+            event_production: eventProduction || {}, // Handle case where event_production is null
         });
     } catch (error) {
         console.error('Error fetching event details:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 
 app.get('/completeEvent/:id', async (req, res) => {
