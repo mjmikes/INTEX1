@@ -76,6 +76,7 @@
         <div class="event-details">
           <h2>Event Details</h2>
           <p><strong>Event Name:</strong> <%= event.event_name %></p>
+          <p><strong>Event Duration:</strong> <%= event.event_duration %></p>
           <p><strong>Event Date:</strong> <%= event.actual_date.toLocaleDateString('en-US') %></p>
           <p><strong>Event Location:</strong> <%= event.event_address %>, <%= event.event_city %>, <%= event.event_state %> <%= event.event_zip %></p>
           <p><strong>Event Description:</strong> <%= event.event_description %></p>
