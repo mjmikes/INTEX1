@@ -81,30 +81,21 @@
                 <p><strong>Event Location:</strong> <%= event.event_address %>, <%= event.event_city %>, <%= event.event_state %> <%= event.event_zip %></p>
                 <p><strong>Event Description:</strong> <%= event.event_description %></p>
               </div>
-          <div class="form-row">
-            <label for="firstName">First Name:</label>
-            </div>
-            <div>
-            <input type="text" id="firstName" name="first_name" required>
-          </div>
-          <div class="form-row">
-            <div>
-            <label for="lastName">Last Name:</label>
-        </div>
-        <div>
-            <input type="text" id="lastName" name="last_name" required>
-          </div>
-          <div class="form-row">
-            <div>
-            <label for="email">Email:</label>
-        </div>
-        <div>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <button type="submit">Sign Up</button>
-        </form>
-      </div>
-      
+              <div class="form-container">
+                <div class="form-row">
+                  <label for="firstName">First Name:</label>
+                  <input type="text" id="firstName" name="first_name" required>
+                </div>
+                <div class="form-row">
+                  <label for="lastName">Last Name:</label>
+                  <input type="text" id="lastName" name="last_name" required>
+                </div>
+                <div class="form-row">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit">Sign Up</button>
+              </div>
   </main>
 
   <footer>
