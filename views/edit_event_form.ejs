@@ -141,7 +141,7 @@
         </div>
       </div>
       <!-- Completed Event -->
-      <h2>Completed Event</h2>
+      <h2>Volunteers and Participants</h2>
       <div class="form-row">
         <div class="form-group">
           <label for="participantsCount">Participants Count:</label>
@@ -150,9 +150,15 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label for="actualEventDate">Actual Event Date:</label>
-          <input type="date" id="actualEventDate" name="actual_event_date" value="<%= completed_event.actual_event_date ? completed_event.actual_event_date.toISOString().split('T')[0] : '' %>">
-        </div>
+          <label for="volunteerCount">Volunteer Count:</label>
+          <input type="number" id="volunteerCount" name="volunteer_count" value="<%= completed_event.volunteer_count || '' %>" min="0" required>
+        </div> 
+        </div>       
+        <div class="form-row">
+          <div class="form-group">
+            <label for="actualEventDate">Actual Event Date:</label>
+            <input type="date" id="actualEventDate" name="actual_event_date" value="<%= completed_event.actual_event_date ? completed_event.actual_event_date.toISOString().split('T')[0] : '' %>">
+          </div>
       </div>
       <!-- Event Production -->
       <h2>Event Production</h2>
