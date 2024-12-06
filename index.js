@@ -4,11 +4,6 @@ const { default: test } = require("node:test");
 
 let app = express();
 
-const cookieParser = require('cookie-parser');
-
-// Use cookie-parser middleware
-app.use(cookieParser());
-
 
 const session = require('express-session');
 
@@ -77,23 +72,6 @@ const knex = require("knex")({
 });
 
 // GET ROUTES TO ACCESS PAGES
-
-
-// COOKIES
-app.get('/', (req, res) => {
-    const showPopup = !req.cookies.subscribed; // Check if the cookie exists
-    res.render('index', { showPopup });
-});
-
-app.post('/subscribe-newsletter', (req, res) => {
-    const email = req.body.email;
-
-    // Add your email subscription logic here, e.g., save to a database
-
-    // Set a cookie to remember the user subscribed
-    res.cookie('subscribed', true, { maxAge: 30 * 24 * 60 * 60 * 1000 }); // Valid for 30 days
-    res.json({ success: true, message: 'Thank you for subscribing!' });
-});
 
 
 

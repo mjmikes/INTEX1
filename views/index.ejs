@@ -286,39 +286,12 @@
             <span class="close-popup" onclick="closePopup()">×</span>
             <h3>Subscribe to our Newsletter</h3>
             <p>Stay updated with events happening near you!</p>
-            <form id="newsletter-form">
+            <form action="/subscribe-newsletter" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit">Subscribe</button>
             </form>
-            <p id="thank-you-message" style="display: none; color: green;">Thank you for subscribing!</p>
         </div>
-        <% } %>
-        <script>
-            // Close popup functionality
-            function closePopup() {
-                document.getElementById('newsletter-popup').style.display = 'none';
-            }
-        
-            // AJAX form submission for thank-you message
-            document.getElementById('newsletter-form').addEventListener('submit', async function (event) {
-                event.preventDefault();
-                const formData = new FormData(this);
-        
-                try {
-                    const response = await fetch('/subscribe-newsletter', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    const result = await response.json();
-                    if (result.success) {
-                        document.getElementById('thank-you-message').style.display = 'block';
-                        this.style.display = 'none'; // Hide the form after submission
-                    }
-                } catch (error) {
-                    console.error('Error subscribing:', error);
-                }
-            });
-        </script>        
+        <% } %>        
     <script src="js/app.js"></script>
 </body>
 </html>
