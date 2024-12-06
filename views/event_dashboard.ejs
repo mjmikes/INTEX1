@@ -43,48 +43,56 @@
                     </div>
                 </ul>
             </div>
-                <div class="sidebar" id="sidebar">
-                    <!-- Close button -->
-                    <button class="close-btn" onclick="toggleSidebar()">×</button>
-                    <!-- Sidebar Links -->
-                    <ul class="sidebar-links">
-                        <li><a href="/#contact-us-form">Contact Us</a></li>
-                        <li><a href="/faqs">FAQs</a></li>
-                        <li><a href="/sponsor_us">Sponsor Us</a></li>
-                        <li>
-                            <a href="/upcoming_events">
-                              <% if (isAdmin) { %>
-                                <b>Upcoming Events</b>
-                              <% } else { %>
-                                Upcoming Events
-                              <% } %>
-                            </a>
-                          </li>
-                        <% if (isAdmin) { %>
-                            <li><a href="/requested_events"><b>Requested Events</b></a></li>
-                            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
-                            <li><a href="/completed_events"><b>Completed Events</b></a></li>
-                            <li><a href="/volunteers"><b>Volunteers</b></a></li>
-                            <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
-                        <% } %>
-                    </ul>
-                </div>
+            <div class="sidebar" id="sidebar">
+                <!-- Close button -->
+                <button class="close-btn" onclick="toggleSidebar()">×</button>
+                <!-- Sidebar Links -->
+                <ul class="sidebar-links">
+                  <li><a href="/#contact-us-form">Contact Us</a></li>
+                  <li><a href="/faqs">FAQs</a></li>
+                  <li><a href="/sponsor_us">Sponsor Us</a></li>
+                  <% if (isAdmin) { %>
+                  <li>
+                    <a href="/requested_events">
+                        <b>Requested Events</b>
+                    </a>
+                  </li>
+                  <% } %>
+                  <li>
+                    <a href="/upcoming_events">
+                      <% if (isAdmin) { %>
+                        <b>Upcoming Events</b>
+                      <% } else { %>
+                        Upcoming Events
+                      <% } %>
+                    </a>
+                  </li>
+                  <% if (isAdmin) { %>
+                    <li><a href="/completed_events"><b>Completed Events</b></a></li>
+                    <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+                    <li><a href="/volunteers"><b>Volunteers</b></a></li>
+                    <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
+                <% } %>
+                </ul>
+            </div>
         </nav>
     </header>
-
+    <h1>Interactive Live Data Dashboard</h1>
     <div class="tableau-container">
-        <div class='tableauPlaceholder' id='viz1733445682097' style='position: relative'>
+        <div class='tableauPlaceholder' id='viz1733474684471' style='position: relative'>
             <noscript>
                 <a href='#'>
-                    <img alt='Dashboard 1' src='https://public.tableau.com/static/images/RJ/RJ9SFDBBX/1_rss.png' style='border: none' />
+                    <img alt='Dashboard 1' src='https://public.tableau.com/static/images/in/intex_17334746755130/Dashboard1/1_rss.png' style='border: none' />
                 </a>
             </noscript>
             <object class='tableauViz' style='display:none;'>
                 <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
                 <param name='embed_code_version' value='3' />
-                <param name='path' value='shared/RJ9SFDBBX' />
+                <param name='site_root' value='' />
+                <param name='name' value='intex_17334746755130/Dashboard1' />
+                <param name='tabs' value='no' />
                 <param name='toolbar' value='yes' />
-                <param name='static_image' value='https://public.tableau.com/static/images/RJ/RJ9SFDBBX/1.png' />
+                <param name='static_image' value='https://public.tableau.com/static/images/in/intex_17334746755130/Dashboard1/1.png' />
                 <param name='animate_transition' value='yes' />
                 <param name='display_static_image' value='yes' />
                 <param name='display_spinner' value='yes' />
@@ -94,9 +102,9 @@
                 <param name='filter' value='publish=yes' />
             </object>
         </div>
-
+    
         <script type='text/javascript'>
-            var divElement = document.getElementById('viz1733445682097');
+            var divElement = document.getElementById('viz1733474684471');
             var vizElement = divElement.getElementsByTagName('object')[0];
             if (divElement.offsetWidth > 800) {
                 vizElement.style.width = '1000px';
@@ -106,13 +114,14 @@
                 vizElement.style.height = '827px';
             } else {
                 vizElement.style.width = '100%';
-                vizElement.style.height = '727px';
+                vizElement.style.height = '1327px';
             }
             var scriptElement = document.createElement('script');
             scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
             vizElement.parentNode.insertBefore(scriptElement, vizElement);
         </script>
     </div>
+    
     
     <footer>
         <div class="footer">

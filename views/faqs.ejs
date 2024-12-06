@@ -42,31 +42,36 @@
                         <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
                     </div>
                 </ul>
-            </div>
                 <div class="sidebar" id="sidebar">
                     <!-- Close button -->
                     <button class="close-btn" onclick="toggleSidebar()">×</button>
                     <!-- Sidebar Links -->
                     <ul class="sidebar-links">
-                        <li><a href="/#contact-us-form">Contact Us</a></li>
-                        <li><a href="/faqs">FAQs</a></li>
-                        <li><a href="/sponsor_us">Sponsor Us</a></li>
-                        <li>
-                            <a href="/upcoming_events">
-                              <% if (isAdmin) { %>
-                                <b>Upcoming Events</b>
-                              <% } else { %>
-                                Upcoming Events
-                              <% } %>
-                            </a>
-                          </li>
-                        <% if (isAdmin) { %>
-                            <li><a href="/requested_events"><b>Requested Events</b></a></li>
-                            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
-                            <li><a href="/completed_events"><b>Completed Events</b></a></li>
-                            <li><a href="/volunteers"><b>Volunteers</b></a></li>
-                            <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
-                        <% } %>
+                      <li><a href="/#contact-us-form">Contact Us</a></li>
+                      <li><a href="/faqs">FAQs</a></li>
+                      <li><a href="/sponsor_us">Sponsor Us</a></li>
+                      <% if (isAdmin) { %>
+                      <li>
+                        <a href="/requested_events">
+                            <b>Requested Events</b>
+                        </a>
+                      </li>
+                      <% } %>
+                      <li>
+                        <a href="/upcoming_events">
+                          <% if (isAdmin) { %>
+                            <b>Upcoming Events</b>
+                          <% } else { %>
+                            Upcoming Events
+                          <% } %>
+                        </a>
+                      </li>
+                      <% if (isAdmin) { %>
+                        <li><a href="/completed_events"><b>Completed Events</b></a></li>
+                        <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+                        <li><a href="/volunteers"><b>Volunteers</b></a></li>
+                        <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
+                    <% } %>
                     </ul>
                 </div>
         </nav>
@@ -192,6 +197,22 @@
             <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
         </div>
     </footer>
+    <!-- Chatbot HTML -->
+    <div id="chatbot-container">
+        <div id="chatbot-icon" onclick="toggleChatbot()">
+            <i class="fas fa-comments"></i><!-- Chat Icon -->
+        </div>
+        <div id="chatbot-window" class="chatbot-window">
+            <div class="chatbot-header">
+                <span>Chat with us</span>
+                <button onclick="closeChatbot()">X</button>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages">
+                <!-- Messages will be displayed here -->
+            </div>
+            <input type="text" id="user-input" placeholder="Ask me anything..." onkeydown="if(event.key === 'Enter'){sendMessage()}" />
+        </div>
+    </div>
     
     <script src="js/app.js"></script>
 </body>
