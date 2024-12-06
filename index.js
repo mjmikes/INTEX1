@@ -731,7 +731,7 @@ app.post('/updateCEvent/:id', async (req, res) => {
         completed_pocket,
         completed_envelope,
         completed_vest,
-        finished_vest
+        finished_vest,
     } = req.body;
 
     try {
