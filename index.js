@@ -859,36 +859,68 @@ app.post('/deleteCEvent/:id', async (req, res) => {
 app.get('/completeEvent/:id', async (req, res) => {
     const { id } = req.params; // Extract the event ID from the route parameter
     try {
-      knex('event_request')
-        .select(
-          'actual_date',
-          'event_name',
-          'expected_participants',
-          'event_start_time',
-          'event_duration'
-        )
-        .where('event_id', id) // Filter by the event ID
-        .first() // Retrieve only one event
-        .then(event => {
-          if (!event) {
+        // Fetch event request details
+        const eventRequest = await knex('event_request')
+            .select(
+                'event_id',
+                'event_name',
+                'expected_participants',
+                'event_start_time',
+                'event_duration',
+                'actual_date',
+                'event_contact_id',
+                'event_location_id'
+            )
+            .where('event_id', id)
+            .first();
+
+        if (!eventRequest) {
             return res.status(404).send('Event not found');
-          }
-  
-          // Render the form with the retrieved data
-          res.render('edit_event_form', {
-            event_id: id, // Pass the event ID for reference
-            event_request : event // Pass the event data
-          });
-        })
-        .catch(error => {
-          console.error('Error querying database:', error);
-          res.status(500).send('Internal Server Error');
+        }
+
+        // Fetch event location details
+        const eventLocation = await knex('event_location')
+            .where('event_location_id', eventRequest.event_location_id)
+            .first();
+
+        if (!eventLocation) {
+            return res.status(404).send('Event location not found');
+        }
+
+        // Fetch event contact details
+        const eventContact = await knex('event_contact')
+            .where('event_contact_id', eventRequest.event_contact_id)
+            .first();
+
+        if (!eventContact) {
+            return res.status(404).send('Event contact not found');
+        }
+
+        // Fetch completed event details, if any
+        const completedEvent = await knex('completed_event')
+            .where('event_id', id)
+            .first();
+
+        // Fetch event production details, if any
+        const eventProduction = await knex('event_production')
+            .where('event_id', id)
+            .first();
+
+        // Render the form with all required data
+        res.render('edit_event_form', {
+            event_id: id,
+            event_request: eventRequest,
+            event_location: eventLocation,
+            event_contact: eventContact,
+            completed_event: completedEvent || {}, // Handle null cases
+            event_production: eventProduction || {}, // Handle null cases
         });
     } catch (error) {
-      console.error('Error fetching event data:', error);
-      res.status(500).send('Internal Server Error');
+        console.error('Error fetching event data:', error);
+        res.status(500).send('Internal Server Error');
     }
-  });
+});
+
   
 
 app.get('/scheduleEvent/:id', async (req, res) => {
