@@ -196,6 +196,17 @@ document.getElementById("adminForm").addEventListener("submit", function (event)
     }
   });
 
+  function closePopup() {
+    const popup = document.getElementById("newsletter-popup");
+    if (popup) {
+        popup.style.display = "none"; // Hide the popup
+    }
+}
+
+
+
+
+
 
 
 

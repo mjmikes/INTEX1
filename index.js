@@ -20,12 +20,18 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 
 // Session setup
-app.use(session({
-    secret: 'your-secret-key',  // Choose a strong secret key
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }  // set to true if using HTTPS
-}));
+app.use(
+    session({
+        secret: "your-secret-key", // Replace with your own secret
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            secure: false, // Set to true if using HTTPS
+            maxAge: 3600000, // Session lasts for 1 hour (in milliseconds)
+        },
+    })
+);
+
 
 // Middleware to make `isAdmin` available globally for all routes
 app.use((req, res, next) => {
@@ -1172,10 +1178,15 @@ app.post("/contact_us", async (req, res) => {
 
 
 //Home Page
-app.get('/', (req, res) => {
-    console.log(req.session);  // Log the entire session object
-    res.render('index');
+app.get("/", (req, res) => {
+    if (!req.session.popupShown) {
+        req.session.popupShown = true; // Mark popup as shown
+        res.render("index", { showPopup: true }); // Render page with popup
+    } else {
+        res.render("index", { showPopup: false }); // Render page without popup
+    }
 });
+
 
 
 app.get('/logout', (req, res) => {
@@ -2020,6 +2031,30 @@ app.get('/signup/:event_id', async (req, res) => {
     }
 });
 
+app.post('/subscribe-newsletter', async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).send('Email is required');
+    }
+
+    try {
+        // Insert email into the newsletter table
+        await knex('newsletter').insert({ email });
+
+        // Redirect to a success page or render a success message
+        res.status(200).send('Thank you for subscribing!');
+    } catch (error) {
+        console.error('Error subscribing to newsletter:', error);
+
+        if (error.code === '23505') {
+            // Handle unique constraint violation (email already subscribed)
+            res.status(400).send('You are already subscribed!');
+        } else {
+            res.status(500).send('An error occurred. Please try again.');
+        }
+    }
+});
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
