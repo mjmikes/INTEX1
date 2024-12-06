@@ -1642,10 +1642,12 @@ app.post('/completed_events/:id', async (req, res) => {
           'event_request.possible_date_1',
           'event_request.possible_date_2',
           'event_request.actual_date',
+          'event_contact.event_contact_id',
           'event_contact.first_name',
           'event_contact.last_name',
           'event_contact.phone',
           'event_contact.event_contact_email',
+          'event_location.event_location_id',
           'event_location.event_address',
           'event_location.event_city',
           'event_location.event_state',
@@ -1663,14 +1665,16 @@ app.post('/completed_events/:id', async (req, res) => {
             first_name: event_request.first_name,
             last_name: event_request.last_name,
             phone: event_request.phone,
-            event_contact_email: event_request.event_contact_email
+            event_contact_email: event_request.event_contact_email,
+            event_contact_id: event_request.event_contact_id
           };
   
           const event_location = {
             event_address: event_request.event_address,
             event_city: event_request.event_city,
             event_state: event_request.event_state,
-            event_zip: event_request.event_zip
+            event_zip: event_request.event_zip,
+            event_location_id: event_request.event_location_id
           };
   
           // Render the template with all data passed to it
@@ -1695,7 +1699,7 @@ app.post('/completed_events/:id', async (req, res) => {
 app.post('/editUpcomingEvent/:id', async (req, res) => {
   const { id } = req.params;
   const {
-    event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
+    event_id, event_contact_id, event_location_id, event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
     event_state,event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
     sewing_machines_available, expected_participants, children_under_10, jen_story, event_space_description,
     round_tables_count, rectangle_tables_count, possible_date_1, possible_date_2, actual_date,
@@ -1704,7 +1708,7 @@ app.post('/editUpcomingEvent/:id', async (req, res) => {
   try {
     // Update event_contact table
     await knex('event_contact')
-      .where('event_contact_id', id)
+      .where('event_contact_id', event_contact_id)
       .update({
         first_name: first_name,
         last_name: last_name,
@@ -1714,7 +1718,7 @@ app.post('/editUpcomingEvent/:id', async (req, res) => {
 
     // Update event_location table
     await knex('event_location')
-      .where('event_location_id', id)
+      .where('event_location_id', event_location_id)
       .update({
         event_address: event_address,
         event_city: event_city,
@@ -1724,7 +1728,7 @@ app.post('/editUpcomingEvent/:id', async (req, res) => {
 
     // Update event_request table
     await knex('event_request')
-      .where('event_id', id)
+      .where('event_id', event_id)
       .update({
         event_name: event_name,
         event_type: event_type,
@@ -1840,13 +1844,24 @@ app.post("/admin_scheduled_events", async (req, res) => {
 });
 
 app.get('/signup/:event_id', async (req, res) => {
-    const { event_id } = req.params; // Extract the event ID from the route parameters
+    const { event_id } = req.params;
+  
+    // Debugging: Ensure event_id is passed correctly
+    console.log('Received event_id:', event_id);
   
     try {
-      // Query the database for the event details based on the event_id
+      // Convert event_id to integer to avoid type issues
+      const parsedEventId = parseInt(event_id, 10);
+  
+      if (isNaN(parsedEventId)) {
+        throw new Error('Invalid event_id: must be an integer');
+      }
+  
+      // Fetch event details
       const event = await knex('event_request')
         .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
         .select(
+        'event_request.event_id',
           'event_request.event_name',
           'event_request.event_duration',
           'event_request.event_description',
@@ -1857,18 +1872,17 @@ app.get('/signup/:event_id', async (req, res) => {
           'event_request.actual_date',
           'event_request.event_start_time'
         )
-        .where('event_request.event_id', event_id)
+        .where('event_request.event_id', parsedEventId)
         .first();
   
       if (!event) {
-        // Handle the case where the event is not found
         return res.status(404).send('Event not found');
       }
   
-      // Render the sign-up form with the event data
+      // Render the form with event details
       res.render('sign_up_form', {
         event,
-        message: req.query.message || null, // Pass any feedback message
+        message: req.query.message || null,
       });
     } catch (error) {
       console.error('Error fetching event details:', error);
@@ -1876,10 +1890,12 @@ app.get('/signup/:event_id', async (req, res) => {
     }
   });
   
-
-app.post('/signupEvent/:id', async (req, res) => {
+  app.post('/signupEvent/:id', async (req, res) => {
     const { id } = req.params; // Event ID
     const { first_name, last_name, email } = req.body; // User input
+
+    console.log(`Signup attempt for Event ID: ${id}`);
+    console.log(`User input - First Name: ${first_name}, Last Name: ${last_name}, Email: ${email}`);
 
     try {
         // Step 1: Check if the user exists in the volunteer_info table
@@ -1888,15 +1904,30 @@ app.post('/signupEvent/:id', async (req, res) => {
             .first();
 
         if (!volunteer) {
+            console.log('Volunteer not found. Redirecting to signup form.');
             // Redirect to volunteer signup form if the user is not found
             return res.redirect(`/sign_up_form?message=Please fill out this volunteer form to sign up.`);
         }
 
-        // Step 2: Register the volunteer for the event
+        console.log(`Volunteer found: ID ${volunteer.volunteer_id}`);
+
+        // Step 2: Check if the volunteer is already signed up for the event
+        const alreadySignedUp = await knex('volunteer_events')
+            .where({ event_id: id, volunteer_id: volunteer.volunteer_id })
+            .first();
+
+        if (alreadySignedUp) {
+            console.log('Volunteer is already signed up for this event.');
+            return res.redirect(`/upcoming_events?message=You are already signed up for this event.`);
+        }
+
+        // Step 3: Register the volunteer for the event
         await knex('volunteer_events').insert({
             event_id: id,
             volunteer_id: volunteer.volunteer_id, // Assuming volunteer_info has a primary key volunteer_id
         });
+
+        console.log('Volunteer successfully signed up for the event.');
 
         // Redirect to a success page or back to the upcoming events page
         res.redirect('/upcoming_events?message=You have successfully signed up for the event.');
@@ -1905,6 +1936,7 @@ app.post('/signupEvent/:id', async (req, res) => {
         res.status(500).send('An error occurred while signing up for the event.');
     }
 });
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
