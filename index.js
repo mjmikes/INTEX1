@@ -1848,11 +1848,11 @@ app.post('/signupEvent/:id', async (req, res) => {
 
         if (!volunteer) {
             // Redirect to volunteer signup form if the user is not found
-            return res.redirect(`/volunteerSignupForm?message=Please fill out this volunteer form to sign up.`);
+            return res.redirect(`/sign_up_form?message=Please fill out this volunteer form to sign up.`);
         }
 
         // Step 2: Register the volunteer for the event
-        await knex('event_volunteers').insert({
+        await knex('volunteer_events').insert({
             event_id: id,
             volunteer_id: volunteer.volunteer_id, // Assuming volunteer_info has a primary key volunteer_id
         });

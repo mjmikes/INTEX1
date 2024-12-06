@@ -56,6 +56,11 @@
                 </div>
         </nav>
     </header>
+    <% if (req.query.message) { %>
+        <div class="alert">
+          <p><%= req.query.message %></p>
+        </div>
+      <% } %>
     <% if (!isAdmin) { %>
         <section class="upcoming-img">
             <img src="images/service_group10.jpg" alt="Turtle Shelter Project">
