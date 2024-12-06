@@ -46,6 +46,11 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
+    res.locals.showPopup = req.session.showPopup || false;  // Make isAdmin available in all views
+    next();  // Proceed to the next middleware/route handler
+});
+
+app.use((req, res, next) => {
     res.locals.admin = null; // Default value
     next();
 });
