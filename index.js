@@ -331,7 +331,6 @@ app.get('/requested_events', async (req, res) => {
                 'event_location.event_state',
                 'event_location.event_zip'
             )
-            .orderBy('event_request.possible_date_1', 'asc')
             .then(event_request => {
                 // Render the index.ejs template and pass the data
                 // We use res.render to work with ejs files we use res.redirct to work with routes
@@ -860,13 +859,6 @@ app.post('/deleteCEvent/:id', async (req, res) => {
 app.get('/completeEvent/:id', async (req, res) => {
     const { id } = req.params; // Extract the event ID from the route parameter
     try {
-        // Update the event status to 'completed'
-        await knex('event_request')
-            .where('event_id', id)
-            .update({
-                status: 'completed', // Assuming the column is named 'status'
-            });
-
         // Fetch event request details
         const eventRequest = await knex('event_request')
             .select(
@@ -925,13 +917,13 @@ app.get('/completeEvent/:id', async (req, res) => {
             completed_event: completedEvent || {}, // Handle null cases
             event_production: eventProduction || {}, // Handle null cases
             isAdmin: req.session?.isAdmin || false, // Optional isAdmin check for EJS
+            event_status: 'completed'
         });
     } catch (error) {
         console.error('Error fetching event data:', error);
         res.status(500).send('Internal Server Error');
     }
 });
-
 
 
   
