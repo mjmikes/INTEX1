@@ -1942,9 +1942,4 @@ app.get('/signup/:event_id', async (req, res) => {
     }
 });
 
-
-
-
-
-
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
