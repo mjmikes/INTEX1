@@ -1603,15 +1603,29 @@ app.post('/completed_events/:id', async (req, res) => {
     const { id } = req.params;
     const {
         event_name,
-        actual_date,
-        event_start_time,
-        event_duration,
+        event_type,
+        event_description,
+        actual_event_start_time,
+        actual_event_duration,
+        event_address,
+        event_city,
+        event_state,
+        event_zip,
+        first_name,
+        last_name,
+        phone,
+        event_contact_email,
         participants_count,
+        volunteer_count,
+        actual_event_date,
         completed_collar,
         completed_pocket,
         completed_envelope,
         completed_vest,
         finished_vest,
+        actual_date,
+        event_start_time,
+        event_duration,
         event_status = 'completed' // Default value
     } = req.body;
 
@@ -1634,7 +1648,7 @@ app.post('/completed_events/:id', async (req, res) => {
             participants_count,
             actual_event_date: actual_date,
             actual_event_start_time: event_start_time,
-            actual_event_duration: parseInt(event_duration, 10),
+            actual_event_duration: parseInt(actual_event_duration, 10),
         });
 
         // Step 3: Insert a new record into event_production table
