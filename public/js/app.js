@@ -130,8 +130,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // app.js
-
-// app.js
 document.addEventListener('DOMContentLoaded', function () {
     // Get the hamburger icon and sidebar
     const sidebarToggler = document.querySelector('.navbar-toggler');
