@@ -1312,7 +1312,7 @@ app.post('/deletesponMessage/:submission_id', async (req, res) => {
 
     try {
         // Delete the message with the given submission_id
-        await knex('contact_us')
+        await knex('sponsor_us')
             .where('submission_id', submission_id) // Find the record with the given ID
             .del(); // Delete the record
 
