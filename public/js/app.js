@@ -185,6 +185,17 @@ document.querySelector('form').addEventListener('submit', function(event) {
     }
 });
 
+// Password validation for new entries
+document.getElementById("adminForm").addEventListener("submit", function (event) {
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password && confirmPassword && password !== confirmPassword) {
+      event.preventDefault(); // Prevent form submission
+      alert("Passwords do not match. Please check your entries.");
+    }
+  });
+
 
 
 
