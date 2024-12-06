@@ -203,6 +203,66 @@ document.getElementById("adminForm").addEventListener("submit", function (event)
     }
 }
 
+// Function to toggle the visibility of the chatbot window
+function toggleChatbot() {
+    const chatbotWindow = document.getElementById('chatbot-window');
+    chatbotWindow.style.display = chatbotWindow.style.display === 'none' || chatbotWindow.style.display === '' ? 'block' : 'none';
+}
+
+// Function to close the chatbot window
+function closeChatbot() {
+    document.getElementById('chatbot-window').style.display = 'none';
+}
+
+// Function to send message and display response
+function sendMessage() {
+    const userInput = document.getElementById('user-input').value;
+    if (!userInput.trim()) return; // Prevent empty messages
+
+    // Display user's message
+    displayMessage(userInput, 'user');
+    
+    // Get bot's response
+    const botResponse = getBotResponse(userInput);
+    
+    // Display bot's response
+    setTimeout(() => {
+        displayMessage(botResponse, 'bot');
+        document.getElementById('user-input').value = ''; // Clear input field
+    }, 1000);
+}
+
+// Function to display messages
+function displayMessage(message, sender) {
+    const messagesContainer = document.getElementById('chatbot-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', sender);
+    messageDiv.textContent = message;
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to the latest message
+}
+
+// Function to get bot's response based on the user's input (FAQ-based)
+function getBotResponse(input) {
+    const faq = {
+        "What is the Turtle Shelter Project?": "The Turtle Shelter Project provides portable, lightweight shelters to homeless individuals facing life-threatening cold. The vests help protect against hypothermia and frostbite.",
+        "How can I donate?": "You can donate by visiting the 'Donate' page on our website.",
+        "How can I volunteer?": "You can volunteer by visiting the 'Get Involved' page and signing up for upcoming events.",
+        "Where are you located?": "Our headquarters are in Kaysville, Utah. You can contact us via the 'Contact Us' form for more details."
+    };
+
+    // Search for a matching FAQ response
+    const normalizedInput = input.trim().toLowerCase();
+    for (let question in faq) {
+        if (normalizedInput.includes(question.toLowerCase())) {
+            return faq[question];
+        }
+    }
+
+    // Default response if no match is found
+    return "I'm sorry, I didn't understand that. Can you ask something else?";
+}
+
 
 
 
