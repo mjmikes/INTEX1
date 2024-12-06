@@ -2044,6 +2044,7 @@ app.post('/subscribe-newsletter', async (req, res) => {
 
         // Redirect to a success page or render a success message
         res.status(200).send('Thank you for subscribing!');
+        res.redirect('/');
     } catch (error) {
         console.error('Error subscribing to newsletter:', error);
 
