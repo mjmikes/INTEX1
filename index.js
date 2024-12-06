@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require("express");
 const moment = require('moment-timezone');
 const { default: test } = require("node:test");
 const { OpenAI } = require('openai');  // OpenAI SDK
-require('dotenv').config();
 dotenv.config(); // Load environment variables
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,  // Get the key from .env
