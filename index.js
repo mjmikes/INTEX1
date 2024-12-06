@@ -1839,6 +1839,44 @@ app.post("/admin_scheduled_events", async (req, res) => {
   }
 });
 
+app.get('/signup/:event_id', async (req, res) => {
+    const { event_id } = req.params; // Extract the event ID from the route parameters
+  
+    try {
+      // Query the database for the event details based on the event_id
+      const event = await knex('event_request')
+        .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
+        .select(
+          'event_request.event_name',
+          'event_request.event_duration',
+          'event_request.event_description',
+          'event_location.event_address',
+          'event_location.event_city',
+          'event_location.event_state',
+          'event_location.event_zip',
+          'event_request.actual_date',
+          'event_request.event_start_time'
+        )
+        .where('event_request.event_id', event_id)
+        .first();
+  
+      if (!event) {
+        // Handle the case where the event is not found
+        return res.status(404).send('Event not found');
+      }
+  
+      // Render the sign-up form with the event data
+      res.render('sign_up_form', {
+        event,
+        message: req.query.message || null, // Pass any feedback message
+      });
+    } catch (error) {
+      console.error('Error fetching event details:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+
 app.post('/signupEvent/:id', async (req, res) => {
     const { id } = req.params; // Event ID
     const { first_name, last_name, email } = req.body; // User input
