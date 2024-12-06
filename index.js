@@ -1840,10 +1840,20 @@ app.post("/admin_scheduled_events", async (req, res) => {
 });
 
 app.get('/signup/:event_id', async (req, res) => {
-    const { event_id } = req.params; // Extract the event ID from the route parameters
+    const { event_id } = req.params;
+  
+    // Debugging: Ensure event_id is passed correctly
+    console.log('Received event_id:', event_id);
   
     try {
-      // Query the database for the event details based on the event_id
+      // Convert event_id to integer to avoid type issues
+      const parsedEventId = parseInt(event_id, 10);
+  
+      if (isNaN(parsedEventId)) {
+        throw new Error('Invalid event_id: must be an integer');
+      }
+  
+      // Fetch event details
       const event = await knex('event_request')
         .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
         .select(
@@ -1857,24 +1867,24 @@ app.get('/signup/:event_id', async (req, res) => {
           'event_request.actual_date',
           'event_request.event_start_time'
         )
-        .where('event_request.event_id', event_id)
+        .where('event_request.event_id', parsedEventId)
         .first();
   
       if (!event) {
-        // Handle the case where the event is not found
         return res.status(404).send('Event not found');
       }
   
-      // Render the sign-up form with the event data
+      // Render the form with event details
       res.render('sign_up_form', {
         event,
-        message: req.query.message || null, // Pass any feedback message
+        message: req.query.message || null,
       });
     } catch (error) {
       console.error('Error fetching event details:', error);
       res.status(500).send('Internal Server Error');
     }
   });
+  
   
 
 app.post('/signupEvent/:id', async (req, res) => {
