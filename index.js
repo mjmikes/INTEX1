@@ -865,6 +865,8 @@ app.get('/completeEvent/:id', async (req, res) => {
             .select(
                 'event_id',
                 'event_name',
+                'event_type',
+                'event_description',
                 'expected_participants',
                 'event_start_time',
                 'event_duration',
@@ -915,12 +917,14 @@ app.get('/completeEvent/:id', async (req, res) => {
             event_contact: eventContact,
             completed_event: completedEvent || {}, // Handle null cases
             event_production: eventProduction || {}, // Handle null cases
+            isAdmin: req.session?.isAdmin || false, // Optional isAdmin check for EJS
         });
     } catch (error) {
         console.error('Error fetching event data:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
 
   
 
