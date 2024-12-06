@@ -1895,14 +1895,14 @@ app.get('/signup/:event_id', async (req, res) => {
     const { first_name, last_name, email } = req.body; // User input
 
     try {
-        // Step 1: Check if the event exists in completed_event
-        const event = await knex('completed_event')
+        // Step 1: Check if the event exists in event_request
+        const event = await knex('event_request')
             .where('event_id', id)
             .first();
 
         if (!event) {
-            // Redirect if the event is not completed
-            return res.redirect(`/upcoming_events?message=Signups are only allowed for completed events.`);
+            // Redirect if the event does not exist
+            return res.redirect(`/upcoming_events?message=The event does not exist or is not open for signups.`);
         }
 
         // Step 2: Check if the volunteer exists
@@ -1928,6 +1928,7 @@ app.get('/signup/:event_id', async (req, res) => {
         res.status(500).send('An error occurred while signing up for the event.');
     }
 });
+
 
 
 
