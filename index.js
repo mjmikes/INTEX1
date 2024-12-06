@@ -1861,6 +1861,7 @@ app.get('/signup/:event_id', async (req, res) => {
       const event = await knex('event_request')
         .join('event_location', 'event_request.event_location_id', '=', 'event_location.event_location_id')
         .select(
+        'event_request.event_id',
           'event_request.event_name',
           'event_request.event_duration',
           'event_request.event_description',
@@ -1889,11 +1890,12 @@ app.get('/signup/:event_id', async (req, res) => {
     }
   });
   
-  
-
-app.post('/signupEvent/:id', async (req, res) => {
+  app.post('/signupEvent/:id', async (req, res) => {
     const { id } = req.params; // Event ID
     const { first_name, last_name, email } = req.body; // User input
+
+    console.log(`Signup attempt for Event ID: ${id}`);
+    console.log(`User input - First Name: ${first_name}, Last Name: ${last_name}, Email: ${email}`);
 
     try {
         // Step 1: Check if the user exists in the volunteer_info table
@@ -1902,15 +1904,30 @@ app.post('/signupEvent/:id', async (req, res) => {
             .first();
 
         if (!volunteer) {
+            console.log('Volunteer not found. Redirecting to signup form.');
             // Redirect to volunteer signup form if the user is not found
             return res.redirect(`/sign_up_form?message=Please fill out this volunteer form to sign up.`);
         }
 
-        // Step 2: Register the volunteer for the event
+        console.log(`Volunteer found: ID ${volunteer.volunteer_id}`);
+
+        // Step 2: Check if the volunteer is already signed up for the event
+        const alreadySignedUp = await knex('volunteer_events')
+            .where({ event_id: id, volunteer_id: volunteer.volunteer_id })
+            .first();
+
+        if (alreadySignedUp) {
+            console.log('Volunteer is already signed up for this event.');
+            return res.redirect(`/upcoming_events?message=You are already signed up for this event.`);
+        }
+
+        // Step 3: Register the volunteer for the event
         await knex('volunteer_events').insert({
             event_id: id,
             volunteer_id: volunteer.volunteer_id, // Assuming volunteer_info has a primary key volunteer_id
         });
+
+        console.log('Volunteer successfully signed up for the event.');
 
         // Redirect to a success page or back to the upcoming events page
         res.redirect('/upcoming_events?message=You have successfully signed up for the event.');
@@ -1919,6 +1936,7 @@ app.post('/signupEvent/:id', async (req, res) => {
         res.status(500).send('An error occurred while signing up for the event.');
     }
 });
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
