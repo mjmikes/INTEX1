@@ -1,15 +1,6 @@
-require('dotenv').config();
 const express = require("express");
 const moment = require('moment-timezone');
 const { default: test } = require("node:test");
-const { OpenAI } = require('openai');  // OpenAI SDK
-dotenv.config(); // Load environment variables
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,  // Get the key from .env
-});
-
-app.use(express.json()); // To parse JSON data
-
 
 let app = express();
 
@@ -2061,39 +2052,6 @@ app.post('/subscribe-newsletter', async (req, res) => {
             res.status(400).send('You are already subscribed!');
         } else {
             res.status(500).send('An error occurred. Please try again.');
-        }
-    }
-});
-
-app.post('/chat', async (req, res) => {
-    const { message } = req.body;
-    
-    if (!message || typeof message !== 'string' || message.trim() === '') {
-        return res.status(400).json({ error: 'Message cannot be empty.' });
-    }
-
-    try {
-        // Send message to OpenAI
-        const response = await openai.chat.completions.create({
-            model: 'gpt-4',  // Use GPT-4 or GPT-3 model
-            messages: [
-                { role: 'system', content: 'You are a helpful assistant.' },
-                { role: 'user', content: message },
-            ],
-            max_tokens: 150,
-            temperature: 0.7,
-        });
-
-        const botResponse = response.choices[0].message.content;
-        res.json({ reply: botResponse });
-    } catch (error) {
-        console.error('Error during OpenAI request:', error);
-
-        // In development, log more detailed error info
-        if (process.env.NODE_ENV === 'development') {
-            res.status(500).json({ error: error.message });
-        } else {
-            res.status(500).json({ error: 'Something went wrong, please try again later.' });
         }
     }
 });
