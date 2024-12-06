@@ -72,22 +72,35 @@
       <h2>Event Details</h2>
       <div class="form-row">
         <div class="form-group">
-          <label for="eventName">Event Name:</label>
-          <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" required>
+            <label for="eventName">Event Name:</label>
+            <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" required>
         </div>
-      </div>
-      <div class="form-row">
+    </div>
+    <div class="form-row">
         <div class="form-group">
-          <label for="eventType">Event Type:</label>
-          <input type="text" id="eventType" name="event_type" value="<%= event_request.event_type %>" required>
+            <label for="eventType">Event Type:</label>
+            <input type="text" id="eventType" name="event_type" value="<%= event_request.event_type %>" required>
         </div>
-      </div>
-      <div class="form-row">
+    </div>
+    <div class="form-row">
         <div class="form-group">
-          <label for="eventDescription">Event Description:</label>
-          <textarea id="eventDescription" name="event_description" required><%= event_request.event_description %></textarea>
+            <label for="eventDescription">Event Description:</label>
+            <textarea id="eventDescription" name="event_description" required><%= event_request.event_description %></textarea>
         </div>
-      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="actualEventStartTime">Actual Event Start Time:</label>
+            <input type="time" id="actualEventStartTime" name="actual_event_start_time" value="<%= completed_event.actual_event_start_time %>" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="actualEventDuration">Actual Event Duration (hours):</label>
+            <input type="number" id="actualEventDuration" name="actual_event_duration" value="<%= completed_event.actual_event_duration %>" min="0" required>
+        </div>
+    </div>
+    
       <!-- Event Location -->
       <h2>Event Location</h2>
       <div class="form-row">
