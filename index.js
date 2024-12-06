@@ -1891,62 +1891,19 @@ app.get('/signup/:event_id', async (req, res) => {
   });
   
   app.post('/signupEvent/:id', async (req, res) => {
-    const { id } = req.params; // Event ID
-    const { first_name, last_name, email } = req.body; // User input
-
     try {
-        console.log(`Received Event ID: ${id}`);
-        console.log(`Received Volunteer Info: ${first_name} ${last_name}, ${email}`);
+        // Log received data for debugging (optional)
+        console.log(`Received Event ID: ${req.params.id}`);
+        console.log(`Received Volunteer Info: ${req.body.first_name} ${req.body.last_name}, ${req.body.email}`);
 
-        // Step 1: Check if the event exists in event_request
-        const event = await knex('event_request')
-            .where('event_id', id)
-            .first();
-        console.log('Event retrieved:', event);
-
-        if (!event) {
-            return res.redirect(`/upcoming_events`);
-        }
-
-        // Step 2: Check if the volunteer exists in volunteer_info
-        const volunteer = await knex('volunteer_info')
-            .where({ first_name, last_name, email })
-            .first();
-        console.log('Volunteer retrieved:', volunteer);
-
-        if (!volunteer) {
-            return res.redirect(`/sign_up_form`);
-        }
-
-        // Step 3: Check if the volunteer is already registered for the event
-        const alreadyRegistered = await knex('volunteer_events')
-            .where({
-                event_id: id,
-                volunteer_id: volunteer.volunteer_id,
-            })
-            .first();
-        console.log('Already registered:', alreadyRegistered);
-
-        if (alreadyRegistered) {
-            return res.redirect(
-                `/upcoming_events`
-            );
-        }
-
-        // Step 4: Register the volunteer for the event in volunteer_events
-        const insertResult = await knex('volunteer_events').insert({
-            event_id: id,
-            volunteer_id: volunteer.volunteer_id,
-        });
-        console.log('Insert result:', insertResult);
-
-        // Step 5: Redirect to a success page or back to the upcoming events page
-        res.redirect('/upcoming_events');
+        // Redirect to the upcoming events page
+        res.redirect('/upcoming_events?message=You have been redirected.');
     } catch (error) {
         console.error('Error signing up for event:', error);
-        res.status(500).send('An error occurred while signing up for the event.');
+        res.status(500).send('An error occurred while processing your request.');
     }
 });
+
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
