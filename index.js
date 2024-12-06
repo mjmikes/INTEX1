@@ -1290,7 +1290,24 @@ app.post("/submit-contact", async (req, res) => {
 });
 
 
-app.delete('/deleteMessage/:submission_id', async (req, res) => {
+app.post('/deleteMessage/:submission_id', async (req, res) => {
+    const { submission_id } = req.params; // Get the submission_id from the URL
+
+    try {
+        // Delete the message with the given submission_id
+        await knex('contact_us')
+            .where('submission_id', submission_id) // Find the record with the given ID
+            .del(); // Delete the record
+
+        // Redirect back to the messages page after deleting
+        res.redirect('/messages');
+    } catch (error) {
+        console.error('Error deleting message:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.post('/deletesponMessage/:submission_id', async (req, res) => {
     const { submission_id } = req.params; // Get the submission_id from the URL
 
     try {
