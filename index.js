@@ -33,7 +33,7 @@ app.use(
     })
 );
 
-
+//comment
 // Middleware to make `isAdmin` available globally for all routes
 app.use((req, res, next) => {
     res.locals.isAdmin = req.session.isAdmin || false;  // Make isAdmin available in all views
