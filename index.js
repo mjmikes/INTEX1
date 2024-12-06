@@ -645,6 +645,98 @@ app.get('/editCEvent/:id', async (req, res) => {
     }
 });
 
+app.post('/updateCEvent/:id', async (req, res) => {
+    const { id } = req.params; // Extract the event ID from the route parameters
+
+    // Extract the data from the form submission
+    const {
+        event_name,
+        event_type,
+        event_description,
+        event_address,
+        event_city,
+        event_state,
+        event_zip,
+        first_name,
+        last_name,
+        phone,
+        event_contact_email,
+        participants_count,
+        actual_event_date,
+        completed_collar,
+        completed_pocket,
+        completed_envelope,
+        completed_vest,
+        finished_vest,
+        volunteer_count
+    } = req.body;
+
+    try {
+        // Update the event_request table
+        await knex('event_request')
+            .where('event_id', id)
+            .update({
+                event_name,
+                event_type,
+                event_description
+            });
+
+        // Update the event_location table
+        await knex('event_location')
+            .where('event_location_id', function () {
+                this.select('event_location_id')
+                    .from('event_request')
+                    .where('event_id', id);
+            })
+            .update({
+                event_address,
+                event_city,
+                event_state,
+                event_zip
+            });
+
+        // Update the event_contact table
+        await knex('event_contact')
+            .where('event_contact_id', function () {
+                this.select('event_contact_id')
+                    .from('event_request')
+                    .where('event_id', id);
+            })
+            .update({
+                first_name,
+                last_name,
+                phone,
+                event_contact_email
+            });
+
+        // Update the completed_event table
+        await knex('completed_event')
+            .where('event_id', id)
+            .update({
+                participants_count: participants_count || null,
+                actual_event_date: actual_event_date || null
+            });
+
+        // Update the event_production table
+        await knex('event_production')
+            .where('event_id', id)
+            .update({
+                completed_collar: completed_collar || null,
+                completed_pocket: completed_pocket || null,
+                completed_envelope: completed_envelope || null,
+                completed_vest: completed_vest || null,
+                finished_vest: finished_vest || null,
+                volunteer_count: volunteer_count || null
+            });
+
+        // Redirect back to the completed events page
+        res.redirect('/completed_events');
+    } catch (error) {
+        console.error('Error updating the event:', error);
+        res.status(500).send('An error occurred while updating the event.');
+    }
+});
+
 
 
 app.get('/completeEvent/:id', async (req, res) => {
