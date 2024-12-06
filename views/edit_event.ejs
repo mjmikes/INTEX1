@@ -221,7 +221,7 @@
           <textarea id="eventDescription" name="event_description" class="form-textarea" rows="4" required><%= event_request.event_description %></textarea>
         </div>
       </div>
-      <input type="hidden" name="event_id" value="<%= event_request.event_id %>">
+      <input type="hidden" name="event_request.event_id" value="<%= event_request.event_id %>">
       <input type="hidden" name="event_contact_id" value="<%= event_contact.event_contact_id %>">
       <input type="hidden" name="event_location_id" value="<%= event_location.event_location_id %>">
 
