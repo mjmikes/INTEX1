@@ -846,7 +846,6 @@ app.get('/scheduleEvent/:id', async (req, res) => {
 
 
 app.post('/editEvent/:id', async (req, res) => {
-  const { id } = req.params;
   const {
     event_id, event_contact_id, event_location_id, // Include specific IDs for contact and location
     event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
