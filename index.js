@@ -1666,7 +1666,7 @@ app.post('/completed_events_edit_completed/:id', async (req, res) => {
       completed_envelope,
       completed_vest,
       finished_vest,
-      actual_date,
+      actual_event_date,
       event_start_time,
       event_duration,
       event_status = 'completed' // Default value
@@ -1689,7 +1689,7 @@ app.post('/completed_events_edit_completed/:id', async (req, res) => {
       await knex('completed_event').insert({
           event_id: id, // Ensure the event_id from event_request is inserted into completed_event
           participants_count,
-          actual_event_date: actual_date,
+          actual_event_date: actual_event_date,
           actual_event_start_time: event_start_time,
           actual_event_duration: parseInt(event_duration, 10),
       });
