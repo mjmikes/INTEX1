@@ -65,150 +65,123 @@
     </nav>
   </header>
   <main>
-    <form action="/completed_events/<%= event_id %>" method="POST" class="event-form">
-      <!-- Event Details -->
-      <h2>Event Details</h2>
-      <div class="form-row">
-        <div class="form-group">
-            <label for="eventName">Event Name:</label>
-            <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" required>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="eventType">Event Type:</label>
-            <input type="text" id="eventType" name="event_type" value="<%= event_request.event_type %>" required>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="eventDescription">Event Description:</label>
-            <textarea id="eventDescription" name="event_description" required><%= event_request.event_description %></textarea>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="actualEventStartTime">Actual Event Start Time:</label>
-            <input type="time" id="actualEventStartTime" name="actual_event_start_time" value="<%= completed_event.actual_event_start_time %>" required>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group">
-            <label for="actualEventDuration">Actual Event Duration (hours):</label>
-            <input type="number" id="actualEventDuration" name="actual_event_duration" value="<%= completed_event.actual_event_duration %>" min="0" required>
-        </div>
-    </div>
-    
-      <!-- Event Location -->
-      <h2>Event Location</h2>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="eventAddress">Address:</label>
-          <input type="text" id="eventAddress" name="event_address" value="<%= event_location.event_address %>" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="eventCity">City:</label>
-          <input type="text" id="eventCity" name="event_city" value="<%= event_location.event_city %>" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="eventState">State:</label>
-          <input type="text" id="eventState" name="event_state" value="<%= event_location.event_state %>" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="eventZip">Zip:</label>
-          <input type="text" id="eventZip" name="event_zip" value="<%= event_location.event_zip %>" required>
-        </div>
-      </div>
-      <!-- Event Contact -->
-      <h2>Event Contact</h2>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="firstName">First Name:</label>
-          <input type="text" id="firstName" name="first_name" value="<%= event_contact.first_name %>" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" name="last_name" value="<%= event_contact.last_name %>" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="phone">Phone:</label>
-          <input type="tel" id="phone" name="phone" value="<%= event_contact.phone %>" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="event_contact_email" value="<%= event_contact.event_contact_email %>" required>
-        </div>
-      </div>
-      <!-- Completed Event -->
-      <h2>Volunteers and Participants</h2>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="participantsCount">Participants Count:</label>
-          <input type="number" id="participantsCount" name="participants_count" value="<%= completed_event.participants_count || '' %>" min="0">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="volunteerCount">Volunteer Count:</label>
-          <input type="number" id="volunteerCount" name="volunteer_count" value="<%= completed_event.volunteer_count || '' %>" min="0" required>
-        </div> 
-        </div>       
+    <h1 class="form-header">Completed Event Information</h1>
+    <form action="/completed_events/<%= event_request.event_id %>" method="POST" class="event-form">
+  
+      <!-- Top Section: Event Details -->
+      <div class="form-section">
+        <h2 class="section-header">Event Details</h2>
+  
+        <!-- Form Row 1 -->
         <div class="form-row">
           <div class="form-group">
-            <label for="actualEventDate">Actual Event Date:</label>
-            <input type="date" id="actualEventDate" name="actual_event_date" value="<%= completed_event.actual_event_date ? completed_event.actual_event_date.toISOString().split('T')[0] : '' %>">
+            <label for="eventName" class="form-label">Event Name:</label>
+            <input type="text" id="eventName" name="event_name" value="<%= event_request.event_name %>" class="form-input" required>
           </div>
-      </div>
-      <!-- Event Production -->
-      <h2>Event Production</h2>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="completedCollar">Completed Collar Pieces:</label>
-          <input type="number" id="completedCollar" name="completed_collar" value="<%= event_production.completed_collar || '' %>" min="0">
+          <div class="form-group">
+            <label for="actualDate" class="form-label">Date:</label>
+            <input type="date" id="actualDate" name="actual_date" value="<%= event_request.actual_date %>" class="form-input" required>
+          </div>
+        </div>
+  
+        <!-- Form Row 2 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="startTime" class="form-label">Event Start Time:</label>
+            <input type="time" id="startTime" name="event_start_time" value="<%= event_request.event_start_time %>" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label for="duration" class="form-label">Event Duration (hrs):</label>
+            <input type="number" id="duration" name="event_duration" value="<%= event_request.event_duration %>" class="form-input" min="1" required>
+          </div>
+        </div>
+  
+        <!-- Form Row 3 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expectedParticipants" class="form-label">Expected Participants:</label>
+            <div id="expectedParticipants" class="form-static"><%= event_request.expected_participants %></div>
+          </div>
+          <div class="form-group">
+            <label for="participantsCount" class="form-label">Actual Participants Count:</label>
+            <input type="number" id="participantsCount" name="participants_count" class="form-input" min="0" required>
+          </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="completedPocket">Completed Pocket Pieces:</label>
-          <input type="number" id="completedPocket" name="completed_pocket" value="<%= event_production.completed_pocket || '' %>" min="0">
+  
+      <!-- Bottom Section: Completed Products -->
+      <div class="form-section">
+        <h2 class="section-header">Completed Products</h2>
+  
+        <!-- Form Row 5 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="completedCollars" class="form-label">Completed Collar Pieces:</label>
+            <input type="number" id="completedCollars" name="completed_collar" class="form-input" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="completedPockets" class="form-label">Completed Pocket Pieces:</label>
+            <input type="number" id="completedPockets" name="completed_pocket" class="form-input" min="0" required>
+          </div>
+        </div>
+  
+        <!-- Form Row 6 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="completedEnvelopes" class="form-label">Completed Envelope Pieces:</label>
+            <input type="number" id="completedEnvelopes" name="completed_envelope" class="form-input" min="0" required>
+          </div>
+          <div class="form-group">
+            <label for="completedVests" class="form-label">Completed Vest Pieces:</label>
+            <input type="number" id="completedVests" name="completed_vest" class="form-input" min="0" required>
+          </div>
+        </div>
+  
+        <!-- Final Row -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="finishedVests" class="form-label">Finished Vests:</label>
+            <input type="number" id="finishedVests" name="finished_vest" class="form-input" min="0" required>
+          </div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="completedEnvelope">Completed Envelope Pieces:</label>
-          <input type="number" id="completedEnvelope" name="completed_envelope" value="<%= event_production.completed_envelope || '' %>" min="0">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="completedVest">Completed Vest Pieces:</label>
-          <input type="number" id="completedVest" name="completed_vest" value="<%= event_production.completed_vest || '' %>" min="0">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="finishedVest">Finished Vests:</label>
-          <input type="number" id="finishedVest" name="finished_vest" value="<%= event_production.finished_vest || '' %>" min="0">
-        </div>
-      </div>
+  
       <!-- Submit Button -->
       <div class="form-row">
-        <button type="submit">Save Changes</button>
+        <button type="submit" class="form-submit">Submit</button>
       </div>
     </form>
   </main>
+
+  <footer>
+    <div class="footer">
+        <!-- Contact Information -->
+        <div class="contact">
+            <h2>Connect with Us!</h2>
+            <p>Phone: 801-872-3190</p>
+            <p>Email: turtleshelterproject@gmail.com</p>
+            <p>Address: PO Box 382, Kaysville, UT 84037</p>
+        </div>
+
+        <!-- Social Media Links (Icons) -->
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/turtle-shelter-project-6aa0aa1a4/" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/turtleshelterproject/" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/turtleshelterproject" target="_blank" class="social-icon">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+
+        <!-- Copyright Text -->
+        <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
+    </div>
+</footer>
+<script src="js/app.js"></script>
+</main
   
   
   
