@@ -859,6 +859,13 @@ app.post('/deleteCEvent/:id', async (req, res) => {
 app.get('/completeEvent/:id', async (req, res) => {
     const { id } = req.params; // Extract the event ID from the route parameter
     try {
+        // Update the event status to 'completed'
+        await knex('event_request')
+            .where('event_id', id)
+            .update({
+                status: 'completed', // Assuming the column is named 'status'
+            });
+
         // Fetch event request details
         const eventRequest = await knex('event_request')
             .select(
@@ -923,6 +930,7 @@ app.get('/completeEvent/:id', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
 
 
   
