@@ -70,20 +70,17 @@
   </header>
   <main>
     <div class="signup-container">
-        <h1>Sign Up for Upcoming Event</h1>
-        
-        <!-- Display Unalterable Event Data -->
-        <div class="event-details">
-          <h2>Event Details</h2>
-          <p><strong>Event Name:</strong> <%= event.event_name %></p>
-          <p><strong>Event Duration:</strong> <%= event.event_duration %></p>
-          <p><strong>Event Date:</strong> <%= event.actual_date.toLocaleDateString('en-US') %></p>
-          <p><strong>Event Location:</strong> <%= event.event_address %>, <%= event.event_city %>, <%= event.event_state %> <%= event.event_zip %></p>
-          <p><strong>Event Description:</strong> <%= event.event_description %></p>
-        </div>
-      
         <!-- Signup Form -->
         <form action="/signupEvent/<%= event.event_id %>" method="POST">
+            <h1 style=>Sign Up for Upcoming Event</h1>
+            <div class="event-details">
+                <h2>Event Details</h2>
+                <p><strong>Event Name:</strong> <%= event.event_name %></p>
+                <p><strong>Event Duration:</strong> <%= event.event_duration %></p>
+                <p><strong>Event Date:</strong> <%= event.actual_date.toLocaleDateString('en-US') %></p>
+                <p><strong>Event Location:</strong> <%= event.event_address %>, <%= event.event_city %>, <%= event.event_state %> <%= event.event_zip %></p>
+                <p><strong>Event Description:</strong> <%= event.event_description %></p>
+              </div>
           <div class="form-row">
             <label for="firstName">First Name:</label>
             <input type="text" id="firstName" name="first_name" required>

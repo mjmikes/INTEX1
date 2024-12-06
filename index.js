@@ -1895,10 +1895,14 @@ app.get('/signup/:event_id', async (req, res) => {
     const { first_name, last_name, email } = req.body; // User input
 
     try {
+        console.log(`Received Event ID: ${id}`);
+        console.log(`Received Volunteer Info: ${first_name} ${last_name}, ${email}`);
+
         // Step 1: Check if the event exists in event_request
         const event = await knex('event_request')
             .where('event_id', id)
             .first();
+        console.log('Event retrieved:', event);
 
         if (!event) {
             return res.redirect(`/upcoming_events?message=Event not found.`);
@@ -1908,9 +1912,9 @@ app.get('/signup/:event_id', async (req, res) => {
         const volunteer = await knex('volunteer_info')
             .where({ first_name, last_name, email })
             .first();
+        console.log('Volunteer retrieved:', volunteer);
 
         if (!volunteer) {
-            // Redirect to volunteer signup form if the user is not found
             return res.redirect(`/sign_up_form?message=Please fill out this volunteer form to sign up.`);
         }
 
@@ -1921,6 +1925,7 @@ app.get('/signup/:event_id', async (req, res) => {
                 volunteer_id: volunteer.volunteer_id,
             })
             .first();
+        console.log('Already registered:', alreadyRegistered);
 
         if (alreadyRegistered) {
             return res.redirect(
@@ -1929,10 +1934,11 @@ app.get('/signup/:event_id', async (req, res) => {
         }
 
         // Step 4: Register the volunteer for the event in volunteer_events
-        await knex('volunteer_events').insert({
+        const insertResult = await knex('volunteer_events').insert({
             event_id: id,
             volunteer_id: volunteer.volunteer_id,
         });
+        console.log('Insert result:', insertResult);
 
         // Step 5: Redirect to a success page or back to the upcoming events page
         res.redirect('/upcoming_events?message=You have successfully signed up for the event.');
@@ -1941,10 +1947,6 @@ app.get('/signup/:event_id', async (req, res) => {
         res.status(500).send('An error occurred while signing up for the event.');
     }
 });
-
-
-
-
 
 
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
