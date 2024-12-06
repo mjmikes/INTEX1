@@ -696,7 +696,7 @@ app.get('/editCEvent/:id', async (req, res) => {
         const eventProduction = await knex('event_production').where('event_id', id).first();
 
         // Render the form with the retrieved data
-        res.render('edit_event_form', {
+        res.render('edit_completed', {
             event_id: id,
             event_request: eventRequest,
             event_contact: eventContact,
