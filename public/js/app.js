@@ -292,7 +292,7 @@ function getBotResponse(input) {
     }
 
     // Default response if no match is found
-    return "I'm sorry, I am haven't learned that in my training. Can you ask something else?";
+    return "I'm sorry, my training hasn't taught me to respond accurately to that yet. Can you ask something else?";
 }
 
 

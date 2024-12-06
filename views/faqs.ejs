@@ -192,6 +192,22 @@
             <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
         </div>
     </footer>
+    <!-- Chatbot HTML -->
+    <div id="chatbot-container">
+        <div id="chatbot-icon" onclick="toggleChatbot()">
+            <i class="fas fa-comments"></i><!-- Chat Icon -->
+        </div>
+        <div id="chatbot-window" class="chatbot-window">
+            <div class="chatbot-header">
+                <span>Chat with us</span>
+                <button onclick="closeChatbot()">X</button>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages">
+                <!-- Messages will be displayed here -->
+            </div>
+            <input type="text" id="user-input" placeholder="Ask me anything..." onkeydown="if(event.key === 'Enter'){sendMessage()}" />
+        </div>
+    </div>
     
     <script src="js/app.js"></script>
 </body>
