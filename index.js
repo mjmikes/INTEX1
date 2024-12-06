@@ -1241,7 +1241,8 @@ app.get('/volunteers', async (req, res) => {
                 'willing_to_travel_county',
                 'willing_to_travel_state',
                 'details'
-            );
+            )
+            .orderBy('last_name', 'asc');
 
         // Render the 'volunteers' view and pass the data
         res.render('volunteers', { volunteer_info });
