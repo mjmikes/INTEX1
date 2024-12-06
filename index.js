@@ -551,10 +551,12 @@ app.get('/editEvent/:id', async (req, res) => {
         'event_request.possible_date_1',
         'event_request.possible_date_2',
         'event_request.actual_date',
+        'event_contact.event_contact_id',
         'event_contact.first_name',
         'event_contact.last_name',
         'event_contact.phone',
         'event_contact.event_contact_email',
+        'event_location.event_location_id',
         'event_location.event_address',
         'event_location.event_city',
         'event_location.event_state',
@@ -754,16 +756,17 @@ app.get('/scheduleEvent/:id', async (req, res) => {
 app.post('/editEvent/:id', async (req, res) => {
   const { id } = req.params;
   const {
+    event_id, event_contact_id, event_location_id, // Include specific IDs for contact and location
     event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
-    event_state,event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
+    event_state, event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
     sewing_machines_available, expected_participants, children_under_10, jen_story, event_space_description,
     round_tables_count, rectangle_tables_count, possible_date_1, possible_date_2, actual_date,
   } = req.body;
 
   try {
-    // Update event_contact table
+    // Update event_contact table with the correct event_contact_id
     await knex('event_contact')
-      .where('event_contact_id', id)
+      .where('event_contact_id', event_contact_id) // Use the correct contact ID
       .update({
         first_name: first_name,
         last_name: last_name,
@@ -771,9 +774,9 @@ app.post('/editEvent/:id', async (req, res) => {
         event_contact_email: event_contact_email,
       });
 
-    // Update event_location table
+    // Update event_location table with the correct event_location_id
     await knex('event_location')
-      .where('event_location_id', id)
+      .where('event_location_id', event_location_id) // Use the correct location ID
       .update({
         event_address: event_address,
         event_city: event_city,
@@ -781,9 +784,9 @@ app.post('/editEvent/:id', async (req, res) => {
         event_zip: event_zip,
       });
 
-    // Update event_request table
+    // Update event_request table with the correct event_id
     await knex('event_request')
-      .where('event_id', id)
+      .where('event_id', event_id) // Use the correct event ID
       .update({
         event_name: event_name,
         event_type: event_type,
