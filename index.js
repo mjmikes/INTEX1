@@ -602,6 +602,68 @@ app.get('/editEvent/:id', async (req, res) => {
   }
 });
 
+
+app.post('/editEvent/:id', async (req, res) => {
+  const {
+    event_id, event_contact_id, event_location_id, // Include specific IDs for contact and location
+    event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
+    event_state, event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
+    sewing_machines_available, expected_participants, children_under_10, jen_story, event_space_description,
+    round_tables_count, rectangle_tables_count, possible_date_1, possible_date_2, actual_date,
+  } = req.body;
+
+  try {
+    // Update event_contact table with the correct event_contact_id
+    await knex('event_contact')
+      .where('event_contact_id', event_contact_id) // Use the correct contact ID
+      .update({
+        first_name: first_name,
+        last_name: last_name,
+        phone: phone,
+        event_contact_email: event_contact_email,
+      });
+
+    // Update event_location table with the correct event_location_id
+    await knex('event_location')
+      .where('event_location_id', event_location_id) // Use the correct location ID
+      .update({
+        event_address: event_address,
+        event_city: event_city,
+        event_state: event_state,
+        event_zip: event_zip,
+      });
+
+    // Update event_request table with the correct event_id
+    await knex('event_request')
+      .where('event_id', event_id) // Use the correct event ID
+      .update({
+        event_name: event_name,
+        event_type: event_type,
+        event_start_time: event_start_time,
+        event_duration: parseInt(event_duration, 10),
+        event_description: event_description,
+        expected_advanced_sewers: parseInt(expected_advanced_sewers, 10),
+        sewing_machines_available: parseInt(sewing_machines_available, 10),
+        expected_participants: parseInt(expected_participants, 10),
+        children_under_10: parseInt(children_under_10, 10),
+        jen_story: jen_story === 'True' || jen_story === true,
+        event_space_description: event_space_description,
+        round_tables_count: parseInt(round_tables_count, 10),
+        rectangle_tables_count: parseInt(rectangle_tables_count, 10),
+        possible_date_1: possible_date_1 || null,
+        possible_date_2: possible_date_2 || null,
+        actual_date: actual_date || null,
+      });
+  
+    // Redirect to requested_events page
+    res.redirect('/requested_events');
+  } catch (error) {
+    console.error('Error updating event:', error);
+    res.status(500).send('An error occurred while updating the event.');
+  }
+});
+
+
 app.get('/editCEvent/:id', async (req, res) => {
     const { id } = req.params; // Extract event ID from route parameters
 
@@ -895,68 +957,6 @@ app.get('/scheduleEvent/:id', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
-
-
-app.post('/editEvent/:id', async (req, res) => {
-  const {
-    event_id, event_contact_id, event_location_id, // Include specific IDs for contact and location
-    event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
-    event_state, event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
-    sewing_machines_available, expected_participants, children_under_10, jen_story, event_space_description,
-    round_tables_count, rectangle_tables_count, possible_date_1, possible_date_2, actual_date,
-  } = req.body;
-
-  try {
-    // Update event_contact table with the correct event_contact_id
-    await knex('event_contact')
-      .where('event_contact_id', event_contact_id) // Use the correct contact ID
-      .update({
-        first_name: first_name,
-        last_name: last_name,
-        phone: phone,
-        event_contact_email: event_contact_email,
-      });
-
-    // Update event_location table with the correct event_location_id
-    await knex('event_location')
-      .where('event_location_id', event_location_id) // Use the correct location ID
-      .update({
-        event_address: event_address,
-        event_city: event_city,
-        event_state: event_state,
-        event_zip: event_zip,
-      });
-
-    // Update event_request table with the correct event_id
-    await knex('event_request')
-      .where('event_id', event_id) // Use the correct event ID
-      .update({
-        event_name: event_name,
-        event_type: event_type,
-        event_start_time: event_start_time,
-        event_duration: parseInt(event_duration, 10),
-        event_description: event_description,
-        expected_advanced_sewers: parseInt(expected_advanced_sewers, 10),
-        sewing_machines_available: parseInt(sewing_machines_available, 10),
-        expected_participants: parseInt(expected_participants, 10),
-        children_under_10: parseInt(children_under_10, 10),
-        jen_story: jen_story === 'True' || jen_story === true,
-        event_space_description: event_space_description,
-        round_tables_count: parseInt(round_tables_count, 10),
-        rectangle_tables_count: parseInt(rectangle_tables_count, 10),
-        possible_date_1: possible_date_1 || null,
-        possible_date_2: possible_date_2 || null,
-        actual_date: actual_date || null,
-      });
-  
-    // Redirect to requested_events page
-    res.redirect('/requested_events');
-  } catch (error) {
-    console.error('Error updating event:', error);
-    res.status(500).send('An error occurred while updating the event.');
-  }
-});
-
 
 
 // Post route to send volunteer form data to database
