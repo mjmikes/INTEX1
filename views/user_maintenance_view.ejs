@@ -44,32 +44,38 @@
                     </div>
                 </ul>
             </div>
-                <div class="sidebar" id="sidebar">
-                    <!-- Close button -->
-                    <button class="close-btn" onclick="toggleSidebar()">×</button>
-                    <!-- Sidebar Links -->
-                    <ul class="sidebar-links">
-                        <li><a href="/#contact-us-form">Contact Us</a></li>
-                        <li><a href="/faqs">FAQs</a></li>
-                        <li><a href="/sponsor_us">Sponsor Us</a></li>
-                        <li>
-                            <a href="/upcoming_events">
-                              <% if (isAdmin) { %>
-                                <b>Upcoming Events</b>
-                              <% } else { %>
-                                Upcoming Events
-                              <% } %>
-                            </a>
-                          </li>
-                        <% if (isAdmin) { %>
-                            <li><a href="/requested_events"><b>Requested Events</b></a></li>
-                            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
-                            <li><a href="/completed_events"><b>Completed Events</b></a></li>
-                            <li><a href="/volunteers"><b>Volunteers</b></a></li>
-                            <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
-                        <% } %>
-                    </ul>
-                </div>
+            <div class="sidebar" id="sidebar">
+                <!-- Close button -->
+                <button class="close-btn" onclick="toggleSidebar()">×</button>
+                <!-- Sidebar Links -->
+                <ul class="sidebar-links">
+                  <li><a href="/#contact-us-form">Contact Us</a></li>
+                  <li><a href="/faqs">FAQs</a></li>
+                  <li><a href="/sponsor_us">Sponsor Us</a></li>
+                  <% if (isAdmin) { %>
+                  <li>
+                    <a href="/requested_events">
+                        <b>Requested Events</b>
+                    </a>
+                  </li>
+                  <% } %>
+                  <li>
+                    <a href="/upcoming_events">
+                      <% if (isAdmin) { %>
+                        <b>Upcoming Events</b>
+                      <% } else { %>
+                        Upcoming Events
+                      <% } %>
+                    </a>
+                  </li>
+                  <% if (isAdmin) { %>
+                    <li><a href="/completed_events"><b>Completed Events</b></a></li>
+                    <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+                    <li><a href="/volunteers"><b>Volunteers</b></a></li>
+                    <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
+                <% } %>
+                </ul>
+            </div>
         </nav>
     </header>
     <div class="table-container">
