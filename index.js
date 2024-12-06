@@ -1703,8 +1703,9 @@ app.post('/completed_events_edit_completed/:id', async (req, res) => {
 
       // Step 2: Insert a new record into completed_event table
       console.log('Inserting into completed_event table');
-      await knex('completed_event').insert({
-          event_id: id, // Ensure the event_id from event_request is inserted into completed_event
+      await knex('completed_event')
+          .where('event_id', id)
+          .update({
           participants_count,
           actual_event_date: actual_event_date,
           actual_event_start_time: event_start_time,
@@ -1713,8 +1714,9 @@ app.post('/completed_events_edit_completed/:id', async (req, res) => {
 
       // Step 3: Insert a new record into event_production table
       console.log('Inserting into event_production table');
-      await knex('event_production').insert({
-          event_id: id, // Ensure the event_id from event_request is inserted into event_production
+      await knex('event_production')
+          .where('event_id', id)
+          .update({
           completed_collar,
           completed_pocket,
           completed_envelope,
