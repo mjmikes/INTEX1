@@ -1113,3 +1113,21 @@ td[colspan="23"] {
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+
+.tableau-container {
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+    max-width: 100%;
+}
+
+.tableauPlaceholder {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.tableauViz {
+    width: 100% !important;
+    height: 100% !important;
+}
