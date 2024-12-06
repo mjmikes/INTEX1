@@ -875,7 +875,7 @@ app.get('/completeEvent/:id', async (req, res) => {
           }
   
           // Render the form with the retrieved data
-          res.render('complete_event_form', {
+          res.render('edit_event_form', {
             event_id: id, // Pass the event ID for reference
             event_request : event // Pass the event data
           });
@@ -1346,10 +1346,10 @@ app.post('/editVolunteer/:id', async (req, res) => {
         source,
         sewing_level,
         monthly_hour_availability,
-        willing_to_teach,
-        willing_to_lead,
         willing_to_travel_county,
         willing_to_travel_state,
+        willing_to_teach,
+        willing_to_lead,
         details
     } = req.body;
 
@@ -1369,10 +1369,10 @@ app.post('/editVolunteer/:id', async (req, res) => {
                 source,
                 sewing_level,
                 monthly_hour_availability,
-                willing_to_teach,
-                willing_to_lead,
                 willing_to_travel_county,
                 willing_to_travel_state,
+                willing_to_teach,
+                willing_to_lead,
                 details
             });
 
