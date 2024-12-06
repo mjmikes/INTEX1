@@ -604,18 +604,19 @@ app.get('/editEvent/:id', async (req, res) => {
 
 
 app.post('/editEvent/:id', async (req, res) => {
+  const { id } = req.params;
   const {
-    event_id, event_contact_id, event_location_id, // Include specific IDs for contact and location
     event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
-    event_state, event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
+    event_state,event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
     sewing_machines_available, expected_participants, children_under_10, jen_story, event_space_description,
     round_tables_count, rectangle_tables_count, possible_date_1, possible_date_2, actual_date,
+    event_id, event_contact_id, event_location_id
   } = req.body;
 
   try {
-    // Update event_contact table with the correct event_contact_id
+    // Update event_contact table
     await knex('event_contact')
-      .where('event_contact_id', event_contact_id) // Use the correct contact ID
+      .where('event_contact_id', event_contact_id)
       .update({
         first_name: first_name,
         last_name: last_name,
@@ -623,9 +624,9 @@ app.post('/editEvent/:id', async (req, res) => {
         event_contact_email: event_contact_email,
       });
 
-    // Update event_location table with the correct event_location_id
+    // Update event_location table
     await knex('event_location')
-      .where('event_location_id', event_location_id) // Use the correct location ID
+      .where('event_location_id', event_location_id)
       .update({
         event_address: event_address,
         event_city: event_city,
@@ -633,9 +634,9 @@ app.post('/editEvent/:id', async (req, res) => {
         event_zip: event_zip,
       });
 
-    // Update event_request table with the correct event_id
+    // Update event_request table
     await knex('event_request')
-      .where('event_id', event_id) // Use the correct event ID
+      .where('event_id', event_id)
       .update({
         event_name: event_name,
         event_type: event_type,
@@ -655,7 +656,7 @@ app.post('/editEvent/:id', async (req, res) => {
         actual_date: actual_date || null,
       });
   
-    // Redirect to requested_events page
+    // Redirect to upcoming_events page
     res.redirect('/requested_events');
   } catch (error) {
     console.error('Error updating event:', error);
