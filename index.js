@@ -616,7 +616,7 @@ app.post('/editEvent/:id', async (req, res) => {
   try {
     // Update event_contact table
     await knex('event_contact')
-      .where('event_contact_id', event_contact_id)
+      .where('event_contact_id', parseInt(event_contact_id))
       .update({
         first_name: first_name,
         last_name: last_name,
@@ -626,7 +626,7 @@ app.post('/editEvent/:id', async (req, res) => {
 
     // Update event_location table
     await knex('event_location')
-      .where('event_location_id', event_location_id)
+      .where('event_location_id', parseInt(event_location_id))
       .update({
         event_address: event_address,
         event_city: event_city,
@@ -636,7 +636,7 @@ app.post('/editEvent/:id', async (req, res) => {
 
     // Update event_request table
     await knex('event_request')
-      .where('event_id', event_id)
+      .where('event_id', parseInt(event_id))
       .update({
         event_name: event_name,
         event_type: event_type,
