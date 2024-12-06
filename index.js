@@ -1656,6 +1656,63 @@ app.post('/completed_events/:id', async (req, res) => {
     }
 });
 
+app.post('/completed_events_edit_completed/:id', async (req, res) => {
+  const { id } = req.params;
+  const {
+      event_name,
+      participants_count,
+      completed_collar,
+      completed_pocket,
+      completed_envelope,
+      completed_vest,
+      finished_vest,
+      actual_date,
+      event_start_time,
+      event_duration,
+      event_status = 'completed' // Default value
+  } = req.body;
+
+  try {
+      // Step 1: Update the event_request table
+      console.log('Updating event_request table');
+      await knex('event_request')
+          .where('event_id', id)
+          .update({
+              event_name,
+              event_start_time,
+              event_duration,
+              event_status, // Update the status
+          });
+
+      // Step 2: Insert a new record into completed_event table
+      console.log('Inserting into completed_event table');
+      await knex('completed_event').insert({
+          event_id: id, // Ensure the event_id from event_request is inserted into completed_event
+          participants_count,
+          actual_event_date: actual_date,
+          actual_event_start_time: event_start_time,
+          actual_event_duration: parseInt(event_duration, 10),
+      });
+
+      // Step 3: Insert a new record into event_production table
+      console.log('Inserting into event_production table');
+      await knex('event_production').insert({
+          event_id: id, // Ensure the event_id from event_request is inserted into event_production
+          completed_collar,
+          completed_pocket,
+          completed_envelope,
+          completed_vest,
+          finished_vest,
+      });
+
+      // Redirect to completed_events page
+      res.redirect('/completed_events'); // Redirect to the completed events list
+  } catch (error) {
+      console.error('Error updating event:', error);
+      res.status(500).send('An error occurred while updating the event.');
+  }
+});
+
   app.get('/editUpcomingEvent/:id', async (req, res) => {
     const { id } = req.params; // Extract the event ID from the route parameter
     try {
