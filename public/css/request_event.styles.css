@@ -578,3 +578,30 @@ table th {
 table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
+.event-details {
+    background-color: #f9f9f9; /* Light background for readability */
+    border: 1px solid #ddd; /* Subtle border for separation */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the box */
+    margin: 20px 0; /* Space above and below the section */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .event-details h2 {
+    font-size: 1.5em; /* Larger font size for the title */
+    margin-bottom: 15px; /* Space between title and content */
+    color: #333; /* Darker color for readability */
+  }
+  
+  .event-details p {
+    font-size: 1em; /* Standard font size for paragraphs */
+    margin-bottom: 10px; /* Space between each paragraph */
+    color: #555; /* Slightly lighter text color for content */
+  }
+  
+  .event-details p strong {
+    font-weight: bold; /* Emphasize the labels */
+    color: #333; /* Darker color for labels */
+  }
+  
