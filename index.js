@@ -1290,7 +1290,7 @@ app.post("/submit-contact", async (req, res) => {
 });
 
 
-app.post('/deleteMessage/:submission_id', async (req, res) => {
+app.delete('/deleteMessage/:submission_id', async (req, res) => {
     const { submission_id } = req.params; // Get the submission_id from the URL
 
     try {
