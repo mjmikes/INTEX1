@@ -331,6 +331,7 @@ app.get('/requested_events', async (req, res) => {
                 'event_location.event_state',
                 'event_location.event_zip'
             )
+            .orderBy('event_request.possible_date_1', 'asc')
             .then(event_request => {
                 // Render the index.ejs template and pass the data
                 // We use res.render to work with ejs files we use res.redirct to work with routes
@@ -381,6 +382,7 @@ app.get('/upcoming_events', async (req, res) => {
                 'event_location.event_state',
                 'event_location.event_zip'
             )
+            .orderBy('event_request.actual_date')
             .then(event_request => {
                 // Render the index.ejs template and pass the data
                 // We use res.render to work with ejs files we use res.redirct to work with routes
