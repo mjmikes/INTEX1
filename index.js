@@ -737,6 +737,55 @@ app.post('/updateCEvent/:id', async (req, res) => {
     }
 });
 
+app.post('/deleteCEvent/:id', async (req, res) => {
+    const { id } = req.params; // Extract the event ID from the route parameters
+
+    try {
+        // Start a transaction to ensure data integrity
+        await knex.transaction(async trx => {
+            // Delete from event_production table
+            await trx('event_production')
+                .where('event_id', id)
+                .del();
+
+            // Delete from completed_event table
+            await trx('completed_event')
+                .where('event_id', id)
+                .del();
+
+            // Fetch event_request to get related foreign keys
+            const eventRequest = await trx('event_request')
+                .select('event_contact_id', 'event_location_id')
+                .where('event_id', id)
+                .first();
+
+            if (!eventRequest) {
+                throw new Error('Event not found');
+            }
+
+            // Delete from event_contact table
+            await trx('event_contact')
+                .where('event_contact_id', eventRequest.event_contact_id)
+                .del();
+
+            // Delete from event_location table
+            await trx('event_location')
+                .where('event_location_id', eventRequest.event_location_id)
+                .del();
+
+            // Delete from event_request table
+            await trx('event_request')
+                .where('event_id', id)
+                .del();
+        });
+
+        // Redirect back to the completed events page
+        res.redirect('/completed_events');
+    } catch (error) {
+        console.error('Error deleting the event:', error);
+        res.status(500).send('An error occurred while deleting the event.');
+    }
+});
 
 
 app.get('/completeEvent/:id', async (req, res) => {
