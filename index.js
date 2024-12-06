@@ -1901,11 +1901,10 @@ app.get('/signup/:event_id', async (req, res) => {
             .first();
 
         if (!event) {
-            // Redirect if the event does not exist
-            return res.redirect(`/upcoming_events?message=The event does not exist or is not open for signups.`);
+            return res.redirect(`/upcoming_events?message=Event not found.`);
         }
 
-        // Step 2: Check if the volunteer exists
+        // Step 2: Check if the volunteer exists in volunteer_info
         const volunteer = await knex('volunteer_info')
             .where({ first_name, last_name, email })
             .first();
@@ -1915,19 +1914,34 @@ app.get('/signup/:event_id', async (req, res) => {
             return res.redirect(`/sign_up_form?message=Please fill out this volunteer form to sign up.`);
         }
 
-        // Step 3: Register the volunteer for the event
+        // Step 3: Check if the volunteer is already registered for the event
+        const alreadyRegistered = await knex('volunteer_events')
+            .where({
+                event_id: id,
+                volunteer_id: volunteer.volunteer_id,
+            })
+            .first();
+
+        if (alreadyRegistered) {
+            return res.redirect(
+                `/upcoming_events?message=You are already signed up for this event.`
+            );
+        }
+
+        // Step 4: Register the volunteer for the event in volunteer_events
         await knex('volunteer_events').insert({
             event_id: id,
-            volunteer_id: volunteer.volunteer_id, // Assuming volunteer_info has a primary key volunteer_id
+            volunteer_id: volunteer.volunteer_id,
         });
 
-        // Redirect to a success page or back to the upcoming events page
+        // Step 5: Redirect to a success page or back to the upcoming events page
         res.redirect('/upcoming_events?message=You have successfully signed up for the event.');
     } catch (error) {
         console.error('Error signing up for event:', error);
         res.status(500).send('An error occurred while signing up for the event.');
     }
 });
+
 
 
 
