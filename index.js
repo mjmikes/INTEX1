@@ -1642,10 +1642,12 @@ app.post('/completed_events/:id', async (req, res) => {
           'event_request.possible_date_1',
           'event_request.possible_date_2',
           'event_request.actual_date',
+          'event_contact.event_contact_id',
           'event_contact.first_name',
           'event_contact.last_name',
           'event_contact.phone',
           'event_contact.event_contact_email',
+          'event_location.event_location_id',
           'event_location.event_address',
           'event_location.event_city',
           'event_location.event_state',
@@ -1663,14 +1665,16 @@ app.post('/completed_events/:id', async (req, res) => {
             first_name: event_request.first_name,
             last_name: event_request.last_name,
             phone: event_request.phone,
-            event_contact_email: event_request.event_contact_email
+            event_contact_email: event_request.event_contact_email,
+            event_contact_id: event_request.event_contact_id
           };
   
           const event_location = {
             event_address: event_request.event_address,
             event_city: event_request.event_city,
             event_state: event_request.event_state,
-            event_zip: event_request.event_zip
+            event_zip: event_request.event_zip,
+            event_location_id: event_request.event_location_id
           };
   
           // Render the template with all data passed to it
@@ -1695,7 +1699,7 @@ app.post('/completed_events/:id', async (req, res) => {
 app.post('/editUpcomingEvent/:id', async (req, res) => {
   const { id } = req.params;
   const {
-    event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
+    event_id, event_contact_id, event_location_id, event_name, first_name, last_name, phone, event_contact_email, event_type, event_address, event_city,
     event_state,event_zip, event_start_time, event_duration, event_description, expected_advanced_sewers,
     sewing_machines_available, expected_participants, children_under_10, jen_story, event_space_description,
     round_tables_count, rectangle_tables_count, possible_date_1, possible_date_2, actual_date,
@@ -1704,7 +1708,7 @@ app.post('/editUpcomingEvent/:id', async (req, res) => {
   try {
     // Update event_contact table
     await knex('event_contact')
-      .where('event_contact_id', id)
+      .where('event_contact_id', event_contact_id)
       .update({
         first_name: first_name,
         last_name: last_name,
@@ -1714,7 +1718,7 @@ app.post('/editUpcomingEvent/:id', async (req, res) => {
 
     // Update event_location table
     await knex('event_location')
-      .where('event_location_id', id)
+      .where('event_location_id', event_location_id)
       .update({
         event_address: event_address,
         event_city: event_city,
@@ -1724,7 +1728,7 @@ app.post('/editUpcomingEvent/:id', async (req, res) => {
 
     // Update event_request table
     await knex('event_request')
-      .where('event_id', id)
+      .where('event_id', event_id)
       .update({
         event_name: event_name,
         event_type: event_type,
