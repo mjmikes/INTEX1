@@ -1905,7 +1905,7 @@ app.get('/signup/:event_id', async (req, res) => {
         console.log('Event retrieved:', event);
 
         if (!event) {
-            return res.redirect(`/upcoming_events?message=Event not found.`);
+            return res.redirect(`/upcoming_events`);
         }
 
         // Step 2: Check if the volunteer exists in volunteer_info
@@ -1915,7 +1915,7 @@ app.get('/signup/:event_id', async (req, res) => {
         console.log('Volunteer retrieved:', volunteer);
 
         if (!volunteer) {
-            return res.redirect(`/sign_up_form?message=Please fill out this volunteer form to sign up.`);
+            return res.redirect(`/sign_up_form`);
         }
 
         // Step 3: Check if the volunteer is already registered for the event
@@ -1929,7 +1929,7 @@ app.get('/signup/:event_id', async (req, res) => {
 
         if (alreadyRegistered) {
             return res.redirect(
-                `/upcoming_events?message=You are already signed up for this event.`
+                `/upcoming_events`
             );
         }
 
@@ -1941,7 +1941,7 @@ app.get('/signup/:event_id', async (req, res) => {
         console.log('Insert result:', insertResult);
 
         // Step 5: Redirect to a success page or back to the upcoming events page
-        res.redirect('/upcoming_events?message=You have successfully signed up for the event.');
+        res.redirect('/upcoming_events');
     } catch (error) {
         console.error('Error signing up for event:', error);
         res.status(500).send('An error occurred while signing up for the event.');
