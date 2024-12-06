@@ -4,6 +4,7 @@ const { default: test } = require("node:test");
 
 let app = express();
 
+
 const session = require('express-session');
 
 let path = require("path");
@@ -52,6 +53,8 @@ app.use((req, res, next) => {
 
 
 
+
+
 const knex = require("knex")({
     client: "pg",
     connection: {
@@ -69,6 +72,9 @@ const knex = require("knex")({
 });
 
 // GET ROUTES TO ACCESS PAGES
+
+
+
 
 
 // get route for the login page
