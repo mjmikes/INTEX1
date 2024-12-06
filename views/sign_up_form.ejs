@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Request | Turtle Shelter Project</title>
+  <link rel="stylesheet" href="/css/request_event.styles.css"> <!-- Update the path as needed -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <script src="js/app.js"></script>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a href="/" class="logo-link">
+          <i class="fas fa-home"></i> <!-- Home icon -->
+          <span class="logo-text">Turtle Shelter Project</span>
+      </a>
+      </div>
+      <div class="navbar-collapse">
+        <ul class="main-menu">
+            <li><a href="/request_event">Request Event</a></li>
+            <li><a href="/jens_story">Jen's Story</a></li>
+            <li><a href="/our_tech">Our Tech</a></li>
+            <li><button class="btn-secondary" onclick="location.href='/how_to_get_involved'">Get Involved</button></li>
+            <li><button class="btn-secondary" onclick="location.href='/donate'">Donate</button></li>
+             <!-- Conditionally show icon based on isAdmin -->
+             <% if (isAdmin) { %>
+                <div class="circle-icon" onclick="toggleLogout()">A</div> <!-- Circle icon with the initial J -->
+                <div id="logout-option" class="logout-option">
+                    <!-- Link for Contact Messages and Sponsor Messages -->
+                    <a href="/messages" class="logout-link"><b>Messages</b></a>
+                    
+                    <!-- Link for Help file (basically the readme to walk Jen through the page if she has questions)-->
+                    <a href="/help" class="logout-link"><b>Help</b></a>
+                    
+                    <!-- Link for Logout -->
+                    <a href="/logout" class="logout-link" onclick="logout()"><b>Logout</b></a>
+                </div>
+            <% } else { %>
+                <li><a href="/login">Login</a></li>
+            <% } %>
+            <div class="navbar-toggler">
+              <i style="font-size: x-large;"class="fas fa-bars"></i> <!-- Hamburger icon -->
+          </div>
+        </ul>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <!-- Close button -->
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <!-- Sidebar Links -->
+        <ul class="sidebar-links">
+          <li><a href="/#contact-us-form">Contact Us</a></li>
+          <li><a href="/faqs">FAQs</a></li>
+          <li><a href="/sponsor_us">Sponsor Us</a></li>
+          <li><a href="/upcoming_events">Upcoming Events</a></li>
+          <% if (isAdmin) { %>
+            <li><a href="/requested_events"><b>Requested Events</b></a></li>
+            <li><a href="/event_dashboard"><b>Event Dashboard</b></a></li>
+            <li><a href="/completed_events"><b>Completed Events</b></a></li>
+            <li><a href="/volunteers"><b>Volunteers</b></a></li>
+            <li><a href="/user_maintenance_view"><b>User Maintenance</b></a></li>
+        <% } %>
+        </ul>
+    </div>
+    </nav>
+  </header>
+  <main>
+    <div class="signup-container">
+        <h1>Sign Up for Upcoming Event</h1>
+        
+        <!-- Display Unalterable Event Data -->
+        <div class="event-details">
+          <h2>Event Details</h2>
+          <p><strong>Event Name:</strong> <%= event.event_name %></p>
+          <p><strong>Event Date:</strong> <%= event.actual_date.toLocaleDateString('en-US') %></p>
+          <p><strong>Event Location:</strong> <%= event.event_address %>, <%= event.event_city %>, <%= event.event_state %> <%= event.event_zip %></p>
+          <p><strong>Event Description:</strong> <%= event.event_description %></p>
+        </div>
+      
+        <!-- Signup Form -->
+        <form action="/signupEvent/<%= event.event_id %>" method="POST">
+          <div class="form-row">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="first_name" required>
+          </div>
+          <div class="form-row">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="last_name" required>
+          </div>
+          <div class="form-row">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+      
+  </main>
+
+  <footer>
+    <div class="footer">
+        <!-- Contact Information -->
+        <div class="contact">
+            <h2>Connect with Us!</h2>
+            <p>Phone: 801-872-3190</p>
+            <p>Email: turtleshelterproject@gmail.com</p>
+            <p>Address: PO Box 382, Kaysville, UT 84037</p>
+        </div>
+
+        <!-- Social Media Links (Icons) -->
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/turtle-shelter-project-6aa0aa1a4/" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/turtleshelterproject/" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/turtleshelterproject" target="_blank" class="social-icon">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+
+        <!-- Copyright Text -->
+        <p>&copy; 2024 Turtle Shelter Project. All Rights Reserved.</p>
+    </div>
+</footer>
+<script src="js/app.js"></script>
+</main

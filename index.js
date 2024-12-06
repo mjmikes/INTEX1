@@ -1836,4 +1836,34 @@ app.post("/admin_scheduled_events", async (req, res) => {
   }
 });
 
+app.post('/signupEvent/:id', async (req, res) => {
+    const { id } = req.params; // Event ID
+    const { first_name, last_name, email } = req.body; // User input
+
+    try {
+        // Step 1: Check if the user exists in the volunteer_info table
+        const volunteer = await knex('volunteer_info')
+            .where({ first_name, last_name, email })
+            .first();
+
+        if (!volunteer) {
+            // Redirect to volunteer signup form if the user is not found
+            return res.redirect(`/volunteerSignupForm?message=Please fill out this volunteer form to sign up.`);
+        }
+
+        // Step 2: Register the volunteer for the event
+        await knex('event_volunteers').insert({
+            event_id: id,
+            volunteer_id: volunteer.volunteer_id, // Assuming volunteer_info has a primary key volunteer_id
+        });
+
+        // Redirect to a success page or back to the upcoming events page
+        res.redirect('/upcoming_events?message=You have successfully signed up for the event.');
+    } catch (error) {
+        console.error('Error signing up for event:', error);
+        res.status(500).send('An error occurred while signing up for the event.');
+    }
+});
+
+
 app.listen(port, () =>console.log(`Server is listening on port ${port}!`))
