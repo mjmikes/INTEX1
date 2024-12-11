@@ -23,7 +23,7 @@ app.use(express.static('public'));
 // Session setup
 app.use(
     session({
-        secret: "your-secret-key", // Replace with your own secret
+        secret: "your-secret-key", // Repliace with your own secret
         resave: false,
         saveUninitialized: true,
         cookie: {
